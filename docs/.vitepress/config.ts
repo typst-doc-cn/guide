@@ -15,6 +15,9 @@ export default defineConfig({
     editLink: {
       pattern: 'https://github.com/typst-doc-cn/guide/edit/master/docs/:path'
     },
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/typst-doc-cn/guide' },
+    ],
     search: {
       provider: 'local',
       options: {
