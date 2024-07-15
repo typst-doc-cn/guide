@@ -1,8 +1,9 @@
 import { defineConfig } from 'vitepress'
 
-// https://vitepress.vuejs.org/config/app-configs
+// https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Typst 中文社区导航',
+  base: '/guide/',
   ignoreDeadLinks: true,
   markdown: {
     theme: {
