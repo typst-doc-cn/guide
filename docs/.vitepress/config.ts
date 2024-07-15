@@ -12,6 +12,9 @@ export default defineConfig({
     },
   },
   themeConfig: {
+    editLink: {
+      pattern: 'https://github.com/typst-doc-cn/guide/edit/master/docs/:path'
+    },
     search: {
       provider: 'local',
       options: {
