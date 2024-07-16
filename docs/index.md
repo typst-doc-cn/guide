@@ -39,3 +39,14 @@ hero:
 #     title: 速度真的很快！
 #     details: 采用静态 HTML 实现快速的页面初次加载，使用客户端路由实现快速的页面切换导航。
 ---
+
+<!--- TODO
+放一些 Typst 编译出的美图？
+简单的 Typst 语法示例？
+友链？
+或者直接是“快速入门”的太长不看版？
+--->
+
+中文聊天群：793548390 <!---考虑放个二维码--->
+官方 Discord：https://discord.gg/2uDybryKPe
+小蓝书 Web 版：https://typst-doc-cn.github.io/guide/
