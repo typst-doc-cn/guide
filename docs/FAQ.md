@@ -6,6 +6,12 @@
 
 因为你没有指定中文字体，请参考下一个问题。
 
+## 如何安装（中文）字体？
+首先，在源代码文件中需要使用类似 `#set text(font: "LXGW WenKai", lang: "zh")` 的命令设置字体（此处使用霞鹜文楷）。然后根据环境配置字体文件的搜索方式:
+- 在 typst.app 上编辑：直接上传字体文件。
+- 在本地 VS Code 引入字体：默认可以使用系统安装的字体。除此以外，也可以通过给 tinymist 指定设定值 tinymist.fontPaths 等使它找到字体文件位置。不过注意使用 VSCode 打开单文件（区别于打开文件夹）时这一功能可能不可用。
+- 使用 Typst CLI：使用 --font-path 参数。
+
 ## 中英文如何使用不同的字体？
 
 设置字体可以使用一个列表，Typst 会按照列表中的顺序依次尝试使用字体。因此只需把英文字体放在中文字体前面即可。例如：
@@ -23,6 +29,8 @@ Typst 你好
 <summary>如果你是剩下的 1%</summary>
 
 如果你发现了中文引号不对劲，那么你可以用这个修复 `#show regex("[“”]"): set text(font: "SimSun")`，并期待 Typst 更新。
+
+Tracking Issue：https://github.com/typst/typst/issues/3385
 
 </details>
 
@@ -50,6 +58,12 @@ Typst 你好
 
 ## 为什么第一段没有缩进？
 
+<details>
+<summary>参考阅读：</summary>
+Typst 官方也意识到了这个问题，希望我们可以早日看见这一问题的解决。
+
+Tracking Issue：https://github.com/typst/typst/issues/311
+</details>
 首先，英文排版是这样的，LaTeX 默认第一段也是不缩进的。其次，这部分实现有一些 bug，当前还不能通过修改设置来实现缩进。要修复这个问题，可以使用下面的方法：
 
 ### 方法1：假段落（推荐）
