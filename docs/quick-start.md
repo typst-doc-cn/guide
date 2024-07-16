@@ -2,9 +2,23 @@
 
 ## 在线使用
 
+适用场景：快速，免安装，多人协作。
+
+打开官网 typst.app，注册账号。新建文档即可。
+
+<!--TODO
+截图
+--->
+
+（官方出品，增值服务！热心的朋友可以试试，打赏一下开发者~）
+
 ## 本地安装
 
-### VS Code
+### VS Code（推荐）
+
+适用场景：深度自定义，离线使用，顾及隐私。（补全体验也比官方好亿点点哦）
+
+[安装 VS Code](https://code.visualstudio.com/)。
 
 点击左侧扩展图标，搜索 `Tinymist` 插件并安装
 
@@ -25,3 +39,9 @@
 typst 会自动扫描到系统中安装的字体，使用 `typst fonts` 命令可以列出所有可用的字体。
 
 ### Vim
+
+### 命令行
+
+[下载 Typst 二进制](https://github.com/typst/typst/releases)并解压。
+
+根据[官网文档](https://github.com/typst/typst?tab=readme-ov-file#usage)在命令行中编译文件。
