@@ -18,6 +18,6 @@
     }
   },
   "dependencies": {
-    "vitepress": "^1.3.0"
+    "vitepress": "^1.3.1"
   }
 }

@@ -54,3 +54,22 @@ hero:
 官方 Discord：https://discord.gg/2uDybryKPe
 
 小蓝书 Web 版：https://typst-doc-cn.github.io/guide/
+
+
+  <div>
+    我想说 <showy-card name="numbly" author="sign here" authorLink="https://github.com/flaribbit"
+                :tags="['自动编号', '111']"
+                :links="['https://github.com/flaribbit/numbly', 'https://typst.app/universe/package/numbly']"
+    /> 很好用。
+  </div>
+
+
+<script>
+import ShowyCard from './ShowyCard.vue'
+
+export default {
+  components: {
+    ShowyCard
+  }
+}
+</script>
