@@ -64,6 +64,7 @@ Typst 官方也意识到了这个问题，希望我们可以早日看见这一�
 
 Tracking Issue：https://github.com/typst/typst/issues/311
 </details>
+
 首先，英文排版是这样的，LaTeX 默认第一段也是不缩进的。其次，这部分实现有一些 bug，当前还不能通过修改设置来实现缩进。要修复这个问题，可以使用下面的方法：
 
 ### 方法1：假段落（推荐）
@@ -118,6 +119,11 @@ $ E=m c^2 $
 但是有一说一，对于大段文字，还是默认的好看一些。
 
 ## 中英文下划线错位了怎么办？
+
+<details>
+<summary>参考阅读：</summary>
+https://github.com/typst/typst/issues/1210
+</details>
 
 ![](https://github.com/user-attachments/assets/9dcb568e-2888-4b27-ae4e-cbe19507bf78)
 

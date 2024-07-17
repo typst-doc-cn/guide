@@ -47,6 +47,10 @@ hero:
 或者直接是“快速入门”的太长不看版？
 --->
 
-中文聊天群：793548390 <!---考虑放个二维码--->
+中文聊天群：793548390
+
+<!--- 考虑放个二维码 --->
+
 官方 Discord：https://discord.gg/2uDybryKPe
+
 小蓝书 Web 版：https://typst-doc-cn.github.io/guide/
