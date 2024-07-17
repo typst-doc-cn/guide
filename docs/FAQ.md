@@ -105,6 +105,31 @@ $ E=m c^2 $
 
 缺点：可能存在一些缩进失效的情况
 
+## 下划线怎么断断续续的？
+
+英文下划线是这样的，如果你不喜欢，可以使用 `evade: false` 参数让他变成连续的。
+
+```typst
+#underline(lorem(20))
+
+#underline(lorem(20), evade: false)
+```
+
+但是有一说一，对于大段文字，还是默认的好看一些。
+
+## 中英文下划线错位了怎么办？
+
+![](https://github.com/user-attachments/assets/9dcb568e-2888-4b27-ae4e-cbe19507bf78)
+
+微调凑合一下吧
+
+```typst
+#set underline(offset: .1em, stroke: .05em, evade: false)
+#underline[1234一二三四“”""]
+```
+
+![](https://github.com/user-attachments/assets/51067bed-18f7-4e08-a571-38a37eae92c8)
+
 ## 如何让某个标题不编号？例如参考文献
 
 手动调用 `heading(numbering: none)`，例如
