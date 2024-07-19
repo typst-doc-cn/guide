@@ -31,14 +31,13 @@ def process_file(filename: str):
         if os.path.isfile(outfilename.replace("{n}", "1")):
             print("=== Skipped")
             return block + get_files_md(outfilename)
-        with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False) as f:
-            tmpfilename = f.name
+        with open("1.typ", "w", encoding="utf-8") as f:
             f.write("""#set page(height: 4cm, width: 6cm)
 #set text(font: ("Times New Roman", "Simsun"))
 """)
             f.write(code)
         result = subprocess.run(
-            ["typst", "compile", tmpfilename, outfilename, "--font-path", "fonts"],
+            ["typst", "compile", "1.typ", outfilename, "--font-path", "fonts"],
             capture_output=True,
             text=True,
             encoding="utf-8",
