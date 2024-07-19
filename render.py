@@ -33,7 +33,7 @@ def process_file(filename: str):
             return block + get_files_md(outfilename)
         with open("1.typ", "w", encoding="utf-8") as f:
             f.write("""#set page(height: 4cm, width: 6cm)
-#set text(font: ("Times New Roman", "Simsun"))
+#set text(font: ("New Computer Modern", "Source Han Serif SC"))
 """)
             f.write(code)
         result = subprocess.run(
