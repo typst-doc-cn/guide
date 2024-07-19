@@ -31,21 +31,21 @@ def process_file(filename: str):
         if os.path.isfile(outfilename.replace("{n}", "1")):
             print("=== Skipped")
             return block + get_files_md(outfilename)
-        with tempfile.NamedTemporaryFile("w", encoding="utf-8") as f:
+        with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False) as f:
+            tmpfilename = f.name
             f.write("""#set page(height: 4cm, width: 6cm)
 #set text(font: ("Times New Roman", "Simsun"))
 """)
             f.write(code)
-            f.flush()
-            result = subprocess.run(
-                ["typst", "compile", f.name, outfilename, "--font-path", "fonts"],
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-            )
-            stderr = result.stderr
-            if stderr:
-                print(stderr)
+        result = subprocess.run(
+            ["typst", "compile", tmpfilename, outfilename, "--font-path", "fonts"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        stderr = result.stderr
+        if stderr:
+            print(stderr)
         return block + get_files_md(outfilename)
 
     with open(filename, "r", encoding="utf-8") as f:
