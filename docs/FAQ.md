@@ -192,3 +192,47 @@ https://github.com/typst/typst/issues/1210
 已知 $f(x)=1/2 x^2$
 
 ```
+
+## 如何获得标签所在页的页码？
+
+其实就是获取计数器 `counter(page)` 在标签所在位置的值。
+
+```typst
+aaa <233>
+#let my-link(l)=context link(l)[#counter(page).at(query(l).at(0).location()).at(0)]
+aaa 在第 #my-link(<233>) 页
+```
+
+::: tip
+另外注意，`counter(page).at(location)` 与 `location.position().page` 是不一样的。
+
+前者是 `location` 位置的页码编号，这个编号可以被重置（例如第一章之前用罗马数字编号，之后用阿拉伯数字重新编号，此时可以使用 `counter(page).update(1)` 重置编号）。而后者是物理的页数，或者说，在第几张纸上。
+:::
+
+## 如何去掉标题的编号后面的空格？
+
+很遗憾，这空格是 [代码里写死的](https://github.com/typst/typst/blob/23746ee18901e08852306f35639298ad234d3481/crates/typst/src/model/heading.rs#L243)，并不能通过设置关掉。
+
+不过从代码里可以看到，它实际上是个 `h(0.3em)`，于是我们可以想到两种方法解决：
+
+### 方法 1：反向空格抵消掉
+
+```typst
+#set heading(numbering: it => {
+  numbering("一、", it) + h(-0.3em)
+})
+= 标题
+= 思考
+```
+
+### 方法 2：给他 show 成 none
+
+```typst
+#set heading(numbering: "一、")
+#show heading: it => {
+  show h.where(amount: 0.3em): none
+  it
+}
+= 标题
+= 思考
+```
