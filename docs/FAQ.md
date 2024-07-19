@@ -120,10 +120,7 @@ $ E=m c^2 $
 
 ## 中英文下划线错位了怎么办？
 
-<details>
-<summary>参考阅读：</summary>
-https://github.com/typst/typst/issues/1210
-</details>
+相关 issue：https://github.com/typst/typst/issues/1210
 
 ![](https://github.com/user-attachments/assets/9dcb568e-2888-4b27-ae4e-cbe19507bf78)
 
