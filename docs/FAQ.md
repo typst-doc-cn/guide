@@ -9,8 +9,8 @@
 ## 如何安装（中文）字体？
 首先，在源代码文件中需要使用类似 `#set text(font: "LXGW WenKai", lang: "zh")` 的命令设置字体（此处使用霞鹜文楷）。然后根据环境配置字体文件的搜索方式:
 - 在 typst.app 上编辑：直接上传字体文件。
-- 在本地 VS Code 引入字体：默认可以使用系统安装的字体。除此以外，也可以通过给 tinymist 指定设定值 tinymist.fontPaths 等使它找到字体文件位置。不过注意使用 VSCode 打开单文件（区别于打开文件夹）时这一功能可能不可用。
-- 使用 Typst CLI：使用 --font-path 参数。
+- 在本地 VS Code 引入字体：默认可以使用系统安装的字体。除此以外，也可以通过给 tinymist 指定设定值 `tinymist.fontPaths` 等使它找到字体文件位置。不过注意使用 VS Code 打开单文件（区别于打开文件夹）时这一功能可能不可用。
+- 使用 Typst CLI：使用 `--font-path` 参数。
 
 ## 中英文如何使用不同的字体？
 
@@ -131,8 +131,6 @@ $ E=m c^2 $
 #underline[1234一二三四“”""]
 ```
 
-![](https://github.com/user-attachments/assets/51067bed-18f7-4e08-a571-38a37eae92c8)
-
 ## 如何让某个标题不编号？例如参考文献
 
 手动调用 `heading(numbering: none)`，例如
@@ -236,7 +234,7 @@ aaa 在第 #my-link(<233>) 页
 
 ## 如何手动输入参考文献？
 
-相关问题：如何实现 latex 的 bibitem ？
+相关问题：如何实现 LaTeX 的 `bibitem` ？
 
 ```typst
 #let bibitem(body)=figure(kind: "bibitem", supplement: none, body)
@@ -255,4 +253,18 @@ aaa 在第 #my-link(<233>) 页
 #heading(numbering: none)[参考文献]
 #bibitem[你说得对] <ref1>
 #bibitem[但是原神] <ref2>
+```
+
+## 如何修复英文参考文献中的“等”？
+
+当中英文参考文献同时出现时，英文参考文献中的“等”应该是“et al.”，而不是“等”。
+
+可以使用上面的手动参考文献方案，或者使用来自 [modern-nju-thesis](https://github.com/nju-lug/modern-nju-thesis) 的 `bilingual-bibliography` 函数修复。
+
+```typst no-render
+// 在文档开头引入
+#import "@preview/modern-nju-thesis:0.3.4": bilingual-bibliography
+
+// 将原本的 #bibliography("refs.bib") 替换为
+#bilingual-bibliography(bibliography: "refs.bib")
 ```
