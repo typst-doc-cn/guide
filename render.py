@@ -1,7 +1,6 @@
 import hashlib
 import re
 import os
-import tempfile
 import subprocess
 
 
@@ -16,7 +15,7 @@ def get_files_md(rawname):
         filename = rawname.replace("{n}", str(i + 1))
         if os.path.isfile(filename):
             filename = filename.replace("docs/", "")
-            res += f"\n![]({filename})"
+            res += f"\n![typst-demo]({filename})"
     return res
 
 

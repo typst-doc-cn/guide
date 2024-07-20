@@ -49,5 +49,6 @@ button.copy::after {
 }
 
 .vp-doc img {
-  margin: auto;
+  margin: 8px auto;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
