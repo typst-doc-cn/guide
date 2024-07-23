@@ -288,3 +288,12 @@ aaa 在第 #my-link(<233>) 页
 #distr("身份证", w: 6em)
 #distr("详细地址", w: 6em)
 ```
+
+## 如何让向量和矩阵使用方括号？
+
+```typst
+#set math.mat(delim: "[")
+#set math.vec(delim: "[")
+$ mat(1,2;3,4) $
+$ vec(a,b,c) $
+```
