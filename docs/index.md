@@ -47,10 +47,18 @@ hero:
 或者直接是“快速入门”的太长不看版？
 --->
 
+## 推荐资料
+
+小蓝书 Web 版（入门必读！）：https://typst-doc-cn.github.io/tutorial/
+
+中文 Awesome Typst 列表：https://github.com/typst-doc-cn/awesome-typst-cn
+
+Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
+
+中文用户使用 Typst 常见问题：https://typst-doc-cn.github.io/docs/chinese/
+
+## 用户社区：
+
 中文聊天群：793548390 [点击此处加入](https://qm.qq.com/q/MQO6j6jCw2)
 
-<!--- 考虑放个二维码 --->
-
 官方 Discord：https://discord.gg/2uDybryKPe
-
-小蓝书 Web 版：https://typst-doc-cn.github.io/tutorial/
