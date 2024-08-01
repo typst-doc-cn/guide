@@ -56,6 +56,12 @@ Tracking Issue：https://github.com/typst/typst/issues/3385
 
 ```
 
+## 如何输入某个符号？
+
+（推荐）可以用这个网站手写查询：https://detypify.quarticcat.com/
+
+Typst 符号列表：https://typst.app/docs/reference/symbols/sym/
+
 ## 为什么第一段没有缩进？
 
 <details>
