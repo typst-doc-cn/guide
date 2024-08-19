@@ -62,6 +62,19 @@ Tracking Issue：https://github.com/typst/typst/issues/3385
 
 Typst 符号列表：https://typst.app/docs/reference/symbols/sym/
 
+## 公式中的正体加粗和正体，是什么代码啊？
+
+也就是 LaTeX 中的 \mathbf 和 \mathrm
+
+```typst
+#let mathrm(x) = math.upright(x)
+#let mathbf(x) = math.bold(math.upright(x))
+
+$ y=3+4 mathrm(i) $
+
+$ nabla times mathbf(H) $
+```
+
 ## 行内公式与中文之间没有自动空格
 
 相关问题：想问下，typst 的盘古之白什么时候支持公式和文字之间的空格
