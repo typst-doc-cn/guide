@@ -62,6 +62,12 @@ Tracking Issue：https://github.com/typst/typst/issues/3385
 
 Typst 符号列表：https://typst.app/docs/reference/symbols/sym/
 
+## 有没有 typst 公式识别工具？
+
+识别公式截图，输出 typst 代码的那种。
+
+有的，群友训练的，仓库在 [ParaN3xus/typress](https://github.com/ParaN3xus/typress) ，点击 [这里](https://typress-web.vercel.app/) 在线使用，模型运行在本地。
+
 ## 公式中的正体加粗和正体，是什么代码啊？
 
 也就是 LaTeX 中的 \mathbf 和 \mathrm
