@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  Vitepress_build:
+  build:
     runs-on: ubuntu-latest
     name: Vitepress build
     steps:
@@ -28,11 +28,29 @@ jobs:
       run: |
         pnpm install
         pnpm build
-        cd docs/.vitepress/dist
-        touch .nojekyll
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
-        git init
-        git add -A
-        git commit -m autobuild
-        git push -f https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY.git master:gh-pages
+    - name: Upload artifact
+      uses: upload-pages-artifact@v3
+      with:
+        path: docs/.vitepress/dist
+
+  # Deploy job
+  deploy:
+    # Add a dependency to the build job
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
