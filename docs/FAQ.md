@@ -1,18 +1,20 @@
 # 常见问题
 
-## 为什么字体这么奇怪
+## 为什么字体这么奇怪 {#strange-fonts}
 
 ![](images/20240715132539.png)
 
 因为你没有指定中文字体，请参考下一个问题。
 
-## 如何安装（中文）字体？
-首先，在源代码文件中需要使用类似 `#set text(font: "LXGW WenKai", lang: "zh")` 的命令设置字体（此处使用霞鹜文楷）。然后根据环境配置字体文件的搜索方式:
+## 如何安装（中文）字体？ {#install-fonts}
+
+首先，在源代码文件中需要使用类似 `#set text(font: "LXGW WenKai", lang: "zh")` 的命令设置字体（此处使用霞鹜文楷）。然后根据环境配置字体文件的搜索方式：
+
 - 在 typst.app 上编辑：直接上传字体文件。如果不方便上传字体，可以使用自带的 `#set text(font: ("New Computer Modern", "Noto Serif CJK SC"), lang: "zh")`。
 - 在本地 VS Code 引入字体：默认可以使用系统安装的字体。除此以外，也可以通过给 tinymist 指定设定值 `tinymist.fontPaths` 等使它找到字体文件位置。不过注意使用 VS Code 打开单文件（区别于打开文件夹）时这一功能可能不可用。
 - 使用 Typst CLI：使用 `--font-path` 参数。
 
-## 中英文如何使用不同的字体？
+## 中英文如何使用不同的字体？ {#lang-fonts}
 
 设置字体可以使用一个列表，Typst 会按照列表中的顺序依次尝试使用字体。因此只需把英文字体放在中文字体前面即可。例如：
 
@@ -34,7 +36,7 @@ Tracking Issue：https://github.com/typst/typst/issues/3385
 
 </details>
 
-## 中文没有加粗
+## 中文没有加粗 {#chinese-bold}
 
 这是因为你使用的中文字体没有粗体字形。我们常用的宋体、黑体、楷体等都没有粗体字形。推荐使用支持粗体的字体，例如使用思源宋体和思源黑体。
 
@@ -56,19 +58,19 @@ Tracking Issue：https://github.com/typst/typst/issues/3385
 
 ```
 
-## 如何输入某个符号？
+## 如何输入某个符号？ {#input-symbol}
 
 （推荐）可以用这个网站手写查询：https://detypify.quarticcat.com/
 
 Typst 符号列表：https://typst.app/docs/reference/symbols/sym/
 
-## 有没有 typst 公式识别工具？
+## 有没有 typst 公式识别工具？ {#math-ocr}
 
 识别公式截图，输出 typst 代码的那种。
 
 有的，群友训练的，仓库在 [ParaN3xus/typress](https://github.com/ParaN3xus/typress) ，点击 [这里](https://typress-web.vercel.app/) 在线使用，模型运行在本地。
 
-## 公式中的正体加粗和正体，是什么代码啊？
+## 公式中的正体加粗和正体，是什么代码啊？ {#math-bold-upright}
 
 也就是 LaTeX 中的 \mathbf 和 \mathrm
 
@@ -81,7 +83,7 @@ $ y=3+4 mathrm(i) $
 $ nabla times mathbf(H) $
 ```
 
-## 如何实现 \mathscr 的花体符号？
+## 如何实现 `\mathscr` 的花体符号？ {#symbol-mathscr}
 
 群友提问：话说 typst 未来可以支持 latex 的一些数学字体，比如 mathscr 的花体，感觉确实帅
 
@@ -91,30 +93,32 @@ $ nabla times mathbf(H) $
 $ cal(L){f(t)} = integral_(t = 0)^oo f(t) e^(- s t) dif t $
 ```
 
-## 行内公式与中文之间没有自动空格
+## 行内公式与中文之间没有自动空格 {#chinese-space}
 
 相关问题：想问下，typst 的盘古之白什么时候支持公式和文字之间的空格
 
 相关 issue：https://github.com/typst/typst/issues/2703
 
 临时修复方法：
+
 ```typst
 #show math.equation.where(block: false): it => h(0.25em, weak: true) + it + h(0.25em, weak: true)
 汉字$A$汉字
 ```
 
-## 为什么第一段没有缩进？
+## 为什么第一段没有缩进？ {#first-line-indent}
 
 <details>
 <summary>参考阅读：</summary>
 Typst 官方也意识到了这个问题，希望我们可以早日看见这一问题的解决。
 
 Tracking Issue：https://github.com/typst/typst/issues/311
+
 </details>
 
 首先，英文排版是这样的，LaTeX 默认第一段也是不缩进的。其次，这部分实现有一些 bug，当前还不能通过修改设置来实现缩进。要修复这个问题，可以使用下面的方法：
 
-### 方法1：假段落（推荐）
+### 方法 1：假段落（推荐） {#first-line-indent-fake}
 
 ```typst
 #set par(first-line-indent: 2em)
@@ -128,7 +132,7 @@ Tracking Issue：https://github.com/typst/typst/issues/311
 缩进修复了
 
 $ E=m c^2 $
-#noindent()其中，$c$ 表示光速。 // 缺点是这里要手动 #noindent()
+#noindent() 其中，$c$ 表示光速。 // 缺点是这里要手动 #noindent()
 
 ```
 
@@ -136,7 +140,7 @@ $ E=m c^2 $
 
 缺点：图表和公式后面的段落也会默认缩进。当你需要写“其中，XXX”的时候，要手动取消缩进。
 
-### 方法2：使用 indenta 包
+### 方法 2：使用 indenta 包 {#first-line-indent-indenta}
 
 ```typst
 #set par(first-line-indent: 2em)
@@ -153,9 +157,9 @@ $ E=m c^2 $
 
 缺点：可能存在一些缩进失效的情况
 
-## 如何实现 Word 中的两倍行距？
+## 如何实现 Word 中的两倍行距？ {#word-line-spacing}
 
-根据 Typst 作者 [@laurmaedje](https://github.com/laurmaedje) 的[回答](https://github.com/typst/typst/issues/106#issuecomment-2041051807)：
+根据 Typst 作者 [@laurmaedje](https://github.com/laurmaedje) 的 [回答](https://github.com/typst/typst/issues/106#issuecomment-2041051807)：
 
 ```typst
 #set text(top-edge: 0.7em, bottom-edge: -0.3em)
@@ -166,7 +170,7 @@ $ E=m c^2 $
 #lorem(7)
 ```
 
-## 如何实现页眉页脚奇偶页不同？
+## 如何实现页眉页脚奇偶页不同？ {#page-odd-even}
 
 设置页眉页脚时，可以使用 `if`，同时因为这个操作是上下文相关的（我们需要知道此时的页码，也就是 `counter(page)` 的值），所以还要使用 `context`，即 `context if`。
 
@@ -187,7 +191,7 @@ $ E=m c^2 $
 偶数页
 ```
 
-## 下划线怎么断断续续的？
+## 下划线怎么断断续续的？ {#underline-evade}
 
 英文下划线是这样的，如果你不喜欢，可以使用 `evade: false` 参数让他变成连续的。
 
@@ -199,7 +203,7 @@ $ E=m c^2 $
 
 但是有一说一，对于大段文字，还是默认的好看一些。
 
-## 中英文下划线错位了怎么办？
+## 中英文下划线错位了怎么办？ {#underline-misplace}
 
 相关 issue：https://github.com/typst/typst/issues/1210
 
@@ -208,11 +212,12 @@ $ E=m c^2 $
 微调凑合一下吧
 
 ```typst
+#underline[1234 一二三四“”""]
 #set underline(offset: .1em, stroke: .05em, evade: false)
-#underline[1234一二三四“”""]
+#underline[1234 一二三四“”""]
 ```
 
-## 如何让某个标题不编号？例如参考文献
+## 如何让某个标题不编号？例如参考文献 {#heading-numbering-none}
 
 手动调用 `heading(numbering: none)`，例如
 
@@ -225,7 +230,7 @@ $ E=m c^2 $
 
 ```
 
-## 如何为每一级标题指定不同的编号格式？
+## 如何为每一级标题指定不同的编号格式？ {#heading-formats}
 
 类似问题：如何从二级标题开始编号？
 
@@ -260,7 +265,7 @@ $ E=m c^2 $
 
 ```
 
-## 如何让页脚的页码显示为“第1页/共N页”，同时目录中的页码使用阿拉伯数字？
+## 如何让页脚的页码显示为“第 1 页/共 N 页”，同时目录中的页码使用阿拉伯数字？ {#page-numbering-format}
 
 为了方便起见，还是用 `numbly`
 
@@ -273,7 +278,7 @@ $ E=m c^2 $
 == 但是原神
 ```
 
-## 如何让 inline 公式显示成 display 公式？
+## 如何让 inline 公式显示成 display 公式？ {#math-inline-display}
 
 ```typst
 #show math.equation.where(block: false): math.display
@@ -282,7 +287,7 @@ $ E=m c^2 $
 
 ```
 
-## 如何获得标签所在页的页码？
+## 如何获得标签所在页的页码？ {#get-label-page}
 
 其实就是获取计数器 `counter(page)` 在标签所在位置的值。
 
@@ -298,7 +303,7 @@ aaa 在第 #my-link(<233>) 页
 前者是 `location` 位置的页码编号，这个编号可以被重置（例如第一章之前用罗马数字编号，之后用阿拉伯数字重新编号，此时可以使用 `counter(page).update(1)` 重置编号）。而后者是物理的页数，或者说，在第几张纸上。
 :::
 
-## 如何去掉标题的编号后面的空格？
+## 如何去掉标题的编号后面的空格？ {#heading-numbering-space}
 
 很遗憾，这空格是 [代码里写死的](https://github.com/typst/typst/blob/23746ee18901e08852306f35639298ad234d3481/crates/typst/src/model/heading.rs#L243)，并不能通过设置关掉。
 
@@ -326,7 +331,7 @@ aaa 在第 #my-link(<233>) 页
 = 思考
 ```
 
-## 如何手动输入参考文献？
+## 如何手动输入参考文献？ {#bibitem}
 
 相关问题：如何实现 LaTeX 的 `bibitem` ？
 
@@ -349,7 +354,7 @@ aaa 在第 #my-link(<233>) 页
 #bibitem[但是原神] <ref2>
 ```
 
-## 如何修复英文参考文献中的“等”？
+## 如何修复英文参考文献中的“等”？ {#bib-etal-lang}
 
 当中英文参考文献同时出现时，英文参考文献中的“等”应该是“et al.”，而不是“等”。
 
@@ -363,7 +368,7 @@ aaa 在第 #my-link(<233>) 页
 #bilingual-bibliography(bibliography: "refs.bib")
 ```
 
-## 如何让几个汉字占固定宽度并均匀分布？
+## 如何让几个汉字占固定宽度并均匀分布？ {#character-intersperse}
 
 放到 `box` 或 `block` 容器里，然后使用 `1fr` 把它们隔开即可。
 
@@ -383,7 +388,7 @@ aaa 在第 #my-link(<233>) 页
 #distr("详细地址", w: 6em)
 ```
 
-## 如何让向量和矩阵使用方括号？
+## 如何让向量和矩阵使用方括号？ {#math-delim}
 
 ```typst
 #set math.mat(delim: "[")
@@ -392,7 +397,7 @@ $ mat(1,2;3,4) $
 $ vec(a,b,c) $
 ```
 
-## 如何输入一个特定编号的公式？
+## 如何输入一个特定编号的公式？ {#math-tag}
 
 相关问题：如何手动给公式编号？类似 LaTeX 的 `\tag{}`。
 
@@ -405,7 +410,7 @@ $ f(x) $
 $ h(x) $
 ```
 
-## 如何实现三线表？
+## 如何实现三线表？ {#three-line-table}
 
 使用 `stroke: none` 隐藏默认边框，然后使用 `table.hline()` 画线即可。
 
@@ -423,16 +428,16 @@ $ h(x) $
 
 ```
 
-## 为什么下划线不显示？
+## 为什么下划线不显示？ {#underline-not-display}
 
 下划线后面必须有内容才会显示，你可以加上个 `sym.zws`（零宽空格）。
 
 TODO: 后面两个例子未整理，先放在这里。
 
 ```typst
-例1：#underline[#(" " * 20)]
+例 1：#underline[#(" " * 20)]
 
-例2：#underline[#(" " * 20)#sym.zws]
+例 2：#underline[#(" " * 20)#sym.zws]
 
 #let uline(n) = underline(n * "\u{3000}" + sym.zws)
 姓名：#uline(6)
@@ -441,7 +446,7 @@ TODO: 后面两个例子未整理，先放在这里。
 学号：#uline2(6em)[114514]
 ```
 
-## 如何在代码中实现数组转置？
+## 如何在代码中实现数组转置？ {#array-transpose}
 
 相关问题：如何实现表格转置？
 
@@ -456,7 +461,7 @@ TODO: 后面两个例子未整理，先放在这里。
 #table(columns: 2, ..array.zip(..data).flatten())
 ```
 
-## 如何关闭 webapp 的拼写检查？
+## 如何关闭 webapp 的拼写检查？ {#webapp-spellcheck}
 
 方法 1：点击左侧设置按钮，找到 Spellcheck，取消勾选 Enable spellchecking
 
@@ -466,7 +471,7 @@ TODO: 后面两个例子未整理，先放在这里。
 #set text(lang: "zh")
 ```
 
-## 如何按章节拆分文件编写？
+## 如何按章节拆分文件编写？ {#multiple-files}
 
 群友反馈文件一大，preview 和浏览器都很卡。那么如何拆文件呢？
 
@@ -491,7 +496,7 @@ TODO: 后面两个例子未整理，先放在这里。
 @fig1 @fig2
 ```
 
-## 能通过看 link 里头的内容来判断颜色吗？
+## 能通过看 link 里头的内容来判断颜色吗？ {#link-colors}
 
 比如 link to lable 用橙色，link to URL 用蓝色这种
 
