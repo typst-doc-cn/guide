@@ -153,6 +153,19 @@ $ E=m c^2 $
 
 缺点：可能存在一些缩进失效的情况
 
+## 如何实现 Word 中的两倍行距？
+
+根据 Typst 作者 [@laurmaedje](https://github.com/laurmaedje) 的[回答](https://github.com/typst/typst/issues/106#issuecomment-2041051807)：
+
+```typst
+#set text(top-edge: 0.7em, bottom-edge: -0.3em)
+#set par(leading: 1em)
+
+#lorem(6)
+
+#lorem(7)
+```
+
 ## 如何实现页眉页脚奇偶页不同？
 
 设置页眉页脚时，可以使用 `if`，同时因为这个操作是上下文相关的（我们需要知道此时的页码，也就是 `counter(page)` 的值），所以还要使用 `context`，即 `context if`。
