@@ -1,4 +1,4 @@
-![6937c2da43f405eb64ecec42185199bb](https://github.com/user-attachments/assets/d3db05ac-f085-44fe-bfab-87b7cf9daba9)# 常见问题
+# 常见问题
 
 ## 为什么字体这么奇怪 {#strange-fonts}
 
@@ -213,6 +213,7 @@ $ E=m c^2 $
 
 ```typst
 #underline[1234 一二三四“”""]
+
 #set underline(offset: .1em, stroke: .05em, evade: false)
 #underline[1234 一二三四“”""]
 ```
