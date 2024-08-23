@@ -1,4 +1,4 @@
-# 常见问题
+![6937c2da43f405eb64ecec42185199bb](https://github.com/user-attachments/assets/d3db05ac-f085-44fe-bfab-87b7cf9daba9)# 常见问题
 
 ## 为什么字体这么奇怪 {#strange-fonts}
 
@@ -228,6 +228,22 @@ $ E=m c^2 $
 
 #heading(numbering: none)[参考文献]
 
+```
+
+## 如何实现标题编号罗马数字加粗，但是标题不加粗？ {#heading-numbering-bold}
+
+群友提问：这个标题，只需要第I卷这个几个字加粗，后面的不加粗怎么设置？（我改了后面的字体）
+
+![6937c2da43f405eb64ecec42185199bb](https://github.com/user-attachments/assets/9ecd0a7d-1442-446c-aadb-6cb3aa7cad5d)
+
+`#set heading(numbering: XXX)` 接受的是返回 `content` 的函数，所以
+
+```typst
+#set heading(numbering: n => strong(numbering("第 I 卷", n)))
+
+#heading("你说得对")
+
+#heading("但是原神")
 ```
 
 ## 如何为每一级标题指定不同的编号格式？ {#heading-formats}
