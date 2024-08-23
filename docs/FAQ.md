@@ -241,6 +241,7 @@ $ E=m c^2 $
 
 ```typst
 #set heading(numbering: n => strong(numbering("第 I 卷", n)))
+#show heading: set text(weight: "regular")
 
 #heading("你说得对")
 
