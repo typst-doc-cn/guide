@@ -110,6 +110,10 @@ $ nabla times mathbf(H) $
 $ cal(L){f(t)} = integral_(t = 0)^oo f(t) e^(- s t) dif t $
 ```
 
+## 有没有类似 LaTeX ElegantBook 的书籍或者笔记模板？ {#note-template}
+
+有的：https://github.com/choglost/LessElegantNote
+
 ## 行内公式与中文之间没有自动空格 {#chinese-space}
 
 相关问题：想问下，typst 的盘古之白什么时候支持公式和文字之间的空格
