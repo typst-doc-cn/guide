@@ -329,7 +329,8 @@ $ E=m c^2 $
 ## 如何让 cases 里面的分数/公式显示成 display 形式？ {#dcases}
 
 ```typst
-typ #import "@preview/physica:0.9.3": *
+#set page(height: auto)
+#import "@preview/physica:0.9.3": *
 #let dcases(..args) = math.cases(..args.pos().map(math.display))
 $
 dcases(nabla dot vb(D) &= 4 pi rho_"f ",
