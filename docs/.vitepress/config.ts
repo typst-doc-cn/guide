@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Typst 中文社区导航',
   base: '/guide/',
+  lang: 'zh-CN',
   ignoreDeadLinks: true,
   markdown: {
     theme: {
@@ -43,6 +44,7 @@ export default defineConfig({
           { text: '快速开始', link: '/quick-start' },
           { text: '常见问题', link: '/FAQ' },
           { text: '面向 Word 用户的快速入门向导', link: '/word' },
+          { text: '其他示例', link: '/showcase' },
         ]
       }
     ]
