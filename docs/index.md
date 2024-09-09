@@ -51,7 +51,7 @@ hero:
 
 小蓝书 Web 版（入门必读！）：https://typst-doc-cn.github.io/tutorial/
 
-中文 Awesome Typst 列表：https://github.com/typst-doc-cn/awesome-typst-cn
+中文 Awesome Typst 列表：https://github.com/qjcg/awesome-typst/
 
 Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
 
