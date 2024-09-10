@@ -110,6 +110,12 @@ $ nabla times mathbf(H) $
 $ cal(L){f(t)} = integral_(t = 0)^oo f(t) e^(- s t) dif t $
 ```
 
+## 有没有好看的数学字体推荐？ {#math-fonts}
+
+群友问题：大家有没有好看的数学字体推荐, 安装了很多名字是 math 结尾字体, 很多都不能显示, 不知道什么问题, 能正常显示的目前就只发现 Cambria Math 比较好看.
+
+参见 [这份文档](math_fonts.pdf)
+
 ## 有没有类似 LaTeX ElegantBook 的书籍或者笔记模板？ {#note-template}
 
 有的：https://github.com/choglost/LessElegantNote
