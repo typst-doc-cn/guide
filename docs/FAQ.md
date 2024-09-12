@@ -488,6 +488,51 @@ $ h(x) $
 
 ```
 
+## 能简单地通过show set等实现将原有的表格转换成三线表吗？ {#auto-three-line-table}
+
+::: warning
+不推荐，建议上一个问题手动使用 `table.hline()` 实现。
+:::
+
+```typst
+#show: columns.with(2)
+
+#let t = table(
+  columns: 3,
+  table.header(
+    [$x$],
+    [$y$],
+    [$z$],
+  ),
+
+  [1], [2], [3],
+  [1], [2], [3],
+  [1], [2], [3],
+)
+
+#t
+
+#set table(stroke: none)
+#show table: it => {
+  if table.hline() in it.children {
+    return it
+  }
+  let children = it.children
+  let new_children = ()
+  for i in children {
+    new_children += (i,)
+    if repr(i).starts-with("header") {
+      new_children += (table.hline(),)
+    }
+  }
+  let meta = it.fields()
+  meta.remove("children")
+  return table(..meta, table.hline(),..new_children,table.hline())
+}
+
+#t
+```
+
 ## 为什么下划线不显示？ {#underline-not-display}
 
 下划线后面必须有内容才会显示，你可以加上个 `sym.zws`（零宽空格）。
