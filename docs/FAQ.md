@@ -533,6 +533,26 @@ $ h(x) $
 #t
 ```
 
+## 如何绘制带斜线(对角线)的表格？ {#diagonal-in-table-cell}
+
+第三方包 [diagbox](https://github.com/PgBiel/typst-diagbox) 实现了这个功能。只需要下载[代码](https://github.com/PgBiel/typst-diagbox/blob/main/diagbox.typ) 到项目目录，然后引入其中的 `tdiagbox` 和 `bdiagbox` 即可使用。
+
+例如:
+```typst no-render
+#import "diagbox.typ": *
+
+#table(
+  columns: (auto, auto, auto),
+  align: horizon + center,
+  bdiagbox[Names][Properties], [*Can Walk*], [*Can Run*],
+  [*Character A*], [Yes], [No],
+  [*Character B*], [No], [No],
+)
+```
+
+注意 `bdiagbox` 中的内容必须足够大，以 "撑开" `diagbox`，不然斜线会偏离对角。如果内容实在不够长，可以适当填充 `#h`。
+
+
 ## 为什么下划线不显示？ {#underline-not-display}
 
 下划线后面必须有内容才会显示，你可以加上个 `sym.zws`（零宽空格）。
