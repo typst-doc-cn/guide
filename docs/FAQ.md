@@ -425,7 +425,7 @@ aaa 在第 #my-link(<233>) 页
 #import "@preview/modern-nju-thesis:0.3.4": bilingual-bibliography
 
 // 将原本的 #bibliography("refs.bib") 替换为
-#bilingual-bibliography(bibliography: "refs.bib")
+#bilingual-bibliography(bibliography: bibliography.with("refs.bib"))
 ```
 
 ## 如何让几个汉字占固定宽度并均匀分布？ {#character-intersperse}
