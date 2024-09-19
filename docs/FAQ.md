@@ -718,6 +718,12 @@ $cfrac(i=1, oo)$
 $ cfrac(i=1, oo) $
 ```
 
-# 我应该如何写文档注释？
+## 作为开发者，我应该如何写文档注释？
 
 参考[社区提供的文档](https://github.com/typst-community/guidelines/blob/2b5dbca9c41866181e9c383515a54fc915df52ea/guidelines.pdf)
+
+## 关于本页面底下的评论区
+
+评论区运行在 [Vercel](https://vercel.com/)，国内用户可能加载不出。
+
+无需登录即可发表评论。若邮箱填写 QQ 邮箱，系统将自动获取你的 QQ 头像。
