@@ -21,7 +21,8 @@ export default defineConfig({
   ],
   themeConfig: {
     editLink: {
-      pattern: 'https://github.com/typst-doc-cn/guide/edit/master/docs/:path'
+      pattern: 'https://github.com/typst-doc-cn/guide/edit/master/docs/:path',
+      text: '在 GitHub 上编辑此页面',
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/typst-doc-cn/guide' },
@@ -54,6 +55,35 @@ export default defineConfig({
           { text: '其他示例', link: '/showcase' },
         ]
       }
-    ]
+    ],
+
+    footer: {
+      message: '基于 MIT 许可发布',
+      copyright: `版权所有 © 2024 typst guide team`
+    },
+
+    docFooter: {
+      prev: '上一页',
+      next: '下一页'
+    },
+
+    outline: {
+      label: '目录'
+    },
+
+    lastUpdated: {
+      text: '最后更新于',
+      formatOptions: {
+        dateStyle: 'short',
+        timeStyle: 'medium'
+      }
+    },
+
+    langMenuLabel: '多语言',
+    returnToTopLabel: '回到顶部',
+    sidebarMenuLabel: '菜单',
+    darkModeSwitchLabel: '主题',
+    lightModeSwitchTitle: '切换到浅色模式',
+    darkModeSwitchTitle: '切换到深色模式'
   }
 })
