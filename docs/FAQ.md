@@ -150,9 +150,12 @@ Tracking Issue：https://github.com/typst/typst/issues/311
 ```typst
 #set par(first-line-indent: 2em)
 #let fakepar=context{box();v(-measure(block()+block()).height)}
-#show heading: it=>it+fakepar
-#show figure: it=>it+fakepar
-#show math.equation.where(block: true): it=>it+fakepar
+#show math.equation.where(block: true): it=>it+fakepar // 公式后缩进
+#show heading: it=>it+fakepar // 标题后缩进
+#show figure: it=>it+fakepar // 图表后缩进
+#show enum.item: it=>it+fakepar
+#show list.item: it=>it+fakepar // 列表后缩进
+// #show xxx: it=>it+fakepar // 其他需要修复缩进的元素
 #let noindent()=h(-2em)
 
 = 标题
@@ -178,6 +181,8 @@ $ E=m c^2 $
 
 缩进修复了
 
+$ E=m c^2 $
+其中，$c$ 表示光速。
 ```
 
 优点：方便自由控制图表和公式后面的段落是否缩进
