@@ -18,6 +18,11 @@ export default defineConfig({
     t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "o5fc884imi");`],
+    ['scipt', { 'async': '', 'src': 'https://www.googletagmanager.com/gtag/js?id=G-NL1RYQ4PW7' }],
+    ['script', {}, `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-NL1RYQ4PW7');`],
   ],
   themeConfig: {
     editLink: {
