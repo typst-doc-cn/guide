@@ -9,12 +9,12 @@ def get_hash(input_string: str):
     return sha1[:10].hex()
 
 
-def get_files_md(rawname):
+def get_files_md(mdfilename, rawname):
     res = ""
     for i in range(10):
         filename = rawname.replace("{n}", str(i + 1))
         if os.path.isfile(filename):
-            filename = filename.replace("docs/", "")
+            filename = os.path.relpath(filename, os.path.dirname(mdfilename))
             res += f"\n![typst-demo]({filename})"
     return res
 
@@ -29,7 +29,7 @@ def process_file(filename: str):
         # if exists then skip
         if os.path.isfile(outfilename.replace("{n}", "1")):
             print("=== Skipped")
-            return block + get_files_md(outfilename)
+            return block + get_files_md(filename, outfilename)
         with open("1.typ", "w", encoding="utf-8") as f:
             f.write("""#set page(height: 4cm, width: 6cm)
 #set text(font: ("New Computer Modern", "Source Han Serif SC"))
@@ -44,7 +44,7 @@ def process_file(filename: str):
         stderr = result.stderr
         if stderr:
             print(stderr)
-        return block + get_files_md(outfilename)
+        return block + get_files_md(filename, outfilename)
 
     with open(filename, "r", encoding="utf-8") as f:
         content = f.read()
