@@ -11,3 +11,21 @@
 ## 问题目录
 
 <FAQList />
+
+## 如何贡献
+
+点击这个链接创建一个新的 `.md` 文件，编辑完成 commit 后提交 pull request 即可。
+
+https://github.com/typst-doc-cn/guide/new/master/docs/FAQ
+
+````
+```typst
+文件中这样的 typst 代码块会被渲染为图片
+```
+
+```typst no-render
+这样的代码块不会被渲染
+```
+````
+
+此外，每个下面下方会都有 `在 GitHub 上编辑此页面` 按钮，点击即可编辑页面内容。
