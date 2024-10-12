@@ -24,7 +24,7 @@
     <div
       v-for="(article, index) in postList"
       :key="index"
-      class="flex justify-between items-center gap-y-4 pl-4"
+      class="flex justify-between items-center gap-y-4"
     >
       <a
         :href="withBase(article.url)"
