@@ -1,3 +1,7 @@
+---
+tags: [math]
+---
+
 # 如何让 inline 公式显示成 display 公式？
 
 ```typst

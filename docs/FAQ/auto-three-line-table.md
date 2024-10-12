@@ -1,3 +1,7 @@
+---
+tags: [code, show, table]
+---
+
 # 能简单地通过show set等实现将原有的表格转换成三线表吗？
 
 ::: warning

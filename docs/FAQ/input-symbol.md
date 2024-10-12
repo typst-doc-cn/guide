@@ -1,3 +1,7 @@
+---
+tags: [symbol]
+---
+
 # 如何输入某个符号？
 
 （推荐）可以用这个网站手写查询：https://detypify.quarticcat.com/

@@ -1,3 +1,7 @@
+---
+tags: [math]
+---
+
 # 如何输入胖胖的好看的空集符号？
 
 也就是 LaTeX 的 `\varnothing` 或者 `\diameter`
