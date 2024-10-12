@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-screen-lg w-full px-6 py-8 my-0 mx-auto">
-    <div class="flex flex-wrap gap-4">
+  <div class="max-w-screen-lg w-full px-2 py-2 my-0 mx-auto">
+    <div class="flex flex-wrap gap-1">
       <div class="simple-tag" @click="changeTab(null)">
         <span>全部</span>
       </div>
@@ -11,20 +11,18 @@
         @click="changeTab(tag)"
       >
         <span>{{ tag }}</span>
-        <span class="pl-1 text-[var(--vp-c-brand)]">
-          {{ data.tagMap[tag].length }}
-        </span>
+        <span class="pl-1"> {{ data.tagMap[tag].length }} </span>
       </div>
     </div>
-    <p v-text="currentTag" class="py-4 text-2xl"></p>
+    <div class="py-2 text-2xl">{{ currentTag }}</div>
     <div
       v-for="(article, index) in postList"
       :key="index"
-      class="flex justify-between items-center py-1 pl-6"
+      class="flex justify-between items-center gap-y-4 pl-4"
     >
       <a
         :href="withBase(article.url)"
-        class="post-dot overflow-hidden whitespace-nowrap text-ellipsis"
+        class="overflow-hidden whitespace-nowrap text-ellipsis decoration-none"
       >
         {{ article.title }}
       </a>

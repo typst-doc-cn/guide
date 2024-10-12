@@ -27,7 +27,7 @@ const path = computed(() => useRoute().path);
 <template>
   <Layout>
     <template #doc-before>
-      <div>
+      <div class="flex gap-1 mb-2">
         <a v-for="tag in makeTags(data.frontmatter.value.tags)" class="simple-tag">
           {{ tag }}
         </a>

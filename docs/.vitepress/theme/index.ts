@@ -1,7 +1,8 @@
-import DefaultTheme from 'vitepress/theme'
-import './custom.css'
-import Layout from './Layout.vue'
-import FAQList from './FAQList.vue'
+import DefaultTheme from 'vitepress/theme';
+import Layout from './Layout.vue';
+import FAQList from './FAQList.vue';
+import './custom.css';
+import 'virtual:uno.css';
 
 export default {
   extends: DefaultTheme,
@@ -10,6 +11,6 @@ export default {
   Layout: Layout,
   enhanceApp({ app }) {
     // register your custom global components
-    app.component('FAQList', FAQList)
-  }
-}
+    app.component('FAQList', FAQList);
+  },
+};
