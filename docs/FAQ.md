@@ -8,7 +8,7 @@
 阅读本文档之前，推荐首先阅读[官方文档](https://typst.app/docs/reference/)和[小蓝书](https://typst-doc-cn.github.io/tutorial/)。
 :::
 
-## 问题目录
+## 问题目录 {#outline}
 
 <FAQList />
 

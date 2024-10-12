@@ -1,18 +1,24 @@
 <template>
   <div class="max-w-screen-lg w-full px-2 py-2 my-0 mx-auto">
     <div class="flex flex-wrap gap-1">
-      <div class="simple-tag" @click="changeTab(null)">
+      <a
+        :href="withBase(`FAQ#outline`)"
+        class="simple-tag"
+        style="text-decoration: none"
+      >
         <span>全部</span>
-      </div>
-      <div
+        <span class="pl-1"> {{ data.posts.length }} </span>
+      </a>
+      <a
         v-for="(tag, i) in tags"
         :key="i"
+        :href="withBase(`FAQ?tag=${tag}#outline`)"
         class="simple-tag"
-        @click="changeTab(tag)"
+        style="text-decoration: none"
       >
         <span>{{ tag }}</span>
         <span class="pl-1"> {{ data.tagMap[tag].length }} </span>
-      </div>
+      </a>
     </div>
     <div class="py-2 text-2xl">{{ currentTag }}</div>
     <div
@@ -22,7 +28,8 @@
     >
       <a
         :href="withBase(article.url)"
-        class="overflow-hidden whitespace-nowrap text-ellipsis decoration-none"
+        class="overflow-hidden whitespace-nowrap text-ellipsis"
+        style="text-decoration: none"
       >
         {{ article.title }}
       </a>
@@ -39,9 +46,6 @@ const tags = Object.keys(data.tagMap);
 
 const currentTag = ref<string | null>(null);
 
-function changeTab(newTag: string | null) {
-  currentTag.value = newTag;
-}
 const postList = computed(() =>
   currentTag.value ? data.tagMap[currentTag.value] : data.posts
 );

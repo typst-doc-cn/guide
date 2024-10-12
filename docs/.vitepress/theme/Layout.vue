@@ -1,5 +1,5 @@
-<script setup>
-import { useData, useRoute } from 'vitepress';
+<script setup lang="ts">
+import { useData, useRoute, withBase } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import { computed } from 'vue';
 import { Waline } from '@waline/client/component';
@@ -28,7 +28,11 @@ const path = computed(() => useRoute().path);
   <Layout>
     <template #doc-before>
       <div class="flex gap-1 mb-2">
-        <a v-for="tag in makeTags(data.frontmatter.value.tags)" class="simple-tag">
+        <a
+          v-for="tag in makeTags(data.frontmatter.value.tags)"
+          class="simple-tag"
+          :href="withBase(`/FAQ?tag=${tag}#outline`)"
+        >
           {{ tag }}
         </a>
       </div>
