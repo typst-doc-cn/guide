@@ -1,4 +1,7 @@
-# 为什么第一段没有缩进？
+---
+title: 为什么第一段没有缩进？
+tags: [layout]
+---
 
 <details>
 <summary>参考阅读：</summary>
@@ -10,7 +13,7 @@ Tracking Issue：https://github.com/typst/typst/issues/311
 
 首先，英文排版是这样的，LaTeX 默认第一段也是不缩进的。其次，这部分实现有一些 bug，当前还不能通过修改设置来实现缩进。要修复这个问题，可以使用下面的方法：
 
-### 方法 1：假段落（推荐） {#first-line-indent-fake}
+## 方法 1：假段落（推荐） {#first-line-indent-fake}
 
 ```typst
 #set par(first-line-indent: 2em)
@@ -35,7 +38,7 @@ $ E=m c^2 $
 
 缺点：图表和公式后面的段落也会默认缩进。当你需要写“其中，XXX”的时候，要手动取消缩进。
 
-### 方法 2：使用 indenta 包 {#first-line-indent-indenta}
+## 方法 2：使用 indenta 包 {#first-line-indent-indenta}
 
 ```typst
 #set par(first-line-indent: 2em)

@@ -1,4 +1,7 @@
-# 如何定义一个在 inline 公式与 display 公式中形式不同的符号？
+---
+title: 如何定义一个在 inline 公式与 display 公式中形式不同的符号？
+tags: [math]
+---
 
 如果你指的是求和或者积分符号那种，应直接用 `limits`
 

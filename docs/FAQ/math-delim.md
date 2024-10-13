@@ -1,4 +1,7 @@
-# 如何让向量和矩阵使用方括号？
+---
+title: 如何让向量和矩阵使用方括号？
+tags: [math]
+---
 
 ```typst
 #set math.mat(delim: "[")

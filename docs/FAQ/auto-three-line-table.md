@@ -1,4 +1,7 @@
-# 能简单地通过show set等实现将原有的表格转换成三线表吗？
+---
+title: 能简单地通过show set等实现将原有的表格转换成三线表吗？
+tags: [code, show, table]
+---
 
 ::: warning
 不推荐，建议参考上一个问题手动使用 `table.hline()` 实现。

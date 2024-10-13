@@ -1,4 +1,7 @@
-# 如何让 cases 里面的分数/公式显示成 display 形式？
+---
+title: 如何让 cases 里面的分数/公式显示成 display 形式？
+tags: [math]
+---
 
 ```typst
 #set page(height: auto)

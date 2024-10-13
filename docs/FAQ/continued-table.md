@@ -1,4 +1,7 @@
-# 跨页的表格如何显示“续表”？
+---
+title: 跨页的表格如何显示“续表”？
+tags: [code, table]
+---
 
 ```typst
 #let xubiao = state("xubiao")

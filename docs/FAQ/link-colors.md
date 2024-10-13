@@ -1,4 +1,7 @@
-# 能通过看 link 里头的内容来判断颜色吗？
+---
+title: 能通过看 link 里头的内容来判断颜色吗？
+tags: [code, show]
+---
 
 比如 link to lable 用橙色，link to URL 用蓝色这种
 

@@ -1,4 +1,7 @@
-# 如何实现两种不同的一级标题？
+---
+title: 如何实现两种不同的一级标题？
+tags: [heading, numbering]
+---
 
 作者：[@flaribbit](https://github.com/flaribbit)
 

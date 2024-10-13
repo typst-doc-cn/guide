@@ -1,4 +1,7 @@
-# 如何实现 Word 中的两倍行距？
+---
+title: 如何实现 Word 中的两倍行距？
+tags: [word, layout]
+---
 
 根据 Typst 作者 [@laurmaedje](https://github.com/laurmaedje) 的 [回答](https://github.com/typst/typst/issues/106#issuecomment-2041051807)：
 
