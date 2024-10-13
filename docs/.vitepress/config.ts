@@ -1,4 +1,5 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig } from 'vitepress';
+import UnoCSS from 'unocss/vite';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -107,5 +108,9 @@ gtag('config', 'G-NL1RYQ4PW7');`,
     darkModeSwitchLabel: '主题',
     lightModeSwitchTitle: '切换到浅色模式',
     darkModeSwitchTitle: '切换到深色模式',
+  },
+
+  vite: {
+    plugins: [UnoCSS()],
   },
 });
