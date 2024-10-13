@@ -22,20 +22,15 @@
         <span class="pl-1"> {{ data.tagMap[tag].length }} </span>
       </a>
     </div>
-    <div class="py-2 text-2xl">{{ currentTag }}</div>
-    <div
-      v-for="(article, index) in postList"
-      :key="index"
-      class="flex justify-between items-center gap-y-4"
-    >
-      <a
-        :href="withBase(article.url)"
-        class="overflow-hidden whitespace-nowrap text-ellipsis"
-        style="text-decoration: none"
-      >
-        {{ article.title }}
-      </a>
-    </div>
+    <div class="my-2 text-2xl">{{ currentTag }}</div>
+    <ul>
+      <li v-for="(article, index) in postList" :key="index">
+        <a :href="withBase(article.url)" class="overflow-hidden whitespace-nowrap text-ellipsis"
+          style="text-decoration: none">
+          {{ article.title }}
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
