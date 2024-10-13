@@ -1,8 +1,7 @@
 ---
+title: 列表符号和文字错位了怎么办？
 tags: [layout, bug]
 ---
-
-# 列表符号和文字错位了怎么办？
 
 来自 [@OrangeX4](https://github.com/OrangeX4) 的解决方案
 

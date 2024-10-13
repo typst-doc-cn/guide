@@ -1,8 +1,7 @@
 ---
+title: 如何让某个标题不编号？例如参考文献
 tags: [heading, numbering]
 ---
-
-# 如何让某个标题不编号？例如参考文献
 
 手动调用 `heading(numbering: none)`，例如
 

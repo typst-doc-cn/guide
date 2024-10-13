@@ -62,6 +62,10 @@ button.copy::after {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
+main .vp-doc h1 {
+  display: none;
+}
+
 .simple-tag {
   margin: 0 0.125em 0.333em 0;
   display: inline-block;

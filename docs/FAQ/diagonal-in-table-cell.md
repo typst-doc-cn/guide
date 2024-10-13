@@ -1,8 +1,7 @@
 ---
+title: 如何绘制带斜线(对角线)的表格？
 tags: [code, table]
 ---
-
-# 如何绘制带斜线(对角线)的表格？
 
 第三方包 [diagbox](https://github.com/PgBiel/typst-diagbox) 实现了这个功能。只需要下载[代码](https://github.com/PgBiel/typst-diagbox/blob/main/diagbox.typ) 到项目目录，然后引入其中的 `tdiagbox` 和 `bdiagbox` 即可使用。
 

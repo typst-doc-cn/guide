@@ -1,8 +1,7 @@
 ---
+title: 如何去掉标题的编号后面的空格？
 tags: [heading, numbering]
 ---
-
-# 如何去掉标题的编号后面的空格？
 
 很遗憾，这空格是 [代码里写死的](https://github.com/typst/typst/blob/23746ee18901e08852306f35639298ad234d3481/crates/typst/src/model/heading.rs#L243)，并不能通过设置关掉。
 

@@ -1,4 +1,4 @@
-import { createContentLoader, withBase } from 'vitepress';
+import { createContentLoader } from 'vitepress';
 import { makeTags } from './utils';
 
 export interface PostData {
@@ -17,18 +17,12 @@ declare const data: Data;
 export { data };
 
 export default createContentLoader('FAQ/*.md', {
-  includeSrc: true,
   transform(rawData): Data {
     const postMap = {};
     const tagMap = {};
 
-    const titleRegex = /^# (.+)$/m;
-
-    const posts = rawData.map(({ url, frontmatter, src }) => {
-      const title =
-        frontmatter.title ??
-        (src && titleRegex.exec(src)?.[1]) ??
-        '<unknown title>';
+    const posts = rawData.map(({ url, frontmatter }) => {
+      const title = frontmatter.title ?? url;
       const result = {
         title,
         url,

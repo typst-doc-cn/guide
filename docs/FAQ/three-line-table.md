@@ -1,8 +1,7 @@
 ---
+title: 如何实现三线表？
 tags: [table]
 ---
-
-# 如何实现三线表？
 
 使用 `stroke: none` 隐藏默认边框，然后使用 `table.hline()` 画线即可。
 

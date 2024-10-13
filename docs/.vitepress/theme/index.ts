@@ -1,3 +1,4 @@
+import type { Theme } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import Layout from './Layout.vue';
 import FAQList from './FAQList.vue';
@@ -13,4 +14,4 @@ export default {
     // register your custom global components
     app.component('FAQList', FAQList);
   },
-};
+} satisfies Theme;
