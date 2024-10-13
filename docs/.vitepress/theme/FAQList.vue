@@ -5,6 +5,7 @@
         :href="withBase(`FAQ#outline`)"
         class="simple-tag"
         style="text-decoration: none"
+        @click="currentTag = null"
       >
         <span>全部</span>
         <span class="pl-1"> {{ data.posts.length }} </span>
@@ -15,6 +16,7 @@
         :href="withBase(`FAQ?tag=${tag}#outline`)"
         class="simple-tag"
         style="text-decoration: none"
+        @click="currentTag = tag"
       >
         <span>{{ tag }}</span>
         <span class="pl-1"> {{ data.tagMap[tag].length }} </span>
@@ -50,8 +52,10 @@ const postList = computed(() =>
   currentTag.value ? data.tagMap[currentTag.value] : data.posts
 );
 
-onMounted(() => {
+onMounted(() => updateCurrentTag());
+
+const updateCurrentTag = () => {
   const searchParams = new URLSearchParams(window.location.search);
   currentTag.value = searchParams.get('tag');
-});
+};
 </script>
