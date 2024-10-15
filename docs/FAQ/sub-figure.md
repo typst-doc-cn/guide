@@ -3,7 +3,7 @@ tags: [layout, figure]
 ---
 # 如何实现子图？
 
-## 方法 1：手动编号（推荐）
+### 方法 1：手动编号（推荐）
 
 这个编号不需要经常修改，因此使用 `grid` 布局，然后手动编号即可。
 
@@ -16,7 +16,7 @@ tags: [layout, figure]
 @fig:demo (a) is xxx
 ```
 
-## 方法 2：使用 subpar 包
+### 方法 2：使用 subpar 包
 
 https://typst.app/universe/package/subpar/
 
