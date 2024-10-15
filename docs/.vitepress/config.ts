@@ -6,6 +6,7 @@ export default defineConfig({
   title: 'Typst 中文社区导航',
   base: '/guide/',
   lang: 'zh-CN',
+  description: '以及一些实用案例',
   ignoreDeadLinks: true,
   markdown: {
     theme: {
