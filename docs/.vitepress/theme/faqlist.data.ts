@@ -17,12 +17,14 @@ declare const data: Data;
 export { data };
 
 export default createContentLoader('FAQ/*.md', {
+  includeSrc: true,
   transform(rawData): Data {
     const postMap = {};
     const tagMap = {};
 
-    const posts = rawData.map(({ url, frontmatter }) => {
-      const title = frontmatter.title ?? url;
+    const posts = rawData.map(({ src, url, frontmatter }) => {
+      // get the title from md source code
+      const title = src?.match(/# (.*)/)?.[1] ?? url;
       const result = {
         title,
         url,

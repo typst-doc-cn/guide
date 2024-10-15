@@ -1,7 +1,7 @@
 ---
-title: 有没有 typst 公式识别工具？
 tags: [tool]
 ---
+# 有没有 typst 公式识别工具？
 
 识别公式截图，输出 typst 代码的那种。
 
