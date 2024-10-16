@@ -23,3 +23,7 @@ tags: bib
 #bibitem[你说得对] <ref1>
 #bibitem[但是原神] <ref2>
 ```
+
+可是，为什么要用 `figure` 来实现呢？
+
+因为目前（0.12 版本）没有自定义元素，`figure` 有个 `kind` 属性可以直接 `query`，而且 `supplement` 和 `caption` 可以用来提供额外信息，所以用它非常合适。
