@@ -6,7 +6,7 @@ export default defineConfig({
   title: 'Typst 中文社区导航',
   base: '/guide/',
   lang: 'zh-CN',
-  description: '以及一些实用案例',
+  description: '本文档收录了日经问题（QQ 群中经常有人问的问题），以及官方文档和小蓝书中未提到的一些零碎的使用技巧。',
   ignoreDeadLinks: true,
   markdown: {
     theme: {
