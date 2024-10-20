@@ -14,11 +14,27 @@
 
 ## 如何贡献
 
+### 修改已有的页面
+
+每个下面下方会都有 `在 GitHub 上编辑此页面` 按钮，点击即可编辑页面内容。
+
+### 创建新页面
+
 点击这个链接创建一个新的 `.md` 文件，编辑完成 commit 后提交 pull request 即可。
 
 https://github.com/typst-doc-cn/guide/new/master/docs/FAQ
 
-````
+模板如下：
+
+````md
+---
+tags: [template, code]
+---
+
+# 问题/页面标题
+
+一些说明文字
+
 ```typst
 文件中这样的 typst 代码块会被渲染为图片
 ```
@@ -28,4 +44,8 @@ https://github.com/typst-doc-cn/guide/new/master/docs/FAQ
 ```
 ````
 
-此外，每个下面下方会都有 `在 GitHub 上编辑此页面` 按钮，点击即可编辑页面内容。
+注意：渲染器在将文档中的 typst 代码渲染成图片时会自动在前面插入这两行代码，避免生成的图片过大，改善阅读体验。因此需要较大的页面展示代码效果的时候记得手动设置页面尺寸。
+```typst no-render
+#set page(height: 4cm, width: 6cm)
+#set text(font: ("New Computer Modern", "Source Han Serif SC"))
+```
