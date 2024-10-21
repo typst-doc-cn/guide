@@ -8,7 +8,7 @@ tags: [math, equation]
 
 ```typst
 #show math.equation: it => {
-  show regex("\p{script=Han}"): set text(font: "Source Han Serif")
+  show regex("\p{script=Han}"): set text(font: "Source Han Serif SC")
   it
 }
 $ f(x) #[原神] $
