@@ -17,7 +17,7 @@ Tracking Issue：https://github.com/typst/typst/issues/311
 
 ```typst
 #set par(first-line-indent: 2em)
-#let fakepar=context{box();v(-measure(block()+block()).height)}
+#let fakepar=context{let b=par(box());b;v(-measure(b+b).height)}
 #show math.equation.where(block: true): it=>it+fakepar // 公式后缩进
 #show heading: it=>it+fakepar // 标题后缩进
 #show figure: it=>it+fakepar // 图表后缩进
