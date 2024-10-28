@@ -12,7 +12,7 @@ tags: chinese
 
 ```
 
-然而，某些场合可能必须使用宋体。Microsoft Word 通过给字体增加描边实现了“伪粗体”，若要实现与 Microsoft Word 同样的效果，可以使用 `cuti` 包：
+然而，某些场合可能必须使用宋体。Microsoft Word 通过给字体增加描边实现了“伪粗体”，若要实现与 Microsoft Word 同样的效果，可以使用 [`cuti` 包](https://typst.app/universe/package/cuti)：
 
 ```typst
 #import "@preview/cuti:0.2.1": show-cn-fakebold

@@ -5,7 +5,7 @@ tags: [math,numbering]
 
 更详细问题的描述：如何使得数学公式默认不编号，并且不记入编号公式的计数，同时可以添加某些命令使得公式编号？
 
-1. 通过`i-figured`包, 建议查看后手搓一个
+1. 通过[`i-figured`包](https://typst.app/universe/package/i-figured)，建议查看后手搓一个
 
 ```typst
 #import "@preview/i-figured:0.2.4"
