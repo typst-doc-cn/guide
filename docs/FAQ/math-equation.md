@@ -99,3 +99,35 @@ $
 )
 
 ```
+
+4. 子公式另一个版本, by obj.fake_cirno
+
+```typst
+#set math.equation(numbering: "(1)")
+#show math.equation.where(block: true): it => {
+  if it.has("label") {
+    if "-" == str(it.label) {
+      counter(math.equation).update(n => n - 1)
+      math.equation(it.body, block: true, numbering: none)
+      return
+    } else if "::" in str(it.label) {
+      let (a, b) = str(it.label).split("::")
+      counter(math.equation).update(n => n - 2)
+      [#math.equation(it.body, block: true, numbering: _ => "(" + b + ")")#label(a)]
+      return
+    }
+  }
+  it
+}
+
+$ f(x) $
+
+$ f(x) $ <eq:some::14a>
+
+$ f(x) $ <->
+
+$ f(x) $
+
+@eq:some
+
+```
