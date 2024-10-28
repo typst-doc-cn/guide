@@ -33,7 +33,7 @@ $<2>
 ```typst
 = Equation numbering
 #set math.equation(numbering: "(1)")
-#show math.equation: it => {
+#show math.equation.where(block: true): it => {
  if not it.has("label") {
    let fields = it.fields()
    fields.remove("body")
@@ -59,7 +59,7 @@ Cite @1. #lorem(10)
 #let ct=counter("eq")
 #set math.equation(numbering: it=>ct.display("(1-1.a)"))
 #show heading.where(level: 1): it=>it+ct.step()+ct.step(level: 2)
-#show math.equation: it=>{ 
+#show math.equation.where(block: true): it=>{ 
   it
   if it.numbering !=none{
     if ct.get().len()==2{
