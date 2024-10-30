@@ -5,4 +5,4 @@ tags: [math, font]
 
 群友问题：大家有没有好看的数学字体推荐, 安装了很多名字是 math 结尾字体, 很多都不能显示, 不知道什么问题, 能正常显示的目前就只发现 Cambria Math 比较好看.
 
-参见 [这份文档](math_fonts.pdf)
+参见 [这份文档](/math_fonts.pdf)
