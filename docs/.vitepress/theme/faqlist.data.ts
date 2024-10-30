@@ -23,8 +23,9 @@ export default createContentLoader('FAQ/*.md', {
     const tagMap = {};
 
     const posts = rawData.map(({ src, url, frontmatter }) => {
-      // get the title from md source code
-      const title = src?.match(/# (.*)/)?.[1] ?? url;
+      // 一般 title 用“# …”即可；
+      // 不过偶尔用了markdown特殊语法，难以渲染，这时改用 frontmatter 手动指定
+      const title = frontmatter.title ?? src?.match(/# (.*)/)?.[1] ??  url;
       const result = {
         title,
         url,
