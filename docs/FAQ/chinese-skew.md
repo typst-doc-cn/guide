@@ -4,13 +4,22 @@ tags: chinese
 
 # 如何设置中文字体的斜体？
 
-一般使用伪斜体, 即_楷体_, 或者其他字体代替, 下面方法使用`skew`函数
+## 用其它字体代替
+
+一般使用其他字体（如楷体）代替斜体：
 
 ```typst
-#skew(ax: -12deg)[111]111
-
+#show emph: text.with(font: ("（西文字体）", "STKaiti"))
+孔乙己_上大人_
 ```
-但是针对一大段效果并不好
+
+## 另法：强行倾斜
+
+伪斜体也可使用[`skew`函数](https://typst.app/docs/reference/layout/skew/)：
+```typst
+#skew(ax: -12deg)[111]111
+```
+但是针对一大段效果并不好。
 ```typst
 #set text(font: ("New Computer Modern", "Noto Serif CJK SC"), lang: "zh")
 

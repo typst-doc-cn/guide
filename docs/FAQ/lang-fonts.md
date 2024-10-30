@@ -17,8 +17,12 @@ Typst 你好
 <details>
 <summary>如果你是剩下的 1%</summary>
 
-如果你发现了中文引号不对劲，那么你可以用这个修复 `#show regex("[“”]"): set text(font: "SimSun")`，并期待 Typst 更新。
+如果你发现了中文引号等标点不对劲，那么你可以用这个修复 `#show regex("[“‘’”]|——|……"): set text(font: "SimSun")`，并期待 Typst 更新。
 
-Tracking Issue：https://github.com/typst/typst/issues/3385
+如果你还需要对中文字体进行特殊处理，例如只缩小中文字体的大小，可以考虑用正则表达式[匹配 script](https://www.unicode.org/reports/tr18/tr18-21.html#Script_Property) 进行 hack：`#show regex("\p{sc=Hani}+"): set text(size: 0.8em)`。
+
+Tracking Issues：
+- 按语言配置字体 https://github.com/typst/typst/issues/794
+- 汉字默认等宽字体 https://github.com/typst/typst/issues/3385
 
 </details>

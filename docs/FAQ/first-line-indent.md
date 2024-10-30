@@ -56,3 +56,19 @@ $ E=m c^2 $
 优点：方便自由控制图表和公式后面的段落是否缩进
 
 缺点：可能存在一些缩进失效的情况
+
+## 方法 3：一次性手动缩进
+
+若仅需一次性使用，可用 [`#h(2em)`](https://typst.app/docs/reference/layout/h/) 手动空两个字。
+
+```typst
+#set par(first-line-indent: 2em)
+
+#let indent = h(2em)
+
+= 一级标题
+
+#indent 豫章故郡
+
+台隍枕夷夏之交
+```
