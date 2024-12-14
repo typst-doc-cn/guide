@@ -7,14 +7,13 @@ tags: [code]
 群友的魔法
 
 ```typst no-render
-#let fn-sequence = [ a].func()
 #let styled-list(..funcs, body, applied: x => x) = {
   let funcs = funcs.pos()
   body.children.map(x => {
     if x.func() != list.item {
       applied(x)
     } else {
-      let body = if x.body.func() == fn-sequence {
+      let body = if x.body.func() == [].func() {
         styled-list(
           ..funcs.slice(1),
           funcs.at(0), 
