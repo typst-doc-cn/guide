@@ -1,12 +1,13 @@
 import MarkdownIt from 'markdown-it';
 import { createHash } from 'crypto';
-import { writeFileSync, existsSync } from 'fs';
+import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import { execSync } from 'child_process';
 
 function compileTypst(src: string) {
   // 计算源码的 SHA1 哈希值
   const hash = createHash('sha1').update(src).digest('hex').substr(0, 10);
-  const outfilename = `docs/generated/${hash}_{n}.png`;
+  const outprefix = 'docs/generated/';
+  const outfilename = `${outprefix}${hash}_{n}.png`;
   const template = `#set page(height: 4cm, width: 6cm)
 #set text(font: ("New Computer Modern", "Source Han Serif SC"))
 <<src>>`;
@@ -20,6 +21,10 @@ function compileTypst(src: string) {
   if (!existsSync(firstOutFile)) {
     // 调用 typst 编译命令
     try {
+      // 确保 prefix 文件夹存在
+      if (!existsSync(outprefix)) {
+        mkdirSync(outprefix, { recursive: true });
+      }
       execSync(`typst compile ${tmpFilePath} ${outfilename} --font-path fonts`);
     } catch (error) {
       console.error('Error compiling Typst file:', error);
