@@ -20,7 +20,7 @@ function compileTypst(src: string) {
   if (!existsSync(firstOutFile)) {
     // 调用 typst 编译命令
     try {
-      execSync(`typst compile ${tmpFilePath} ${outfilename}`);
+      execSync(`typst compile ${tmpFilePath} ${outfilename} --font-path fonts`);
     } catch (error) {
       console.error('Error compiling Typst file:', error);
     }
