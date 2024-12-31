@@ -25,7 +25,6 @@ jobs:
         sudo snap install typst
         curl -OL https://github.com/typst-doc-cn/guide/releases/download/files/fonts.7z
         7z x fonts.7z -ofonts
-        python3 render.py
     - name: Setup and build
       shell: bash
       run: |

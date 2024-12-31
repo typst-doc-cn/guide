@@ -19,5 +19,8 @@
         "@algolia/client-search"
       ]
     }
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0"
   }
 }

@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress';
 import UnoCSS from 'unocss/vite';
+import TypstRender from './typst_render';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -12,6 +13,9 @@ export default defineConfig({
     theme: {
       light: 'github-light',
       dark: 'github-dark',
+    },
+    config: (md) => {
+      md.use(TypstRender);
     },
   },
   head: [
