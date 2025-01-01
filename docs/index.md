@@ -57,6 +57,13 @@ Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
 
 中文用户使用 Typst 常见问题：https://typst-doc-cn.github.io/docs/chinese/
 
+## 问卷调查
+
+为了解各位的使用情况，这里有两份问卷调查，感兴趣的用户可以填写一下：
+
+- [Typst 非官方中文社群年度问卷（2024）](https://www.wjx.cn/vm/Q43WAhW.aspx)
+- [关于 是否需要在Word中插入typst公式的功能 的调研](https://wj.qq.com/s2/16829677/507f/)
+
 ## 用户社区
 
 中文聊天群：793548390 [点击此处加入](https://qm.qq.com/q/MQO6j6jCw2)
