@@ -7,6 +7,8 @@ tags: [table]
 原理是隐藏了表格边框处单元格的外围线条，使用 block 提供的 radius 实现圆角。
 
 ```typst
+#set page(width: 6cm, height: auto)
+
 #let rounded_table(
   columns: none,
   rows: 1,
@@ -65,7 +67,7 @@ tags: [table]
 
 #rounded_table(
   columns: (1fr,) * 5,
-  rows: (30pt,),
+  rows: (2em,),
   radius: 2em,
   stroke: stroke(2pt + gradient.linear(..color.map.rainbow)),
   align: (x, y) => {
