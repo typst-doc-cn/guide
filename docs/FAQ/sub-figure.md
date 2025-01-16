@@ -3,11 +3,12 @@ tags: [layout, figure]
 ---
 # 如何实现子图？子图与 `i-figured`编号冲突怎么办？
 
-### 方法 1：手动编号（推荐）
+## 方法 1：手动编号（推荐）
 
 这个编号不需要经常修改，因此使用 `grid` 布局，然后手动编号即可。
 
 ```typst
+#set page(width: 12cm, height: auto)
 #figure(grid(columns: 2, gutter: 1em,
   figure(rect(), numbering: none, caption: [a) demo1]),
   figure(rect(), numbering: none, caption: [b) demo2]),
@@ -16,13 +17,12 @@ tags: [layout, figure]
 @fig:test1 (a) is xxx
 ```
 
-![img](guide\docs\images\sub-figure\typst-raw-subfigures.png)
-
-### 方法 2：使用 subpar 包
+## 方法 2：使用 subpar 包
 
 https://typst.app/universe/package/subpar/
 
 ```typst
+#set page(width: 12cm, height: auto)
 #import "@preview/subpar:0.2.0": grid as subfigure
 #subfigure(
   align:center,
@@ -40,22 +40,22 @@ https://typst.app/universe/package/subpar/
 *subpar displays*: Above in @test2, we see a figure which is composed of two other figures, namely @test2-a and @test2-b.
 ```
 
-### 常见问题1：如果使用 `i-figured` 进行分章节计数，子图编号序号会不正常计数，比如：
+## 常见问题1：如果使用 `i-figured` 进行分章节计数，子图编号序号会不正常计数，比如：
 
 **情况1：** `i-figured `会忽略 `figure` 的 `numbering`，导致出现计数错误
 
 ```typst
+#set page(width: 12cm, height: auto)
 #figure(grid(columns: 2, gutter: 1em,
   figure(rect(), numbering: none, caption: [a) demo1]),
   figure(rect(), numbering: none, caption: [b) demo2]),
 ), caption: [Conflict between raw grid and i-figured]) <fig:test3>
 ```
 
-![img](guide\docs\images\sub-figure\i-figured-error1.png)
-
 **情况2**：`i-figured` 会对 `subpar` 中超图进行冲突计数
 
 ```typst
+#set page(width: 12cm, height: auto)
 #import "@preview/i-figured:0.2.4"
 #show figure: i-figured.show-figure
 #import "@preview/subpar:0.2.0": grid as subfigure
@@ -75,11 +75,10 @@ https://typst.app/universe/package/subpar/
 *subpar displays*: Above in @fig:test4, we see a figure which is composed of two other figures, namely @fig:test4-a and @fig:test4-b.
 ```
 
-![img](guide\docs\images\sub-figure\i-figured-error2.png)
-
 **正确用法：** 使用subpar实现子图超图功能，自行实现编号规则
 
-```
+```typst
+#set page(width: 20cm, height: auto)
 // Synopsis:
 // - adding contextual numbering like chapter-relative numbering preserves the correct subfigure
 //   numbering and supplements
@@ -176,9 +175,4 @@ $ phi.alt := (1 + sqrt(5)) / 2 $ <ratio2>
 See @full1, @a and @b.
 
 See also @full2, @c and @d.
-
 ```
-
-**效果如下：**
-
-![img](guide\docs\images\sub-figure\subpar-numbering.png)
