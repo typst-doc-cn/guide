@@ -46,6 +46,8 @@ https://typst.app/universe/package/subpar/
 
 ```typst
 #set page(width: 12cm, height: auto)
+#import "@preview/i-figured:0.2.4"
+#show figure: i-figured.show-figure
 #figure(grid(columns: 2, gutter: 1em,
   figure(rect(), numbering: none, caption: [a) demo1]),
   figure(rect(), numbering: none, caption: [b) demo2]),
