@@ -8,6 +8,8 @@
 阅读本文档之前，推荐首先阅读[官方文档](https://typst.app/docs/reference/)和[小蓝书](https://typst-doc-cn.github.io/tutorial/)。
 :::
 
+如果页面上的内容有错误或者对内容有疑问，可以直接[提交 issue](https://github.com/typst-doc-cn/guide/issues/new/choose)
+
 ## 问题目录 {#outline}
 
 <FAQList />
@@ -33,15 +35,30 @@ tags: [template, code]
 
 # 问题/页面标题
 
-一些说明文字
+写一些说明文字。
+
+如果你需要展示 demo，可以像下面这样使用 typst 代码块。
 
 ```typst
-文件中这样的 typst 代码块会被渲染为图片
+Let $a$, $b$, and $c$ be the side
+lengths of right-angled triangle.
+Then, we know that:
+$ a^2 + b^2 = c^2 $
+
+Prove by induction:
+$ sum_(k=1)^n k = (n(n+1)) / 2 $
 ```
 
+上面的代码块在生成文档时，会自动调用 typst 编译器生成预览图片并附在代码块后面。从而让网站维护者和读者知道这段代码是可以正常使用的。
+
+如果你的代码片段还需要与其他内容配合，不能直接运行，可以在语言后面加上 no-render，这样的代码块就不会被渲染，例如下面这个：
+
 ```typst no-render
-这样的代码块不会被渲染
+// 设置中英文字体
+#set text(font: ("New Computer Modern", "Noto Serif CJK SC"), lang: "zh")
 ```
+
+嗯，暂时没有需要补充的了。
 ````
 
 注意：渲染器在将文档中的 typst 代码渲染成图片时会自动在前面插入这两行代码，避免生成的图片过大，改善阅读体验。因此需要较大的页面展示代码效果的时候记得手动设置页面尺寸。
