@@ -22,3 +22,22 @@ tags: [chinese, layout]
 #distr("身份证", w: 6em)
 #distr("详细地址", w: 6em)
 ```
+
+另一个在表格里的例子
+
+```typst
+#table(
+  columns: (6em, 1fr), ..(
+    [甲方],
+    [你的头],
+    [承担方],
+    [怎么尖尖的],
+    [这里五个字],
+    [那我问你],
+  )
+    .enumerate()
+    .map(((i, e)) => if calc.even(i) {
+      e.text.clusters().intersperse(h(1fr)).join()
+    } else { e })
+)
+```
