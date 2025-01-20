@@ -6,12 +6,21 @@
 
 ~~以[非官方聊天群](https://qm.qq.com/q/MQO6j6jCw2)为例，每时隔一段时间就有群友重新开发答题卡。~~
 
-<div>
-我想说 <showy-card name="numbly" author="sign here" authorLink="https://github.com/flaribbit"
-            :tags="['自动编号', '111']"
-            :links="['https://github.com/flaribbit/numbly', 'https://typst.app/universe/package/numbly']"
+## 常设陈列位
+
+我想说 <showy-card
+    name="道馆" author="Ty*[] t;"
+    authorLink="https://github.com/iscas-zac"
+    qqNumber="2683905765"
+    :tags="['网页展示']"
+    :links="['https://github.com/iscas-zac/guide/tree/cards']"
 /> 很好用。
-</div>
+
+## 长期合作招募
+
+## 归档
+
+## 展示台
 
 <script>
 import ShowyCard from './ShowyCard.vue'

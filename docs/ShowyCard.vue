@@ -1,15 +1,17 @@
 <template>
   <span class="inline-card" :style="{ width: nameWidth, height: nameWidth * 0.8, lineHeight: 1, marginBottom: '0.5em' }">
-    <b class="card-name">{{ name }}</b>
+    <b class="card-name">{{ name }}</b><br>
     <strong>
-      <a :href="authorLink">Author: {{ author }}</a>
+      Author: <a :href="authorLink" class="author">{{ author }}</a>
     </strong>
+    <br>
+    <span v-if="qqNumber">QQ: {{ qqNumber }}</span>
     <span v-if="tags" class="tags">
       <span v-for="(tag, index) in tags" :key="index" class="tag">
         {{ tag }}
       </span>
     </span>
-    <span v-if="links">
+    <span v-if="links" class="links">
       <a v-for="(link, index) in links" :key="index" :href="link" class="link">
         <img class="logo" :src="getLogo(link)" alt="logo">
       </a>
@@ -33,6 +35,10 @@ export default {
       type: String,
       required: false
     },
+    qqNumber: {
+      type: String,
+      required: false
+    },
     description: {
       type: String,
       required: false
@@ -46,9 +52,10 @@ export default {
       required: false
     }
   },
+  
   computed: {
     nameWidth() {
-      return this.name.length * 2 + "em";
+      return this.name.length * 6 + "em";
     }
   },
   methods: {
@@ -74,6 +81,17 @@ export default {
   box-shadow: 0 0 0.1em #ccc;
 }
 
+.author {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+a img {
+  margin: 0;
+  padding: 0;
+  display: block; /* Optional, but helps with spacing */
+}
+
 .card-name {
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -81,7 +99,14 @@ export default {
 }
 
 .tags {
-  margin-bottom: 0.5em;
+  display: inline-block;
+  vertical-align: center;
+}
+
+.tags, .links {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: auto;
 }
 
 .tag {
@@ -93,6 +118,11 @@ export default {
   box-shadow: 0 0 0.1em #ccc;
 }
 
+.links {
+  display: inline-block;
+  justify-content: center;
+  vertical-align: center;
+}
 .link {
   display: inline-block;
   margin: 2px 5px;
