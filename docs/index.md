@@ -18,6 +18,9 @@ hero:
     - theme: alt
       text: 我是 Word 用户
       link: /word
+    - theme: alt
+      text: 发现
+      link: /gym
 #     - theme: alt
 #       text: GitHub
 #       link: https://github.com/vuejs/vitepress
@@ -69,22 +72,3 @@ Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
 中文聊天群：793548390 [点击此处加入](https://qm.qq.com/q/MQO6j6jCw2)
 
 官方 Discord：https://discord.gg/2uDybryKPe
-
-
-  <div>
-    我想说 <showy-card name="numbly" author="sign here" authorLink="https://github.com/flaribbit"
-                :tags="['自动编号', '111']"
-                :links="['https://github.com/flaribbit/numbly', 'https://typst.app/universe/package/numbly']"
-    /> 很好用。
-  </div>
-
-
-<script>
-import ShowyCard from './ShowyCard.vue'
-
-export default {
-  components: {
-    ShowyCard
-  }
-}
-</script>
