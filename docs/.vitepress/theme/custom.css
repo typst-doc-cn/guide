@@ -1,6 +1,7 @@
 :root {
   --vp-c-brand-1: #f06292;
   --vp-c-brand-light: #ff94c2;
+  --vp-c-brand-lighter: #f7cee0;
   --vp-c-brand-dark: #ba2d65;
   --vp-code-block-bg: #f6f8fa;
   --vp-code-copy-code-bg: #dedede;
@@ -14,7 +15,11 @@
   --vp-custom-block-tip-bg: #ecfdf5;
   --vp-custom-block-tip-border: #dcfce7;
   --vp-custom-block-tip-text: #15803d;
-  --vp-c-brand-nav-active: color-mix(in srgb, var(--vp-c-brand-light) 15%, transparent 100%);
+  --vp-c-brand-nav-active: color-mix(
+    in srgb,
+    var(--vp-c-brand-light) 15%,
+    transparent 100%
+  );
   --vp-nav-logo-height: 28px;
 }
 
@@ -32,7 +37,11 @@
   --vp-custom-block-tip-bg: #064e3b;
   --vp-custom-block-tip-border: #052e16;
   --vp-custom-block-tip-text: #f0fdf4;
-  --vp-c-brand-nav-active: color-mix(in srgb, var(--vp-c-brand-dark) 30%, transparent 100%);
+  --vp-c-brand-nav-active: color-mix(
+    in srgb,
+    var(--vp-c-brand-dark) 30%,
+    transparent 100%
+  );
 }
 
 html,
@@ -49,5 +58,33 @@ button.copy::after {
 }
 
 .vp-doc img {
-  margin: auto;
+  margin: 8px auto;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+main .vp-doc h1 {
+  display: none;
+}
+
+.simple-tag {
+  margin: 0 0.125em 0.333em 0;
+  display: inline-block;
+  padding: 0 7px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  white-space: nowrap;
+  border-radius: 2em;
+  padding-right: 10px;
+  padding-left: 10px;
+  line-height: 22px;
+  color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-lighter);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.simple-tag:hover {
+  color: #ffffff;
+  background-color: var(--vp-c-brand-1);
 }
