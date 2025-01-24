@@ -8,9 +8,13 @@ tags: [font, chinese, raw]
 
 然后，对于代码块，需要在源代码文件中使用类似的命令设置字体：
 
-```typst
+```typst no-render
 #show raw : set text(font: ("DejaVu Sans Mono", "Noto Sans CJK SC"))
 ```
+
+相关 issue：https://github.com/typst/typst/issues/5748
+
+![示例](../images/chinese-in-raw.png)
 
 ## 相关内容
 
