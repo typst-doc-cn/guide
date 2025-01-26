@@ -13,3 +13,12 @@ tags: [layout]
 
 #place[左#h(1fr)右对齐]#align(center)[居中]
 ```
+
+不过群友反馈似乎用在 `header` 里有问题，那就再来一次 `place`
+
+```typst
+#set page(header: {
+  place[左对齐#h(1fr)右对齐]
+  place[#h(1fr)居中#h(1fr)]
+})
+```
