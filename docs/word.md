@@ -392,6 +392,8 @@ $
 
 这一部分建议还是多看看官方文档的 [math](https://typst.app/docs/reference/math/) 部分，三言两语不太容易说清。
 
+如果已经习惯了 LaTeX 写法无心改变，可以尝试使用 [mitex](https://typst.app/universe/package/mitex/) 包来写入 LaTeX 公式。或者使用 [detypstify](https://github.com/detypstify/detypstify) 或群友科技 [typress](https://github.com/ParaN3xus/typress) 识别公式、输出 Typst 代码。
+
 ### 代码
 
 和 Markdown 类似，使用反引号（`）包裹代码：
