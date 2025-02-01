@@ -1,5 +1,5 @@
 ---
-outline: 3
+outline: [2,3]
 ---
 
 # 面向 Word 用户的快速入门向导
