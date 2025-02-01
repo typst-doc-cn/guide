@@ -109,7 +109,17 @@ A~~~~~B
 
 ### 对齐方式
 
-在 Typst 中，使用 `#set align(left)`、`#set align(right)`、`#set align(center)` 来设置文本的对齐方式。
+在 Typst 中，如果需要设置局部的对齐方式，可以使用 `#align(left)[左对齐]`、`#align(right)[右对齐]`、`#align(center)[居中]`。
+
+```typst
+文字默认是左对齐的。
+
+#align(center)[但我想临时居中！]
+
+而不影响其他文字。
+```
+
+使用 `#set align(left)`、`#set align(right)`、`#set align(center)` 来设置之后所有文本的对齐方式。
 
 ```typst
 #set align(left)
@@ -120,16 +130,6 @@ A~~~~~B
 
 #set align(center)
 这行字居中
-```
-
-而如果需要设置局部的对齐方式，可以使用 `#align(left)[左对齐]`、`#align(right)[右对齐]`、`#align(center)[居中]`。
-
-```typst
-文字默认是左对齐的。
-
-#align(center)[但我想临时居中！]
-
-而不影响其他文字。
 ```
 
 在 Word 的工具栏中，还有两种对齐方式，分别是两端对齐和分散对齐。在 Typst 中，两端对齐由段落的 `justify` 参数控制。
