@@ -14,9 +14,17 @@ Word 是一个开箱即用、所见即所得的软件，而其弊端就在于其
 
 本文将会介绍 Typst 中的一些常用样式设置，以及如何将 Word 中的样式迁移到 Typst 中。部分内容摘选自[小蓝书](https://typst-doc-cn.github.io/tutorial)。
 
-::: tip
-本文会使用绿色的 TIP 穿插一些关于 Typst 的基础知识，但不会过多展开。
-:::
+## 需要补充的知识
+
+### set 语法
+
+在本文中，你会多次见到形如 `#set A()` 的语句。这里的 `#` 是 Typst 由默认的内容模式进入脚本模式的标志，而 `set` 允许你设置在这之后 `A` 元素默认的参数值，它的作用范围从 `#set` 开始到文档结束。相对应的，直接使用 `#A()` 并传入一些参数可以构造一个使用这些参数的 `A` 元素对象，这样就不会影响其他元素的参数值，作用范围是局部的。
+
+与之对应还有 show 语法，在本文中没有怎么出现但实际使用中同样很重要，详见[小蓝书的「show」语法部分](https://typst-doc-cn.github.io/tutorial/basic/scripting-scope-and-style.html#label-grammar-show) 和 [「set」语法部分](https://typst-doc-cn.github.io/tutorial/basic/writing-scripting.html#)。
+
+### package
+
+package 就是「包」，在小蓝书中翻译为「库」，是一些由 [Typst 社区](https://typst.app/universe)提供的功能扩展。在 Typst 中，你可以通过 `#import` 命令引入包，然后使用包中的功能。
 
 ## 字体
 
@@ -32,9 +40,7 @@ Word 是一个开箱即用、所见即所得的软件，而其弊端就在于其
 #set text(font: "Noto Sans CJK SC", lang: "zh", region: "cn", size: 12pt)
 ```
 
-::: tip
-这里的 `#` 是 Typst 由默认的内容模式进入脚本模式的标志。在这里，我们使用 `set` 命令设置文本 `text` 的参数。在这里，我们传入了 `font`、`lang`、`region` 和 `size` 四个参数的值。
-:::
+在这里，我们使用 `set` 命令设置文本 `text` 的参数，传入了 `font`、`lang`、`region` 和 `size` 四个参数的值。
 
 为了与 Word 中的字号相对应，你也可以使用 [pointless-size](https://typst.app/universe/package/pointless-size) 包，如以下代码所示：
 
@@ -44,11 +50,7 @@ Word 是一个开箱即用、所见即所得的软件，而其弊端就在于其
 #set text(size: zh(5)) // 五号（10.5pt）
 ```
 
-::: tip
-package 就是「包」，在小蓝书中翻译为「库」，是一些由 [Typst 社区](https://typst.app/universe)提供的功能扩展。在 Typst 中，你可以通过 `#import` 命令引入包，然后使用包中的功能。在这里，我们引入了 `pointless-size` 包，并使用了其中的 `zh` 函数来设置字号。
-:::
-
-pointless 包中更多的字号与命令的对应请参考下图：
+在这里，我们引入了 `pointless-size` 包，并使用了其中的 `zh` 函数来设置字号。pointless 包中更多的字号与命令的对应请参考下图：
 
 ![字号对照](./images/pointless.png)
 
@@ -199,28 +201,29 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 
 <!-- TODO: 加个段落模型的图，说明 leading 和 spacing 影响哪些距离 -->
 
-在 Typst 中，行距和段距分别由 `par` 的 `leading` 和 `spacing` 参数控制。行距是指行与行之间的距离，段距是指段与段之间的距离。
+在 Typst 中，行距和段距分别由 `par` 的 `leading` 和 `spacing` 参数控制。行距是指行与行之间的距离，段距是指段与段之间的距离。下面例子中的红框即表示每一段的轮廓。
 
 ::: tip
 有关长度单位的介绍请参考[小蓝书的度量与布局](https://typst-doc-cn.github.io/tutorial/basic/scripting-length-and-layout.html)。你可以简单理解成 em 就是当前上下文中一个字的长度，历史上曾定义 `M` 的宽度为 1em，但实际情况下并不一定完全相等。当然以下例子中的行距和段距也可以使用绝对单位，如 `12pt`、`1cm` 等。
 :::
 
 ```typst
+#set rect(stroke: red, inset: 0pt)
 #set par(leading: 0.65em, spacing: 1em)
 
 这里的行距是 0.65em，段落间距是 1em。
 
-#lorem(5)
+#rect(lorem(8))
 
-#lorem(5)
+#rect(lorem(5))
 
 #set par(leading: 1em, spacing: 2em)
 
 这里的行距是 1em，段落间距是 2em。
 
-#lorem(5)
+#rect(lorem(8))
 
-#lorem(5)
+#rect(lorem(5))
 ```
 
 ### 字间距和词间距
@@ -228,14 +231,14 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 使用 `text` 的 `tracking` 参数可以设置字符间距，`spacing` 参数设置词间空格宽度。
 
 ```typst
-#text(spacing: 20pt)[#lorem(5)]
+#text(spacing: 20pt)[#lorem(5) 设置文本的 spacing 属性对中文不会生效。]
 
-#text(tracking: 2pt)[#lorem(5)]
+#text(tracking: 2pt)[#lorem(5) 而设置 traking 属性对中文是生效的。]
 ```
 
 ### 水平方向或竖直方向的空白
 
-使用 `#h(1em)` 可以插入水平方向的空白，而使用 `#v(1em)` 可以插入竖直方向的空白。
+使用 `#h`（e.g., `#h(1em)`）可以插入水平方向的空白，而使用 `#v`（e.g., `#v(1em)`）可以插入竖直方向的空白（会导致强制换行）。
 
 ```typst
 这里有一些空白：#h(1em)这里有一些空白。
@@ -251,18 +254,20 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 左 #h(1fr) 中 #h(1fr) 右
 ```
 
-这里的 `fr` 表示比例，它也是一个相对单位，在同一个部分的 `fr` 会按照不同的比例平分剩余的空间，因此同样的系数平分的空间是相等的。
+这里的 `fr` 表示比例，它也是一个相对单位，在同一个部分的 `fr` 会按照不同的比例平分剩余的空间，因此同样的系数平分的空间是相等的。有关相对长度可见[小蓝书的解释](https://typst-doc-cn.github.io/tutorial/basic/scripting-length-and-layout.html#)。
 
 ### 竖排
 
-暂未支持。
+暂无官方支持，但是可以使用一些魔法来实现简单的竖排效果。
 
 ## 标题
 
-使用一个或多个连续的「等于号」（=）开启一个标题。不同数量的等于号划分了标题的层级、对应其在大纲中的级别。
+使用一个或多个连续的**等于号**（`=`）开启一个标题。不同数量的等于号划分了标题的层级、对应其在 Word 大纲中的级别。
 
 ::: tip
-如果你使用过 Markdown，可能会发现 Markdown 中通常将一级标题视为文档属性的标题，而 Typst 中的标题则是文档的章节。因此，Typst 中的标题可以有多个一级标题。对于全文的标题，使用 `#set document(title: "文档标题")` 来设置文档属性。
+如果你使用过 Markdown，可能会发现 Markdown 中通常将一级标题视为文档属性的标题（在最开头且唯一），而 Typst 中的一级标题可以有多个，可表示语义上的“章节”。
+
+对于全文的标题，使用 `#set document(title: "文档标题")` 来设置文档属性。开头的大标题可以用…………实现。
 :::
 
 ```typst
@@ -292,7 +297,7 @@ Typst 的标题编号是自动的，可以通过修改 `heading` 的 `numbering`
 我走了又来了。
 ```
 
-但这里编号会有一些问题，它对于全角符号的支持并不好，比如：
+但这里官方的编号实现会有一些问题，例如当传入 "chapter" 时，它可能会将其中的 `a` 解析为编号造成一些难绷的结果。此外，它对于全角符号的支持并不好，比如：
 
 ```typst
 #set heading(numbering: "一、1.a.i")
@@ -302,15 +307,15 @@ Typst 的标题编号是自动的，可以通过修改 `heading` 的 `numbering`
 我也没了。
 ```
 
-推荐使用群友科技 [numbly](https://typst.app/universe/package/numbly) 包来解决这个问题。
+况且，如果需要不同级别的标题分别使用不同的编号，官方的实现也无法简单实现。因此，推荐使用群友科技 [numbly](https://typst.app/universe/package/numbly) 包来解决这个问题。
 
 ```typst
 #import "@preview/numbly:0.1.0": numbly
 #set heading(numbering: numbly(
   "{1:一}、",
   "{2:1}.",
-  "{2:1}.{3:a}.",
-  "{2:1}.{3:a}.{4:i}.",
+  "{3:a}.",
+  "{4:i}.",
 ))
 = 一级标题
 我走了。
@@ -322,7 +327,7 @@ Typst 的标题编号是自动的，可以通过修改 `heading` 的 `numbering`
 我走了又来了。
 ```
 
-仍存在的问题是，顿号后有一个代码中写死的一小段空格，请参考[如何去掉标题的编号后面的空格？](./FAQ/heading-numbering-space.md)。
+仍存在的问题是，顿号后有一个代码中写死的一小段空格（长度为 0.3em），请参考[如何去掉标题的编号后面的空格？](./FAQ/heading-numbering-space.md)。
 
 ## 插入非文本元素
 
@@ -334,7 +339,7 @@ Typst 的标题编号是自动的，可以通过修改 `heading` 的 `numbering`
 #table(
     columns: 3, // 列数
     table.header([表头 1], [表头 2], [表头 3]), // 表头
-    [内容 1], [内容 2], [内容 3], // 第一行
+    [一段很长的内容 1], [内容 2], [内容 3], // 第一行
     [内容 4], [内容 5], [内容 6], // 第二行
 )
 ```
@@ -345,7 +350,7 @@ Typst 的标题编号是自动的，可以通过修改 `heading` 的 `numbering`
 #table(
     columns: (1fr, 1fr, 1fr),
     table.header([表头 1], [表头 2], [表头 3]),
-    [内容 1], [内容 2], [内容 3],
+    [一段很长的内容 1], [内容 2], [内容 3],
     [内容 4], [内容 5], [内容 6],
 )
 ```
@@ -358,13 +363,7 @@ Typst 的标题编号是自动的，可以通过修改 `heading` 的 `numbering`
 #table(
     columns: 3,
     table.header([表头 1], [表头 2], [表头 3]),
-    [内容 1], [内容 2], [内容 3],
-    [内容 4], [内容 5], [内容 6],
-    [内容 7], [内容 8], [内容 9],
-    [内容 10], [内容 11], [内容 12],
-    [内容 13], [内容 14], [内容 15],
-    [内容 16], [内容 17], [内容 18],
-    [内容 19], [内容 20], [内容 21],
+    ..for i in range(1, 19) { ([#i],) }
 )
 ```
 
@@ -386,11 +385,11 @@ Typst 的标题编号是自动的，可以通过修改 `heading` 的 `numbering`
 
 ### 数学公式
 
-Typst 的数学公式用 `$` 包裹，在 `$` 之间加入空格或换行可以切换至公式块模式。
+Typst 的数学公式用一对 `$` 包裹。当 `$` 内侧有空白（空格或换行符）时为行间公式（e.g.，`$ a $`），否则为行内公式。
 
 ```typst
 #set page(height: auto)
-行间公式：$(a+b)^2 = a^2 + 2 a b + b^2$
+行内公式：$(a+b)^2 = a^2 + 2 a b + b^2$
 
 公式块：
 $ (a+b)^2 = a^2 + 2 a b + b^2 $
@@ -466,9 +465,12 @@ $
 
 ````typst
 #set text(lang: "zh", region: "cn") // 用于将默认的 supplement 改为中文
-#figure(```typ
-#image("/assets/files/香風とうふ店.jpg")
-```, caption: [用于加载香風とうふ店送外卖的宝贵影像的代码])
+#figure(
+  ```typ
+  #image("/assets/files/香風とうふ店.jpg")
+  ```,
+  caption: [用于加载香風とうふ店送外卖的宝贵影像的代码]
+)
 
 #figure(
   table(
@@ -482,7 +484,7 @@ $
 
 ### 链接
 
-Typst 会自动识别文中的 HTTPS 和 HTTP 链接文本并创建链接。手动使用 `#link()[链接文本]` 可以创建一个链接。
+Typst 会自动识别文中的 HTTPS 和 HTTP 链接文本并创建链接。手动使用 `#link[链接文本]` 可以创建一个链接。
 
 ```typst
 #show link: set text(fill: blue) // 设置链接的颜色为蓝色
