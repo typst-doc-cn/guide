@@ -20,11 +20,11 @@ Word 是一个开箱即用、所见即所得的软件，而其弊端就在于其
 
 ## 字体
 
-在复制一段中文文本后，你可能会发现这样的问题：
+在输入一段中文文本后，你可能会发现这样的问题：
 
 ![为什么中文字体这么奇怪](./images/20240715132539.png)
 
-由于 Typst 并非由国人设计，它的默认字体并不适合中文排版。因此，我们需要对 Typst 的字体进行一些设置。在文章的开头，我们可以使用 `#set text(font: "Noto Sans CJK SC", lang: "zh", region: "cn")` 来设置文章正文的字体为「思源黑体」、语言为「中文」、地区为「中国」。这样，我们就可以保证中文的排版效果。如果你需要使用其他字体，可以参考 [为什么中文字体这么奇怪](./FAQ/install-fonts.md)。
+由于 Typst 并非由国人设计，它的默认字体并不适合中文排版。因此，我们需要对 Typst 的字体进行一些设置。在文章的开头，我们可以使用 `#set text(font: "Noto Sans CJK SC", lang: "zh", region: "cn")` 来设置文章正文的字体为「思源黑体」、语言为「中文」、地区为「中国」。这样，我们就可以保证中文的排版效果。如果你需要使用其他字体，可以参考[为什么中文字体这么奇怪](./FAQ/install-fonts.md)。
 
 要调整正文字体的大小，可以使用 `#set text(size: 12pt)` 来设置字体大小为 12 磅。
 
@@ -33,10 +33,10 @@ Word 是一个开箱即用、所见即所得的软件，而其弊端就在于其
 ```
 
 ::: tip
-这里的 `#` 是 Typst 由默认的内容模式进入脚本模式的标志。在这里，我们使用 `set` 命令设置文本 `text` 的参数。参数是一系列的键值对，用冒号 `:` 分隔。在这里，我们设置了 `font`、`lang`、`region` 和 `size` 四个参数。
+这里的 `#` 是 Typst 由默认的内容模式进入脚本模式的标志。在这里，我们使用 `set` 命令设置文本 `text` 的参数。在这里，我们传入了 `font`、`lang`、`region` 和 `size` 四个参数的值。
 :::
 
-为了与 Word 中的字号相对应，你也可以使用 pointless-size 包，如以下代码所示：
+为了与 Word 中的字号相对应，你也可以使用 [pointless-size](https://typst.app/universe/package/pointless-size) 包，如以下代码所示：
 
 ```typst no-render
 #import "@preview/pointless-size:0.1.0": zh, zihao
@@ -45,7 +45,7 @@ Word 是一个开箱即用、所见即所得的软件，而其弊端就在于其
 ```
 
 ::: tip
-包是 package 的翻译，是一些由 [Typst 社区](https://typst.app/universe)提供的功能扩展。在 Typst 中，你可以通过 `#import` 命令引入包，然后使用包中的功能。在这里，我们引入了 `pointless-size` 包，并使用了其中的 `zh` 函数来设置字号。
+package 就是「包」，在小蓝书中翻译为「库」，是一些由 [Typst 社区](https://typst.app/universe)提供的功能扩展。在 Typst 中，你可以通过 `#import` 命令引入包，然后使用包中的功能。在这里，我们引入了 `pointless-size` 包，并使用了其中的 `zh` 函数来设置字号。
 :::
 
 pointless 包中更多的字号与命令的对应请参考下图：
@@ -67,23 +67,38 @@ pointless 包中更多的字号与命令的对应请参考下图：
 
 其中，`#text(fill: red)[红色文本]` 可以设置文本的颜色，`red` 可以替换为其他颜色，如 `blue`、`green` 等。`fill` 参数接收的是一个颜色，可以参考[小蓝书](https://typst-doc-cn.github.io/tutorial/basic/scripting-color-and-shape.html)中有关颜色的介绍。`#highlight(fill: yellow)[高亮]` 可以设置文本的背景色，`yellow` 可以替换为其他颜色，这个是同理的。
 
-中文字体并不一定提供了粗体和斜体的变体。Word 原生提供了伪粗体和伪斜体的功能，但 Typst 原生并不默认支持，因此在使用粗体和斜体时可能会出现问题。详情请参考：
+Word 原生提供了伪粗体和伪斜体的功能，但 Typst 原生并不默认支持，而是直接使用字体文件中已有的不同样式和字重。中文字体并不一定提供了粗体和斜体的变体，因此在使用粗体和斜体时可能会出现问题。详情请参考：
 
 - [设置的字体未生效？](./FAQ/install-fonts.md)
 - [中文的粗体](./FAQ/chinese-bold.md)
 - [中文的斜体](./FAQ/chinese-skew.md)
 
+而对于下划线，可能出现以下问题：
+
+- [下划线怎么断断续续的？](./FAQ/underline-evade.md)
+- [中英文下划线错位了怎么办？](./FAQ/underline-misplace.md)
+- [波浪线](./FAQ/wave-underline.md)
+
+::: tip
+官方的文本高亮实现不够完善，存在一些不好解决的问题，后续版本可能会修复。
+:::
+
 ## 段落
 
-和 Markdown 类似，Typst 也使用空行来分隔段落。如下面的例子所示：
+Typst 使用空行来分隔段落。如下面的例子所示：
 
 ```typst
 这是第一个段落。
 这里没有空行，所以这句话和上一句在同一个段落中。
 ```
 
+```typst
+Another one
+bites the dust.
+```
+
 ::: tip
-上面的例子中换行会产生一个空格，这不是一个正确的行为，可能会在后续版本中修复。
+上面的例子中，换行会产生一个空格，对于 CJK 而言这不是一个正确的行为，可能会在后续版本中修复。
 :::
 
 ```typst
@@ -92,19 +107,18 @@ pointless 包中更多的字号与命令的对应请参考下图：
 这里有一个空行，所以这句话和上一句在不同的段落中。
 ```
 
-而如果需要强制换行而不划分段落，可以使用 `\`，等价于 Word 中的 Shift+Enter 快捷键：
+而如果需要强制换行而不划分段落，可以使用 `\`（即 `#linebreak()`），等价于 Word 中的 Shift+Enter 快捷键：
 
 ```typst
 这是第一行。\
 这是第二行。
 ```
 
-连续的空格会被合并为一个空格。如果需要输入多个空格，可以使用 `~`：
+连续的空格会被合并为一个空格。
 
 ```typst
 A     B
-
-A~~~~~B
+// 会输出为 A B
 ```
 
 ::: tip
@@ -136,7 +150,7 @@ A~~~~~B
 这行字居中
 ```
 
-在 Word 的工具栏中，还有两种对齐方式，分别是两端对齐和分散对齐。在 Typst 中，两端对齐由段落的 `justify` 参数控制。
+在 Word 的工具栏中，还有两种对齐方式，分别是**两端对齐**和**分散对齐**。在 Typst 中，两端对齐由段落的 `justify` 参数控制。由于断行算法不一样，同样的字体设置下，在 Word 和 Typst 的断行位置不一定一致，可能会影响论文模板精确复现。
 
 ```typst
 #set par(justify: false)
@@ -183,10 +197,12 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 
 ### 行距和段距
 
+<!-- TODO: 加个段落模型的图，说明 leading 和 spacing 影响哪些距离 -->
+
 在 Typst 中，行距和段距分别由 `par` 的 `leading` 和 `spacing` 参数控制。行距是指行与行之间的距离，段距是指段与段之间的距离。
 
 ::: tip
-有关长度单位的介绍请参考[小蓝书的度量与布局](https://typst-doc-cn.github.io/tutorial/basic/scripting-length-and-layout.html)。你可以简单理解成 em 就是当前一个字的长度，是一个相对单位。当然以下例子中的行距和段距也可以使用绝对单位，如 `12pt`、`1cm` 等。
+有关长度单位的介绍请参考[小蓝书的度量与布局](https://typst-doc-cn.github.io/tutorial/basic/scripting-length-and-layout.html)。你可以简单理解成 em 就是当前上下文中一个字的长度，历史上曾定义 `M` 的宽度为 1em，但实际情况下并不一定完全相等。当然以下例子中的行距和段距也可以使用绝对单位，如 `12pt`、`1cm` 等。
 :::
 
 ```typst
