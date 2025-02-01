@@ -177,7 +177,6 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 
 默认列表使用紧凑模式。而列表各行之间可以插入空行，这样列表就会变得没那么紧凑。
 
-
 ### 行距和段距
 
 在 Typst 中，行距和段距分别由 `par` 的 `leading` 和 `spacing` 参数控制。行距是指行与行之间的距离，段距是指段与段之间的距离。
@@ -501,14 +500,20 @@ Typst 使用 `#bibliography` 命令来插入参考文献。在文中引用参考
 
 使用 `#footnote` 命令来插入脚注。
 
-```typst
+````typst
 #set page(height: auto)
 在任意地方使用 ```typ #footnote``` 来插入一个脚注。比如这里#footnote[这个地方就是一个脚注]就是一个脚注。脚注会#footnote[自动编号]自动编号。
-```
+````
 
 ## 页面
 
-Typst 的页面默认是 A4 纸，纵向排列，页边距为 2.5cm。如果需要设置页面的大小、方向、页边距，可以使用 `#set page` 命令。下面例子中的灰色框是版心轮廓。
+Typst 的页面默认是 A4 纸，纵向排列，页边距为 2.5cm。如果需要设置页面的大小、方向、页边距，可以使用 `#set page` 命令。
+
+::: tip
+每次 `#set page` 都会产生一个新页。
+:::
+
+下面例子中的灰色框是版心轮廓。
 
 ```typst
 #set page(paper: "a4")
@@ -522,48 +527,49 @@ Typst 的页面默认是 A4 纸，纵向排列，页边距为 2.5cm。如果需�
 ```typst
 #page(paper: "a5", flipped: true)[#rect(width: 100%, height: 100%, stroke: gray)[= A5]]
 #page(paper: "a4")[#rect(width: 100%, height: 100%, stroke: gray)[= A4]]
-#page(paper: "iso-b5")[#rect(width: 100%, height: 100%, stroke: gray)[= B5]]
 ```
 
 可以使用 `width` 和 `height` 参数来设置页面的宽度和高度。如果没有指定纸张类型，则会在预设的 "a4" 基础上修改参数。设置为 `auto` 时，页面的宽度或高度会自动调整，不会自动分页。
 
 ```typst
-#lorem(30)
+滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。
+白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。
 // v.s.
 #set page(height: auto)
-#lorem(30)
+滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。
+白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。
 ```
 
 同理，可以使用 `margin` 参数来设置页边距。这个参数传入的值比较多样：
 
 - 当传入一个长度值时表示四边的页边距都是这个值。
 
-    ```typst
-    #set page(paper: "a5", margin: 1cm)
-    #rect(width: 100%, height: 100%, stroke: gray)[= margin: 1cm]
-    ```
+  ```typst
+  #set page(paper: "a5", margin: 1cm)
+  #rect(width: 100%, height: 100%, stroke: gray)[= margin: 1cm]
+  ```
 
 - 传入一个字典，指定上下左右方向的页边距。当然也是传什么才修改什么，不传的话就不会修改（默认是 2.5cm）。
 
-    ```typst
-    #set page(paper: "a5", margin: (top: 1cm, bottom: 2cm, right: 4cm))
-    #rect(width: 100%, height: 100%, stroke: gray)[= margin: (top: 1cm, bottom: 2cm, right: 4cm)]
-    ```
+  ```typst
+  #set page(paper: "a5", margin: (top: 1cm, bottom: 2cm, right: 4cm))
+  #rect(width: 100%, height: 100%, stroke: gray)[= margin: (top: 1cm, bottom: 2cm, right: 4cm)]
+  ```
 
 - 传入一个字典，指定水平方向和竖直方向的页边距。
 
-    ```typst
-    #set page(paper: "a5", margin: (x: 1cm, y: 2cm))
-    #rect(width: 100%, height: 100%, stroke: gray)[= margin: (x: 1cm, y: 2cm)]
-    ```
+  ```typst
+  #set page(paper: "a5", margin: (x: 1cm, y: 2cm))
+  #rect(width: 100%, height: 100%, stroke: gray)[= margin: (x: 1cm, y: 2cm)]
+  ```
 
 - 传入一个字典，指定页面内侧和外侧的页边距。内侧和外侧即相对装订而言，装订线的一侧是内侧，另一侧是外侧。奇数页的内侧是左侧，偶数页的内侧是右侧。
 
-    ```typst
-    #set page(paper: "a5", margin: (inside: 1cm, outside: 2cm))
-    #rect(width: 100%, height: 100%, stroke: gray)[= margin: (inside: 1cm, outside: 2cm)]
-    #rect(width: 100%, height: 100%, stroke: gray)[= margin: (inside: 1cm, outside: 2cm)]
-    ```
+  ```typst
+  #set page(paper: "a5", margin: (inside: 1cm, outside: 2cm))
+  #rect(width: 100%, height: 100%, stroke: gray)[= margin: (inside: 1cm, outside: 2cm)]
+  #rect(width: 100%, height: 100%, stroke: gray)[= margin: (inside: 1cm, outside: 2cm)]
+  ```
 
 ### 页眉、页脚与页码
 
@@ -610,7 +616,7 @@ Typst 的页面默认是 A4 纸，纵向排列，页边距为 2.5cm。如果需�
 
 ```typst
 #set page(columns: 2)
-#lorem(30)
+东临碣石，以观沧海。水何澹澹，山岛竦峙。树木丛生，百草丰茂。秋风萧瑟，洪波涌起。日月之行，若出其中；星汉灿烂，若出其里。幸甚至哉，歌以咏志。
 ```
 
 ### 背景
@@ -633,18 +639,21 @@ Typst 的页面默认是 A4 纸，纵向排列，页边距为 2.5cm。如果需�
 
 ### 空白页与分页
 
-一个空白页其实就是调用 `#page()[]` 函数传入一个空白内容。
+一个空白页其实就是调用 `#page[]` 函数传入一个空白内容。
 
 ```typst
-#lorem(30)
-#page()[]
-#lorem(30)
+滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。
+白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。
+#page[]
+滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。
+白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。
 ```
 
 当然，像前面的例子所示，这个页面也可以有各种各样的内容。
 
 ```typst
-#lorem(30)
+滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。
+白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。
 #page(
   fill: black,
   background: rotate(
@@ -655,13 +664,16 @@ Typst 的页面默认是 A4 纸，纵向排列，页边距为 2.5cm。如果需�
   ),
 )[#set text(white)
   孩子们好久不见！]
-#lorem(30)
+滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。
+白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。
 ```
 
 通常要分页而不是插入一个页面的时候，只需调用 `#pagebreak()` 函数即可。
 
 ```typst
-#lorem(30)
+滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。
+白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。
 #pagebreak()
-#lorem(30)
+滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。
+白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。
 ```
