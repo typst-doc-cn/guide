@@ -14,10 +14,6 @@ Word 是一个开箱即用、所见即所得的软件，而其弊端就在于其
 本文会使用绿色的 TIP 穿插一些关于 Typst 的基础知识，但不会过多展开。
 :::
 
-## 开始
-
-你可以任意复制一段文本到 Typst 中，然后按照本文的指导进行样式设置。
-
 ## 字体
 
 在复制一段中文文本后，你可能会发现这样的问题：
@@ -262,6 +258,54 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 
 要设置标题的样式，需要使用 `show` 或者 `set` 命令。
 
+### 标题编号
+
+Typst 的标题编号是自动的，可以通过 `heading` 命令来设置编号的格式。
+
+```typst
+#set heading(numbering: "1.a.i")
+= 一级标题
+我走了。
+== 二级标题
+我来了。
+== 二级标题
+我来了吗？
+=== 三级标题
+我走了又来了。
+```
+
+但这里编号会有一些问题，它对于全角符号的支持并不好，比如：
+
+```typst
+#set heading(numbering: "一、1.a.i")
+= 一级标题
+我顿号没了。
+== 二级标题
+我也没了。
+```
+
+推荐使用群友科技 [numbly](https://typst.app/universe/package/numbly) 包来解决这个问题。
+
+```typst
+#import "@preview/numbly:0.1.0": numbly
+#set heading(numbering: numbly(
+  "{1:一}、",
+  "{2:1}.",
+  "{2:1}.{3:a}.",
+  "{2:1}.{3:a}.{4:i}.",
+))
+= 一级标题
+我走了。
+== 二级标题
+我来了。
+== 二级标题
+我来了吗？
+=== 三级标题
+我走了又来了。
+```
+
+仍存在的问题是，顿号后有一个代码中写死的一小段空格，请参考[如何去掉标题的编号后面的空格？](./FAQ/heading-numbering-space.md)。
+
 ## 插入非文本元素
 
 ### 表格
@@ -419,6 +463,8 @@ $
 Typst 会自动识别文中的 HTTPS 和 HTTP 链接文本并创建链接。手动使用 `#link()[链接文本]` 可以创建一个链接。
 
 ```typst
+#show link: set text(fill: blue) // 设置链接的颜色为蓝色
+
 https://zh.wikipedia.org
 
 #link("https://zh.wikipedia.org")[维基百科]
@@ -427,6 +473,9 @@ https://zh.wikipedia.org
 在 Typst 中，可以通过创建标签标记任意内容。要引用该标签，可以使用 `@` 或者 `#link(<标签名>)`。
 
 ```typst
+#show link: set text(fill: blue) // 设置链接的颜色为蓝色
+#show ref: set text(fill: red) // 设置引用的颜色为红色
+
 #figure(
   table(
     columns: 2,
@@ -438,18 +487,179 @@ https://zh.wikipedia.org
 == 一个神秘标题 <mystery>
 
 @table1 后面讲述了#link(<mystery>)[一个神秘标题]。
+
 ```
 
 ### 参考文献、脚注与引用
 
+Typst 使用 `#bibliography` 命令来插入参考文献。在文中引用参考文献时，使用 `#cite` 命令。
+
+```typst no-render
+例子暂无。
+```
+
+使用 `#footnote` 命令来插入脚注。
+
+```typst
+在任意地方使用 ```typ #footnote``` 来插入一个脚注。比如这里#footnote[这个地方就是一个脚注]就是一个脚注。脚注会#footnote[自动编号]自动编号。
+```
+
 ## 页面
+
+Typst 的页面默认是 A4 纸，纵向排列，页边距为 2.5cm。如果需要设置页面的大小、方向、页边距，可以使用 `#set page` 命令。下面例子中的灰色框是版心轮廓。
+
+```typst
+#set page(paper: "a4")
+#rect(width: 100%, height: 100%, stroke: gray)
+```
 
 ### 大小、方向与页边距
 
+使用预设的各种 paper 传入 `paper` 参数，可以设置页面的大小。`flipped` 参数可以让页面横向。
+
+```typst
+#page(paper: "a5", flipped: true)[#rect(width: 100%, height: 100%, stroke: gray)[= A5]]
+#page(paper: "a4")[#rect(width: 100%, height: 100%, stroke: gray)[= A4]]
+#page(paper: "iso-b5")[#rect(width: 100%, height: 100%, stroke: gray)[= B5]]
+```
+
+可以使用 `width` 和 `height` 参数来设置页面的宽度和高度。如果没有指定纸张类型，则会在预设的 "a4" 基础上修改参数。设置为 `auto` 时，页面的宽度或高度会自动调整，不会自动分页。
+
+```typst
+#lorem(30)
+// v.s.
+#set page(height: auto)
+#lorem(30)
+```
+
+同理，可以使用 `margin` 参数来设置页边距。这个参数传入的值比较多样：
+
+- 当传入一个长度值时表示四边的页边距都是这个值。
+
+    ```typst
+    #set page(margin: 1cm)
+    #rect(width: 100%, height: 100%, stroke: gray)[= margin: 1cm]
+    ```
+
+- 传入一个字典，指定上下左右方向的页边距。当然也是传什么才修改什么，不传的话就不会修改（默认是 2.5cm）。
+
+    ```typst
+    #set page(margin: (top: 1cm, bottom: 2cm, right: 4cm))
+    #rect(width: 100%, height: 100%, stroke: gray)[= margin: (top: 1cm, bottom: 2cm, right: 4cm)]
+    ```
+
+- 传入一个字典，指定水平方向和竖直方向的页边距。
+
+    ```typst
+    #set page(margin: (x: 1cm, y: 2cm))
+    #rect(width: 100%, height: 100%, stroke: gray)[= margin: (x: 1cm, y: 2cm)]
+    ```
+
+- 传入一个字典，指定页面内侧和外侧的页边距。内侧和外侧即相对装订而言，装订线的一侧是内侧，另一侧是外侧。奇数页的内侧是左侧，偶数页的内侧是右侧。
+
+    ```typst
+    #set page(margin: (inside: 1cm, outside: 2cm))
+    #rect(width: 100%, height: 100%, stroke: gray)[= margin: (inside: 1cm, outside: 2cm)]
+    #rect(width: 100%, height: 100%, stroke: gray)[= margin: (inside: 1cm, outside: 2cm)]
+    ```
+
 ### 页眉、页脚与页码
+
+通过传入 `header` 和 `footer` 参数可以设置页眉和页脚。页眉和页脚的内容可以是任意的 Typst 内容。
+
+如果指定了 `page` 的 `numbering` 参数，页码会自动显示在页脚中。使用 `#counter(page).update(1)` 可以手动更新页码。
+
+```typst
+#set page(numbering: "1")
+
+#rect(width: 100%, height: 100%, stroke: gray)[#lorem(10)]
+
+#rect(width: 100%, height: 100%, stroke: gray)[#lorem(10)]
+
+#counter(page).update(1)
+
+#rect(width: 100%, height: 100%, stroke: gray)[#lorem(10)]
+```
+
+也可以手动操控页码在页脚的显示方式：
+
+```typst
+#set page(
+  height: 5cm,
+  width: 10cm,
+  header: [A Tutorial #h(1fr) for Word Users],
+  footer: context [
+    #set align(right)
+    #set text(8pt)
+    #counter(page).display(
+      "1 of 1", // 类似 numbering 的写法
+      both: true, // 既显示当前页数，也显示总页数
+    )
+  ],
+)
+
+#rect(width: 100%, height: 100%, stroke: gray)[#lorem(40)]
+#rect(width: 100%, height: 100%, stroke: gray)[#lorem(40)]
+```
 
 ### 分栏
 
-### 水印与背景
+使用 `columns` 参数可以将页面分为多栏。
+
+```typst
+#set page(columns: 2)
+#lorem(30)
+```
+
+### 背景
+
+使用 `background` 参数可以设置页面的背景，传入的是任意的内容。使用 `fill` 参数可以设置页面的背景颜色。
+
+```typst
+#set page(
+  fill: black,
+  background: rotate(
+    24deg,
+    text(18pt, fill: rgb("FFCBC4"))[
+      *I AM WATCHING U*
+    ],
+  ),
+)
+#set text(white)
+孩子们好久不见！
+```
 
 ### 空白页与分页
+
+一个空白页其实就是调用 `#page()` 函数而不传入任何参数。
+
+```typst
+#lorem(30)
+#page()
+#lorem(30)
+```
+
+当然，像前面的例子所示，这个页面也可以有各种各样的内容。
+
+```typst
+#lorem(30)
+#page(
+  fill: black,
+  background: rotate(
+    24deg,
+    text(18pt, fill: rgb("FFCBC4"))[
+      *I AM WATCHING U*
+    ],
+  ),
+)[#set text(white)
+  孩子们好久不见！]
+#lorem(30)
+```
+
+通常要分页而不是插入一个页面的时候，只需调用 `#pagebreak()` 函数即可。
+
+```typst
+#lorem(30)
+#pagebreak()
+#lorem(30)
+```
