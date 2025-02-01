@@ -88,7 +88,7 @@ pointless 包中更多的字号与命令的对应请参考下图：
 这里有一个空行，所以这句话和上一句在不同的段落中。
 ```
 
-而如果需要强制换行而不划分段落，可以使用 `\`：
+而如果需要强制换行而不划分段落，可以使用 `\`，等价于 Word 中的 Shift+Enter 快捷键：
 
 ```typst
 这是第一行。\
@@ -168,16 +168,15 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 + 一级列表项 2
   - 二级列表项 2.1
 
-列表间插入一段描述。
+列表间插入一段描述，列表项 3 被吃掉了。
 
-3. 列表项 3
-+  列表项 4
+4. 列表项 4
 +  列表项 5
++  列表项 6
 ```
 
-::: tip
 默认列表使用紧凑模式。而列表各行之间可以插入空行，这样列表就会变得没那么紧凑。
-:::
+
 
 ### 行距和段距
 
@@ -228,9 +227,9 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 借助这个特性，我们可以实现一些行内的等分排列：
 
 ```typst
-左边的内容 #h(1fr) 右边的内容
+左 #h(1fr) 右
 #v(1fr)
-左边的内容 #h(1fr) 中间的内容 #h(1fr) 右边的内容
+左 #h(1fr) 中 #h(1fr) 右
 ```
 
 这里的 `fr` 表示比例，它也是一个相对单位，在同一个部分的 `fr` 会按照不同的比例平分剩余的空间，因此同样的系数平分的空间是相等的。
@@ -260,7 +259,7 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 
 ### 标题编号
 
-Typst 的标题编号是自动的，可以通过 `heading` 命令来设置编号的格式。
+Typst 的标题编号是自动的，可以通过修改 `heading` 的 `numbering` 参数来设置编号的格式。`numbering` 传入一个字符串，它会解析其中的各级编号和分隔符。
 
 ```typst
 #set heading(numbering: "1.a.i")
@@ -371,6 +370,7 @@ Typst 的标题编号是自动的，可以通过 `heading` 命令来设置编号
 Typst 的数学公式用 `$` 包裹，在 `$` 之间加入空格或换行可以切换至公式块模式。
 
 ```typst
+#set page(height: auto)
 行间公式：$(a+b)^2 = a^2 + 2 a b + b^2$
 
 公式块：
@@ -444,6 +444,7 @@ $
 可以通过 figure 函数为图像或任意内容设置标题：
 
 ````typst
+#set text(lang: "zh", region: "cn") // 用于将默认的 supplement 改为中文
 #figure(```typ
 #image("/assets/files/香風とうふ店.jpg")
 ```, caption: [用于加载香風とうふ店送外卖的宝贵影像的代码])
@@ -501,6 +502,7 @@ Typst 使用 `#bibliography` 命令来插入参考文献。在文中引用参考
 使用 `#footnote` 命令来插入脚注。
 
 ```typst
+#set page(height: auto)
 在任意地方使用 ```typ #footnote``` 来插入一个脚注。比如这里#footnote[这个地方就是一个脚注]就是一个脚注。脚注会#footnote[自动编号]自动编号。
 ```
 
@@ -537,28 +539,28 @@ Typst 的页面默认是 A4 纸，纵向排列，页边距为 2.5cm。如果需�
 - 当传入一个长度值时表示四边的页边距都是这个值。
 
     ```typst
-    #set page(margin: 1cm)
+    #set page(paper: "a5", margin: 1cm)
     #rect(width: 100%, height: 100%, stroke: gray)[= margin: 1cm]
     ```
 
 - 传入一个字典，指定上下左右方向的页边距。当然也是传什么才修改什么，不传的话就不会修改（默认是 2.5cm）。
 
     ```typst
-    #set page(margin: (top: 1cm, bottom: 2cm, right: 4cm))
+    #set page(paper: "a5", margin: (top: 1cm, bottom: 2cm, right: 4cm))
     #rect(width: 100%, height: 100%, stroke: gray)[= margin: (top: 1cm, bottom: 2cm, right: 4cm)]
     ```
 
 - 传入一个字典，指定水平方向和竖直方向的页边距。
 
     ```typst
-    #set page(margin: (x: 1cm, y: 2cm))
+    #set page(paper: "a5", margin: (x: 1cm, y: 2cm))
     #rect(width: 100%, height: 100%, stroke: gray)[= margin: (x: 1cm, y: 2cm)]
     ```
 
 - 传入一个字典，指定页面内侧和外侧的页边距。内侧和外侧即相对装订而言，装订线的一侧是内侧，另一侧是外侧。奇数页的内侧是左侧，偶数页的内侧是右侧。
 
     ```typst
-    #set page(margin: (inside: 1cm, outside: 2cm))
+    #set page(paper: "a5", margin: (inside: 1cm, outside: 2cm))
     #rect(width: 100%, height: 100%, stroke: gray)[= margin: (inside: 1cm, outside: 2cm)]
     #rect(width: 100%, height: 100%, stroke: gray)[= margin: (inside: 1cm, outside: 2cm)]
     ```
@@ -631,11 +633,11 @@ Typst 的页面默认是 A4 纸，纵向排列，页边距为 2.5cm。如果需�
 
 ### 空白页与分页
 
-一个空白页其实就是调用 `#page()` 函数而不传入任何参数。
+一个空白页其实就是调用 `#page()[]` 函数传入一个空白内容。
 
 ```typst
 #lorem(30)
-#page()
+#page()[]
 #lorem(30)
 ```
 
