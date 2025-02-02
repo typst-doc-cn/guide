@@ -203,7 +203,7 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 
 ```typst
 #set page(height: 6cm, width: 10cm)
-#let marker(body, height)=box(place(box(height: height, width: 0.2em, fill: red, text(blue, body))))
+#let marker(body, height)=box(place(box(height: height, width: 2pt, stroke: (rest: 1pt+red, left: none), place(dx: 4pt, text(8pt, red, body)))))
 
 #set par(leading: 0.6em, spacing: 1em)
 
