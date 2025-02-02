@@ -199,32 +199,22 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 
 ### 行距和段距
 
-<!-- TODO: 加个段落模型的图，说明 leading 和 spacing 影响哪些距离 -->
+在 Typst 中，行距和段距分别由 `par` 的 `leading` 和 `spacing` 参数控制。行距是指行与行之间的距离，段距是指段与段之间的距离。如图所示。
 
-在 Typst 中，行距和段距分别由 `par` 的 `leading` 和 `spacing` 参数控制。行距是指行与行之间的距离，段距是指段与段之间的距离。下面例子中的红框即表示每一段的轮廓。
+```typst
+#set page(height: 6cm, width: 10cm)
+#let marker(body, height)=box(place(box(height: height, width: 0.2em, fill: red, text(blue, body))))
+
+#set par(leading: 0.6em, spacing: 1em)
+
+　　#context marker([par.leading], par.leading)是日也，天朗气清，惠风和畅。仰观宇宙之大，俯察品类之盛，所以游目骋怀，足以极视听之娱，#context marker([par.spacing], par.spacing)信可乐也。
+
+　　夫人之相与，俯仰一世，或取诸怀抱，悟言一室之#context marker([par.leading], par.leading)内；或因寄所托，放浪形骸之外。虽趣舍万殊，静躁不同，当其欣于所遇，暂得于己，快然自足，不知老之将至。及其所之既倦，情随事迁，感慨系之矣。
+```
 
 ::: tip
 有关长度单位的介绍请参考[小蓝书的度量与布局](https://typst-doc-cn.github.io/tutorial/basic/scripting-length-and-layout.html)。你可以简单理解成 em 就是当前上下文中一个字的长度，历史上曾定义 `M` 的宽度为 1em，但实际情况下并不一定完全相等。当然以下例子中的行距和段距也可以使用绝对单位，如 `12pt`、`1cm` 等。
 :::
-
-```typst
-#set rect(stroke: red, inset: 0pt)
-#set par(leading: 0.65em, spacing: 1em)
-
-这里的行距是 0.65em，段落间距是 1em。
-
-#rect(lorem(8))
-
-#rect(lorem(5))
-
-#set par(leading: 1em, spacing: 2em)
-
-这里的行距是 1em，段落间距是 2em。
-
-#rect(lorem(8))
-
-#rect(lorem(5))
-```
 
 ### 字间距和词间距
 
