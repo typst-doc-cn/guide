@@ -45,7 +45,7 @@ package 就是「包」，在小蓝书中翻译为「库」，是一些由 [Typs
 为了与 Word 中的字号相对应，你也可以使用 [pointless-size](https://typst.app/universe/package/pointless-size) 包，如以下代码所示：
 
 ```typst no-render
-#import "@preview/pointless-size:0.1.0": zh, zihao
+#import "@preview/pointless-size:0.1.1": zh, zihao
 
 #set text(size: zh(5)) // 五号（10.5pt）
 ```
