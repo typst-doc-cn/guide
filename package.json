@@ -8,6 +8,8 @@
     "serve": "vitepress serve docs"
   },
   "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^22.13.1",
     "@waline/client": "^3.5.1",
     "unocss": "^0.63.6",
     "vitepress": "^1.6.3",
