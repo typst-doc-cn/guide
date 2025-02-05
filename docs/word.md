@@ -221,9 +221,9 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 使用 `text` 的 `tracking` 参数可以设置字符间距，`spacing` 参数设置词间空格宽度。
 
 ```typst
-#text(spacing: 20pt)[#lorem(5) 设置文本的 spacing 属性对中文不会生效。]
+#text(spacing: 20pt)[#lorem(5) 设置文本的 spacing 属性对中文无效。]
 
-#text(tracking: 2pt)[#lorem(5) 而设置 traking 属性对中文是生效的。]
+#text(tracking: 2pt)[#lorem(5) 而设置 tracking 属性对中文有效。]
 ```
 
 ### 水平方向或竖直方向的空白
