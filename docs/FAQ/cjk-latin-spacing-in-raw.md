@@ -4,8 +4,8 @@ tags: [font, chinese, raw, bug, spacing, layout]
 
 # 【已修复】代码块中西文间有多余的空格？
 
-::: tip
-[\#5753](https://github.com/typst/typst/pull/5753) 已设置默认 cjk-latin-spacing 在 raw 中为 false，因此相关问题在 0.13 应该不会再出现。
+::: tip ✅ Typst 0.13 已修复
+[\#5753](https://github.com/typst/typst/pull/5753) 已默认设置 `cjk-latin-spacing` 在 `raw` 中为 `false`。
 :::
 
 首先，你可能需要参考 [为什么中文字体这么奇怪](./strange-fonts.md) 对正文字体进行配置。然后参照 [为什么代码块里面的中文字体显示不正常？](./chinese-in-raw.md) 对于代码块内中文的进行修改。
