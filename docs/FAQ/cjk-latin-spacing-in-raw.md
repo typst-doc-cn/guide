@@ -27,7 +27,7 @@ printf("这是%d段代码", 1);
 就是有害的。因为在这种情况下，如果我们在编译的结果中在 `%d` 和 `段代码` 之间添加一个空格，它有歧义，因为我们无法判断它是否是一个空格还是一个中西文间距。
 
 ```typst
-#show raw: set text(font: ("Monospace", "Source Han Serif SC"))
+#show raw: set text(font: ("DejaVu Sans Mono", "Source Han Serif SC"))
 #raw(lang: "cpp", "printf(\"这是%d段代码\", 1)")
 ```
 
