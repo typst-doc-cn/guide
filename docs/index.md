@@ -55,8 +55,6 @@ hero:
 
 Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
 
-中文用户使用 Typst 常见问题：https://typst-doc-cn.github.io/docs/chinese/
-
 ## 问卷调查
 
 为了解各位的使用情况，这里有两份问卷调查，感兴趣的用户可以填写一下：
