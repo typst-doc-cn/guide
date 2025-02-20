@@ -7,9 +7,9 @@ tags: [layout, text]
 0.12 可以玩 `regex` 魔法了，`regex` 现在可以跨不同的 `text`
 
 ```typst
-✅测试一下，效果怎么样。
+✓ 测试一下，效果怎么样。
 
-😥测试一下，
+✗ 测试一下，
 效果怎么样。
 
 // https://www.w3.org/TR/clreq/#table_of_punctuation_marks
@@ -19,7 +19,7 @@ tags: [layout, text]
   a + b
 }
 
-✅测试一下，
+✓ 测试一下，
 效果怎么样。
 ```
 
@@ -31,9 +31,9 @@ tags: [layout, text]
 #set page(width: auto, height: auto, margin: 1em)
 #set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "Source Han Serif SC"))
 
-✅“七斤嫂，你‘恨棒打人’。……”
+✓“七斤嫂，你‘恨棒打人’。……”
 
-😥“七斤嫂，你‘恨棒打人’。
+✗“七斤嫂，你‘恨棒打人’。
 ……”
 
 #show regex("[。] [……]"): it => {
@@ -41,7 +41,7 @@ tags: [layout, text]
   a + b
 }
 
-😥“七斤嫂，你‘恨棒打人’。
+✗“七斤嫂，你‘恨棒打人’。
 ……”
 ```
 
