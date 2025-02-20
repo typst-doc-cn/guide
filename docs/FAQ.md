@@ -26,7 +26,7 @@
 
 https://github.com/typst-doc-cn/guide/new/master/docs/FAQ
 
-模板如下：
+:::: details 模板
 
 ````md
 ---
@@ -66,3 +66,15 @@ $ sum_(k=1)^n k = (n(n+1)) / 2 $
 #set page(height: 4cm, width: 6cm)
 #set text(font: ("New Computer Modern", "Source Han Serif SC"))
 ```
+
+另外，如果问题已在新版 typst 修复或改进，可在标题开头添加`【已修复】`，并注明版本。
+
+```md
+# 【已修复】……？
+
+::: tip ✅ Typst 0.0 已修复/已改进
+[#000](https://github.com/typst/typst/pull/000) 已经……
+:::
+```
+
+::::

@@ -13,7 +13,7 @@ tags: [heading, numbering]
     level: 1,
     {
       counter("chapter").step()
-      counter("chapter").display("第一章")
+      context counter("chapter").display("第一章")
       h(0.3em)
       title
     },
@@ -25,7 +25,7 @@ tags: [heading, numbering]
     level: 1,
     {
       counter("subject").step()
-      counter("subject").display("专题一")
+      context counter("subject").display("专题一")
       h(0.3em)
       title
     },
