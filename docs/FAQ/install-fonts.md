@@ -9,9 +9,25 @@ tags: [font]
 - 如果需要在 typst.app 上使用，可以使用 `#set text(font:` 后的自动补全查看需要的字体（其中应该有 Noto Serif CJK SC 和 Noto Sans CJK SC，即思源宋体和思源黑体），如果没有需要的字体则请准备好需要的字体文件。
 - 如果是在本机上（VS Code 或 Typst CLI），如需使用系统字体，请在命令行中使用 `typst fonts` 查看可用字体。
 
-接着，在源代码文件中需要使用类似 `#set text(font: "LXGW WenKai", lang: "zh")` 的命令设置字体（此处使用霞鹜文楷）。然后根据环境配置字体文件的搜索方式：
+接着，在源代码文件中需要使用：
 
-- 在 typst.app 上编辑：直接上传字体文件。如果不方便上传字体，可以使用自带的 `#set text(font: ("New Computer Modern", "Noto Serif CJK SC"), lang: "zh")`。
+```typst no-render
+// Typst 0.13.0
+#set text(font: (
+  (name: "Inria Serif", covers: "latin-in-cjk"), // 西文字体
+  "LXGW WenKai" // 中文字体
+), lang: "zh")
+
+// Typst 0.12.0 或更早
+#set text(font: (
+  "Inria Serif", // 首选字体为西文字体，因为西文字体中通常不含有中文字符
+  "LXGW WenKai" // 当无法使用首选字体时就会回退到中文字体
+), lang: "zh")
+```
+
+的命令设置字体（此处使用霞鹜文楷）。然后根据环境配置字体文件的搜索方式：
+
+- 在 typst.app 上编辑：直接上传字体文件。如果不方便上传字体，可以使用自带的 New Computer Modern 作为西文字体、Noto Serif CJK SC 作为中文字体。
 - 在本地 VS Code 引入字体：默认可以使用系统安装的字体。除此以外，也可以通过给 tinymist 指定设定值 `tinymist.fontPaths` 等使它找到字体文件位置。不过注意使用 VS Code 打开单文件（区别于打开文件夹）时这一功能可能不可用。
 - 使用 Typst CLI：使用 `--font-path` 参数。
 
