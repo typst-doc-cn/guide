@@ -8,7 +8,7 @@ tags: [math,layout]
 1. 用 `#box()` 将行间数学公式包住，且不能有空行。
 
 ```typst
-#set page(width: 30em)
+#set page(width: 30em, height: auto)
 #set par(first-line-indent: (amount: 2em, all: true))
 #set math.equation(numbering: "(1.1)")
 
@@ -22,7 +22,7 @@ shows that the integral of $x + y$ is $z$.
 对比
 
 ```typst
-#set page(width: 30em)
+#set page(width: 30em, height: auto)
 #set par(first-line-indent: (amount: 2em, all: true))
 #set math.equation(numbering: "(1.1)")
 
