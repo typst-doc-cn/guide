@@ -1,5 +1,5 @@
 ---
-tags: [heading, numbering]
+tags: [heading, numbering, text]
 ---
 # 如何实现标题编号罗马数字加粗，但是标题不加粗？
 

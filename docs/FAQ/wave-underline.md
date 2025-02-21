@@ -4,8 +4,8 @@ tags: [text]
 # 如何实现波浪线下划线？
 
 ```typst
-#let pat = pattern(size: (4pt, 3pt), path(
-  stroke: blue+0.5pt,
+#let pat = tiling(size: (4pt, 3pt), path(
+  stroke: blue + 0.5pt,
   ((0%, 10%), (-20%, 0%)),
   ((50%, 40%), (-20%, 0%)),
   ((100%, 10%), (-20%, 0%)),
@@ -16,3 +16,6 @@ tags: [text]
 ::: warning
 不推荐，不同阅读器对于 pattern 的支持情况不一样，显示效果可能有所区别。
 :::
+
+> [!NOTE]
+> 自 Typst 0.13，`tiling` 代替了 `pattern`。

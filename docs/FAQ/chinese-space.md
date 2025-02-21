@@ -1,5 +1,5 @@
 ---
-tags: [chinese, bug]
+tags: [chinese, bug, text]
 ---
 # 行内公式与中文之间没有自动空格
 

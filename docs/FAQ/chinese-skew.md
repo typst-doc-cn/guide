@@ -1,5 +1,5 @@
 ---
-tags: chinese
+tags: [chinese, text]
 ---
 
 # 如何设置中文字体的斜体？

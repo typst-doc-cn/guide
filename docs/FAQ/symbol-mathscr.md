@@ -1,6 +1,5 @@
 ---
 tags: [math]
-title: 如何实现 \mathscr 的花体符号？
 ---
 # 如何实现 `\mathscr` 的花体符号？
 

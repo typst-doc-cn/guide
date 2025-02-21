@@ -16,7 +16,7 @@ const path = computed(() => useRoute().path);
 
 const tags = computed(() => makeTags(data.frontmatter.value.tags));
 
-const typstVersion = computed(() => getTypstVersion(new Date(data.page.value.lastUpdated)));
+const typstVersion = computed(() => getTypstVersion(new Date(data.page.value.lastUpdated!)));
 </script>
 
 <style>

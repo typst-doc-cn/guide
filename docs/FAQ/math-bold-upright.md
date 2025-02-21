@@ -3,7 +3,7 @@ tags: [math]
 ---
 # 公式中的正体加粗和正体，是什么代码啊？
 
-也就是 LaTeX 中的 \mathbf 和 \mathrm
+也就是 LaTeX 中的 `\mathbf` 和 `\mathrm`
 
 ```typst
 #let mathrm(x) = math.upright(x)
