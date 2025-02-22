@@ -23,7 +23,7 @@ https://typst.app/universe/package/subpar/
 
 ```typst
 #set page(width: 12cm, height: auto)
-#import "@preview/subpar:0.2.0": grid as subfigure
+#import "@preview/subpar:0.2.1": grid as subfigure
 #subfigure(
   align:center,
   figure(rect(), caption: [
@@ -60,7 +60,7 @@ https://typst.app/universe/package/subpar/
 #set page(width: 12cm, height: auto)
 #import "@preview/i-figured:0.2.4"
 #show figure: i-figured.show-figure
-#import "@preview/subpar:0.2.0": grid as subfigure
+#import "@preview/subpar:0.2.1": grid as subfigure
 #subfigure(
   align:center,
   figure(rect(), caption: [
@@ -86,7 +86,7 @@ https://typst.app/universe/package/subpar/
 //   numbering and supplements
 
 #let fake-image = block(stroke: red, inset: 1em, lorem(10))
-#import "@preview/subpar:0.2.0"
+#import "@preview/subpar:0.2.1"
 
 #let sub-figure-numbering = (super, sub) => numbering("1.1a", counter(heading).get().first(), super, sub)
 #let figure-numbering = super => numbering("1.1", counter(heading).get().first(), super)
