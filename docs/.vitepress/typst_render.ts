@@ -4,10 +4,41 @@ import { createHash } from 'node:crypto';
 import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 
-import { prettify, readToString } from './util';
+import TEMPLATE from './typst_template';
+import { prettify, readToString, removePrefix } from './util';
+
+type PreprocessResult = {
+  /** 用于显示的版本 */
+  display: string;
+  /** 用于编译的版本 */
+  compiling: string;
+};
+
+/**
+ * 预处理
+ *
+ * - 添加导言
+ * - 以`-- `开头的行在显示时隐藏，在编译时保留
+ *
+ * @param src 源文档的内容，不含导言
+ * @returns 预处理结果
+ */
+function preprocess(src: string): PreprocessResult {
+  const HIDE = '-- ';
+
+  const lines = src.split('\n');
+
+  return {
+    display: lines.filter((l) => !l.startsWith(HIDE)).join('\n'),
+    compiling: TEMPLATE.replace(
+      '<<src>>',
+      lines.map((l) => removePrefix(l, HIDE)).join('\n'),
+    ),
+  };
+}
 
 type CompileResult = {
-  /** 输入一系列 PNG 的路径 */
+  /** 输出一系列 PNG 的路径，按页面原始顺序 */
   pages: string[];
   /** typst 生成的日志（通常无任何警告或错误） */
   log?: string;
@@ -18,7 +49,7 @@ type CompileResult = {
  *
  * 若已编译，会复用先前结果。
  *
- * @param src 源文档的内容，不含导言
+ * @param src 源文档预处理后的内容
  * @param info 源文档的位置信息，仅用于报错提示
  * @returns 编译结果
  */
@@ -33,13 +64,6 @@ function compileTypst(
   const outPrefix = 'docs/generated/';
   const pageFilePattern = `${outPrefix}${hash}_{n}.png`;
   const logFile = `${outPrefix}${hash}.log`;
-
-  // 输入设置
-
-  const template = `#set page(height: 4cm, width: 6cm)
-#set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "Source Han Serif SC"))
-<<src>>`;
-  const srcFull = template.replace('<<src>>', src);
 
   // 编译
 
@@ -61,7 +85,7 @@ function compileTypst(
       '--font-path',
       'fonts',
     ], {
-      input: srcFull,
+      input: src,
     });
 
     // 正常应该没有 stdout；不过以防万一，检查一下
@@ -122,8 +146,10 @@ function TypstRender(md: MarkdownIt) {
   md.renderer.rules.fence = (tokens, idx, options, env, self) => {
     const token = tokens[idx];
     if (token.info.trim() === 'typst') {
-      const src = token.content;
-      const result = compileTypst(src, {
+      const { display, compiling } = preprocess(token.content);
+      token.content = display;
+
+      const result = compileTypst(compiling, {
         path: `docs/${env.relativePath}`,
         // 加四是因为 front matter
         line_begin: token.map ? token.map[0] + 4 : undefined,

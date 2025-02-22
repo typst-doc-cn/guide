@@ -63,11 +63,30 @@ $ sum_(k=1)^n k = (n(n+1)) / 2 $
 
 注意：渲染器在将文档中的 typst 代码渲染成图片时会自动在前面插入这两行代码，避免生成的图片过大，改善阅读体验。因此需要较大的页面展示代码效果的时候记得手动设置页面尺寸。
 ```typst no-render
-#set page(height: 4cm, width: 6cm)
-#set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "Source Han Serif SC"))
+<!--@include: @/.vitepress/typst_template.ts{2,3} -->
 ```
 
-另外，如果问题已在新版 typst 修复或改进，可在标题开头添加`【已修复】`，并注明版本。
+对于设置页面这种与正文关系不大的代码，可于行首加`-- `，在渲染时隐藏。
+
+::: details 示例：隐藏代码
+
+`.md` 文件：
+
+```typst no-render
+-- #set page(width: auto, height: auto, margin: 1em)
+#lorem(1)
+```
+
+渲染结果：
+
+```typst
+-- #set page(width: auto, height: auto, margin: 1em)
+#lorem(1)
+```
+
+:::
+
+最后，如果问题已在新版 typst 修复或改进，可在标题开头添加`【已修复】`，并注明版本。
 
 ```md
 # 【已修复】……？
