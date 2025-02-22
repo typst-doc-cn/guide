@@ -4,11 +4,11 @@ tags: [text]
 # 如何实现波浪线下划线？
 
 ```typst
-#let pat = tiling(size: (4pt, 3pt), path(
+#let pat = tiling(size: (4pt, 3pt), curve(
   stroke: blue + 0.5pt,
-  ((0%, 10%), (-20%, 0%)),
-  ((50%, 40%), (-20%, 0%)),
-  ((100%, 10%), (-20%, 0%)),
+  curve.move((0%, 10%)),
+  curve.cubic((20%, 0%), (30%, 30%), (50%, 30%), relative: true),
+  curve.cubic(auto, (30%, -30%), (50%, -30%), relative: true),
 ))
 #underline(stroke: (thickness: 3pt, paint: pat), evade: false, offset: 2pt)[你说得对，但是 Genshin Impact 是]
 ```
