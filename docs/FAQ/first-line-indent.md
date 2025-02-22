@@ -4,7 +4,7 @@ tags: [layout]
 # 【已修复】为什么第一段没有缩进？
 
 ::: tip ✅ Typst 0.13 已修复
-[#5768](https://github.com/typst/typst/pull/5768) 增加了 `all` 选项，可以缩进所有段落了，但会在 `figure`、`equation` 等块元素后强行换行。
+[#5768](https://github.com/typst/typst/pull/5768) 增加了 `all` 选项，可以缩进所有段落了。
 
 ```typst
 #set par(first-line-indent: (amount: 2em, all: true))
@@ -15,6 +15,8 @@ tags: [layout]
 
 之后段落原本已缩进。
 ```
+
+不过，公式、图表等块元素等块元素后也强行缩进了，可[套`#box[…]`修复](./block-equation-in-paragraph.md)。
 :::
 
 首先，英文排版是这样的，LaTeX 默认第一段也是不缩进的。其次，这部分实现有一些 bug，当前还不能通过修改设置来实现缩进。要修复这个问题，可以使用下面的方法：
