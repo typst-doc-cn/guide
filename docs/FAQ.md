@@ -55,7 +55,7 @@ $ sum_(k=1)^n k = (n(n+1)) / 2 $
 
 ```typst no-render
 // 设置中英文字体
-#set text(font: ("New Computer Modern", "Noto Serif CJK SC"), lang: "zh")
+#set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "Noto Serif CJK SC"), lang: "zh")
 ```
 
 嗯，暂时没有需要补充的了。
@@ -64,7 +64,7 @@ $ sum_(k=1)^n k = (n(n+1)) / 2 $
 注意：渲染器在将文档中的 typst 代码渲染成图片时会自动在前面插入这两行代码，避免生成的图片过大，改善阅读体验。因此需要较大的页面展示代码效果的时候记得手动设置页面尺寸。
 ```typst no-render
 #set page(height: 4cm, width: 6cm)
-#set text(font: ("New Computer Modern", "Source Han Serif SC"))
+#set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "Source Han Serif SC"))
 ```
 
 另外，如果问题已在新版 typst 修复或改进，可在标题开头添加`【已修复】`，并注明版本。
