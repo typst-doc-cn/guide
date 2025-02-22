@@ -37,7 +37,7 @@ function compileTypst(
   // 输入设置
 
   const template = `#set page(height: 4cm, width: 6cm)
-#set text(font: ("New Computer Modern", "Source Han Serif SC"))
+#set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "Source Han Serif SC"))
 <<src>>`;
   const srcFull = template.replace('<<src>>', src);
 
