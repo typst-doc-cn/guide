@@ -10,6 +10,7 @@ tags: [chinese, bug, text]
 临时修复方法：
 
 ```typst
+-- #set page(height: auto, margin: 1em)
 #show math.equation.where(block: false): it => h(0.25em, weak: true) + it + h(0.25em, weak: true)
 汉字$A$汉字
 ```

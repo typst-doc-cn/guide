@@ -9,7 +9,7 @@ tags: [layout, figure]
 这个编号不需要经常修改，因此使用 `grid` 布局，然后手动编号即可。
 
 ```typst
-#set page(width: 12cm, height: auto)
+-- #set page(width: 12cm, height: auto)
 #figure(grid(columns: 2, gutter: 1em,
   figure(rect(), numbering: none, caption: [a) demo1]),
   figure(rect(), numbering: none, caption: [b) demo2]),
@@ -23,7 +23,7 @@ tags: [layout, figure]
 https://typst.app/universe/package/subpar/
 
 ```typst
-#set page(width: 12cm, height: auto)
+-- #set page(width: 12cm, height: auto)
 #import "@preview/subpar:0.2.1": grid as subfigure
 #subfigure(
   align:center,
@@ -46,7 +46,7 @@ https://typst.app/universe/package/subpar/
 **情况 1：** `i-figured `会忽略 `figure` 的 `numbering`，导致出现计数错误
 
 ```typst
-#set page(width: 12cm, height: auto)
+-- #set page(width: 12cm, height: auto)
 #import "@preview/i-figured:0.2.4"
 #show figure: i-figured.show-figure
 #figure(grid(columns: 2, gutter: 1em,
@@ -58,7 +58,7 @@ https://typst.app/universe/package/subpar/
 **情况 2**：`i-figured` 会对 `subpar` 中超图进行冲突计数
 
 ```typst
-#set page(width: 12cm, height: auto)
+-- #set page(width: 12cm, height: auto)
 #import "@preview/i-figured:0.2.4"
 #show figure: i-figured.show-figure
 #import "@preview/subpar:0.2.1": grid as subfigure
@@ -81,7 +81,7 @@ https://typst.app/universe/package/subpar/
 **正确用法：** 使用 `subpar` 实现子图超图功能，自行实现编号规则
 
 ```typst
-#set page(width: 20cm, height: auto)
+-- #set page(width: 20cm, height: auto)
 // Synopsis:
 // - adding contextual numbering like chapter-relative numbering preserves the correct subfigure
 //   numbering and supplements
