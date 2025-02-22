@@ -5,7 +5,9 @@ tags: [math, numbering]
 
 更详细问题的描述：如何使得数学公式默认不编号，并且不记入编号公式的计数，同时可以添加某些命令使得公式编号？
 
-1. 通过 [`i-figured`包](https://typst.app/universe/package/i-figured)，建议查看后手搓一个
+## 1. 通过 [`i-figured`包](https://typst.app/universe/package/i-figured)
+
+建议查看后手搓一个。
 
 ```typst
 #import "@preview/i-figured:0.2.4"
@@ -28,19 +30,22 @@ $<2>
 #lorem(10)
 ```
 
-2. 手搓 by OrangeX4, [原文地址](https://forum.typst.app/t/how-to-conditionally-enable-equation-numbering-for-labeled-equations/977/13)
+## 2. 手搓
+
+by OrangeX4（[原文](https://forum.typst.app/t/how-to-conditionally-enable-equation-numbering-for-labeled-equations/977/13)）
 
 ```typst
 = Equation numbering
 #set math.equation(numbering: "(1)")
 #show math.equation.where(block: true): it => {
- if not it.has("label") {
-   let fields = it.fields()
-   fields.remove("body")
-   fields.numbering = none
-   return [#counter(math.equation).update(v => v - 1)#math.equation(..fields, it.body)<math-equation-without-label>]
- }
- return it
+  if not it.has("label") {
+    let fields = it.fields()
+    let _ = fields.remove("body")
+    fields.numbering = none
+    [#counter(math.equation).update(v => v - 1)#math.equation(..fields, it.body)<math-equation-without-label>]
+  } else {
+    it
+  }
 }
 
 $ x + y $<1>
@@ -52,7 +57,9 @@ $ x + y $<2>
 Cite @1. #lorem(10)
 ```
 
-3. 如果你还需要子公式，by obj.fake_cirno
+## 3. 如果你还需要子公式
+
+by obj.fake_cirno
 
 ```typst
 #set heading(numbering: "1.")
@@ -100,7 +107,9 @@ $
 
 ```
 
-4. 子公式另一个版本，by obj.fake_cirno
+## 4. 子公式另一个版本
+
+by obj.fake_cirno
 
 ```typst
 #set math.equation(numbering: "(1)")

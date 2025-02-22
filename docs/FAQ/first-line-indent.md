@@ -52,7 +52,7 @@ $ E=m c^2 $
 indenta 0.0.3 已不适用 Typst 0.13
 :::
 
-```typst
+```typst no-render
 #set par(first-line-indent: 2em)
 #import "@preview/indenta:0.0.3": fix-indent
 #show: fix-indent()
