@@ -1,5 +1,5 @@
 ---
-tags: [font]
+tags: [font, text, chinese]
 ---
 
 # 如何设置（中文）字体？

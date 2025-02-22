@@ -1,5 +1,5 @@
 ---
-tags: [math, equation]
+tags: [math, equation, text]
 ---
 
 # 如何修改公式里的中文字体？

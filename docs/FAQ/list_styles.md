@@ -1,5 +1,5 @@
 ---
-tags: [code]
+tags: [code, list]
 ---
 
 # 如何为列表的每个层级指定不同的样式？
@@ -16,7 +16,7 @@ tags: [code]
       let body = if x.body.func() == [].func() {
         styled-list(
           ..funcs.slice(1),
-          funcs.at(0), 
+          funcs.at(0),
           x.body,
           applied: funcs.at(0)
         )

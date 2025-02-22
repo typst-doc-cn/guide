@@ -27,7 +27,7 @@ import { withBase } from 'vitepress';
 import { ref, computed, onMounted } from 'vue';
 import { data } from './faqlist.data';
 
-const tags = Object.keys(data.tagMap);
+const tags = Object.keys(data.tagMap).sort();
 
 const currentTag = ref<string | null>(null);
 

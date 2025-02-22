@@ -1,5 +1,5 @@
 ---
-tags: [counter, page]
+tags: [counter, page, label]
 ---
 # 如何获得标签所在页的页码？
 

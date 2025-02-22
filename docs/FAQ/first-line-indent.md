@@ -4,7 +4,7 @@ tags: [layout]
 # 【已修复】为什么第一段没有缩进？
 
 ::: tip ✅ Typst 0.13 已修复
-[#5768](https://github.com/typst/typst/pull/5768) 增加了 `all` 选项，可以缩进所有段落了。
+[#5768](https://github.com/typst/typst/pull/5768) 增加了 `all` 选项，可以缩进所有段落了，但会在 `figure`、`equation` 等块元素后强行换行。
 
 ```typst
 #set par(first-line-indent: (amount: 2em, all: true))
@@ -45,6 +45,10 @@ $ E=m c^2 $
 缺点：图表和公式后面的段落也会默认缩进。当你需要写“其中，XXX”的时候，要手动取消缩进。
 
 ## 方法 2：使用 indenta 包 {#first-line-indent-indenta}
+
+:::warning
+indenta 0.0.3 已不适用 Typst 0.13
+:::
 
 ```typst
 #set par(first-line-indent: 2em)

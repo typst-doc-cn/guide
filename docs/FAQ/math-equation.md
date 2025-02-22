@@ -1,11 +1,11 @@
 ---
-tags: [math,numbering]
+tags: [math, numbering]
 ---
 # 如何让自定义数学公式编号？
 
 更详细问题的描述：如何使得数学公式默认不编号，并且不记入编号公式的计数，同时可以添加某些命令使得公式编号？
 
-1. 通过[`i-figured`包](https://typst.app/universe/package/i-figured)，建议查看后手搓一个
+1. 通过 [`i-figured`包](https://typst.app/universe/package/i-figured)，建议查看后手搓一个
 
 ```typst
 #import "@preview/i-figured:0.2.4"
@@ -15,15 +15,15 @@ tags: [math,numbering]
 #show math.equation: i-figured.show-equation.with(only-labeled: true)
 #lorem(10)
 $
-a+b=c
+  a+b=c
 $<1>
 Try to cite @eqt:1, #lorem(5)
 $
-1+2=3
+  1+2=3
 $
 #lorem(10)
 $
-4+5 =9
+  4+5=9
 $<2>
 #lorem(10)
 ```
@@ -45,21 +45,21 @@ $<2>
 
 $ x + y $<1>
 
-$ x + y + z $ 
+$ x + y + z $
 
 $ x + y $<2>
 
-Cite @1. #lorem(10) 
+Cite @1. #lorem(10)
 ```
 
-3. 如果你还需要子公式, by obj.fake_cirno
+3. 如果你还需要子公式，by obj.fake_cirno
 
 ```typst
 #set heading(numbering: "1.")
 #let ct=counter("eq")
 #set math.equation(numbering: it=>ct.display("(1-1.a)"))
 #show heading.where(level: 1): it=>it+ct.step()+ct.step(level: 2)
-#show math.equation.where(block: true): it=>{ 
+#show math.equation.where(block: true): it=>{
   it
   if it.numbering !=none{
     if ct.get().len()==2{
@@ -100,7 +100,7 @@ $
 
 ```
 
-4. 子公式另一个版本, by obj.fake_cirno
+4. 子公式另一个版本，by obj.fake_cirno
 
 ```typst
 #set math.equation(numbering: "(1)")

@@ -1,5 +1,5 @@
 ---
-tags: [font, chinese]
+tags: [font, chinese, text]
 ---
 # 中英文如何使用不同的字体？
 

@@ -4,6 +4,6 @@ export function makeTags(tags: string | string[] | undefined): string[] {
   } else if (typeof tags === 'string') {
     return [tags];
   } else {
-    return tags;
+    return tags.sort();
   }
 }

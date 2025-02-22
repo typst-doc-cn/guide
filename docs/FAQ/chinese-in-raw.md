@@ -1,5 +1,5 @@
 ---
-tags: [font, chinese, raw]
+tags: [font, chinese, raw, text]
 ---
 
 # 为什么代码块里面的中文字体显示不正常？

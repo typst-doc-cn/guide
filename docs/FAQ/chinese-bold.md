@@ -1,5 +1,5 @@
 ---
-tags: chinese
+tags: [chinese, text]
 ---
 # 中文没有加粗
 
