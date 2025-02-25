@@ -8,9 +8,9 @@ tags: [math, layout]
 用 `#box()` 将行间数学公式包住，且不能有空行。
 
 ```typst
-#set page(width: 30em, height: auto)
+-- #set page(width: 30em, height: auto)
 #set par(first-line-indent: (amount: 2em, all: true))
-#set math.equation(numbering: "(1.1)")
+-- #set math.equation(numbering: "(1.1)")
 
 #lorem(10), for example,
 #box[$ integral x + y = z $]
@@ -22,15 +22,12 @@ shows that the integral of $x + y$ is $z$.
 对比
 
 ```typst
-#set page(width: 30em, height: auto)
-#set par(first-line-indent: (amount: 2em, all: true))
-#set math.equation(numbering: "(1.1)")
-
+-- #set page(width: 30em, height: auto)
+-- #set par(first-line-indent: (amount: 2em, all: true))
+-- #set math.equation(numbering: "(1.1)")
 #lorem(10), for example,
 $ integral x + y = z $
 shows that the integral of $x + y$ is $z$.
-
-#lorem(20)
 ```
 
 对于 tight list 和 figure 来说也是同理。

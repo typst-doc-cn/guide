@@ -9,7 +9,8 @@ tags: [chinese, text]
 一般使用其他字体（如楷体）代替斜体：
 
 ```typst
-#let 西文字体 = "Libertinus Serif"
+-- #set page(height: auto, margin: 1em)
+-- #let 西文字体 = (name: "Libertinus Serif", covers: "latin-in-cjk")
 #show emph: text.with(font: (西文字体, "Kaiti"))
 孔乙己_上大人_
 ```
@@ -18,6 +19,7 @@ tags: [chinese, text]
 
 伪斜体也可使用[`skew`函数](https://typst.app/docs/reference/layout/skew/)：
 ```typst
+-- #set page(height: auto, margin: 1em)
 #skew(ax: -12deg)[111]111
 ```
 但是针对一大段效果并不好。

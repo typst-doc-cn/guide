@@ -7,7 +7,7 @@ tags: [table]
 使用 `block` 提供的 `radius` 即可实现圆角，结合 `clip` 参数可以去除不需要的部分。为了实现样式的统一 `stroke` 需要提前定义。
 
 ```typst
-#set page(width: 10cm, height: auto)
+-- #set page(width: 10cm, height: auto)
 #let stroke = stroke(2pt + gradient.linear(..color.map.plasma))
 #show table: it => block(stroke: stroke, radius: 2em, clip: true, it)
 

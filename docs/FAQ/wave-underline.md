@@ -4,6 +4,7 @@ tags: [text]
 # 如何实现波浪线下划线？
 
 ```typst
+-- #set page(height: auto, margin: 1em)
 #let pat = tiling(size: (4pt, 3pt), curve(
   stroke: blue + 0.5pt,
   curve.move((0%, 10%)),

@@ -7,6 +7,7 @@ tags: [font, chinese, text]
 [#5305](https://github.com/typst/typst/pull/5305) 增加了 `covers` 选项，请这样设置：
 
 ```typst
+-- #set page(width: 18em, height: auto, margin: 1em)
 #set text(font: (
   (name: "Times New Roman", covers: "latin-in-cjk"),
   "SimSun"
@@ -20,6 +21,7 @@ tags: [font, chinese, text]
 设置字体可以使用一个列表，Typst 会按照列表中的顺序依次尝试使用字体。因此只需把英文字体放在中文字体前面即可。例如：
 
 ```typst
+-- #set page(width: 18em, height: auto, margin: 1em)
 #set text(font: ("Times New Roman", "SimSun"))
 分别设置“中文”和English字体
 ```

@@ -202,8 +202,8 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 在 Typst 中，行距和段距分别由 `par` 的 `leading` 和 `spacing` 参数控制。行距是指行与行之间的距离，段距是指段与段之间的距离。如图所示。
 
 ```typst
-#set page(height: 6cm, width: 10cm)
-#let marker(body, height)=box(place(box(height: height, width: 2pt, stroke: (rest: 1pt+red, left: none), place(dx: 4pt, text(8pt, red, body)))))
+-- #set page(height: 6cm, width: 10cm)
+#let marker(body, height) = box(place(box(height: height, width: 2pt, stroke: (rest: 1pt+red, left: none), place(dx: 4pt, text(8pt, red, body)))))
 
 #set par(leading: 0.6em, spacing: 1em)
 
@@ -378,7 +378,7 @@ Typst 的标题编号是自动的，可以通过修改 `heading` 的 `numbering`
 Typst 的数学公式用一对 `$` 包裹。当 `$` 内侧有空白（空格或换行符）时为行间公式（e.g.，`$ a $`），否则为行内公式。
 
 ```typst
-#set page(height: auto)
+-- #set page(height: auto)
 行内公式：$(a+b)^2 = a^2 + 2 a b + b^2$
 
 公式块：
@@ -421,7 +421,7 @@ $
 - 群友科技 [zebraw](https://typst.app/universe/package/zebraw)
 
 ````typst
-#set page(paper: "a4", height: auto, margin: 1cm)
+-- #set page(paper: "a4", height: auto, margin: 1cm)
 #import "@preview/zebraw:0.3.0": *
 #show: zebraw
 #zebraw(
@@ -515,7 +515,7 @@ Typst 使用 `#bibliography` 命令来插入参考文献。在文中引用参考
 使用 `#footnote` 命令来插入脚注。
 
 ````typst
-#set page(height: auto)
+-- #set page(height: auto)
 在任意地方使用 ```typ #footnote``` 来插入一个脚注。比如这里#footnote[这个地方就是一个脚注]就是一个脚注。脚注会#footnote[自动编号]自动编号。
 ````
 

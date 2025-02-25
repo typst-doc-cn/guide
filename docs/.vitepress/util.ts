@@ -31,3 +31,13 @@ export function prettify(
   }
   return lines.map((l) => `${indent}${l}`).join('\n');
 }
+
+/**
+ * 若以`prefix`开头，删除之
+ */
+export function removePrefix(s: string, prefix: string): string {
+  if (s.startsWith(prefix)) {
+    return s.slice(prefix.length);
+  }
+  return s;
+}
