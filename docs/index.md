@@ -55,6 +55,8 @@ hero:
 
 Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
 
+Typst Examples Book（英文，有非常多的例子）：https://sitandr.github.io/typst-examples-book/book/
+
 ## 问卷调查
 
 为了解各位的使用情况，这里有两份问卷调查，感兴趣的用户可以填写一下：
