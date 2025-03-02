@@ -1,7 +1,7 @@
 ---
 tags: [bib]
 ---
-# 为什么指定参考文献 CSL 后，报错 `failed to load CSL style`？
+# 为什么指定参考文献 CSL 后，报错“failed to load CSL style”？
 
 Typst[已经内置](https://typst.app/docs/reference/model/bibliography/#parameters-style)了中文常用的 GB/T 7714—2015 格式；如果你使用了其它[中文 CSL 样式](https://zotero-chinese.com/styles/)，可能会遇到这些报错。
 
