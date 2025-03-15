@@ -65,6 +65,9 @@ Typst Examples Book（英文，有非常多的例子）：https://sitandr.github
 
 ## 用户社区
 
-中文聊天群：793548390 [点击此处加入](https://qm.qq.com/q/MQO6j6jCw2)
+中文聊天群
+
+- QQ：793548390 [点击此处加入](https://qm.qq.com/q/MQO6j6jCw2)
+- Telegram：<https://t.me/typst_zh>
 
 官方 Discord：https://discord.gg/2uDybryKPe
