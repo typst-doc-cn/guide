@@ -22,7 +22,7 @@ tags: [publish, template, package]
 name = "example"         # 项目名，需要使用
 version = "0.1.0"        # 项目版本，一般来说是 0.1.0
 entrypoint = "lib.typ"   # 项目入口文件
-authors = ["Developers"] # 开发人员，可以写成 `@your-github-name`
+authors = ["Developers"] # 开发人员，可以写成 ["Your Name <@your-github-name>"]
 license = "MIT"          # 许可证书
 description = "..."      # 项目描述
 repository = "..."       # Github 仓库目录
@@ -34,6 +34,30 @@ exclude = ["tmp"]        # 可选，排除目录
 path = "template"        # 模板目录
 entrypoint = "main.typ"  # 模板入口，这是基于模板路径的，即 template/main.typ
 thumbnail = "thumb.png"  # 缩略图路径，这是基于项目路径的
+```
+
+这里参考 Typst 大佬 OrangeX4 项目中的配置 
+
+[nju-lug/modern-nju-thesis: 南京大学学位论文 Typst 模板 modern-nju-thesis](https://github.com/nju-lug/modern-nju-thesis/tree/main)
+
+```toml
+[package]
+name = "modern-nju-thesis"
+version = "0.4.0"
+entrypoint = "lib.typ"
+authors = ["OrangeX4"]
+license = "MIT"
+description = "南京大学学位论文模板。Modern Nanjing University Thesis."
+repository = "https://github.com/nju-lug/modern-nju-thesis"
+keywords = ["Nanjing University", "thesis"]
+categories = ["thesis"]
+exclude = ["imgs"]
+compiler = "0.13.0"
+
+[template]
+path = "template"
+entrypoint = "thesis.typ"
+thumbnail = "thumbnail.png"
 ```
 
 ## 发布项目
