@@ -1,11 +1,11 @@
 ---
-tags: [publish, template]
+tags: [publish, template, package]
 ---
 
-# 如何发布自己的模板
+# 如何发布自己的包以及模板
 
 对于比较熟悉 Typst 的朋友来说，
-也许会想发布自己的模板分享给周围人使用。
+也许会想发布自己的包或模板分享给周围人使用。
 
 首先所有的三方包都在官方项目中 [typst/packages: Packages for Typst.](https://github.com/typst/packages)
 
@@ -22,7 +22,7 @@ tags: [publish, template]
 name = "example"         # 项目名，需要使用
 version = "0.1.0"        # 项目版本，一般来说是 0.1.0
 entrypoint = "lib.typ"   # 项目入口文件
-authors = ["Developers"] # 开发人员，可以写
+authors = ["Developers"] # 开发人员，可以写成 `@your-github-name`
 license = "MIT"          # 许可证书
 description = "..."      # 项目描述
 repository = "..."       # Github 仓库目录
@@ -53,14 +53,14 @@ thumbnail = "thumb.png"  # 缩略图路径，这是基于项目路径的
 
 1. 首先下载 [typship](https://github.com/sjfhsjfh/typship)；
 2. 将 typship 添加到环境变量；
-3. `fork` 仓库 [typst/packages](https://github.com/typst/packages)；
-4. 在 Github -> Setting -> Develop Settings -> Personal access tokens 中创建 PAC；
-   1. 指定你 `fork` 的仓库；
-   2. 给 `metadata` 的读权限；
-   3. 给 `content` 读权限和写权限；
-   4. 妥善保存生成的 `PAC`；
-5. 回到你的项目（不是 `fork` 的仓库）；
-6. 在根目录下运行命令 `typship login universe`，输入你的 `PAC`；
+3. `fork` 仓库 [typst/packages](https://github.com/typst/packages)，新手不建议重命名，使用默认名字 `packages`；
+4. 在 Github -> Setting -> Develop Settings -> fine-grained **P**ersonal **A**ccess **T**okens 中创建 fine-granted PAT，关于 fine-granted PAT 的介绍，可以参考- [Introducing fine-grained personal access tokens for GitHub - The GitHub Blog](https://github.blog/security/application-security/introducing-fine-grained-personal-access-tokens-for-github/)
+   1. 指定你 `fork` 的仓库，不建议使用全部仓库！
+   2. 赋予 `metadata` 的读权限；
+   3. 赋予 `content` 读权限和写权限；
+   4. 妥善保存生成的 `PAT`；
+5. 回到你包项目的根目录（不是 `fork` 的仓库 `packages`）；
+6. 在根目录下运行命令 `typship login universe`，输入你的 `PAT`；
 7. 完成后继续运行命令 `typship publish universe`，一路回车，等待上传成功；
 8. 手动提交 PR。
 
@@ -77,18 +77,31 @@ thumbnail = "thumb.png"  # 缩略图路径，这是基于项目路径的
    3. `--branch {你新建的分支名}`：指定克隆分支；
 3. 进入克隆的项目，`cd packages`，一般来说是空白，只有 `.git` 文件夹；
 4. 运行命令 `git config core.sparsecheckout true` 表示开启稀疏检出；
-5. 运行命令 `git sparse-checkout set packages/preview/{name}`，这个 `name` 需要谨慎，要和你 `typst.toml` 中的 `name` 一致；
-6. 将你的项目里的文件手动复制进去，删除不必要的文件，提交 commit；
-7. 手动提交 PR。
+5. 运行命令 `git sparse-checkout set packages/preview/{name}`，这个 `name` 需要谨慎，要和你 `typst.toml` 中的 `name` 一致
+6. 在 `packages/preview/{name}` 中创建目录 `0.1.0`
+7. 将你的项目里的文件手动复制进去，删除不必要的文件，提交 commit；
+8. 手动提交 PR。
 
 是不是很简单呢 😄（开玩笑）
+
+### \*方法四：使用 Github-Action
+
+据大佬补充，
+还有 Github-Action 方法可以使用，
+参考：https://github.com/typst-community/typst-package-template/blob/64726bec3bb0c664e8d7a1df4ed82d52a87465a7/.github/workflows/release.yml，
+不需要在本地 clone；
+不过不确定是否要求文件名纯ASCII。
+
+> 该方法本文作者没有使用过，
+> 希望有经验的大佬可以补充此条。
+
 
 ## 等待 PR 通过
 
 在等待 PR 的过程中，
-需要做以下事情
+还需要做以下事情
 
-1. 玩原神
-2. 玩崩铁
-3. 玩绝区零
+1. 手机原神启动
+2. 平板崩铁启动
+3. 电脑绝区零启动
 4. PR 通过
