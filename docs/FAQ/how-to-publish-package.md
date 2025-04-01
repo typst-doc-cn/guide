@@ -78,7 +78,7 @@ thumbnail = "thumbnail.png"
 1. 首先下载 [typship](https://github.com/sjfhsjfh/typship)；
 2. 将 typship 添加到环境变量；
 3. `fork` 仓库 [typst/packages](https://github.com/typst/packages)，新手不建议重命名，使用默认名字 `packages`；
-4. 在 Github -> Setting -> Develop Settings -> fine-grained **P**ersonal **A**ccess **T**okens 中创建 fine-granted PAT，关于 fine-granted PAT 的介绍，可以参考- [Introducing fine-grained personal access tokens for GitHub - The GitHub Blog](https://github.blog/security/application-security/introducing-fine-grained-personal-access-tokens-for-github/)
+4. 在 Github -> Setting -> Develop Settings -> fine-grained **P**ersonal **A**ccess **T**okens 中创建 fine-grained PAT，关于 fine-grained PAT 的介绍，可以参考- [Introducing fine-grained personal access tokens for GitHub - The GitHub Blog](https://github.blog/security/application-security/introducing-fine-grained-personal-access-tokens-for-github/)
    1. 指定你 `fork` 的仓库，不建议使用全部仓库！
    2. 赋予 `metadata` 的读权限；
    3. 赋予 `content` 读权限和写权限；
