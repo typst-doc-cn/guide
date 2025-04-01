@@ -112,7 +112,7 @@ thumbnail = "thumbnail.png"
 
 据大佬补充，
 还有 Github-Action 方法可以使用，
-参考：https://github.com/typst-community/typst-package-template/blob/64726bec3bb0c664e8d7a1df4ed82d52a87465a7/.github/workflows/release.yml，
+参考：[typst-community/typst-package-template](https://github.com/typst-community/typst-package-template/blob/64726bec3bb0c664e8d7a1df4ed82d52a87465a7/.github/workflows/release.yml)，
 不需要在本地 clone；
 不过不确定是否要求文件名纯ASCII。
 
