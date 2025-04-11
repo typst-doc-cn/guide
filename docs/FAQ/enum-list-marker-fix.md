@@ -1,5 +1,5 @@
 ---
-tags: [layout, bug]
+tags: [layout, bug, list]
 ---
 # 列表符号和文字错位了怎么办？
 
