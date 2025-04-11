@@ -257,7 +257,7 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 ::: tip
 如果你使用过 Markdown，可能会发现 Markdown 中通常将一级标题视为文档属性的标题（在最开头且唯一），而 Typst 中的一级标题可以有多个，可表示语义上的“章节”。
 
-对于全文的标题，使用 `#set document(title: "文档标题")` 来设置文档属性。开头的大标题可以用…………实现。
+对于全文的标题，使用 `#set document(title: "文档标题")` 来设置文档属性。开头的大标题可以用 `#heading(outlined: false)[文档标题]` 实现。
 :::
 
 ```typst
