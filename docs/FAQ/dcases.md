@@ -6,7 +6,7 @@ tags: [math]
 ```typst
 -- #set page(height: auto)
 #import "@preview/physica:0.9.3": *
-#let dcases(..args) = math.cases(..args.pos().map(math.display))
+#let dcases(..args) = math.cases(..args.pos().map(math.display), ..args.named())
 $
   dcases(nabla dot vb(D) &= 4 pi rho_"f ",
   nabla dot vb(B) &= 0,
