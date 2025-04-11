@@ -4,7 +4,7 @@ tags: [math]
 # 如何让 cases 里面的分数/公式显示成 display 形式？
 
 ```typst
-#set page(height: auto)
+-- #set page(height: auto)
 #import "@preview/physica:0.9.3": *
 #let dcases(..args) = math.cases(..args.pos().map(math.display), ..args.named())
 $
