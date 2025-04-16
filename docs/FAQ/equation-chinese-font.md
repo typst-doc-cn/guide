@@ -21,7 +21,7 @@ $ f(x) #[原神] $
 - 「New Computer Modern Math」是数学字体，负责 `123`、`abc`、`,"!、{}()` 等
 - 「Noto Sans CJK SC」是 CJK 字体，负责汉字和`，“”！`等
 
-此外，请**不要**设置 `#show raw: set text(fallback: false)`。
+此外，请**不要**设置 `#show math.equation: set text(fallback: false)`。
 :::
 
 如果你使用旧版本，请使用以下旧方案。
