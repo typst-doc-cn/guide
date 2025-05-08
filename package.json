@@ -8,10 +8,10 @@
     "serve": "vitepress serve docs"
   },
   "devDependencies": {
-    "@waline/client": "^3.3.2",
-    "unocss": "^0.63.4",
-    "vitepress": "^1.4.0",
-    "vue": "^3.5.12"
+    "@waline/client": "^3.5.1",
+    "unocss": "^0.63.6",
+    "vitepress": "^1.6.3",
+    "vue": "^3.5.13"
   },
   "pnpm": {
     "peerDependencyRules": {
