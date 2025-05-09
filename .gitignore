@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 docs/.vitepress/cache
+generated
+tmp.typ

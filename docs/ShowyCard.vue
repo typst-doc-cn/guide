@@ -47,6 +47,10 @@ export default {
       type: String,
       required: false
     },
+    qqNumber: {
+      type: String,
+      required: false
+    },
     description: {
       type: String,
       required: false
@@ -65,6 +69,7 @@ export default {
       validator: (value) => ['inline', 'grid'].includes(value)
     }
   },
+  
   computed: {
     layoutStyles() {
       const styles = {
@@ -175,7 +180,14 @@ export default {
 }
 
 .tags {
-  margin-bottom: 0.5em;
+  display: inline-block;
+  vertical-align: center;
+}
+
+.tags, .links {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: auto;
 }
 
 .tag {
