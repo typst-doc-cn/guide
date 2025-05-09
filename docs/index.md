@@ -56,11 +56,24 @@ hero:
 小蓝书 Web 版：https://typst-doc-cn.github.io/guide/
 
 
-  <div>
-    我想说 <showy-card name="numbly" author="sign here" authorLink="https://github.com/flaribbit"
+  <div class="grid-container">
+    <showy-card name="numbly" author="sign here" authorLink="https://github.com/flaribbit"
                 :tags="['自动编号', '111']"
                 :links="['https://github.com/flaribbit/numbly', 'https://typst.app/universe/package/numbly']"
-    /> 很好用。
+                layout="grid" gridWidth="300px"
+    />
+    <showy-card name="typst-live" author="Typst Team" 
+                description="实时预览Typst文档"
+                :tags="['实时预览', '编辑器']"
+                :links="['https://github.com/typst/typst-live']"
+                layout="grid" gridWidth="300px"
+    />
+    <showy-card name="typst-vscode" author="Typst Team"
+                description="VSCode的Typst插件"
+                :tags="['VSCode', '插件']"
+                :links="['https://github.com/typst/vscode-typst']"
+                layout="grid" gridWidth="300px"
+    />
   </div>
 
 
