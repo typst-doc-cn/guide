@@ -80,29 +80,76 @@ Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
     <showy-card name="numbly" author="sign here" authorLink="https://github.com/flaribbit"
                 :tags="['自动编号', '111']"
                 :links="['https://github.com/flaribbit/numbly', 'https://typst.app/universe/package/numbly']"
-                layout="grid" gridWidth="300px"
     />
     <showy-card name="typst-live" author="Typst Team" 
                 description="实时预览Typst文档"
                 :tags="['实时预览', '编辑器']"
                 :links="['https://github.com/typst/typst-live']"
-                layout="grid" gridWidth="300px"
     />
     <showy-card name="typst-vscode" author="Typst Team"
                 description="VSCode的Typst插件"
                 :tags="['VSCode', '插件']"
                 :links="['https://github.com/typst/vscode-typst']"
-                layout="grid" gridWidth="300px"
     />
   </div>
 
+  <GridView>
+    <ShowyCard
+      name="卡片1 (在GridView中)"
+      author="示例作者"
+      :tags="['网格布局', '测试']"
+      description="这是在 GridView 中的第一个卡片。"
+      layout="grid"
+    />
+    <ShowyCard
+      name="卡片2 (在GridView中)"
+      author="示例作者"
+      :tags="['Vue', '组件']"
+      description="这是在 GridView 中的第二个卡片，用于演示统一尺寸排列。"
+      layout="grid"
+    />
+    <ShowyCard
+      name="卡片3 (在GridView中)"
+      author="示例作者"
+      :tags="['演示', '布局']"
+      description="这是在 GridView 中的第三个卡片。"
+      layout="grid"
+    />
+  </GridView>
+
+  <div>
+    <ShowyCard
+      name="自定义卡片示例"
+      author="Trae AI"
+      authorLink="https://example.com"
+      :tags="['Vue', 'Slot']"
+      description="这是一个通过插槽自定义内容的卡片。"
+      layout="grid"
+    >
+      <div style="padding: 1em; text-align: center;">
+        <h2>这是一个自定义的标题</h2>
+        <p>这里可以放任何 HTML 内容，比如一张图片：</p>
+        <img src="https://via.placeholder.com/150" alt="Placeholder Image" />
+      </div>
+    </ShowyCard>  
+    <ShowyCard
+      name="默认卡片示例"
+      author="Trae AI"
+      authorLink="https://example.com"
+      :tags="['Vue', 'Default']"
+      description="这是一个使用默认布局的卡片。"
+      layout="grid"
+    />
+  </div>
 
 <script>
 import ShowyCard from './ShowyCard.vue'
+import GridView from './GridView.vue'
 
 export default {
   components: {
-    ShowyCard
+    ShowyCard,
+    GridView
   }
 }
 </script>

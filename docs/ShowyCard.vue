@@ -1,26 +1,29 @@
 <template>
   <component :is="layout === 'inline' ? 'span' : 'div'" class="card" :class="[layout, { 'grid-item': layout === 'grid' }]" :style="layoutStyles">
-    <div class="card-element">
-      <b class="card-name">{{ name }}</b>
-    </div>
-    <div class="card-element">
-      <strong>
-        <a :href="authorLink">Author: {{ author }}</a>
-      </strong>
-    </div>
-    <div v-if="tags" class="card-element tags">
-      <span v-for="(tag, index) in tags" :key="index" class="tag">
-        {{ tag }}
-      </span>
-    </div>
-    <div v-if="links" class="card-element links-container">
-      <a v-for="(link, index) in links" :key="index" :href="link" class="link">
-        <img class="logo" :src="getLogo(link)" alt="logo">
-      </a>
-    </div>
-    <div v-if="description" class="card-element card-description">
-      <p>{{ description }}</p>
-    </div>
+    <slot>
+      <!-- Default content if no slot is provided -->
+      <div class="card-element">
+        <b class="card-name">{{ name }}</b>
+      </div>
+      <div class="card-element">
+        <strong>
+          <a :href="authorLink">Author: {{ author }}</a>
+        </strong>
+      </div>
+      <div v-if="tags" class="card-element tags">
+        <span v-for="(tag, index) in tags" :key="index" class="tag">
+          {{ tag }}
+        </span>
+      </div>
+      <div v-if="links" class="card-element links-container">
+        <a v-for="(link, index) in links" :key="index" :href="link" class="link">
+          <img class="logo" :src="getLogo(link)" alt="logo">
+        </a>
+      </div>
+      <div v-if="description" class="card-element card-description">
+        <p>{{ description }}</p>
+      </div>
+    </slot>
   </component>
 </template>
 
