@@ -1,0 +1,38 @@
+{
+  "commonCard": {
+    "name": "Pikachu",
+    "hp": "60",
+    "type": "Lightning",
+    "imageUrl": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",
+    "attacks": [
+      { "name": "Quick Attack", "damage": "10" },
+      { "name": "Thunder Shock", "damage": "20" }
+    ],
+    "description": "When several of these POKéMON gather, their electricity could build and cause lightning storms.",
+    "weakness": { "type": "Fighting", "value": "x2" },
+    "resistance": { "type": "Metal", "value": "-20" },
+    "retreatCost": "1",
+    "artist": "Ken Sugimori",
+    "rarity": "Common",
+    "setAbbr": "BS",
+    "setNumber": "104"
+  },
+  "anotherCommonCard": {
+    "name": "Charmander",
+    "hp": "50",
+    "type": "Fire",
+    "imageUrl": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png",
+    "attacks": [
+      { "name": "Scratch", "damage": "10" },
+      { "name": "Ember", "damage": "30" }
+    ],
+    "description": "The flame that burns at the tip of its tail is an indication of its emotions. The flame wavers when Charmander is enjoying itself.",
+    "weakness": { "type": "Water", "value": "x2" },
+    "resistance": null,
+    "retreatCost": "1",
+    "artist": "Mitsuhiro Arita",
+    "rarity": "Common",
+    "setAbbr": "BS",
+    "setNumber": "46"
+  }
+}

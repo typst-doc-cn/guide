@@ -42,7 +42,6 @@ hero:
 #     title: 速度真的很快！
 #     details: 采用静态 HTML 实现快速的页面初次加载，使用客户端路由实现快速的页面切换导航。
 ---
-
 <!--- TODO
 放一些 Typst 编译出的美图？
 简单的 Typst 语法示例？
@@ -91,6 +90,11 @@ Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
                 :tags="['VSCode', '插件']"
                 :links="['https://github.com/typst/vscode-typst']"
     />
+  </div>
+
+  <div style="margin-top: 20px;">
+    <h2>宝可梦卡片示例</h2>
+    <CommonPokemonCard :card="pokemon" />
   </div>
 
   <GridView>
@@ -142,14 +146,27 @@ Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
     />
   </div>
 
+  <div style="margin-top: 20px;">
+    <h2>宝可梦卡片示例</h2>
+    <CommonPokemonCard :card="pokemon" />
+  </div>
+
 <script>
-import ShowyCard from './ShowyCard.vue'
+import ShowyCard from './ShowyCard.vue';
+import CommonPokemonCard from './CommonPokemonCard.vue';
+import pokemonData from './data/pokemon-data.json';
 import GridView from './GridView.vue'
 
 export default {
+  data() {
+    return {
+      pokemon: pokemonData.commonCard // Or anotherCommonCard, or pass dynamically
+    };
+  },
   components: {
     ShowyCard,
-    GridView
+    GridView,
+    CommonPokemonCard
   }
 }
 </script>

@@ -72,8 +72,12 @@ export default {
       validator: (value) => ['inline', 'grid'].includes(value)
     }
   },
-  
+  inject: ['is3dEffectEnabled'],
   computed: {
+    is3dActive() {
+      // is3dEffectEnabled is injected as a function from GridView
+      return this.is3dEffectEnabled ? this.is3dEffectEnabled() : false;
+    },
     layoutStyles() {
       const styles = {
         height: this.height,
@@ -96,6 +100,9 @@ export default {
       }
     },
     handleMouseMove(e) {
+      if (!this.is3dActive) {
+        return;
+      }
       if (!this.$el || typeof this.$el.getBoundingClientRect !== 'function') return;
       const rect = this.$el.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -111,19 +118,38 @@ export default {
       if (!this.$el || !this.$el.style) return;
       this.$el.style.setProperty('--mouse-x', '50%');
       this.$el.style.setProperty('--mouse-y', '50%');
+    },
+    addEffectListeners() {
+      if (this.$el && typeof this.$el.addEventListener === 'function') {
+        this.$el.addEventListener('mousemove', this.handleMouseMove);
+        this.$el.addEventListener('mouseleave', this.handleMouseLeave);
+      }
+    },
+    removeEffectListeners() {
+      if (this.$el && typeof this.$el.removeEventListener === 'function') {
+        this.$el.removeEventListener('mousemove', this.handleMouseMove);
+        this.$el.removeEventListener('mouseleave', this.handleMouseLeave);
+      }
     }
   },
   mounted() {
-    if (this.$el && typeof this.$el.addEventListener === 'function') {
-        this.$el.addEventListener('mousemove', this.handleMouseMove);
-        this.$el.addEventListener('mouseleave', this.handleMouseLeave);
-        this.handleMouseLeave(); // Initialize CSS variables to default
+    this.handleMouseLeave(); // Always initialize CSS variables
+    if (this.is3dActive) {
+      this.addEffectListeners();
     }
   },
   beforeUnmount() {
-    if (this.$el && typeof this.$el.removeEventListener === 'function') {
-        this.$el.removeEventListener('mousemove', this.handleMouseMove);
-        this.$el.removeEventListener('mouseleave', this.handleMouseLeave);
+    this.removeEffectListeners();
+  },
+  watch: {
+    is3dActive(newValue) {
+      if (newValue) {
+        this.addEffectListeners();
+        this.handleMouseLeave(); // Ensure initial state when activated
+      } else {
+        this.removeEffectListeners();
+        this.handleMouseLeave(); // Ensure reset when deactivated
+      }
     }
   }
 }
