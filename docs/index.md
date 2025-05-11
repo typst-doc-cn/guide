@@ -20,7 +20,7 @@ hero:
       link: /word
     - theme: alt
       text: 发现
-      link: /gym
+      link: /garden
 #     - theme: alt
 #       text: GitHub
 #       link: https://github.com/vuejs/vitepress
@@ -49,7 +49,6 @@ hero:
 或者直接是“快速入门”的太长不看版？
 --->
 
-<ShowyCard name="My Garden" author="Typst User" homePage="/garden/demo.md" description="A personal space to explore and share." :tags="['personal', 'notes']" layout="grid" />
 
 ## 推荐资料
 
@@ -75,116 +74,3 @@ Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
 官方 Discord：https://discord.gg/2uDybryKPe
 
 小蓝书 Web 版：https://typst-doc-cn.github.io/guide/
-
-
-  <div class="grid-container">
-    <showy-card name="numbly" author="sign here" authorLink="https://github.com/flaribbit"
-                :tags="['自动编号', '111']"
-                :links="['https://github.com/flaribbit/numbly', 'https://typst.app/universe/package/numbly']"
-    />
-    <showy-card name="typst-live" author="Typst Team" 
-                description="实时预览Typst文档"
-                :tags="['实时预览', '编辑器']"
-                :links="['https://github.com/typst/typst-live']"
-    />
-    <showy-card name="typst-vscode" author="Typst Team"
-                description="VSCode的Typst插件"
-                :tags="['VSCode', '插件']"
-                :links="['https://github.com/typst/vscode-typst']"
-    />
-  </div>
-
-  <div style="margin-top: 20px;">
-    <h2>宝可梦卡片示例</h2>
-    <CommonPokemonCard :card="pokemon" />
-  </div>
-
-  <GridView>
-    <ShowyCard
-      name="自定义HTML页面 (demo1.html)"
-      author="测试员"
-      homePage="/garden/demo1.html"
-      description="这是一个链接到自定义 HTML 页面的卡片。"
-      :tags="['html', '测试']"
-      layout="grid"
-    />
-    <ShowyCard
-      name="外部链接 (GitHub)"
-      author="测试员"
-      homePage="https://github.com"
-      description="这是一个链接到 GitHub 的外部链接卡片。"
-      :tags="['外部链接', '测试']"
-      layout="grid"
-    />
-    <ShowyCard
-      name="卡片1 (在GridView中)"
-      author="示例作者"
-      :tags="['网格布局', '测试']"
-      description="这是在 GridView 中的第一个卡片。"
-      layout="grid"
-    />
-    <ShowyCard
-      name="卡片2 (在GridView中)"
-      author="示例作者"
-      :tags="['Vue', '组件']"
-      description="这是在 GridView 中的第二个卡片，用于演示统一尺寸排列。"
-      layout="grid"
-    />
-    <ShowyCard
-      name="卡片3 (在GridView中)"
-      author="示例作者"
-      :tags="['演示', '布局']"
-      description="这是在 GridView 中的第三个卡片。"
-      layout="grid"
-    />
-  </GridView>
-
-  <div>
-    <ShowyCard
-      name="自定义卡片示例"
-      author="Trae AI"
-      authorLink="https://example.com"
-      :tags="['Vue', 'Slot']"
-      description="这是一个通过插槽自定义内容的卡片。"
-      layout="grid"
-    >
-      <div style="padding: 1em; text-align: center;">
-        <h2>这是一个自定义的标题</h2>
-        <p>这里可以放任何 HTML 内容，比如一张图片：</p>
-        <img src="https://via.placeholder.com/150" alt="Placeholder Image" />
-      </div>
-    </ShowyCard>  
-    <ShowyCard
-      name="默认卡片示例"
-      author="Trae AI"
-      authorLink="https://example.com"
-      :tags="['Vue', 'Default']"
-      description="这是一个使用默认布局的卡片。"
-      layout="grid"
-    />
-  </div>
-
-  <div style="margin-top: 20px;">
-    <h2>宝可梦卡片示例</h2>
-    <CommonPokemonCard :card="pokemon" />
-  </div>
-
-<script>
-import ShowyCard from './ShowyCard.vue';
-import CommonPokemonCard from './CommonPokemonCard.vue';
-import pokemonData from './data/pokemon-data.json';
-import GridView from './GridView.vue'
-
-export default {
-  data() {
-    return {
-      pokemon: pokemonData.commonCard // Or anotherCommonCard, or pass dynamically
-    };
-  },
-  components: {
-    ShowyCard,
-    GridView,
-    CommonPokemonCard
-  }
-}
-</script>
