@@ -1,13 +1,20 @@
 <template>
   <component :is="layout === 'inline' ? 'span' : 'div'" 
              class="card" 
-             :class="[layout, { 'grid-item': layout === 'grid' }]" 
+             :class="[layout, { 'grid-item': layout === 'grid' }, { 'clickable': !!homePage }]" 
              :style="[layoutStyles, cardStyle]"
              ref="pokemonCard"
              @mousemove="handleMouseMove"
              @mouseenter="handleMouseEnter"
-             @mouseleave="handleMouseLeave">
+             @mouseleave="handleMouseLeave"
+             @click="handleCardClick">
     <div class="card-glow" :style="glowStyle"></div>
+    <div v-if="homePage && isExternalLink" class="pop-out-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+        <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+      </svg>
+    </div>
     <slot>
       <!-- Default content if no slot is provided -->
       <div class="card-element">
@@ -36,6 +43,8 @@
 </template>
 
 <script>
+import { withBase } from 'vitepress';
+
 export default {
   data() {
     return {
@@ -88,6 +97,11 @@ export default {
       type: String,
       default: 'inline',
       validator: (value) => ['inline', 'grid'].includes(value)
+    },
+    homePage: {
+      type: String,
+      required: false,
+      default: null
     }
   },
   inject: ['is3dEffectEnabled'],
@@ -116,6 +130,11 @@ export default {
         transform: `perspective(1000px) rotateX(${this.rotateX}deg) rotateY(${this.rotateY}deg)`,
         transition: 'transform 0.1s ease-out'
       };
+    },
+    isExternalLink() {
+      if (!this.homePage) return false;
+      // Only treat links starting with http(s):, mailto:, or tel: as external
+      return /^(https?:|mailto:|tel:)/.test(this.homePage);
     },
     glowStyle() {
       return {
@@ -182,6 +201,30 @@ export default {
       if (this.$el && typeof this.$el.addEventListener === 'function') {
         this.$el.addEventListener('mousemove', this.handleMouseMove);
         this.$el.addEventListener('mouseleave', this.handleMouseLeave);
+      }
+    },
+    handleCardClick() {
+      if (this.homePage) {
+        let targetPage = this.homePage;
+
+        // Convert .md links to .html only for internal links
+        if (!this.isExternalLink && targetPage.endsWith('.md')) {
+          targetPage = targetPage.substring(0, targetPage.length - 3) + '.html';
+        }
+
+        if (this.isExternalLink) {
+          window.open(targetPage, '_blank');
+        } else {
+          // Internal link navigation
+          const finalUrl = withBase(targetPage); // Use VitePress helper for base path
+
+          if (this.$router) {
+            this.$router.push(finalUrl);
+          } else {
+            // Fallback for environments without Vue Router or if router is not available
+            window.location.href = finalUrl;
+          }
+        }
       }
     },
     removeEffectListeners() {
@@ -345,6 +388,18 @@ export default {
 
 .link:hover .logo {
   transform: rotate(10deg); /* Slight rotation on link hover */
+}
+
+.card.clickable:hover {
+  cursor: pointer;
+}
+
+.pop-out-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2; /* Above glow but below other potential absolute elements if any */
+  color: #555;
 }
 
 .card:hover {

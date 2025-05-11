@@ -49,6 +49,8 @@ hero:
 或者直接是“快速入门”的太长不看版？
 --->
 
+<ShowyCard name="My Garden" author="Typst User" homePage="/garden/demo.md" description="A personal space to explore and share." :tags="['personal', 'notes']" layout="grid" />
+
 ## 推荐资料
 
 小蓝书 Web 版（入门必读！）：https://typst-doc-cn.github.io/tutorial/
@@ -98,6 +100,22 @@ Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
   </div>
 
   <GridView>
+    <ShowyCard
+      name="自定义HTML页面 (demo1.html)"
+      author="测试员"
+      homePage="/garden/demo1.html"
+      description="这是一个链接到自定义 HTML 页面的卡片。"
+      :tags="['html', '测试']"
+      layout="grid"
+    />
+    <ShowyCard
+      name="外部链接 (GitHub)"
+      author="测试员"
+      homePage="https://github.com"
+      description="这是一个链接到 GitHub 的外部链接卡片。"
+      :tags="['外部链接', '测试']"
+      layout="grid"
+    />
     <ShowyCard
       name="卡片1 (在GridView中)"
       author="示例作者"
