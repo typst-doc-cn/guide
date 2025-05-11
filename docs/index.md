@@ -12,15 +12,12 @@ hero:
     - theme: brand
       text: 快速开始
       link: /quick-start
-    - theme: alt
+    - theme: brand
       text: 常见问题
       link: /FAQ
     - theme: alt
       text: 我是 Word 用户
       link: /word
-    - theme: alt
-      text: 发现
-      link: /garden
 #     - theme: alt
 #       text: GitHub
 #       link: https://github.com/vuejs/vitepress
@@ -42,13 +39,13 @@ hero:
 #     title: 速度真的很快！
 #     details: 采用静态 HTML 实现快速的页面初次加载，使用客户端路由实现快速的页面切换导航。
 ---
+
 <!--- TODO
 放一些 Typst 编译出的美图？
 简单的 Typst 语法示例？
 友链？
 或者直接是“快速入门”的太长不看版？
 --->
-
 
 ## 推荐资料
 
@@ -58,19 +55,19 @@ hero:
 
 Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
 
-中文用户使用 Typst 常见问题：https://typst-doc-cn.github.io/docs/chinese/
+Typst Examples Book（英文，有非常多的例子）：https://sitandr.github.io/typst-examples-book/book/
 
 ## 问卷调查
 
-为了解各位的使用情况，这里有两份问卷调查，感兴趣的用户可以填写一下：
+为了解各位的使用情况，这里有一份问卷调查，感兴趣的用户可以填写一下：
 
-- [Typst 非官方中文社群年度问卷（2024）](https://www.wjx.cn/vm/Q43WAhW.aspx)
-- [关于 是否需要在Word中插入typst公式的功能 的调研](https://wj.qq.com/s2/16829677/507f/)
+- [关于 是否需要在 Word 中插入 typst 公式的功能的调研](https://wj.qq.com/s2/16829677/507f/)
 
 ## 用户社区
 
-中文聊天群：793548390 [点击此处加入](https://qm.qq.com/q/MQO6j6jCw2)
+中文聊天群
+
+- QQ：793548390 [点击此处加入](https://qm.qq.com/q/MQO6j6jCw2)
+- Telegram：<https://t.me/typst_zh>
 
 官方 Discord：https://discord.gg/2uDybryKPe
-
-小蓝书 Web 版：https://typst-doc-cn.github.io/guide/
