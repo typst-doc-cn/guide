@@ -37,11 +37,13 @@ export default {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
   padding: 0.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 1000; /* Ensure it's above other content */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Basic Switch CSS */
