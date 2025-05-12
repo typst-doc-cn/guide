@@ -1,7 +1,7 @@
 <template>
   <component :is="layout === 'inline' ? 'span' : 'div'" 
              class="card" 
-             :class="[layout, { 'grid-item': layout === 'grid' }, { 'clickable': !!homePage }]" 
+             :class="[layout, { 'grid-item': layout === 'grid' }, { 'clickable': !!homePage }, { 'dark-mode': isDark } ]" 
              :style="[layoutStyles, cardStyle]"
              ref="pokemonCard"
              @mousemove="handleMouseMove"
@@ -42,220 +42,227 @@
   </component>
 </template>
 
-<script>
-import { withBase } from 'vitepress';
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount, watch, inject } from 'vue';
+import { withBase, useData } from 'vitepress';
+import { useRouter } from 'vitepress'; // Import useRouter
 
-export default {
-  data() {
+const props = defineProps({
+  height: {
+    type: String,
+    default: 'auto'
+  },
+  width: {
+    type: String,
+    default: 'auto'
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  author: {
+    type: String,
+    required: true
+  },
+  authorLink: {
+    type: String,
+    required: false
+  },
+  qqNumber: {
+    type: String,
+    required: false
+  },
+  description: {
+    type: String,
+    required: false
+  },
+  tags: {
+    type: Array,
+    required: false
+  },
+  links: {
+    type: Array,
+    required: false
+  },
+  layout: {
+    type: String,
+    default: 'inline',
+    validator: (value) => ['inline', 'grid'].includes(value)
+  },
+  homePage: {
+    type: String,
+    required: false,
+    default: null
+  }
+});
+
+const router = useRouter(); // Initialize router
+const { isDark: _vitepressIsDark } = useData();
+
+const rotateX = ref(0);
+const rotateY = ref(0);
+const glowX = ref(0);
+const glowY = ref(0);
+const glowOpacity = ref(0);
+const pokemonCard = ref(null); // Ref for the card element
+
+const is3dEffectEnabled = inject('is3dEffectEnabled');
+
+const isDark = computed(() => _vitepressIsDark.value);
+
+const is3dActive = computed(() => {
+  return is3dEffectEnabled ? is3dEffectEnabled() : false;
+});
+
+const layoutStyles = computed(() => {
+  const styles = {
+    height: props.height,
+  };
+  if (props.width !== 'auto') {
+    styles.width = props.width;
+  }
+  return styles;
+});
+
+const cardStyle = computed(() => {
+  if (!is3dActive.value) {
     return {
-      rotateX: 0,
-      rotateY: 0,
-      glowX: 0,
-      glowY: 0,
-      glowOpacity: 0,
-      cardElement: null
+      transform: 'none',
+      transition: 'transform 0.1s ease-out'
     };
-  },
-  props: {
-    height: {
-      type: String,
-      default: 'auto'
-    },
-    width: {
-      type: String,
-      default: 'auto'
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    author: {
-      type: String,
-      required: true
-    },
-    authorLink: {
-      type: String,
-      required: false
-    },
-    qqNumber: {
-      type: String,
-      required: false
-    },
-    description: {
-      type: String,
-      required: false
-    },
-    tags: {
-      type: Array,
-      required: false
-    },
-    links: {
-      type: Array,
-      required: false
-    },
-    layout: {
-      type: String,
-      default: 'inline',
-      validator: (value) => ['inline', 'grid'].includes(value)
-    },
-    homePage: {
-      type: String,
-      required: false,
-      default: null
+  }
+  return {
+    transform: `perspective(1000px) rotateX(${rotateX.value}deg) rotateY(${rotateY.value}deg)`,
+    transition: 'transform 0.1s ease-out'
+  };
+});
+
+const isExternalLink = computed(() => {
+  if (!props.homePage) return false;
+  return /^(https?:|mailto:|tel:)/.test(props.homePage);
+});
+
+const glowStyle = computed(() => {
+  return {
+    left: `${glowX.value}px`,
+    top: `${glowY.value}px`,
+    opacity: is3dActive.value ? glowOpacity.value : 0,
+    transition: 'opacity 0.2s ease-out'
+  };
+});
+
+const getLogo = (link) => {
+  if (link.startsWith("https://github.com")) {
+    return "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png";
+  } else if (link.startsWith("https://typst.app/universe")) {
+    return "https://typst.app/assets/favicon-16x16.png";
+  } else {
+    return "https://github.githubassets.com/images/icons/emoji/octocat.png";
+  }
+};
+
+const handleMouseMove = (event) => {
+  if (!pokemonCard.value || !is3dActive.value) return;
+  const rect = pokemonCard.value.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+
+  const maxRotation = 15; // Max rotation in degrees
+
+  rotateY.value = ((x - centerX) / centerX) * maxRotation;
+  rotateX.value = -((y - centerY) / centerY) * maxRotation;
+
+  glowX.value = x;
+  glowY.value = y;
+  
+  if (is3dActive.value) {
+    const mouseX = Math.min(Math.max(x / rect.width, 0), 1) * 100;
+    const mouseY = Math.min(Math.max(y / rect.height, 0), 1) * 100;
+    pokemonCard.value.style.setProperty('--mouse-x', `${mouseX}%`);
+    pokemonCard.value.style.setProperty('--mouse-y', `${mouseY}%`);
+  }
+};
+
+const handleMouseEnter = () => {
+  if (is3dActive.value) {
+    glowOpacity.value = 1;
+  }
+};
+
+const handleMouseLeave = () => {
+  rotateX.value = 0;
+  rotateY.value = 0;
+  glowOpacity.value = 0;
+  
+  if (pokemonCard.value && pokemonCard.value.style) {
+    pokemonCard.value.style.setProperty('--mouse-x', '50%');
+    pokemonCard.value.style.setProperty('--mouse-y', '50%');
+  }
+};
+
+const addEffectListeners = () => {
+  if (pokemonCard.value && typeof pokemonCard.value.addEventListener === 'function') {
+    pokemonCard.value.addEventListener('mousemove', handleMouseMove);
+    pokemonCard.value.addEventListener('mouseleave', handleMouseLeave);
+  }
+};
+
+const handleCardClick = () => {
+  if (props.homePage) {
+    let targetPage = props.homePage;
+
+    if (!isExternalLink.value && targetPage.endsWith('.md')) {
+      targetPage = targetPage.substring(0, targetPage.length - 3) + '.html';
     }
-  },
-  inject: ['is3dEffectEnabled'],
-  computed: {
-    is3dActive() {
-      // is3dEffectEnabled is injected as a function from GridView
-      return this.is3dEffectEnabled ? this.is3dEffectEnabled() : false;
-    },
-    layoutStyles() {
-      const styles = {
-        height: this.height,
-      };
-      if (this.width !== 'auto') {
-        styles.width = this.width;
-      }
-      return styles;
-    },
-    cardStyle() {
-      if (!this.is3dActive) {
-        return {
-          transform: 'none',
-          transition: 'transform 0.1s ease-out'
-        };
-      }
-      return {
-        transform: `perspective(1000px) rotateX(${this.rotateX}deg) rotateY(${this.rotateY}deg)`,
-        transition: 'transform 0.1s ease-out'
-      };
-    },
-    isExternalLink() {
-      if (!this.homePage) return false;
-      // Only treat links starting with http(s):, mailto:, or tel: as external
-      return /^(https?:|mailto:|tel:)/.test(this.homePage);
-    },
-    glowStyle() {
-      return {
-        left: `${this.glowX}px`,
-        top: `${this.glowY}px`,
-        opacity: this.is3dActive ? this.glowOpacity : 0,
-        transition: 'opacity 0.2s ease-out'
-      };
-    }
-  },
-  methods: {
-    // TODO: 不知道这里会不会有跨域问题，可以考虑存一下 logo 到本地
-    getLogo(link) {
-      if (link.startsWith("https://github.com")) {
-        return "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png";
-      } else if (link.startsWith("https://typst.app/universe")) {
-        return "https://typst.app/assets/favicon-16x16.png";
+
+    if (isExternalLink.value) {
+      window.open(targetPage, '_blank');
+    } else {
+      const finalUrl = withBase(targetPage);
+      // 对于HTML文件使用window.location.href进行导航
+      if (targetPage.endsWith('.html')) {
+        window.location.href = finalUrl;
+      } else if (router) {
+        router.go(finalUrl); // 对于其他文件使用路由导航
       } else {
-        return "https://github.githubassets.com/images/icons/emoji/octocat.png";
-      }
-    },
-    handleMouseMove(event) {
-      if (!this.cardElement || !this.is3dActive) return;
-      const rect = this.cardElement.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const maxRotation = 15; // Max rotation in degrees
-
-      this.rotateY = ((x - centerX) / centerX) * maxRotation;
-      this.rotateX = -((y - centerY) / centerY) * maxRotation;
-
-      this.glowX = x;
-      this.glowY = y;
-      
-      // 保持原有的CSS变量设置，用于CSS中的hover效果
-      if (this.is3dActive) {
-        const mouseX = Math.min(Math.max(x / rect.width, 0), 1) * 100;
-        const mouseY = Math.min(Math.max(y / rect.height, 0), 1) * 100;
-        this.$el.style.setProperty('--mouse-x', `${mouseX}%`);
-        this.$el.style.setProperty('--mouse-y', `${mouseY}%`);
-      }
-    },
-    handleMouseEnter() {
-      if (this.is3dActive) {
-        this.glowOpacity = 1;
-      }
-    },
-    handleMouseLeave() {
-      this.rotateX = 0;
-      this.rotateY = 0;
-      this.glowOpacity = 0;
-      
-      // 保持原有的CSS变量重置
-      if (this.$el && this.$el.style) {
-        this.$el.style.setProperty('--mouse-x', '50%');
-        this.$el.style.setProperty('--mouse-y', '50%');
-      }
-    },
-    addEffectListeners() {
-      if (this.$el && typeof this.$el.addEventListener === 'function') {
-        this.$el.addEventListener('mousemove', this.handleMouseMove);
-        this.$el.addEventListener('mouseleave', this.handleMouseLeave);
-      }
-    },
-    handleCardClick() {
-      if (this.homePage) {
-        let targetPage = this.homePage;
-
-        // Convert .md links to .html only for internal links
-        if (!this.isExternalLink && targetPage.endsWith('.md')) {
-          targetPage = targetPage.substring(0, targetPage.length - 3) + '.html';
-        }
-
-        if (this.isExternalLink) {
-          window.open(targetPage, '_blank');
-        } else {
-          // Internal link navigation
-          const finalUrl = withBase(targetPage); // Use VitePress helper for base path
-
-          if (this.$router) {
-            this.$router.push(finalUrl);
-          } else {
-            // Fallback for environments without Vue Router or if router is not available
-            window.location.href = finalUrl;
-          }
-        }
-      }
-    },
-    removeEffectListeners() {
-      if (this.$el && typeof this.$el.removeEventListener === 'function') {
-        this.$el.removeEventListener('mousemove', this.handleMouseMove);
-        this.$el.removeEventListener('mouseleave', this.handleMouseLeave);
-      }
-    }
-  },
-  mounted() {
-    this.cardElement = this.$refs.pokemonCard;
-    this.handleMouseLeave(); // Always initialize CSS variables
-    if (this.is3dActive) {
-      this.addEffectListeners();
-    }
-  },
-  beforeUnmount() {
-    this.removeEffectListeners();
-  },
-  watch: {
-    is3dActive(newValue) {
-      if (newValue) {
-        this.addEffectListeners();
-        this.handleMouseLeave(); // Ensure initial state when activated
-      } else {
-        this.removeEffectListeners();
-        this.handleMouseLeave(); // Ensure reset when deactivated
+        window.location.href = finalUrl;
       }
     }
   }
-}
+};
+
+const removeEffectListeners = () => {
+  if (pokemonCard.value && typeof pokemonCard.value.removeEventListener === 'function') {
+    pokemonCard.value.removeEventListener('mousemove', handleMouseMove);
+    pokemonCard.value.removeEventListener('mouseleave', handleMouseLeave);
+  }
+};
+
+onMounted(() => {
+  // pokemonCard.value is already assigned by ref in template
+  handleMouseLeave(); // Always initialize CSS variables
+  if (is3dActive.value) {
+    addEffectListeners();
+  }
+});
+
+onBeforeUnmount(() => {
+  removeEffectListeners();
+});
+
+watch(is3dActive, (newValue) => {
+  if (newValue) {
+    addEffectListeners();
+    handleMouseLeave(); // Ensure initial state when activated
+  } else {
+    removeEffectListeners();
+    handleMouseLeave(); // Ensure reset when deactivated
+  }
+});
+
 </script>
 
 <style scoped>
@@ -422,6 +429,55 @@ export default {
 .card strong a:hover {
   color: #003366; /* Darker blue on hover */
   text-decoration: underline;
+}
+
+/* Dark Mode Styles */
+.card.dark-mode {
+  border-color: #7a6320; /* Darker gold */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5), /* Darker shadow */
+              inset 0 0 0 2px #333, /* Inner dark highlight */
+              inset 0 0 0 4px #7a6320; /* Inner darker gold border */
+  background: radial-gradient(circle, #4a4a4a 60%, #303030 100%); /* Dark gradient */
+}
+
+.card.dark-mode .card-name {
+  color: #f5f5f5; /* Lighter name color */
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.7),
+               -1px -1px 1px rgba(255,255,255,0.1);
+}
+
+.card.dark-mode .tag {
+  background-color: #b08020; /* Slightly adjusted tag color */
+  color: #121212; /* Darker text for contrast on gold */
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.1);
+}
+
+.card.dark-mode .card-description p {
+  color: #c0c0c0; /* Lighter description text */
+}
+
+.card.dark-mode strong a {
+  color: #87cefa; /* Light sky blue for links */
+}
+
+.card.dark-mode strong a:hover {
+  color: #add8e6; /* Lighter blue on hover */
+}
+
+.card.dark-mode .pop-out-icon {
+  color: #c0c0c0; /* Lighter icon color */
+}
+
+.card.dark-mode:hover {
+  box-shadow: 0 20px 30px rgba(0,0,0,0.7), /* Deeper shadow for dark mode */
+              0 0 20px rgba(122, 99, 32, 0.3), /* Darker gold glow effect */
+              inset 0 0 0 2px #333,
+              inset 0 0 0 4px #7a6320;
+  filter: brightness(1.15);
+}
+
+.card.dark-mode .card-glow {
+  background: radial-gradient(circle, rgba(200, 200, 200, 0.6) 0%, rgba(200, 200, 200, 0) 70%);
 }
 </style>
 

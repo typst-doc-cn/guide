@@ -18,6 +18,9 @@ hero:
     - theme: alt
       text: 我是 Word 用户
       link: /word
+    - theme: alt
+      text: 发现
+      link: /garden
 #     - theme: alt
 #       text: GitHub
 #       link: https://github.com/vuejs/vitepress
@@ -39,7 +42,6 @@ hero:
 #     title: 速度真的很快！
 #     details: 采用静态 HTML 实现快速的页面初次加载，使用客户端路由实现快速的页面切换导航。
 ---
-
 <!--- TODO
 放一些 Typst 编译出的美图？
 简单的 Typst 语法示例？
