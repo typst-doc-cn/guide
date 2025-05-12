@@ -6,7 +6,7 @@ tags: [code, list]
 
 群友的魔法
 
-```typst no-render
+```typst
 #let styled-list(..funcs, body, applied: x => x) = {
   let funcs = funcs.pos()
   body.children.map(x => {
@@ -27,4 +27,30 @@ tags: [code, list]
     }
   }).sum()
 }
+
+#styled-list(
+  it => {
+    set text(red)
+    it
+  },
+  it => {
+    set text(green)
+    it
+  },
+  it => {
+    set text(blue)
+    it
+  },
+)[
+  - abcd
+    - abcd
+      - abcd
+      - abcd
+        - abcd
+    - abcd
+  - abcd
+    - abcd
+]
 ```
+
+
