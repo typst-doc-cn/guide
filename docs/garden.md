@@ -16,7 +16,15 @@
 
 ## 归档
 
-## DEMO
+## 贡献须知
+
+【这一板块后续可能会移动至单独页面】
+
+本页面欢迎贡献。基础的贡献方式是直接在 GridView 中添加新卡片，卡片的条目见以下 demo。作者名包括但不限于非官方中文群昵称、qq 号、GitHub 用户名；封面上外链如果链接到 GitHub 仓库或者 Typst Universe 会自动显示八爪鱼或者蓝 t 图标。标签目前是预计描述使用场景，如果是包可以加入“包”标签，模板、扩展工具等都类似。注意这里不需要是完整的工具，也不需要有专门的主页（但是尽量提供一个获取方式），只要是群友围绕 Typst 做的项目，或者在群外发现对群友有帮助的都可以。
+
+目前想的进阶玩法是可以用 Typst Export HTML 自定义一个卡片布局，也可以自定义一个主页然后托管在 typst-doc-cn，玩法参见以下主页测试。由于目前卡片和网格设计比较粗糙，也欢迎阅读卡片源代码并提 PR 改进。
+
+### DEMO
 
   <GridView>
     <showy-card name="numbly" author="sign here" authorLink="https://github.com/flaribbit"
