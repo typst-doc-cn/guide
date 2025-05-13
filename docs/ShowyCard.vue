@@ -124,6 +124,9 @@ const layoutStyles = computed(() => {
   return styles;
 });
 
+const translateX = ref(0);
+const translateY = ref(0);
+
 const cardStyle = computed(() => {
   if (!is3dActive.value) {
     return {
@@ -132,7 +135,7 @@ const cardStyle = computed(() => {
     };
   }
   return {
-    transform: `perspective(1000px) rotateX(${rotateX.value}deg) rotateY(${rotateY.value}deg)`,
+    transform: `perspective(1000px) rotateX(${rotateX.value}deg) rotateY(${rotateY.value}deg) translate(${translateX.value}px, ${translateY.value}px)`,
     transition: 'transform 0.1s ease-out'
   };
 });
@@ -170,10 +173,15 @@ const handleMouseMove = (event) => {
   const centerX = rect.width / 2;
   const centerY = rect.height / 2;
 
-  const maxRotation = 15; // Max rotation in degrees
+  const maxRotation = -15; // Max rotation in degrees
+  const maxTranslation = 8; // Max translation in pixels
 
-  rotateY.value = ((x - centerX) / centerX) * maxRotation;
   rotateX.value = -((y - centerY) / centerY) * maxRotation;
+  rotateY.value = ((x - centerX) / centerX) * maxRotation;
+
+  // 计算平移距离
+  translateX.value = ((x - centerX) / centerX) * maxTranslation;
+  translateY.value = ((y - centerY) / centerY) * maxTranslation;
 
   glowX.value = x;
   glowY.value = y;
@@ -195,6 +203,8 @@ const handleMouseEnter = () => {
 const handleMouseLeave = () => {
   rotateX.value = 0;
   rotateY.value = 0;
+  translateX.value = 0;
+  translateY.value = 0;
   glowOpacity.value = 0;
   
   if (pokemonCard.value && pokemonCard.value.style) {
