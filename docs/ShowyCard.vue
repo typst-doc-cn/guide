@@ -106,6 +106,13 @@ const glowY = ref(0);
 const glowOpacity = ref(0);
 const pokemonCard = ref(null); // Ref for the card element
 
+// 在组件挂载后初始化暗黑模式
+onMounted(() => {
+  if (pokemonCard.value && _vitepressIsDark.value) {
+    pokemonCard.value.classList.add('dark-mode');
+  }
+});
+
 const is3dEffectEnabled = inject('is3dEffectEnabled');
 
 const isDark = computed(() => _vitepressIsDark.value);
