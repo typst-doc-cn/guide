@@ -1,5 +1,5 @@
 ---
-tags: [chinese, bug]
+tags: [chinese, bug, text]
 ---
 # 行内公式与中文之间没有自动空格
 
@@ -10,6 +10,7 @@ tags: [chinese, bug]
 临时修复方法：
 
 ```typst
+-- #set page(height: auto, margin: 1em)
 #show math.equation.where(block: false): it => h(0.25em, weak: true) + it + h(0.25em, weak: true)
 汉字$A$汉字
 ```

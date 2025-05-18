@@ -1,5 +1,5 @@
 ---
-tags: [layout]
+tags: [layout, heading]
 ---
 # 如何增加标题前后的距离？类似于 Word 的段前段后
 

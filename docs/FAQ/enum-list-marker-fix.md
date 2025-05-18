@@ -1,5 +1,5 @@
 ---
-tags: [layout, bug]
+tags: [layout, bug, list]
 ---
 # 列表符号和文字错位了怎么办？
 
@@ -10,7 +10,7 @@ tags: [layout, bug]
 ///
 /// Usage: `#show: align-list-marker-with-baseline`
 #let align-list-marker-with-baseline(body) = {
-  show list.item: it => {
+  show list.item: it => context {
     let current-marker = {
       set text(fill: text.fill)
       if type(list.marker) == array {
@@ -41,7 +41,7 @@ tags: [layout, bug]
 ///
 /// Usage: `#show: align-enum-marker-with-baseline`
 #let align-enum-marker-with-baseline(body) = {
-  show enum.item: it => {
+  show enum.item: it => context {
     if not it.has("number") or it.number == none or enum.full == true {
       // If the enum item does not have a number, or the number is none, or the enum is full
       return it

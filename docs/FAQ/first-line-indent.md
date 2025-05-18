@@ -1,15 +1,23 @@
 ---
 tags: [layout]
 ---
-# 为什么第一段没有缩进？
+# 【已修复】为什么第一段没有缩进？
 
-<details>
-<summary>参考阅读：</summary>
-Typst 官方也意识到了这个问题，希望我们可以早日看见这一问题的解决。
+::: tip ✅ Typst 0.13 已修复
+[#5768](https://github.com/typst/typst/pull/5768) 增加了 `all` 选项，可以缩进所有段落了。
 
-Tracking Issue：https://github.com/typst/typst/issues/311
+```typst
+#set par(first-line-indent: (amount: 2em, all: true))
 
-</details>
+= 标题
+
+首段也缩进了。
+
+之后段落原本已缩进。
+```
+
+不过，公式、图表等块元素等块元素后也强行缩进了，可[套`#box[…]`修复](./block-equation-in-paragraph.md)。
+:::
 
 首先，英文排版是这样的，LaTeX 默认第一段也是不缩进的。其次，这部分实现有一些 bug，当前还不能通过修改设置来实现缩进。要修复这个问题，可以使用下面的方法：
 
@@ -40,7 +48,11 @@ $ E=m c^2 $
 
 ## 方法 2：使用 indenta 包 {#first-line-indent-indenta}
 
-```typst
+:::warning
+indenta 0.0.3 已不适用 Typst 0.13
+:::
+
+```typst no-render
 #set par(first-line-indent: 2em)
 #import "@preview/indenta:0.0.3": fix-indent
 #show: fix-indent()

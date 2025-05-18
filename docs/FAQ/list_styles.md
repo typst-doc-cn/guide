@@ -1,12 +1,12 @@
 ---
-tags: [code]
+tags: [code, list]
 ---
 
 # 如何为列表的每个层级指定不同的样式？
 
 群友的魔法
 
-```typst no-render
+```typst
 #let styled-list(..funcs, body, applied: x => x) = {
   let funcs = funcs.pos()
   body.children.map(x => {
@@ -16,7 +16,7 @@ tags: [code]
       let body = if x.body.func() == [].func() {
         styled-list(
           ..funcs.slice(1),
-          funcs.at(0), 
+          funcs.at(0),
           x.body,
           applied: funcs.at(0)
         )
@@ -27,4 +27,30 @@ tags: [code]
     }
   }).sum()
 }
+
+#styled-list(
+  it => {
+    set text(red)
+    it
+  },
+  it => {
+    set text(green)
+    it
+  },
+  it => {
+    set text(blue)
+    it
+  },
+)[
+  - abcd
+    - abcd
+      - abcd
+      - abcd
+        - abcd
+    - abcd
+  - abcd
+    - abcd
+]
 ```
+
+

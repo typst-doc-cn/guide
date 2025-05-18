@@ -1,5 +1,5 @@
 ---
-tags: [tool]
+tags: [tool, pdf]
 ---
 # 能否嵌入 PDF 文件？
 

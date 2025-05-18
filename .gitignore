@@ -25,4 +25,3 @@ dist-ssr
 
 docs/.vitepress/cache
 generated
-tmp.typ

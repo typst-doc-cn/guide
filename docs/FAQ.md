@@ -26,7 +26,7 @@
 
 https://github.com/typst-doc-cn/guide/new/master/docs/FAQ
 
-模板如下：
+:::: details 模板
 
 ````md
 ---
@@ -55,7 +55,7 @@ $ sum_(k=1)^n k = (n(n+1)) / 2 $
 
 ```typst no-render
 // 设置中英文字体
-#set text(font: ("New Computer Modern", "Noto Serif CJK SC"), lang: "zh")
+#set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "Noto Serif CJK SC"), lang: "zh")
 ```
 
 嗯，暂时没有需要补充的了。
@@ -63,6 +63,37 @@ $ sum_(k=1)^n k = (n(n+1)) / 2 $
 
 注意：渲染器在将文档中的 typst 代码渲染成图片时会自动在前面插入这两行代码，避免生成的图片过大，改善阅读体验。因此需要较大的页面展示代码效果的时候记得手动设置页面尺寸。
 ```typst no-render
-#set page(height: 4cm, width: 6cm)
-#set text(font: ("New Computer Modern", "Source Han Serif SC"))
+<!--@include: @/.vitepress/typst_template.ts{2,3} -->
 ```
+
+对于设置页面这种与正文关系不大的代码，可于行首加`-- `，在渲染时隐藏。
+
+::: details 示例：隐藏代码
+
+`.md` 文件：
+
+```typst no-render
+-- #set page(width: auto, height: auto, margin: 1em)
+#lorem(1)
+```
+
+渲染结果：
+
+```typst
+-- #set page(width: auto, height: auto, margin: 1em)
+#lorem(1)
+```
+
+:::
+
+最后，如果问题已在新版 typst 修复或改进，可在标题开头添加`【已修复】`，并注明版本。
+
+```md
+# 【已修复】……？
+
+::: tip ✅ Typst 0.0 已修复/已改进
+[#000](https://github.com/typst/typst/pull/000) 已经……
+:::
+```
+
+::::

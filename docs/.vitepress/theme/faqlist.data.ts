@@ -23,9 +23,21 @@ export default createContentLoader('FAQ/*.md', {
     const tagMap = {};
 
     const posts = rawData.map(({ src, url, frontmatter }) => {
-      // 一般 title 用“# …”即可；
-      // 不过偶尔用了markdown特殊语法，难以渲染，这时改用 frontmatter 手动指定
-      const title = frontmatter.title ?? src?.match(/# (.*)/)?.[1] ??  url;
+      // get the title from md source code
+      const title_from_src = src?.match(/^# (.*)$/m)?.[1];
+      if (!title_from_src) {
+        console.warn(`Failed to find title for ${url}; fall back to the URL.`);
+      } else if (title_from_src.includes('`')) {
+        console.warn(
+          [
+            `The title for ${url} contains markdown: ${title_from_src}.`,
+            '    It will NOT be rendered due to technical limitations. (https://github.com/typst-doc-cn/guide/issues/60)',
+            '    Please remove back quotes (`) or replace them with plain quotes (“”).',
+          ].join('\n'),
+        );
+      }
+      const title = title_from_src ?? url;
+
       const result = {
         title,
         url,

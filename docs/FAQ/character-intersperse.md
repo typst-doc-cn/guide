@@ -1,5 +1,5 @@
 ---
-tags: [chinese, layout]
+tags: [chinese, layout, text]
 ---
 # 如何让几个汉字占固定宽度并均匀分布？
 

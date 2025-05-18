@@ -2,7 +2,7 @@
 tags: [equation, font]
 ---
 
-# 怎么把 cal 字体变成 latex 里 mathcal 默认的那种？
+# 怎么把 cal 字体变成 LaTeX 里 mathcal 默认的那种？
 
 字体不一样，换个字体即可。LaTeX 用的是 Computer Modern Math，mathcal 字体所在的字体文件名字通常是 `cmsy10.pfm`，你可以手动把它转换成 ttf 格式，但是没必要。
 
