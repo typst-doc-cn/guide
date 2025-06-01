@@ -16,7 +16,14 @@ const path = computed(() => useRoute().path);
 
 const tags = computed(() => makeTags(data.frontmatter.value.tags));
 
-const typstVersion = computed(() => getTypstVersion(new Date(data.page.value.lastUpdated!)));
+const typstVersion = computed(() => {
+  const lastUpdated = data.page.value.lastUpdated;
+  // 新创建而未提交的页面，`lastUpdated`会为`null`
+  if (lastUpdated !== null) {
+    return getTypstVersion(new Date(lastUpdated!));
+  }
+  return null;
+});
 </script>
 
 <style>
@@ -53,6 +60,7 @@ const typstVersion = computed(() => getTypstVersion(new Date(data.page.value.las
     <template #doc-footer-before>
       <!-- 与 <VPDocFooterLastUpdated> 并列 -->
       <p
+        v-if="typstVersion !== null"
         class="text-align-right"
         style="font-size: 14px; font-weight: 500; color: var(--vp-c-text-2);"
       >更新时针对 typst {{ typstVersion.version }}<span v-if="typstVersion.latest">（最新版）</span></p>
