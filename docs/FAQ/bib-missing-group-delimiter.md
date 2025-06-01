@@ -2,7 +2,7 @@
 tags: bib
 ---
 
-# 【已修复】参考文献引文条目中 `. `、`: ` 部分丢失
+# 【已修复】参考文献引文条目中“. ”和“: ”部分丢失
 
 ::: tip ✅ Typst 0.13 已修复
 [hayagriva#269](https://github.com/typst/hayagriva/pull/269) 已经改正了 CSL 中`<choose>`和`<layout>`中分隔符的实现方法。
