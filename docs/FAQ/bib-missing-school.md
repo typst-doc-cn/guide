@@ -2,7 +2,7 @@
 tags: bib
 ---
 
-# 参考文献学位论文条目 `[D]` 后不显示 `地点: 学校名称, 年份.`
+# 参考文献学位论文条目 [D] 后不显示“地点: 学校名称, 年份.”
 
 Typst 使用 [Hayagriva](https://github.com/typst/hayagriva) 管理参考文献，有不少细节问题还在逐步修复。
 
