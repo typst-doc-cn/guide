@@ -3,7 +3,7 @@ tags: [text]
 ---
 # 为什么下划线不显示？
 
-`underline`必须有内容才会显示。
+标记模式下写多个空格是没用的，会被合并成一个空格，如下图
 
 ```typst
 -- #set page(height: auto, width: auto, margin: 1em)
