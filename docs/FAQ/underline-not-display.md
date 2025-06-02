@@ -3,18 +3,51 @@ tags: [text]
 ---
 # 为什么下划线不显示？
 
-下划线后面必须有内容才会显示，你可以加上个 `sym.zws`（零宽空格）。
-
-TODO: 后面两个例子未整理，先放在这里。
+`underline`必须有内容才会显示。
 
 ```typst
-例 1：#underline[#(" " * 20)]
-
-例 2：#underline[#(" " * 20)#sym.zws]
-
-#let uline(n) = underline(n * "\u{3000}" + sym.zws)
-姓名：#uline(6)
-
-#let uline2(width, body) = box(body, width: width, stroke: (bottom: 0.5pt), outset: (bottom: 2pt))
-学号：#uline2(6em)[114514]
+-- #set page(height: auto, width: auto, margin: 1em)
+- 空空 #underline[     ] 如也
+- 空空#underline[     ]如也
 ```
+
+## 若坚持用`underline`
+
+请换用字符串占位。
+
+```typst
+-- #set page(height: auto, width: auto, margin: 1em)
+- 空空#underline("     ")如也
+- 空空#underline(" " * 5)如也 // 效果同上
+// 也可用汉字空格 U+3000 IDEOGRAPHIC SPACE 占位
+- 空空#underline("\u{3000}" * 2)如也
+```
+
+## 换用`box`
+
+也可换用[`box`](https://typst.app/docs/reference/layout/box/#parameters-baseline)，直接指定长度：
+
+```typst
+-- #set page(height: auto, width: auto, margin: 1em)
+空空#box(width: 2em, stroke: (bottom: 0.5pt))如也
+```
+
+若之前用`underline(offset: …)`调整了下划线位置，现在可用`box(outset: …)`替代：
+
+```typst
+-- #set page(height: auto, width: auto, margin: 1em)
+#let uline(width) = box(width: width, stroke: (bottom: 0.5pt), outset: (bottom: 2pt))
+空空#uline(2em)如也
+```
+
+::: details 番外
+
+```typst
+-- #set page(height: auto, width: auto, margin: 1em)
+#let uline(width) = box(width: width, stroke: (bottom: 0.5pt))
+#for n in range(20) [
+  - 空空#uline(1em + 10pt * calc.sin(n / 10 * calc.pi))如也
+]
+```
+
+:::
