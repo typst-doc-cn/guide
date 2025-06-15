@@ -1,11 +1,89 @@
 ---
 tags: [layout, bug, list]
+outline: [2, 3]
 ---
-# 列表符号和文字错位了怎么办？
+
+# 列表符号/编号和内容错位怎么办？
+
+## 如果列表只写汉字
+
+### 现象
+
+若分别设置了中西字体，那么即使只写汉字，`enum`或`list`的符号/编号和内容也可能错位，例如下图：
+
+```typst
+-- #set page(height: auto)
+#set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "SimSun"))
+
+= `enum`
++ 鲁镇的酒店的格局
+
+= `list`
++ 鲁镇的酒店的格局
+```
+
+并且直接写编号完全正常：
+
+```typst
+-- #set page(height: auto)
+-- #set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "SimSun"))
+#[1.] 鲁镇的酒店的格局
+```
+
+::: info 已知存在问题的字体组合
+
+- 西文：New Computer Modern / Libertinus Serif
+- 中文：中易宋体/方正书宋/方正新书宋
+
+:::
+
+### 法一：数字也用中文字体
+
+
+```typst {1}
+-- #set page(height: auto)
+#set text(font: "SimSun")
++ 鲁镇的酒店的格局
+```
+
+### 法二：修改编号对齐方式
+
+```typst
+-- #set page(height: auto)
+#set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "SimSun"))
+
+= `enum`
+#set enum(number-align: bottom) // [!code ++]
++ 鲁镇的酒店的格局
+
+= `list`
+#set list(marker: ([•], [‣], [–]).map(align.with(horizon)))  // [!code ++]
+- 鲁镇的酒店的格局
+```
+
+### 法三：修改汉字边框计算方式
+
+```typst
+-- #set page(height: auto)
+#set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "SimSun"))
+
+#set text(top-edge: "ascender", bottom-edge: "descender") // [!code ++]
+
+= `enum`
++ 鲁镇的酒店的格局
+
+= `list`
+- 鲁镇的酒店的格局
+```
+
+不过这样会在视觉上增大行距，详见[文字外框的解释](./par-leading.md)。
+
+## 如果列表内容复杂
 
 来自 [@OrangeX4](https://github.com/OrangeX4) 的解决方案
 
 ```typst
+-- #set page(height: auto)
 /// Align the list marker with the baseline of the first line of the list item.
 ///
 /// Usage: `#show: align-list-marker-with-baseline`
@@ -84,3 +162,5 @@ tags: [layout, bug, list]
 1. 1 + $display(integral) + x$
 2. 1 + $display(integral)$
 ```
+
+相关 issue：[List and enum markers are not aligned with the baseline of the item's contents · Issue #1204 · typst/typst](https://github.com/typst/typst/issues/1204)
