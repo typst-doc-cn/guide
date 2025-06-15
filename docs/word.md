@@ -203,13 +203,33 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 
 ```typst
 -- #set page(height: 6cm, width: 10cm)
-#let marker(body, height) = box(place(box(height: height, width: 2pt, stroke: (rest: 1pt+red, left: none), place(dx: 4pt, text(8pt, red, body)))))
+#let marker(body, height, paint: red) = box(place(box(height: height, width: 2pt, stroke: (rest: 1pt + paint, left: none), place(dx: 4pt, text(8pt, paint, body)))))
 
 #set par(leading: 0.6em, spacing: 1em)
 
-　　#context marker([par.leading], par.leading)是日也，天朗气清，惠风和畅。仰观宇宙之大，俯察品类之盛，所以游目骋怀，足以极视听之娱，#context marker([par.spacing], par.spacing)信可乐也。
+　　#context marker([par.leading], par.leading)是日也，天朗气清，惠风和畅。仰观宇宙之大，俯察品类之盛，所以游目骋怀，足以极视听之娱，#context marker([par.spacing], par.spacing, paint: blue)信可乐也。
 
 　　夫人之相与，俯仰一世，或取诸怀抱，悟言一室之#context marker([par.leading], par.leading)内；或因寄所托，放浪形骸之外。虽趣舍万殊，静躁不同，当其欣于所遇，暂得于己，快然自足，不知老之将至。及其所之既倦，情随事迁，感慨系之矣。
+```
+
+“行”的定义牵涉[文字外框](./FAQ/par-leading.md)，可通过 `text` 的 `top-edge`、`bottom-edge` 调整。
+
+```typst
+-- #set page(height: auto)
+#set par(leading: 0.6em, spacing: 1em)
+#set box(fill: aqua)
+
+= 西文习惯（默认）
+
+#set text(top-edge: "cap-height", bottom-edge: "baseline") // [!code highlight]
+#box[Typst 国王] \
+#box[Typst 国王]
+
+= 中文习惯
+
+#set text(top-edge: "ascender", bottom-edge: "descender") // [!code highlight]
+#box[Typst 国王] \
+#box[Typst 国王]
 ```
 
 ::: tip
@@ -221,6 +241,7 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 使用 `text` 的 `tracking` 参数可以设置字符间距，`spacing` 参数设置词间空格宽度。
 
 ```typst
+-- #set page(height: auto)
 #text(spacing: 20pt)[#lorem(5) 设置文本的 spacing 属性对中文无效。]
 
 #text(tracking: 2pt)[#lorem(5) 而设置 tracking 属性对中文有效。]
@@ -261,6 +282,7 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 :::
 
 ```typst
+-- #set page(height: auto)
 = 一级标题
 我走了。
 == 二级标题
@@ -401,15 +423,17 @@ $
 
 ### 代码
 
-和 Markdown 类似，使用反引号（`）包裹代码：
+和 Markdown 类似，使用反引号（`` ` ``）包裹代码：
 
 ```typst
+-- #set page(height: auto, width: auto, margin: 1em)
 `print("Hello, world!")`
 ```
 
 如果需要插入代码块，可以使用三个反引号：
 
 ````typst
+-- #set page(height: auto, width: auto, margin: 1em)
 ```typst
 #text(fill: red)[红色文本]
 ```
