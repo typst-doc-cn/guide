@@ -6,7 +6,9 @@ tags: [list, layout, bug]
 
 Typst 当前版本容易遇到列表编号或者符号与内容错位的问题。归根到底是因为当前列表的底层实现是 `grid`，编号和内容在同一行的两个格子中，它们之间自然没有 `baseline` 约束。要让它们能够基线对齐，最直接的方法就是使用 `par` 来排版。
 
-@Andrew 在论坛上给出了 [解决方案](https://forum.typst.app/t/how-to-make-bullet-list-item-bodies-flow-like-paragraphs/3756/3) 。
+开发者曾经开了一个 better-lists 分支来修复这个问题，但是后来没有合并，不了了之。
+
+幸运的是，@Andrew 在论坛上给出了 [比较完美的解决方案](https://forum.typst.app/t/how-to-make-bullet-list-item-bodies-flow-like-paragraphs/3756/3) 。
 
 ```typst
 -- #set page(height: auto, width: 14cm)
