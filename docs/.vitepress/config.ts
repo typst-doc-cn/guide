@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress';
+import footnote from 'markdown-it-footnote';
 import UnoCSS from 'unocss/vite';
 import TypstRender from './typst_render';
 
@@ -15,6 +16,7 @@ export default defineConfig({
       dark: 'github-dark',
     },
     config: (md) => {
+      md.use(footnote);
       md.use(TypstRender);
     },
   },

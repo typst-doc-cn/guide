@@ -1,9 +1,25 @@
 ---
-tags: [math]
+tags: [math, font]
 ---
 # 如何实现 mathscr 的花体符号？
 
-群友提问：话说 typst 未来可以支持 LaTeX 的一些数学字体，比如`\mathscr`的花体，感觉确实帅
+可用如下办法实现 LaTeX 的`\mathscr`花体。
+
+## 局部使用
+
+```typst
+-- #set page(height: auto)
+#let scr(it) = text(
+  stylistic-set: 1,
+  box($cal(it)$),
+)
+
+We establish $cal(P) != scr(P)$.
+```
+
+来源：[`cal` - Variants Functions – Typst Documentation](https://typst.app/docs/reference/math/variants#functions-cal)。
+
+## 全局设置
 
 ```typst
 #set text(stylistic-set: 1)

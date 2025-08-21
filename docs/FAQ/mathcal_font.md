@@ -1,28 +1,17 @@
 ---
-tags: [equation, font]
+tags: [math, font]
 ---
 
 # 怎么把 cal 字体变成 LaTeX 里 mathcal 默认的那种？
 
-## 标准办法
+Typst 中数学字体默认是 New Computer Modern Math，与 LaTeX 中默认[^unicode-math]的 Computer Modern Math 略有不同。
 
-```typst
--- #set page(height: auto)
-#let scr(it) = text(
-  features: ("ss01",),
-  box($cal(it)$),
-)
+[^unicode-math]: 此处指不使用 unicode-math 时的默认数学字体；若使用 unicode-math，默认字体是 New Computer Modern Math，Typst 效果与之相同。
 
-We establish $cal(P) != scr(P)$.
-```
+若想使用 LaTeX 默认的`\mathcal`花体，需要更换字体。
 
-来源：[`cal` - Variants Functions – Typst Documentation](https://typst.app/docs/reference/math/variants#functions-cal)。
-
-## 另法
-
-字体不一样，换个字体即可。LaTeX 用的是 Computer Modern Math，mathcal 字体所在的字体文件名字通常是 `cmsy10.pfm`，你可以手动把它转换成 ttf 格式，但是没必要。
-
-另一种获得这个字体的方法是，如果你电脑上安装了 python 的 matplotlib 包，那么你可以在 `Lib/site-packages/matplotlib/mpl-data/fonts/ttf` 目录中找到 `cmsy10.ttf`，使用这个文件即可。
+1. 从 matplotlib 的`mpl-data/fonts/ttf/`文件夹[下载`cmsy10.ttf`](https://github.com/matplotlib/matplotlib/blob/be68dfecf9d26ac1a8e1e30a0de6171ecf174cd5/lib/matplotlib/mpl-data/fonts/ttf/cmsy10.ttf)
+2. 设置`font: "cmsy10"`
 
 ```typst no-render
 $ cal(K M Z) $
@@ -31,3 +20,14 @@ $ cal(K M Z) $
 ```
 
 ![image](https://github.com/user-attachments/assets/481908d4-6163-425b-9296-617eef98338f)
+
+::: details 为何出现 matplotlib？
+
+Computer Modern Math 早于 OpenType 技术标准，通常以 Type 1 字体形式存在，如`cmsy10.pfm`。
+
+今天很多软件都不支持`*.pfm`。matplotlib 开发者将它转换成了`cmsy10.ttf`，可供 Typst 等软件使用。
+
+:::
+
+
+另外，LaTeX 中有 calligraphic 和 script 两种花体，后者请参考[如何实现`\mathscr`的花体符号](./symbol-mathscr.md)。
