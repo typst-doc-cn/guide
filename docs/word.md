@@ -202,14 +202,66 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 在 Typst 中，行距和段距分别由 `par` 的 `leading` 和 `spacing` 参数控制。行距是指行与行之间的距离，段距是指段与段之间的距离。如图所示。
 
 ```typst
--- #set page(height: 6cm, width: 10cm)
-#let marker(body, height, paint: red) = box(place(box(height: height, width: 2pt, stroke: (rest: 1pt + paint, left: none), place(dx: 4pt, text(8pt, paint, body)))))
+-- #set page(height: auto, width: 300pt, margin: (right: 25%, rest: 15pt))
+-- #set text(top-edge: "ascender", bottom-edge: "descender")
+-- 
+-- // A sample text for measuring font metrics.
+-- #let sample-text = [国]
+-- 
+-- // Number of lines in each paragraph
+-- #let n-rows = (4, 2, 2, 1, 1)
+-- 
+-- #context place({
+--   let line-height = measure(sample-text).height
+-- 
+--   let rows(n) = ((line-height,) * n).intersperse(par.leading)
+--   let jumps = n-rows.map(rows).intersperse(par.spacing).flatten()
+-- 
+--   grid(
+--     ..jumps
+--       .enumerate()
+--       .map(((i, h)) => if calc.even(i) {
+--         // Draw a stripe for the line
+--         block(
+--           height: h,
+--           width: 100%,
+--           fill: aqua.transparentize(60%),
+--         )
+--       } else {
+--         // Put an annotation for the gap
+-- 
+--         // `(x, y).at(hh)` becomes `x` for leading, or `y` for spacing.
+--         let hh = if h == par.spacing { 1 } else { 0 }
+-- 
+--         align(end, block(
+--           height: h,
+--           outset: (right: (0.5em, 1em).at(hh)),
+--           stroke: (
+--             left: none,
+--             rest: 0.5pt + (blue, orange).at(hh),
+--           ),
+--           if i <= (6, 12).at(hh) {
+--             place(horizon, dx: 1.3em, {
+--               set text(0.8em, (blue.darken(20%), orange.darken(10%)).at(hh))
+--               ([行距 leading], [段距 spacing]).at(hh)
+--             })
+--           },
+--         ))
+--       })
+--   )
+-- })
+-- 
+-- #set text(gray, lang: "zh")
+-- #set par(justify: true, first-line-indent: (amount: 2em, all: true))
+四千年來時時喫人的地方，今天纔明白，我也在其中混了多年；大哥正管着家務，妹子恰恰死了，他未必不和在飯菜裏，暗暗給我們喫。
 
-#set par(leading: 0.6em, spacing: 1em)
+我未必無意之中，不喫了我妹子的幾片肉，現在也輪到我自己，……
 
-　　#context marker([par.leading], par.leading)是日也，天朗气清，惠风和畅。仰观宇宙之大，俯察品类之盛，所以游目骋怀，足以极视听之娱，#context marker([par.spacing], par.spacing, paint: blue)信可乐也。
+有了四千年喫人履歷的我，當初雖然不知道，現在明白，難見眞的人！
 
-　　夫人之相与，俯仰一世，或取诸怀抱，悟言一室之#context marker([par.leading], par.leading)内；或因寄所托，放浪形骸之外。虽趣舍万殊，静躁不同，当其欣于所遇，暂得于己，快然自足，不知老之将至。及其所之既倦，情随事迁，感慨系之矣。
+沒有喫過人的孩子，或者還有？
+
+救救孩子……
 ```
 
 “行”的定义牵涉[文字外框](./FAQ/par-leading.md)，可通过 `text` 的 `top-edge`、`bottom-edge` 调整。
