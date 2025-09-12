@@ -45,14 +45,15 @@ package 就是「包」，在小蓝书中翻译为「库」，是一些由 [Typs
 为了与 Word 中的字号相对应，你也可以使用 [pointless-size](https://typst.app/universe/package/pointless-size) 包，如以下代码所示：
 
 ```typst no-render
-#import "@preview/pointless-size:0.1.1": zh, zihao
+#import "@preview/pointless-size:0.1.2": zh, zihao
 
 #set text(size: zh(5)) // 五号（10.5pt）
 ```
 
 在这里，我们引入了 `pointless-size` 包，并使用了其中的 `zh` 函数来设置字号。pointless 包中更多的字号与命令的对应请参考下图：
 
-![字号对照](./images/pointless.png)
+<!-- https://github.com/YDX-2147483647/typst-pointless-size/blob/main/docs/conversion-table.typ -->
+![字号对照](./images/pointless-size.svg)
 
 ### 常用的字体设置与装饰
 
