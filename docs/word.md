@@ -285,6 +285,17 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 #box[Typst 国王]
 ```
 
+请注意 Word 与 Typst 的行距模型存在不少差异。如果你想复现 Word 设置，建议不纠结换算公式，而是[写满一页纸，然后调整 `leading` 数值，让每页的行数符合预期](./FAQ/word-line-spacing.md)。
+
+::: details Word 与 Typst 行距模型的若干具体差异
+
+- Word 中“页面设置 → 文档网格”默认指定行网格，而“段落设置 → 间距”又默认启用对齐到网格。所以默认设置下，Word 会把每行字四舍五入到最近的行网格，导致行距的实际值未必等于设置值，甚至可能前后变化。而 Typst 中没有类似机制，行距设置多少实际就是多少。
+- Word 设置中所谓“行距”其实是行高，[行高 = 文字尺寸 + 行距](https://www.w3.org/TR/clreq/#considerations_in_designing_type_area)。因此，“固定值 22 磅”大致对应 Typst 中的`set par(leading: 22pt - 1em)`，而非 `set par(leading: 22pt)`。
+- Word 中[“单倍行距”与文字尺寸的比值依赖于字体，有时甚至还依赖于操作系统](https://texdoc.org/serve/zhlineskip/0)，实际在 1.14 与 1.92 间浮动。而 Typst 中 `1em` 始终等于汉字尺寸。
+- ……
+
+:::
+
 ::: tip
 有关长度单位的介绍请参考[小蓝书的度量与布局](https://typst-doc-cn.github.io/tutorial/basic/scripting-length-and-layout.html)。你可以简单理解成 em 就是当前上下文中一个字的长度，历史上曾定义 `M` 的宽度为 1em，但实际情况下并不一定完全相等。当然以下例子中的行距和段距也可以使用绝对单位，如 `12pt`、`1cm` 等。
 :::
