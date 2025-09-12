@@ -45,14 +45,15 @@ package 就是「包」，在小蓝书中翻译为「库」，是一些由 [Typs
 为了与 Word 中的字号相对应，你也可以使用 [pointless-size](https://typst.app/universe/package/pointless-size) 包，如以下代码所示：
 
 ```typst no-render
-#import "@preview/pointless-size:0.1.1": zh, zihao
+#import "@preview/pointless-size:0.1.2": zh, zihao
 
 #set text(size: zh(5)) // 五号（10.5pt）
 ```
 
 在这里，我们引入了 `pointless-size` 包，并使用了其中的 `zh` 函数来设置字号。pointless 包中更多的字号与命令的对应请参考下图：
 
-![字号对照](./images/pointless.png)
+<!-- https://github.com/YDX-2147483647/typst-pointless-size/blob/main/docs/conversion-table.typ -->
+![字号对照](./images/pointless-size.svg)
 
 ### 常用的字体设置与装饰
 
@@ -202,14 +203,66 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 在 Typst 中，行距和段距分别由 `par` 的 `leading` 和 `spacing` 参数控制。行距是指行与行之间的距离，段距是指段与段之间的距离。如图所示。
 
 ```typst
--- #set page(height: 6cm, width: 10cm)
-#let marker(body, height, paint: red) = box(place(box(height: height, width: 2pt, stroke: (rest: 1pt + paint, left: none), place(dx: 4pt, text(8pt, paint, body)))))
+-- #set page(height: auto, width: 300pt, margin: (right: 25%, rest: 15pt))
+-- #set text(top-edge: "ascender", bottom-edge: "descender")
+-- 
+-- // A sample text for measuring font metrics.
+-- #let sample-text = [国]
+-- 
+-- // Number of lines in each paragraph
+-- #let n-rows = (4, 2, 2, 1, 1)
+-- 
+-- #context place({
+--   let line-height = measure(sample-text).height
+-- 
+--   let rows(n) = ((line-height,) * n).intersperse(par.leading)
+--   let jumps = n-rows.map(rows).intersperse(par.spacing).flatten()
+-- 
+--   grid(
+--     ..jumps
+--       .enumerate()
+--       .map(((i, h)) => if calc.even(i) {
+--         // Draw a stripe for the line
+--         block(
+--           height: h,
+--           width: 100%,
+--           fill: aqua.transparentize(60%),
+--         )
+--       } else {
+--         // Put an annotation for the gap
+-- 
+--         // `(x, y).at(hh)` becomes `x` for leading, or `y` for spacing.
+--         let hh = if h == par.spacing { 1 } else { 0 }
+-- 
+--         align(end, block(
+--           height: h,
+--           outset: (right: (0.5em, 1em).at(hh)),
+--           stroke: (
+--             left: none,
+--             rest: 0.5pt + (blue, orange).at(hh),
+--           ),
+--           if i <= (6, 12).at(hh) {
+--             place(horizon, dx: 1.3em, {
+--               set text(0.8em, (blue.darken(20%), orange.darken(10%)).at(hh))
+--               ([行距 leading], [段距 spacing]).at(hh)
+--             })
+--           },
+--         ))
+--       })
+--   )
+-- })
+-- 
+-- #set text(gray, lang: "zh")
+-- #set par(justify: true, first-line-indent: (amount: 2em, all: true))
+四千年來時時喫人的地方，今天纔明白，我也在其中混了多年；大哥正管着家務，妹子恰恰死了，他未必不和在飯菜裏，暗暗給我們喫。
 
-#set par(leading: 0.6em, spacing: 1em)
+我未必無意之中，不喫了我妹子的幾片肉，現在也輪到我自己，……
 
-　　#context marker([par.leading], par.leading)是日也，天朗气清，惠风和畅。仰观宇宙之大，俯察品类之盛，所以游目骋怀，足以极视听之娱，#context marker([par.spacing], par.spacing, paint: blue)信可乐也。
+有了四千年喫人履歷的我，當初雖然不知道，現在明白，難見眞的人！
 
-　　夫人之相与，俯仰一世，或取诸怀抱，悟言一室之#context marker([par.leading], par.leading)内；或因寄所托，放浪形骸之外。虽趣舍万殊，静躁不同，当其欣于所遇，暂得于己，快然自足，不知老之将至。及其所之既倦，情随事迁，感慨系之矣。
+沒有喫過人的孩子，或者還有？
+
+救救孩子……
 ```
 
 “行”的定义牵涉[文字外框](./FAQ/par-leading.md)，可通过 `text` 的 `top-edge`、`bottom-edge` 调整。
@@ -231,6 +284,17 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 #box[Typst 国王] \
 #box[Typst 国王]
 ```
+
+请注意 Word 与 Typst 的行距模型存在不少差异。如果你想复现 Word 设置，建议不纠结换算公式，而是[写满一页纸，然后调整 `leading` 数值，让每页的行数符合预期](./FAQ/word-line-spacing.md)。
+
+::: details Word 与 Typst 行距模型的若干具体差异
+
+- Word 中“页面设置 → 文档网格”默认指定行网格，而“段落设置 → 间距”又默认启用对齐到网格。所以默认设置下，Word 会把每行字四舍五入到最近的行网格，导致行距的实际值未必等于设置值，甚至可能前后变化。而 Typst 中没有类似机制，行距设置多少实际就是多少。
+- Word 设置中所谓“行距”其实是行高，[行高 = 文字尺寸 + 行距](https://www.w3.org/TR/clreq/#considerations_in_designing_type_area)。因此，“固定值 22 磅”大致对应 Typst 中的`set par(leading: 22pt - 1em)`，而非 `set par(leading: 22pt)`。
+- Word 中[“单倍行距”与文字尺寸的比值依赖于字体，有时甚至还依赖于操作系统](https://texdoc.org/serve/zhlineskip/0)，实际在 1.14 与 1.92 间浮动。而 Typst 中 `1em` 始终等于汉字尺寸。
+- ……
+
+:::
 
 ::: tip
 有关长度单位的介绍请参考[小蓝书的度量与布局](https://typst-doc-cn.github.io/tutorial/basic/scripting-length-and-layout.html)。你可以简单理解成 em 就是当前上下文中一个字的长度，历史上曾定义 `M` 的宽度为 1em，但实际情况下并不一定完全相等。当然以下例子中的行距和段距也可以使用绝对单位，如 `12pt`、`1cm` 等。
