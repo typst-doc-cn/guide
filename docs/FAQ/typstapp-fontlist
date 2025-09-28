@@ -1,18 +1,23 @@
-## 如何获取Typst.app中预安装的字体列表
+---
+tags: [template, code]
+---
 
-### 方法一：使用preview窗口
+# 如何获取Typst.app中预安装的字体列表
+
+## 方法一：使用preview窗口
 
 输入`#text(font: )`...弹出下拉菜单
 
 <img width="460" height="458" alt="Image" src="https://github.com/user-attachments/assets/d2f20eaf-c651-486d-a83f-40b5a90c73cb" />
 
-### 方法二：
+
+## 方法二：
 
 在[这个链接](https://typst.app/assets/font-derived/font-previews.json)中获取.
 
-截至2025-09-28日，现有的字体列表为：
+截至**2025-09-28**，现有的字体列表为：
 
-```json
+```json no-render
 [
     "Allura",
     "Atkinson Hyperlegible",
