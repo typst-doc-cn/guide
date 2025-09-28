@@ -25,7 +25,7 @@
 ![](images/20240715222928.png)
 
 ::: warning
-不要安装 Typst LSP 插件和 Typst Preview 插件，这两个插件已废弃，功能已经整合到 `Tinymist` 插件中。
+不要安装 `Typst LSP` 插件和 `Typst Preview` 插件，这两个插件已废弃，功能已经整合到 `Tinymist` 插件中。
 
 如果之前安装了这两个插件请卸载，否则会导致冲突。
 :::
