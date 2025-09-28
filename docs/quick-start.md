@@ -42,6 +42,32 @@ typst 会自动扫描到系统中安装的字体，使用 `typst fonts` 命令�
 
 ### 命令行
 
-[下载 Typst 二进制](https://github.com/typst/typst/releases)并解压。
+Typst 的命令行工具可以通过多种方式获取，详见 [官方文档](https://github.com/typst/typst?tab=readme-ov-file#Installation)
 
-根据[官网文档](https://github.com/typst/typst?tab=readme-ov-file#usage)在命令行中编译文件。
+#### 预编译二进制文件
+
+你可以从 [Typst 发布页面](https://github.com/typst/typst/releases) 获取最新版本的源码和预编译二进制文件。
+
+下载适合你平台的压缩包并将其放置在 PATH 环境变量包含的目录中。
+
+要获取未来版本的更新，只需运行 `typst update` 命令。
+
+#### 包管理器安装
+
+你也可以通过不同的包管理器安装 Typst。
+
+:::details 部分包管理器和命令
+
+| 系统 | 包管理器 | 命令 |
+| :--- | :--- | :--- |
+| Any | Cargo | `cargo install --locked typst-cli` |
+| Linux & macOS | Nixpkgs | `nix-shell -p typst` |
+| macOS | Homebrew | `brew install typst` |
+| Arch Linux | Pacman | `pacman -S typst` |
+| Windows | Winget | `winget install --id Typst.Typst` |
+
+:::
+
+#### 使用方法
+
+安装完成后，根据[官网文档](https://github.com/typst/typst?tab=readme-ov-file#usage)在命令行中编译文件。
