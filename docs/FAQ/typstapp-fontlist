@@ -17,7 +17,7 @@ tags: [font]
 
 截至**2025-09-28**，现有的字体列表为：
 
-```json no-render
+```json
 [
     "Allura",
     "Atkinson Hyperlegible",
