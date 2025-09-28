@@ -4,7 +4,7 @@ tags: [font]
 
 # 如何获取Typst.app中预安装的字体列表
 
-## 方法一：使用preview窗口
+## 方法一：使用自动补全
 
 输入`#text(font: )`...弹出下拉菜单
 
