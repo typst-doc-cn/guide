@@ -5,11 +5,11 @@ outline: [2, 3]
 
 # 列表符号/编号和内容错位怎么办？
 
-## 如果列表只写汉字
+## 现象
 
-### 现象
+### 分别设置中西文字体，导致符号/编号与内容错位
 
-若分别设置了中西字体，那么即使只写汉字，`enum`或`list`的符号/编号和内容也可能错位，例如下图：
+若分别设置了中西字体，那么即使只写汉字，`enum` 或 `list` 的符号/编号和内容也可能错位，例如下图：
 
 ```typst
 -- #set page(height: auto)
@@ -19,7 +19,7 @@ outline: [2, 3]
 + 鲁镇的酒店的格局
 
 = `list`
-+ 鲁镇的酒店的格局
+- 鲁镇的酒店的格局
 ```
 
 并且直接写编号完全正常：
@@ -37,8 +37,65 @@ outline: [2, 3]
 
 :::
 
-### 法一：数字也用中文字体
+### 复杂内容块或行内公式，导致符号/编号与内容错位
 
+如果行内有额外高度的 `box` 或者行内公式，会撑高内容块的高度，导致符号/编号与内容错位，例如下图：
+
+```typst
+-- #set page(height: auto)
+= `enum`
++ abc $display(integral)_a^b$
++ def #box(stroke: 1pt, inset: 3mm, baseline: 3mm)[test]
+
+= `list`
+- abc $display(integral)_a^b$
+- def #box(stroke: 1pt, inset: 3mm, baseline: 3mm)[test]
+```
+
+## 解决方法
+
+### 推荐方法：使用 `itemize` 包
+
+`itemize` 包可以解决大多数符号/编号与内容错位的问题
+
+```typst
+-- #set page(height: auto)
+#import "@preview/itemize:0.1.2" as el
+#show: el.default-enum-list
+
+#set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "SimSun"))
+
+= `enum`
++ 鲁镇的酒店的格局
+
+= `list`
+- 鲁镇的酒店的格局
+```
+
+```typst
+-- #set page(height: auto)
+#import "@preview/itemize:0.1.2" as el
+#show: el.default-enum-list
+
+= `enum`
++ abc $display(integral)_a^b$
++ def #box(stroke: 1pt, inset: 3mm, baseline: 3mm)[test]
+
+= `list`
+- abc $display(integral)_a^b$
+- def #box(stroke: 1pt, inset: 3mm, baseline: 3mm)[test]
+```
+
+具体可参考其 [Typst Universe 页面](https://typst.app/universe/package/itemize)
+
+### 其它方法
+
+以下是早期文档中提及的其它方法，这里保留并折叠，可供额外参考：
+
+<details>
+<summary>点击展开</summary>
+
+#### 法一：数字也用中文字体
 
 ```typst {1}
 -- #set page(height: auto)
@@ -46,7 +103,7 @@ outline: [2, 3]
 + 鲁镇的酒店的格局
 ```
 
-### 法二：修改编号对齐方式
+#### 法二：修改编号对齐方式
 
 ```typst
 -- #set page(height: auto)
@@ -61,7 +118,7 @@ outline: [2, 3]
 - 鲁镇的酒店的格局
 ```
 
-### 法三：修改汉字边框计算方式
+#### 法三：修改汉字边框计算方式
 
 ```typst
 -- #set page(height: auto)
@@ -78,7 +135,7 @@ outline: [2, 3]
 
 不过这样会在视觉上增大行距，详见[文字外框的解释](./par-leading.md)。
 
-## 如果列表内容复杂
+#### 如果列表内容复杂
 
 来自 [@OrangeX4](https://github.com/OrangeX4) 的解决方案
 
@@ -162,5 +219,7 @@ outline: [2, 3]
 1. 1 + $display(integral) + x$
 2. 1 + $display(integral)$
 ```
+
+</details>
 
 相关 issue：[List and enum markers are not aligned with the baseline of the item's contents · Issue #1204 · typst/typst](https://github.com/typst/typst/issues/1204)
