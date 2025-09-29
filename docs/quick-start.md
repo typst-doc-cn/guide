@@ -4,7 +4,7 @@
 
 适用场景：快速，免安装，多人协作。
 
-打开官网 typst.app，注册账号。新建文档即可。
+打开官网 [typst.app](https://typst.app/)，注册账号。新建文档即可。
 
 <!--TODO
 截图
@@ -25,7 +25,7 @@
 ![](images/20240715222928.png)
 
 ::: warning
-不要安装 Typst LSP 插件和 Typst Preview 插件，这两个插件已废弃，功能已经整合到 `Tinymist` 插件中。
+不要安装 `Typst LSP` 插件和 `Typst Preview` 插件，这两个插件已废弃，功能已经整合到 `Tinymist` 插件中。
 
 如果之前安装了这两个插件请卸载，否则会导致冲突。
 :::
@@ -42,6 +42,6 @@ typst 会自动扫描到系统中安装的字体，使用 `typst fonts` 命令�
 
 ### 命令行
 
-[下载 Typst 二进制](https://github.com/typst/typst/releases)并解压。
+Typst 的命令行工具可以通过多种方式获取，详见[官网文档](https://typst.app/open-source/#download)。此文档为各操作系统提供了手动下载和包管理器两种安装方式，并包含 PATH 环境变量的配置说明。
 
-根据[官网文档](https://github.com/typst/typst?tab=readme-ov-file#usage)在命令行中编译文件。
+安装完成后，根据[官网文档](https://github.com/typst/typst?tab=readme-ov-file#usage)在命令行中编译文件。
