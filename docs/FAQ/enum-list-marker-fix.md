@@ -60,8 +60,8 @@ outline: [2, 3]
 
 ```typst
 -- #set page(height: auto)
-#import "@preview/itemize:0.1.2" as el
-#show: el.default-enum-list
+#import "@preview/itemize:0.1.2" as el  // [!code ++]
+#show: el.default-enum-list // [!code ++]
 
 #set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "SimSun"))
 
@@ -74,8 +74,8 @@ outline: [2, 3]
 
 ```typst
 -- #set page(height: auto)
-#import "@preview/itemize:0.1.2" as el
-#show: el.default-enum-list
+#import "@preview/itemize:0.1.2" as el  // [!code ++]
+#show: el.default-enum-list // [!code ++]
 
 = `enum`
 + abc $display(integral)_a^b$
