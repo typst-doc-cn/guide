@@ -95,6 +95,8 @@ outline: [2, 3]
 <details>
 <summary>点击展开</summary>
 
+### 如果只写汉字
+
 #### 法一：数字也用中文字体
 
 ```typst {1}
@@ -135,7 +137,7 @@ outline: [2, 3]
 
 不过这样会在视觉上增大行距，详见[文字外框的解释](./par-leading.md)。
 
-#### 如果列表内容复杂
+### 如果列表内容复杂
 
 来自 [@OrangeX4](https://github.com/OrangeX4) 的解决方案
 
