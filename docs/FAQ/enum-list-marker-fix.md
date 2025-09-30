@@ -60,8 +60,8 @@ outline: [2, 3]
 
 ```typst
 -- #set page(height: auto)
-#import "@preview/itemize:0.1.2" as el
-#show: el.default-enum-list
+#import "@preview/itemize:0.1.2" as el  // [!code ++]
+#show: el.default-enum-list // [!code ++]
 
 #set text(font: ((name: "New Computer Modern", covers: "latin-in-cjk"), "SimSun"))
 
@@ -74,8 +74,8 @@ outline: [2, 3]
 
 ```typst
 -- #set page(height: auto)
-#import "@preview/itemize:0.1.2" as el
-#show: el.default-enum-list
+#import "@preview/itemize:0.1.2" as el  // [!code ++]
+#show: el.default-enum-list // [!code ++]
 
 = `enum`
 + abc $display(integral)_a^b$
@@ -94,6 +94,8 @@ outline: [2, 3]
 
 <details>
 <summary>点击展开</summary>
+
+### 如果只写汉字
 
 #### 法一：数字也用中文字体
 
@@ -135,7 +137,7 @@ outline: [2, 3]
 
 不过这样会在视觉上增大行距，详见[文字外框的解释](./par-leading.md)。
 
-#### 如果列表内容复杂
+### 如果列表内容复杂
 
 来自 [@OrangeX4](https://github.com/OrangeX4) 的解决方案
 
@@ -221,5 +223,9 @@ outline: [2, 3]
 ```
 
 </details>
+
+## 参考阅读
+
+在 [修复列表的终极方案](./fix-enum-list.md) 页面中提及了另一种实现符号/编号与内容正确对齐的方法，其实现效果在默认情况下会使内容延伸到编号下方的空白处，可另行参考。
 
 相关 issue：[List and enum markers are not aligned with the baseline of the item's contents · Issue #1204 · typst/typst](https://github.com/typst/typst/issues/1204)
