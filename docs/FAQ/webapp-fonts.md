@@ -6,7 +6,7 @@ tags: [font]
 
 ## 方法一：使用自动补全
 
-输入`#text(font: …)`弹出下拉菜单
+输入`#text(font: …)`弹出下拉菜单，可搜索字体名称并补全，如下图。
 
 <img width="460" height="458" alt="Image" src="https://github.com/user-attachments/assets/d2f20eaf-c651-486d-a83f-40b5a90c73cb" />
 
