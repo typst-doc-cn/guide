@@ -73,7 +73,7 @@ function compileTypst(
   // 输出设置
 
   // 计算源码的 SHA1 哈希值
-  const hash = createHash('sha1').update(src + typst_executable).digest('hex')
+  const hash = createHash('sha1').update(`${src}\0${typst_executable}`).digest('hex')
     .slice(0, 10);
   const outPrefix = 'docs/generated/';
   const pageFilePattern = `${outPrefix}${hash}_{n}.png`;
