@@ -20,6 +20,14 @@ jobs:
     - uses: typst-community/setup-typst@v4
       with:
         typst-version: v0.14.0
+    - name: Setup old typst versions
+      shell: bash
+      run: |
+        set -euxo pipefail
+        curl -OL https://github.com/typst/typst/releases/download/v0.13.1/typst-x86_64-unknown-linux-musl.tar.xz
+        tar -xvf typst-x86_64-unknown-linux-musl.tar.xz
+        mv typst-x86_64-unknown-linux-musl/typst typst-0.13.1
+        rm -r typst-x86_64-unknown-linux-musl
 
     - name: Restore cached fonts
       # Downloading fonts.7z is time consuming.

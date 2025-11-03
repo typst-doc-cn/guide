@@ -126,7 +126,7 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 [配置正文字体](./install-fonts.md)后，请继续设置数学公式的字体：
 
-```typst
+```typst v0.13.1
 -- #set page(height: auto, width: auto, margin: 1em)
 #show math.equation: set text(font: (
   (name: "Libertinus Serif", covers: "latin-in-cjk"), // 西文
@@ -157,7 +157,7 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 可合并前两项，例如：
 
-```typst
+```typst v0.13.1
 -- #set page(height: auto, width: auto, margin: 1em)
 #show math.equation: set text(font: (
   "Source Han Serif SC",

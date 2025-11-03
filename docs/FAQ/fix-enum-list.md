@@ -10,7 +10,7 @@ Typst 当前版本容易遇到列表编号或者符号与内容错位的问题�
 
 幸运的是，@Andrew 在论坛上给出了 [比较完美的解决方案](https://forum.typst.app/t/how-to-make-bullet-list-item-bodies-flow-like-paragraphs/3756/3) 。
 
-```typst
+```typst v0.13.1
 -- #set page(height: auto, width: 14cm)
 #let correctly-indent-list-and-enum-items(doc) = {
   let first-line-indent() = if type(par.first-line-indent) == dictionary {
