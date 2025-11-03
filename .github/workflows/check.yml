@@ -1,0 +1,49 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # All history is required for https://vitepress.dev/reference/default-theme-last-updated
+          fetch-depth: 0
+
+      - uses: typst-community/setup-typst@v4
+        with:
+          typst-version: v0.14.0
+
+      - name: Restore cached fonts
+        # Downloading fonts.7z is time consuming.
+        uses: actions/cache@v4
+        id: fonts-cache
+        with:
+          path: |
+            fonts/
+          key: fonts-2025-11-03
+      - name: Prepare fonts
+        if: steps.fonts-cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          curl -OL https://github.com/typst-doc-cn/guide/releases/download/files/fonts.7z
+          7z x fonts.7z -ofonts
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+      - run: pnpm install
+
+      - run: pnpm build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: docs/.vitepress/dist

@@ -10,24 +10,39 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Vitepress build
+    name: VitePress build
     steps:
     - uses: actions/checkout@v4
       with:
         # All history is required for https://vitepress.dev/reference/default-theme-last-updated
         fetch-depth: 0
-    - uses: pnpm/action-setup@v4
-    - name: Prepare fonts and images
+
+    - uses: typst-community/setup-typst@v4
+      with:
+        typst-version: v0.14.0
+
+    - name: Restore cached fonts
+      # Downloading fonts.7z is time consuming.
+      uses: actions/cache@v4
+      id: fonts-cache
+      with:
+        path: |
+          fonts/
+        key: fonts-2025-11-03
+    - name: Prepare fonts
+      if: steps.fonts-cache.outputs.cache-hit != 'true'
       shell: bash
       run: |
-        sudo snap install typst
         curl -OL https://github.com/typst-doc-cn/guide/releases/download/files/fonts.7z
         7z x fonts.7z -ofonts
-    - name: Setup and build
-      shell: bash
-      run: |
-        pnpm install
-        pnpm build
+
+    - uses: pnpm/action-setup@v4
+    - uses: actions/setup-node@v4
+      with:
+        cache: pnpm
+    - run: pnpm install
+
+    - run: pnpm build
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
