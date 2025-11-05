@@ -30,7 +30,7 @@ tags: [label, ref]
 
 在 typst 0.14 等特定版本，上述代码对于 bibliography 的引用 (`cite`) 失效。一种解决方法是自行扫描 `*.bib`:
 
-```typst
+```typst no-render
 #import "@preview/citegeist:0.2.0": load-bibliography
 
 #let all-bib-entries() = {
