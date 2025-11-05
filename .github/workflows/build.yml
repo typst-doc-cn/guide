@@ -24,9 +24,11 @@ jobs:
       shell: bash
       run: |
         set -euxo pipefail
+        mkdir -p ~/.local/bin
+
         curl -OL https://github.com/typst/typst/releases/download/v0.13.1/typst-x86_64-unknown-linux-musl.tar.xz
         tar -xvf typst-x86_64-unknown-linux-musl.tar.xz
-        mv typst-x86_64-unknown-linux-musl/typst typst-0.13.1
+        mv typst-x86_64-unknown-linux-musl/typst ~/.local/bin/typst-0.13.1
         rm -r typst-x86_64-unknown-linux-musl
 
     - name: Restore cached fonts

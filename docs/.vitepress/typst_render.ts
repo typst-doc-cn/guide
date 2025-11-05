@@ -23,7 +23,12 @@ const AVAILABLE_EXECUTABLES = await Promise.all([
 );
 assert(
   AVAILABLE_EXECUTABLES.includes('typst'),
-  `Failed to find the typst executable in PATH. Found: ${AVAILABLE_EXECUTABLES}`
+  `Failed to find the typst executable in $PATH. Found: ${
+    AVAILABLE_EXECUTABLES.join(', ')
+  }`,
+);
+console.log(
+  `Found available typst executables: ${AVAILABLE_EXECUTABLES.join(', ')}`,
 );
 
 /**
@@ -73,8 +78,9 @@ function compileTypst(
   // 输出设置
 
   // 计算源码的 SHA1 哈希值
-  const hash = createHash('sha1').update(`${src}\0${typst_executable}`).digest('hex')
-    .slice(0, 10);
+  const hash = createHash('sha1').update(
+    `cache-version: 2025-11-05\0${typst_executable}\0${src}`,
+  ).digest('hex').slice(0, 10);
   const outPrefix = 'docs/generated/';
   const pageFilePattern = `${outPrefix}${hash}_{n}.png`;
   const logFile = `${outPrefix}${hash}.log`;
