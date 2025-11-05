@@ -10,10 +10,12 @@
   "devDependencies": {
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^22.13.1",
+    "@types/which": "^3.0.4",
     "@waline/client": "^3.5.1",
     "unocss": "^0.63.6",
     "vitepress": "^1.6.3",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "which": "^5.0.0"
   },
   "pnpm": {
     "peerDependencyRules": {

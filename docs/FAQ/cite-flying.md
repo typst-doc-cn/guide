@@ -2,9 +2,13 @@
 tags: [bib, text]
 ---
 
-# 引用编号的数字高于括号
+# 【已修复】引用编号的数字高于括号
 
 <!-- https://github.com/typst-doc-cn/guide/issues/21#issuecomment-2900797365 -->
+
+::: tip ✅ Typst 0.14 已修复
+[#5777](https://github.com/typst/typst/pull/5777) 已经修复了这一问题。
+:::
 
 如果引用编号的数字高于括号`[]`，可能是字体只给数字提供了专用上标版本，而括号只有普通版本。
 

@@ -13,6 +13,10 @@ Typst [已经内置](https://typst.app/docs/reference/model/bibliography/#parame
 
 其实大部分非标准特性只影响特殊情况。可以先**删除非标准特性**，让 Typst 能读取样式生成参考文献；等真的遇到特殊情况了，再[专门解决](https://typst-doc-cn.github.io/clreq/#x7-bibliography)或[手动编辑](https://forum.typst.app/t/how-to-manually-correct-the-format-of-bibliography-for-60-styles/5303/2)。
 
+::: tip
+对于 [Zotero 中文社区的 CSL 样式](https://zotero-chinese.com/styles/)，可直接前往[可用于 hayagriva 的 CSL 样式](https://typst-doc-cn.github.io/csl-sanitizer/)下载批量修改好的版本。
+:::
+
 以下列出了常见报错以及解决方法，大致按常见程度降序排列。如果您遇到的错误不在其中，可尝试**二分法**依次删除各个`<macro>`来定位问题。
 
 ## duplicate field `layout`
