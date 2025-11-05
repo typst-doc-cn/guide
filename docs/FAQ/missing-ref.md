@@ -25,3 +25,37 @@ tags: [label, ref]
 相关 issue：[Downgrade missing references from errors to warning · Issue #4035 · typst/typst](https://github.com/typst/typst/issues/4035)
 
 :::
+
+---
+
+在 typst 0.14 等特定版本，上述代码对于 bibliography 的引用 (`cite`) 失效。一种解决方法是自行扫描 `*.bib`:
+
+```typst no-render
+#import "@preview/citegeist:0.2.0": load-bibliography
+
+#let all-bib-entries() = {
+  let bib-file = {
+    let all-bib = query(bibliography)
+    if all-bib.len() > 0 {
+      all-bib.at(0).sources.at(0)
+    } else {
+      none
+    }
+  }
+  if bib-file == none {
+    (:)
+  } else {
+    load-bibliography(read(bib-file))
+  }
+}
+
+#let possible-missing-ref(it) = {
+  if str(it.target) in all-bib-entries() or it.element != none {
+    it
+  } else {
+    text(fill: red, "<未找到引用" + str(it.target) + ">")
+  }
+}
+
+#show ref: possible-missing-ref
+```
