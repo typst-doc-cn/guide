@@ -18,6 +18,7 @@ export PATH=$PATH:$(pwd) && \
 \
 curl -OL https://github.com/typst-doc-cn/guide/releases/download/files/fonts.7z && \
 7z x fonts.7z -ofonts && \
+curl -L https://github.com/matplotlib/matplotlib/raw/be68dfecf9d26ac1a8e1e30a0de6171ecf174cd5/lib/matplotlib/mpl-data/fonts/ttf/cmsy10.ttf -o fonts/cmsy10.ttf && \
 \
 pnpm install && \
 sed -i "/base: '\\/guide\\/',/d" docs/.vitepress/config.ts && \
