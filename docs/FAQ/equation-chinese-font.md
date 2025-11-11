@@ -14,14 +14,40 @@ $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
 $ cases("Math" 1 I l, "正文 1Il") $
 ```
 
+<!-- 为测试效果明显，以下都关闭 text.fallback；实用时不建议关闭 -->
+
 ## Typst 0.14
 
 [配置正文字体](./install-fonts.md)后，请按以下任一方法继续设置数学公式的字体。
+
+::: details “引号”泛指中西共用标点
+
+下文所谓“引号”并不专指单双引号，而泛指[中西共用标点](https://github.com/w3c/clreq/issues/534)，具体包括：
+
+- Latin-1 Supplement:
+  - U+00B7 `·` MIDDLE DOT
+- General Punctuation:
+  - U+2013 `–` EN DASH
+  - U+2014 `—` EM DASH
+  - U+2018 `‘` LEFT SINGLE QUOTATION MARK
+  - U+2019 `’` RIGHT SINGLE QUOTATION MARK
+  - U+201C `“` LEFT DOUBLE QUOTATION MARK
+  - U+201D `”` RIGHT DOUBLE QUOTATION MARK
+  - U+2025 `‥` TWO DOT LEADER
+  - U+2026 `…` HORIZONTAL ELLIPSIS
+  - U+2027 `‧` HYPHENATION POINT
+- Supplemental Punctuation:
+  - U+2E3A `⸺` TWO-EM DASH
+
+参考[Typst 源代码中的 `Covers::LatinInCjk`](https://github.com/typst/typst/blob/17a7890b2dc47da390d194d3593ed9a8b5668169/crates/typst-library/src/text/mod.rs#L891-L898)。
+
+:::
 
 ### 若引号想用中文字体（数学、西文字体统一）
 
 ```typst
 -- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false)
 #show math.equation: set text(font: (
   (name: "New Computer Modern Math", covers: "latin-in-cjk"), // 数学
   (name: "Source Han Serif SC", covers: regex(".")), // 中文
@@ -41,6 +67,7 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 ```typst
 -- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false)
 #show math.equation: set text(font: (
   "New Computer Modern Math", // 数学
   "Source Han Serif SC", // 中文
@@ -69,18 +96,18 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 ```typst
 -- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false)
 #show math.equation: set text(font: (
-  (name: "Libertinus Serif", covers: regex("\p{Latin}")), // 西文
-  (name: "Source Han Serif SC", covers: regex("[\p{Han}\u{00B7}\u{2013}\u{2014}\u{2018}\u{2019}\u{201C}\u{201D}\u{2025}-\u{2027}\u{2E3A}]")), // 中文
+  (name: "Libertinus Serif", covers: regex("[.\d\p{Latin}]")), // 西文
+  (name: "Source Han Serif SC", covers: regex("[·–—‘’“”‥…‧⸺]")), // 中文
   "New Computer Modern Math", // 数学
+  "Source Han Serif SC", // 中文
 ))
 
 -- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
 -- $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
 -- $ cases("Math" 1 I l, "正文 1Il") $
 ```
-
-以上这一长串正则表达式源于 [Typst 源代码中的 `Covers::LatinInCjk`](https://github.com/typst/typst/blob/17a7890b2dc47da390d194d3593ed9a8b5668169/crates/typst-library/src/text/mod.rs#L891-L898)。
 
 :::
 
@@ -88,10 +115,11 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 ```typst
 -- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false)
 #show math.equation: set text(font: (
-  (name: "Libertinus Serif", covers: regex("[\p{Latin}\u{00B7}\u{2013}\u{2014}\u{2018}\u{2019}\u{201C}\u{201D}\u{2025}-\u{2027}\u{2E3A}]")), // 西文
-  (name: "Source Han Serif SC", covers: regex("\p{Han}")), // 中文
+  (name: "Libertinus Serif", covers: regex("[.\d\p{Latin}·–—‘’“”‥…‧⸺]")), // 西文
   "New Computer Modern Math", // 数学
+  "Source Han Serif SC", // 中文
 ))
 
 -- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
@@ -99,18 +127,17 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 -- $ cases("Math" 1 I l, "正文 1Il") $
 ```
 
-以上这一长串正则表达式源于 [Typst 源代码中的 `Covers::LatinInCjk`](https://github.com/typst/typst/blob/17a7890b2dc47da390d194d3593ed9a8b5668169/crates/typst-library/src/text/mod.rs#L891-L898)。
-
 :::
 
 ::: details 如果引号想用数学字体
 
 ```typst
 -- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false)
 #show math.equation: set text(font: (
-  (name: "Libertinus Serif", covers: regex("\p{Latin}")), // 西文
-  (name: "Source Han Serif SC", covers: regex("\p{Han}")), // 中文
+  (name: "Libertinus Serif", covers: regex("[.\d\p{Latin}]")), // 西文
   "New Computer Modern Math", // 数学
+  "Source Han Serif SC", // 中文
 ))
 
 -- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
@@ -128,6 +155,7 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 ```typst v0.13.1
 -- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false)
 #show math.equation: set text(font: (
   (name: "Libertinus Serif", covers: "latin-in-cjk"), // 西文
   "Source Han Serif SC", // 中文
@@ -159,6 +187,7 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 ```typst v0.13.1
 -- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false)
 #show math.equation: set text(font: (
   "Source Han Serif SC",
   "New Computer Modern Math",
@@ -192,4 +221,4 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 -- $ cases("Math" 1 I l, "正文 1Il") $
 ```
 
-这种方法在使用后难以覆盖，谨慎使用。
+这种方法不会设置`（）`等中文独占标点的字体（它们仍然随即回落），而且在使用后难以覆盖，请谨慎使用。
