@@ -28,21 +28,16 @@ jobs:
         typst-version: v0.14.0
 
     - name: Restore cached fonts
-      # Downloading fonts.7z is time consuming.
+      # Downloading fonts is time consuming.
       uses: actions/cache@v4
       id: fonts-cache
       with:
         path: |
           fonts/
-        key: fonts-2025-11-09
-    - name: Prepare fonts
+        key: fonts-${{ hashFiles('scripts/download-fonts.sh') }}
+    - name: Download fonts
       if: steps.fonts-cache.outputs.cache-hit != 'true'
-      shell: bash
-      run: |
-        curl -OL https://github.com/typst-doc-cn/guide/releases/download/files/fonts.7z
-        7z x fonts.7z -ofonts
-        curl -L https://github.com/matplotlib/matplotlib/raw/be68dfecf9d26ac1a8e1e30a0de6171ecf174cd5/lib/matplotlib/mpl-data/fonts/ttf/cmsy10.ttf \
-          -o fonts/cmsy10.ttf
+      run: bash scripts/download-fonts.sh
 
     - uses: pnpm/action-setup@v4
     - uses: actions/setup-node@v4
