@@ -1,19 +1,13 @@
 import MarkdownIt from 'markdown-it';
 import assert from 'node:assert';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
+import { env } from 'node:process';
 import which from 'which';
 
 import TEMPLATE from './typst_template';
 import { prettify, readToString, removePrefix } from './util';
-
-type PreprocessResult = {
-  /** 用于显示的版本 */
-  display: string;
-  /** 用于编译的版本 */
-  compiling: string;
-};
 
 const AVAILABLE_EXECUTABLES = await Promise.all([
   'typst',
@@ -30,6 +24,20 @@ assert(
 console.log(
   `Found available typst executables: ${AVAILABLE_EXECUTABLES.join(', ')}`,
 );
+
+const DEFAULT_POLICY = env.CI ? 'deny-warning-and-error' : 'allow-any';
+if (DEFAULT_POLICY !== 'allow-any') {
+  console.log(
+    `The default compile policy is changed to ${DEFAULT_POLICY}, because $CI is set to ${env.CI}.`,
+  );
+}
+
+type PreprocessResult = {
+  /** 用于显示的版本 */
+  display: string;
+  /** 用于编译的版本 */
+  compiling: string;
+};
 
 /**
  * 预处理
@@ -68,12 +76,16 @@ type CompileResult = {
  *
  * @param src 源文档预处理后的内容
  * @param info 源文档的位置信息，仅用于报错提示
+ * @param typst_executable 用于编译的 typst 可执行文件
+ * @param policy 后台报错策略（不影响返回结果）
  * @returns 编译结果
  */
 function compileTypst(
   src: string,
   info: { path: string; line_begin?: number },
   typst_executable: string = 'typst',
+  policy: 'allow-any' | 'expect-warning' | 'deny-warning-and-error' =
+    'allow-any',
 ): CompileResult {
   // 输出设置
 
@@ -84,6 +96,7 @@ function compileTypst(
   const outPrefix = 'docs/generated/';
   const pageFilePattern = `${outPrefix}${hash}_{n}.png`;
   const logFile = `${outPrefix}${hash}.log`;
+  const statusFile = `${outPrefix}${hash}.nonzero-exit-code`;
 
   // 编译
 
@@ -98,7 +111,7 @@ function compileTypst(
     mkdirSync(outPrefix, { recursive: true });
 
     // 编译
-    const { stderr, stdout, error } = spawnSync(typst_executable, [
+    const { stderr, stdout, error, status } = spawnSync(typst_executable, [
       'compile',
       '-', // 用 stdin 输入，这样文档多了后容易改成并发
       pageFilePattern,
@@ -117,6 +130,9 @@ function compileTypst(
     if (stderr.length > 0) {
       writeFileSync(logFile, stderr);
     }
+    if (status !== 0) {
+      writeFileSync(statusFile, JSON.stringify(status));
+    }
   }
 
   // 收集结果
@@ -133,7 +149,7 @@ function compileTypst(
     }
   }
 
-  // 读取日志，适当报错
+  // 读取日志
   const log = readToString(logFile)?.replaceAll(
     // 删除日志中的无用路径（编译时的工作目录）
     /(  ┌─ ).+(<stdin>:)/g,
@@ -143,7 +159,16 @@ function compileTypst(
     /(^|\n)downloading @preview\/.+\n.+ ETA: 0 s($|\n)/g,
     '',
   )?.trim();
-  if (log) {
+  const exitedWithNonzero = existsSync(statusFile);
+
+  // 适当报错
+  const result = exitedWithNonzero ? 'error' : log ? 'warning' : 'ok';
+  const canHideLog = policy === 'expect-warning' && result === 'warning';
+  const shouldPanic =
+    (policy === 'deny-warning-and-error' && result !== 'ok') ||
+    (policy === 'expect-warning' && result !== 'warning');
+
+  if ((log && !canHideLog) || shouldPanic) {
     let location = info.path;
     if (info.line_begin) {
       location += `:${info.line_begin}`;
@@ -153,32 +178,42 @@ function compileTypst(
       `  Source (starting at ${location}):`,
       prettify(src, { indent: '    ', max_lines: 4 }),
       `  Log (${logFile}):`,
-      prettify(log, { indent: '    ', max_lines: 8 }),
+      prettify(log ?? '', { indent: '    ', max_lines: 8 }),
+      `  Result: ${result}`,
+      `  Compiler: ${typst_executable}`,
     ].join('\n'));
   }
+  assert(
+    !shouldPanic,
+    `Panicked because the policy is set to ${policy}, but the result is ${result}.`,
+  );
 
   return { pages, log };
 }
 
 /**
  * 决定选择使用哪个 typst 编译
- * @param lang markdown 代码块中指定的语言标签
+ * @param tags markdown 代码块中指定的语言标签（“typst”之后的部分）
  * @returns 选择结果和 markdown 格式提示信息
  */
 function determineExecutable(
-  lang: string,
+  tags: string[],
 ): { executable: string; info: string | null } {
-  if (lang === 'typst') {
-    return { executable: lang, info: null };
+  const candidates = tags.filter((t) => t.startsWith('v'));
+  assert(candidates.length <= 1, `Failed to parse language tags: ${tags}`);
+
+  if (candidates.length === 0) {
+    return { executable: 'typst', info: null };
   }
 
-  const candidate = lang.replace(' v', '-');
-  if (AVAILABLE_EXECUTABLES.includes(candidate)) {
+  const version = candidates[0];
+  const executable = `typst-${version.replace(/^v/, '')}`;
+  if (AVAILABLE_EXECUTABLES.includes(executable)) {
     return {
-      executable: candidate,
+      executable,
       info: [
         '::: warning 并非最新版',
-        `上例使用 ${lang} 编译，可能不适用于最新版。`,
+        `上例使用 ${version} 编译，可能不适用于最新版。`,
         ':::',
       ].join('\n'),
     };
@@ -187,7 +222,7 @@ function determineExecutable(
       executable: 'typst',
       info: [
         '::: warning 非正常编译',
-        `上例应当使用 ${lang} 编译，但实际用最新版编译，结果可能不正常。`,
+        `上例应当使用 ${version} 编译，但实际用最新版编译，结果可能不正常。`,
         ':::',
       ].join('\n'),
     };
@@ -195,32 +230,46 @@ function determineExecutable(
 }
 
 function TypstRender(md: MarkdownIt) {
-  const defaultRender = md.renderer.rules.fence || function (tokens, idx, options, env, self) {
-    return self.renderToken(tokens, idx, options);
-  };
+  const defaultRender = md.renderer.rules.fence ||
+    function (tokens, idx, options, env, self) {
+      return self.renderToken(tokens, idx, options);
+    };
 
   md.renderer.rules.fence = (tokens, idx, options, env, self) => {
     const token = tokens[idx];
 
-    const lang = token.info.trim();
+    const [lang, ...tags] = token.info.trim().split(' ');
     // Language tags:
     // - `typst` (recommended): Compile with the latest typst
     // - `typst v0.13.1`: Compile with typst v0.13.1
     // - `typst no-render`: Skip compilation
+    // - `typst expect-warning`: Compile with the latest typst, and expect warnings. These warnings will still be shown on the website, but will not fail the CI or be reported to the terminal.
     // Other variants are discouraged.
 
-    if (['typst', 'typst v0.13.1'].includes(lang)) {
+    if (lang === 'typst' && !tags.includes('no-render')) {
       const { display, compiling } = preprocess(token.content);
       token.content = display;
 
-      const { executable, info: versionInfo } = determineExecutable(lang);
+      const { executable, info: versionInfo } = determineExecutable(tags);
       const versionHtml = versionInfo !== null ? md.render(versionInfo) : '';
 
-      const result = compileTypst(compiling, {
-        path: `docs/${env.relativePath}`,
-        // 加四是因为 front matter
-        line_begin: token.map ? token.map[0] + 4 : undefined,
-      }, executable);
+      const policy = tags.includes('expect-warning')
+        ? 'expect-warning'
+        : DEFAULT_POLICY;
+      const policyHtml = policy === 'expect-warning'
+        ? md.render('::: tip\n上例出现警告是正常现象。\n:::')
+        : '';
+
+      const result = compileTypst(
+        compiling,
+        {
+          path: `docs/${env.relativePath}`,
+          // 加四是因为 front matter
+          line_begin: token.map ? token.map[0] + 4 : undefined,
+        },
+        executable,
+        policy,
+      );
 
       const codeHtml = defaultRender(tokens, idx, options, env, self);
 
@@ -233,7 +282,7 @@ function TypstRender(md: MarkdownIt) {
         ? md.render(['````log', result.log, '````'].join('\n'))
         : '';
 
-      return `${codeHtml}${imagesHtml}${versionHtml}${logHtml}`;
+      return `${codeHtml}${imagesHtml}${versionHtml}${logHtml}${policyHtml}`;
     }
     return defaultRender(tokens, idx, options, env, self);
   };

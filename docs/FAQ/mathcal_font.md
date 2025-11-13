@@ -60,7 +60,7 @@ Computer Modern Math 早于 OpenType 技术标准，通常以 Type 1 字体形�
 
 ::: details 对比表格
 
-```typst
+```typst expect-warning
 -- #set page(height: auto, width: auto, margin: 1em)
 #let examples = (
   [ABC],
