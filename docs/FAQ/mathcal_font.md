@@ -18,23 +18,61 @@ Typst 中数学字体默认是 New Computer Modern Math，与 LaTeX 中默认[^u
 1. [下载`CMSY10-fix_cmap_kerning.otf`](https://github.com/typst-doc-cn/guide/releases/download/files/CMSY10-fix_cmap_kerning.otf)并安装
 2. 如下设置`covers`
 
-```typst {4-7}
+```typst {4}
 -- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false) // 为测试效果明显而关闭，实用时不建议关闭
 修改前 $cal(K M Z), cal(P)_n, cal(T)^p$
 
-#show math.equation: set text(
-  font: (
-    (name: "Computer Modern Symbol", covers: regex("[𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩-𝒬ℛ𝒮-𝒵]")),
-    "New Computer Modern Math",
-  ),
-  weight: 450,
-  stylistic-set: 1,
-  fallback: false,
-)
+#show math.equation: set text(font: (
+  (name: "Computer Modern Symbol", covers: regex("[𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩-𝒬ℛ𝒮-𝒵]")),
+  "New Computer Modern Math",
+))
 修改后 $cal(K M Z), cal(P)_n, cal(T)^p$
 ```
 
 该字体的字形与法二相同，但将字符重新映射到了正确的 Unicode 码位，并补充了 MathKernInfo、MathItalicsCorrectionInfo 等信息。感谢网友“请输入密码”进行修改工作并无偿分享。
+
+::: details 为何正则表达式如此凌乱？
+以上正则表达式`[𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩-𝒬ℛ𝒮-𝒵]`不可简省为`[𝒜-𝒵]`。由于历史原因，大写花体字母的编码并不连续，而分散在 Letterlike Symbols 和 Mathematical Alphanumeric Symbols 两块。具体可参考 [typst/codex 源代码](https://docs.rs/codex/0.2.0/src/codex/styling.rs.html#543-562)或 [Mathematical Alphanumeric Symbols - Wikipedia](https://en.wikipedia.org/wiki/Mathematical_Alphanumeric_Symbols#Latin_letters)。
+:::
+
+::: details 需要同时使用 scr？
+以上设置会同时影响`cal(A)`和`scr(A)`，因为 Unicode 把它们统一编码了[^unicode-math-cal]。
+
+[^unicode-math-cal]: 其实还标准化了[用于区分的变体序列][L2/20-275R]。不过目前 typst、正则表达式、字体的支持都很有限，它对我们设置字体没有什么帮助。
+
+[L2/20-275R]: https://www.unicode.org/L2/L2020/20275r-math-calligraphic.pdf "Proposed variation sequences for math calligraphic letters (L2/20-275R) | Unicode"
+
+如需同时使用二者，请自定义函数设置字体。
+
+```typst
+-- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false) // 为测试效果明显而关闭，实用时不建议关闭
+默认字体效果 $cal(L)^p != scr(L)^p, cal(a)_n = scr(a)_n$
+
+#show math.equation: set text(font: (
+  (name: "Computer Modern Symbol", covers: regex("[𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩-𝒬ℛ𝒮-𝒵]")),
+  "New Computer Modern Math",
+))
+更换字体之后 $cal(L)^p = scr(L)^p, cal(a)_n = scr(a)_n$
+
+#let scr(it) = text( // [!code ++]
+  font: "New Computer Modern Math", // [!code ++]
+  $std.math.scr(it)$, // [!code ++]
+) // [!code ++]
+自定义`scr`后 $cal(L)^p != scr(L)^p, cal(a)_n = scr(a)_n$
+```
+
+```typst {1-4}
+-- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false) // 为测试效果明显而关闭，实用时不建议关闭
+#let cal(it) = text(
+  font: ("Computer Modern Symbol", "New Computer Modern Math"),
+  $std.math.scr(it)$,
+)
+只自定义`cal`也可行 $cal(L)^p != scr(L)^p, cal(a)_n = scr(a)_n$
+```
+:::
 
 ## 法二：使用原版字体
 
