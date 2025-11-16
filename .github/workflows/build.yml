@@ -28,19 +28,16 @@ jobs:
         typst-version: v0.14.0
 
     - name: Restore cached fonts
-      # Downloading fonts.7z is time consuming.
+      # Downloading fonts is time consuming.
       uses: actions/cache@v4
       id: fonts-cache
       with:
         path: |
           fonts/
-        key: fonts-2025-11-03
-    - name: Prepare fonts
+        key: fonts-${{ hashFiles('scripts/download-fonts.sh') }}
+    - name: Download fonts
       if: steps.fonts-cache.outputs.cache-hit != 'true'
-      shell: bash
-      run: |
-        curl -OL https://github.com/typst-doc-cn/guide/releases/download/files/fonts.7z
-        7z x fonts.7z -ofonts
+      run: bash scripts/download-fonts.sh
 
     - uses: pnpm/action-setup@v4
     - uses: actions/setup-node@v4

@@ -9,7 +9,7 @@ tags: [equation]
 ```typst
 -- #show link: set text(blue.lighten(20%))
 -- #set page(width: auto, height: auto, margin: 1em)
-#import "@preview/mitex:0.2.5": *
+#import "@preview/mitex:0.2.6": *
 
 Write inline equations like #mi("x") or #mi[y].
 

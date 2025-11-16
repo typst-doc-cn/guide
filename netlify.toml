@@ -16,8 +16,7 @@ rm -r typst-x86_64-unknown-linux-musl && \
 \
 export PATH=$PATH:$(pwd) && \
 \
-curl -OL https://github.com/typst-doc-cn/guide/releases/download/files/fonts.7z && \
-7z x fonts.7z -ofonts && \
+bash scripts/download-fonts.sh && \
 \
 pnpm install && \
 sed -i "/base: '\\/guide\\/',/d" docs/.vitepress/config.ts && \
