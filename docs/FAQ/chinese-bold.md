@@ -22,3 +22,5 @@ tags: [chinese, text, font]
 现在可以使用*伪粗体*了
 
 ```
+
+另请参考：[如何控制嵌套`emph`和`strong`的样式？](./strong-emph.md)
