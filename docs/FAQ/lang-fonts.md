@@ -31,7 +31,7 @@ tags: [font, chinese, text]
 ::: details 如果你是剩下的 1%
 如果你发现了中文引号等标点不对劲，那么你可以用这个修复 `#show regex("[“‘’”]|——|……"): set text(font: "SimSun")`。
 
-如果你还需要对中文字体进行特殊处理，例如只缩小中文字体的大小，可以考虑用正则表达式[匹配 script](https://www.unicode.org/reports/tr18/tr18-21.html#Script_Property) 进行 hack：`#show regex("\p{sc=Hani}+"): set text(size: 0.8em)`。
+如果你还需要对中文字体进行特殊处理，例如只缩小中文字体的大小，请参考[如何协调中西字体的字号](./lang-font-size.md)。
 
 Tracking Issue：
 - 按语言配置字体 https://github.com/typst/typst/issues/794

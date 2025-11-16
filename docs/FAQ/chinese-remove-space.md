@@ -24,7 +24,18 @@ tags: [layout, text]
 效果怎么样。✓
 ```
 
-::: details 微小副作用
+不过建议使用 [cjk-unbreak](https://typst.app/universe/package/cjk-unbreak) 而非自行构造，这样可以避免某些细节问题。
+
+```typst
+-- #set page(width: auto, height: auto, margin: 1em)
+#import "@preview/cjk-unbreak:0.2.1": remove-cjk-break-space // [!code ++]
+#show: remove-cjk-break-space // [!code ++]
+
+测试一下，
+效果怎么样。✓
+```
+
+::: details 细节问题
 
 在整个正则表达式匹配的边界，标点宽度会有问题。
 
@@ -42,6 +53,17 @@ tags: [layout, text]
 
 “七斤嫂，你‘恨棒打人’。
 ……”✗
+```
+
+而 cjk-unbreak 不存在这个问题。
+
+```typst
+-- #set page(width: auto, height: auto, margin: 1em)
+#import "@preview/cjk-unbreak:0.2.1": remove-cjk-break-space
+#show: remove-cjk-break-space
+
+“七斤嫂，你‘恨棒打人’。
+……”✓
 ```
 
 相关 issue：[Ignore linebreaks between CJK characters in source code · #792](https://github.com/typst/typst/issues/792)
