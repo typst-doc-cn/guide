@@ -16,14 +16,15 @@ jobs:
           # All history is required for https://vitepress.dev/reference/default-theme-last-updated
           fetch-depth: 0
 
-      - uses: typst-community/setup-typst@v4
-        with:
-          typst-version: v0.14.0
+      # The order matters https://github.com/typst-community/setup-typst/issues/51
       - name: Setup old typst versions
         uses: typst-community/setup-typst@v4
         with:
           typst-version: v0.13.1
           executable-name: typst-0.13.1
+      - uses: typst-community/setup-typst@v4
+        with:
+          typst-version: v0.14.0
 
       - name: Restore cached fonts
         # Downloading fonts.7z is time consuming.
