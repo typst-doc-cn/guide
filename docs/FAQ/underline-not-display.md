@@ -23,6 +23,8 @@ tags: [text]
 - 空空#underline("\u{3000}" * 2)如也
 ```
 
+已知问题：若这些空格刚好在换行处，下划线会消失不见。
+
 ## 换用 `box`
 
 也可换用[`box`](https://typst.app/docs/reference/layout/box/#parameters-baseline)，直接指定长度：
@@ -59,3 +61,5 @@ tags: [text]
 ```
 
 :::
+
+已知问题：`box`不支持换行。
