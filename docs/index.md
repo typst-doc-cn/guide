@@ -51,13 +51,21 @@ hero:
 
 ## 推荐资料
 
-小蓝书 Web 版（入门必读！）：https://typst-doc-cn.github.io/tutorial/
+中文社区资料：
 
-中文 Awesome Typst 列表：https://github.com/qjcg/awesome-typst/
+- **🧭 本站**——导航、快速介绍、常见问题解答
+- [**📘 小蓝书 The Raindrop-Blue Book**](https://typst-doc-cn.github.io/tutorial/)——入门教程
+- [**📜 中文文档**](https://typst-doc-cn.github.io/docs/)——官方文档的非官方翻译
+- [clreq-gap for typst](https://typst-doc-cn.github.io/clreq/)——分析 Typst 与中文排版的差距
+- [可用于 hayagriva 的 CSL 样式](https://typst-doc-cn.github.io/csl-sanitizer/)——让 Zotero 中文社区的参考文献样式能被 Typst 接受
+- [泰普斯屯](https://typst-doc-cn.github.io/news/)——新闻信息汇总
 
-Typst 非官方中文文档网站：https://typst-doc-cn.github.io/docs/
+其它资料：
 
-Typst Examples Book（英文，有非常多的例子）：https://sitandr.github.io/typst-examples-book/book/
+- [**📜 官方文档 Typst Documentation**](https://typst.app/docs/)——教程、参考手册、指南（英文）
+- [**🌌 官方宇宙 Typst Universe**](https://typst.app/universe)——浏览各种包、模板的平台（英文为主，个别页面有中文）
+- [Typst Examples Book](https://sitandr.github.io/typst-examples-book/book/)——有非常多例子（英文）
+- [Awesome Typst](https://github.com/qjcg/awesome-typst/)（英文为主，亦有中文专版）
 
 ## 问卷调查
 
@@ -67,9 +75,24 @@ Typst Examples Book（英文，有非常多的例子）：https://sitandr.github
 
 ## 用户社区
 
-中文聊天群
+中文社区：
 
-- QQ：793548390 [点击此处加入](https://qm.qq.com/q/MQO6j6jCw2)
-- Telegram：<https://t.me/typst_zh>
+- 🐧 QQ：[**主群 793548390**](https://qm.qq.com/q/MQO6j6jCw2)、[聊天室 589034686](https://qm.qq.com/q/gYgU5vgbRK)、[开发群 833549182](https://qm.qq.com/q/FuRvQHGQU0)（点击链接加入）
+- Telegram：[typst_zh](https://t.me/typst_zh)
 
-官方 Discord：https://discord.gg/2uDybryKPe
+官方社区（英文）：
+
+- [**🙏 论坛**](https://forum.typst.app/)——讨论和问答平台，支持搜索过往解答
+- [Discord](https://discord.gg/2uDybryKPe)——聊天及开发沟通平台，需要科学上网
+- 其它平台见[官方文档 Community 页面](https://typst.app/docs/community/)
+
+## 本站镜像
+
+如果您本次访问缓慢，可尝试切换站点。
+
+- 主站：[GitHub Pages](https://typst-doc-cn.github.io/guide)
+- 镜像站：[Vercel (guide.typst.dev)](https://guide.typst.dev)
+- 镜像站：[Cloudflare (typst.dev/guide)](https://typst.dev/guide/)
+- 测试站：[Netlify](https://luxury-mochi-9269a9.netlify.app/)
+
+其中镜像站不定期手动更新，有时略滞后。
