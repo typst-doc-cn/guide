@@ -50,15 +50,20 @@ type PreprocessResult = {
  * @returns 预处理结果
  */
 function preprocess(src: string): PreprocessResult {
-  const HIDE = '-- ';
+  const HIDE = '--';
+  const HIDE_SPACE = `${HIDE} `;
 
   const lines = src.split('\n');
 
   return {
-    display: lines.filter((l) => !l.startsWith(HIDE)).join('\n'),
+    display: lines
+      .filter((l) => !(l === HIDE || l.startsWith(HIDE_SPACE)))
+      .join('\n'),
     compiling: TEMPLATE.replace(
       '<<src>>',
-      lines.map((l) => removePrefix(l, HIDE)).join('\n'),
+      lines
+        .map((l) => (l === HIDE ? '' : removePrefix(l, HIDE_SPACE)))
+        .join('\n'),
     ),
   };
 }
