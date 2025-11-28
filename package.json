@@ -5,13 +5,16 @@
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
-    "serve": "vitepress serve docs"
+    "serve": "vitepress serve docs",
+    "fmt": "prettier . --write"
   },
   "devDependencies": {
     "@types/markdown-it": "^14.1.2",
+    "@types/markdown-it-footnote": "^3.0.4",
     "@types/node": "^22.13.1",
     "@types/which": "^3.0.4",
     "@waline/client": "^3.5.1",
+    "prettier": "^3.7.1",
     "unocss": "^0.63.6",
     "vitepress": "^1.6.3",
     "vue": "^3.5.13",

@@ -1,4 +1,5 @@
 # 一些未整理的例子
+
 ## 下划线 {#underline}
 
 ```typst
@@ -8,7 +9,7 @@
 #let uline(answer: false, body) = context {
   let show_all_answer = false
   show_all_answer = true
-  
+
   let y = 1em / 5
   let l = measure(body).width + 3pt
   if body.has("block") { // 内容是否是公式

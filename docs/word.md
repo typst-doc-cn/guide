@@ -1,5 +1,5 @@
 ---
-outline: [2,3]
+outline: [2, 3]
 ---
 
 # 面向 Word 用户的快速入门向导
@@ -53,6 +53,7 @@ package 就是「包」，在小蓝书中翻译为「库」，是一些由 [Typs
 在这里，我们引入了 `pointless-size` 包，并使用了其中的 `zh` 函数来设置字号。pointless 包中更多的字号与命令的对应请参考下图：
 
 <!-- https://github.com/YDX-2147483647/typst-pointless-size/blob/main/docs/conversion-table.typ -->
+
 ![字号对照](./images/pointless-size.svg)
 
 ### 常用的字体设置与装饰
@@ -205,19 +206,19 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 ```typst
 -- #set page(height: auto, width: 300pt, margin: (right: 25%, rest: 15pt))
 -- #set text(top-edge: "ascender", bottom-edge: "descender")
--- 
+--
 -- // A sample text for measuring font metrics.
 -- #let sample-text = [国]
--- 
+--
 -- // Number of lines in each paragraph
 -- #let n-rows = (4, 2, 2, 1, 1)
--- 
+--
 -- #context place({
 --   let line-height = measure(sample-text).height
--- 
+--
 --   let rows(n) = ((line-height,) * n).intersperse(par.leading)
 --   let jumps = n-rows.map(rows).intersperse(par.spacing).flatten()
--- 
+--
 --   grid(
 --     ..jumps
 --       .enumerate()
@@ -230,10 +231,10 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 --         )
 --       } else {
 --         // Put an annotation for the gap
--- 
+--
 --         // `(x, y).at(hh)` becomes `x` for leading, or `y` for spacing.
 --         let hh = if h == par.spacing { 1 } else { 0 }
--- 
+--
 --         align(end, block(
 --           height: h,
 --           outset: (right: (0.5em, 1em).at(hh)),
@@ -251,7 +252,7 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 --       })
 --   )
 -- })
--- 
+--
 -- #set text(gray, lang: "zh")
 -- #set par(justify: true, first-line-indent: (amount: 2em, all: true))
 四千年來時時喫人的地方，今天纔明白，我也在其中混了多年；大哥正管着家務，妹子恰恰死了，他未必不和在飯菜裏，暗暗給我們喫。

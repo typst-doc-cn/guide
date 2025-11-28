@@ -1,0 +1,5 @@
+/pnpm-lock.yaml
+
+# TypstRender assumes that there is no newline after the front matter,
+# but Prettier does not support configuring that. Therefore, ignore them.
+/docs/FAQ/*.md

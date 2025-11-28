@@ -2,7 +2,7 @@
   <div class="grid-view-container">
     <div class="controls-container">
       <label class="switch">
-        <input type="checkbox" v-model="is3dEffectActive">
+        <input type="checkbox" v-model="is3dEffectActive" />
         <span class="slider round"></span>
       </label>
       <span>Enable 3D Effect</span>
@@ -21,12 +21,12 @@ export default {
   provide() {
     return {
       // Provide a function to ensure reactivity when accessed by injected components
-      is3dEffectEnabled: () => this.is3dEffectActive 
+      is3dEffectEnabled: () => this.is3dEffectActive,
     };
   },
   inject: ['is3dEffectEnabled'],
-  name: 'GridView'
-}
+  name: 'GridView',
+};
 </script>
 
 <style scoped>
@@ -41,9 +41,11 @@ export default {
   color: var(--vp-c-text-1);
   padding: 0.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000; /* Ensure it's above other content */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Basic Switch CSS */
@@ -54,7 +56,7 @@ export default {
   height: 20px; /* Smaller switch */
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -68,26 +70,26 @@ export default {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 16px; /* Adjusted for smaller switch */
-  width: 16px;  /* Adjusted for smaller switch */
-  left: 2px;    /* Adjusted for smaller switch */
-  bottom: 2px;  /* Adjusted for smaller switch */
+  width: 16px; /* Adjusted for smaller switch */
+  left: 2px; /* Adjusted for smaller switch */
+  bottom: 2px; /* Adjusted for smaller switch */
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #2196f3;
 }
 
 input:checked + .slider:before {
@@ -105,7 +107,10 @@ input:checked + .slider:before {
 .grid-view-container {
   position: relative; /* Needed for absolute positioning of controls */
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust minmax for desired card size */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(250px, 1fr)
+  ); /* Adjust minmax for desired card size */
   gap: 1rem; /* Adjust gap as needed */
   padding: 1rem;
 }
