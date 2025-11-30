@@ -66,5 +66,4 @@ tags: [layout, text]
 ……”✓
 ```
 
-相关 issue：[Ignore linebreaks between CJK characters in source code · #792](https://github.com/typst/typst/issues/792)
 :::

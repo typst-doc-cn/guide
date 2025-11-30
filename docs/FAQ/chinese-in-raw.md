@@ -44,5 +44,3 @@ tags: [font, chinese, raw, text]
 
 - [代码块里多了空格/代码块的对齐非常奇怪](./code-block-justify.md)
 - [【已修复】代码块中西文间有多余的空格](./cjk-latin-spacing-in-raw.md)
-
-<!-- 汉字默认等宽字体 https://github.com/typst/typst/issues/3385 -->

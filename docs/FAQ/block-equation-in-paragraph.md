@@ -24,8 +24,6 @@ shows that the integral of $x + y$ is $z$.
 
 以下以公式为例，但方法也适用于 tight list 和 figure。
 
-相关 issue：[Paragraph should be able to contain tight lists and block-level equations · #3206](https://github.com/typst/typst/issues/3206)
-
 ### 基础情况
 
 用 `#box()` 将行间数学公式包住，且不能有空行。

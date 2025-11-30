@@ -1,5 +1,7 @@
 ---
 tags: [font, text, chinese]
+links:
+  - https://github.com/typst/typst/issues/185
 ---
 
 # 如何设置（中文）字体？
@@ -68,7 +70,7 @@ tags: [font, text, chinese]
    - Style: Normal, Weight: 400, Stretch: 100%
    ```
 
-   至于以下 Source Han Sans CN VF 则是可变字体（variable font），[尚不支持](https://github.com/typst/typst/issues/185)，显示只有 250 一种特殊字重，基本不可用。
+   至于以下 Source Han Sans CN VF 则是可变字体（variable font），尚不支持，显示只有 250 一种特殊字重，基本不可用。
 
    ```
    Source Han Sans CN VF
