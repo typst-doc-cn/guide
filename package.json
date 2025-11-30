@@ -9,11 +9,13 @@
     "fmt": "prettier . --write"
   },
   "devDependencies": {
+    "@std/fmt": "jsr:^1.0.8",
     "@types/markdown-it": "^14.1.2",
     "@types/markdown-it-footnote": "^3.0.4",
     "@types/node": "^22.13.1",
     "@types/which": "^3.0.4",
     "@waline/client": "^3.5.1",
+    "es-toolkit": "^1.42.0",
     "prettier": "^3.7.1",
     "unocss": "^0.63.6",
     "vite": "^5.4.14",

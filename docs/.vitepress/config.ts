@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress';
 import footnote from 'markdown-it-footnote';
 import UnoCSS from 'unocss/vite';
+import { MarkdownTransform } from './plugins/markdown_transform';
 import TypstRender from './typst_render';
 
 // https://vitepress.dev/reference/site-config
@@ -120,6 +121,6 @@ gtag('config', 'G-NL1RYQ4PW7');`,
   },
 
   vite: {
-    plugins: [UnoCSS()],
+    plugins: [UnoCSS(), MarkdownTransform()],
   },
 });
