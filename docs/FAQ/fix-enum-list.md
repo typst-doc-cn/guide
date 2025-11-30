@@ -1,5 +1,7 @@
 ---
 tags: [list, layout, bug]
+links:
+  - https://github.com/typst/typst/issues/1204
 ---
 
 # 修复列表的终极方案
@@ -109,5 +111,3 @@ Typst 当前版本容易遇到列表编号或者符号与内容错位的问题�
 ## 参考阅读
 
 另请参阅 [itemize 方法](./enum-list-marker-fix.md)，两种方法的实现效果略有差异：本页面中方法在默认情况下会使内容延伸到编号下方的空白处，而 `itemize` 方法不会。
-
-相关 issue：[List and enum markers are not aligned with the baseline of the item's contents · Issue #1204 · typst/typst](https://github.com/typst/typst/issues/1204)

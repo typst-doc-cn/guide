@@ -1,6 +1,8 @@
 ---
 tags: [layout, bug, list]
 outline: [2, 3]
+links:
+  - https://github.com/typst/typst/issues/1204
 ---
 
 # 列表符号/编号和内容错位怎么办？
@@ -227,5 +229,3 @@ outline: [2, 3]
 ## 参考阅读
 
 在 [修复列表的终极方案](./fix-enum-list.md) 页面中提及了另一种实现符号/编号与内容正确对齐的方法，其实现效果在默认情况下会使内容延伸到编号下方的空白处，可另行参考。
-
-相关 issue：[List and enum markers are not aligned with the baseline of the item's contents · Issue #1204 · typst/typst](https://github.com/typst/typst/issues/1204)

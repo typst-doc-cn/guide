@@ -1,11 +1,10 @@
 ---
 tags: [chinese, bug, text]
 ---
+
 # 行内公式与中文之间没有自动空格
 
 相关问题：想问下，typst 的盘古之白什么时候支持公式和文字之间的空格
-
-相关 issue：https://github.com/typst/typst/issues/2703
 
 临时修复方法：
 

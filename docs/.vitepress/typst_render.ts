@@ -7,7 +7,8 @@ import { env } from 'node:process';
 import _which from 'which';
 
 import TEMPLATE from './typst_template';
-import { prettify, readToString, removePrefix } from './util';
+import { prettify, removePrefix } from './util';
+import { readToString } from './util_node';
 
 const which = (cmd: string): Promise<string | null> =>
   _which(cmd)
@@ -283,7 +284,7 @@ function TypstRender(md: MarkdownIt) {
         compiling,
         {
           path: `docs/${env.relativePath}`,
-          // 加四是因为 front matter
+          // TODO: 目前加四是因为 front matter，最好改成 front matter 实际行数
           line_begin: token.map ? token.map[0] + 4 : undefined,
         },
         executable,

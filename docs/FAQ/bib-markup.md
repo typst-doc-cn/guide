@@ -1,10 +1,12 @@
 ---
 tags: bib
+links:
+  - https://github.com/typst/typst/issues/1975
 ---
 
 # 参考文献 title 里如何加上下标等样式？
 
-目前没有内置支持，因为没设计好接口。（[#1975](https://github.com/typst/typst/issues/1975)）
+目前没有内置支持，因为没设计好接口。
 
 ## 法一：自己定义标记，`show regex`
 

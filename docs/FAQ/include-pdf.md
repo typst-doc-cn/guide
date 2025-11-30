@@ -1,13 +1,16 @@
 ---
 tags: [tool, pdf]
+links:
+  - https://github.com/typst/typst/issues/6644
 ---
+
 # 能否嵌入 PDF 文件？
 
 ::: tip ✅ Typst 0.14 已改进
 
 [#6623](https://github.com/typst/typst/pull/6623) 已经支持直接`image("file.pdf", page: 5, width: …)`，详见 [Image Function – Typst Documentation](https://typst.app/docs/reference/visualize/image/#parameters-format)。
 
-不过尚不支持获取 PDF 总页数，详见 [#6644](https://github.com/typst/typst/issues/6644)。
+不过尚不支持获取 PDF 总页数。
 
 :::
 

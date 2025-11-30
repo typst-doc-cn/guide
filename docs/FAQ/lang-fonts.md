@@ -1,6 +1,9 @@
 ---
 tags: [font, chinese, text]
+links:
+  - https://github.com/typst/typst/issues/794
 ---
+
 # 中英文如何使用不同的字体？
 
 ::: tip ✅ Typst 0.13 已改进
@@ -32,7 +35,4 @@ tags: [font, chinese, text]
 如果你发现了中文引号等标点不对劲，那么你可以用这个修复 `#show regex("[“‘’”]|——|……"): set text(font: "SimSun")`。
 
 如果你还需要对中文字体进行特殊处理，例如只缩小中文字体的大小，请参考[如何协调中西字体的字号](./lang-font-size.md)。
-
-Tracking Issue：
-- 按语言配置字体 https://github.com/typst/typst/issues/794
 :::
