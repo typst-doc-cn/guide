@@ -35,7 +35,6 @@ TODO：Tinymist, typst.ts, Typst-Preview, Typstyle, Touying, numbly, 中文社�
 
 本页面欢迎贡献。具体方式请参考 [贡献须知](garden-help.md) 和源代码。
 
-
 <script>
 import ShowyCard from './ShowyCard.vue';
 import GridView from './GridView.vue'

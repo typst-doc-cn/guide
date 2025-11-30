@@ -4,22 +4,23 @@ import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { env } from 'node:process';
-import which from 'which';
+import _which from 'which';
 
 import TEMPLATE from './typst_template';
 import { prettify, readToString, removePrefix } from './util';
 
-const AVAILABLE_EXECUTABLES = await Promise.all([
-  'typst',
-  'typst-0.13.1',
-].map((cmd) => which(cmd).then((_) => cmd).catch((_) => null))).then(
-  (executables) => executables.filter((cmd) => cmd !== null),
-);
+const which = (cmd: string): Promise<string | null> =>
+  _which(cmd)
+    .then((_) => cmd)
+    .catch((_) => null);
+
+const AVAILABLE_EXECUTABLES = await Promise.all(
+  ['typst', 'typst-0.13.1'].map(which),
+).then((executables) => executables.filter((cmd) => cmd !== null));
 assert(
   AVAILABLE_EXECUTABLES.includes('typst'),
-  `Failed to find the typst executable in $PATH. Found: ${
-    AVAILABLE_EXECUTABLES.join(', ')
-  }`,
+  'Failed to find the typst executable in $PATH. Found: ' +
+    AVAILABLE_EXECUTABLES.join(', '),
 );
 console.log(
   `Found available typst executables: ${AVAILABLE_EXECUTABLES.join(', ')}`,
@@ -49,15 +50,20 @@ type PreprocessResult = {
  * @returns 预处理结果
  */
 function preprocess(src: string): PreprocessResult {
-  const HIDE = '-- ';
+  const HIDE = '--';
+  const HIDE_SPACE = `${HIDE} `;
 
   const lines = src.split('\n');
 
   return {
-    display: lines.filter((l) => !l.startsWith(HIDE)).join('\n'),
+    display: lines
+      .filter((l) => !(l === HIDE || l.startsWith(HIDE_SPACE)))
+      .join('\n'),
     compiling: TEMPLATE.replace(
       '<<src>>',
-      lines.map((l) => removePrefix(l, HIDE)).join('\n'),
+      lines
+        .map((l) => (l === HIDE ? '' : removePrefix(l, HIDE_SPACE)))
+        .join('\n'),
     ),
   };
 }
@@ -84,15 +90,18 @@ function compileTypst(
   src: string,
   info: { path: string; line_begin?: number },
   typst_executable: string = 'typst',
-  policy: 'allow-any' | 'expect-warning' | 'deny-warning-and-error' =
-    'allow-any',
+  policy:
+    | 'allow-any'
+    | 'expect-warning'
+    | 'deny-warning-and-error' = 'allow-any',
 ): CompileResult {
   // 输出设置
 
   // 计算源码的 SHA1 哈希值
-  const hash = createHash('sha1').update(
-    `cache-version: 2025-11-05\0${typst_executable}\0${src}`,
-  ).digest('hex').slice(0, 10);
+  const hash = createHash('sha1')
+    .update(`cache-version: 2025-11-05\0${typst_executable}\0${src}`)
+    .digest('hex')
+    .slice(0, 10);
   const outPrefix = 'docs/generated/';
   const pageFilePattern = `${outPrefix}${hash}_{n}.png`;
   const logFile = `${outPrefix}${hash}.log`;
@@ -111,15 +120,17 @@ function compileTypst(
     mkdirSync(outPrefix, { recursive: true });
 
     // 编译
-    const { stderr, stdout, error, status } = spawnSync(typst_executable, [
-      'compile',
-      '-', // 用 stdin 输入，这样文档多了后容易改成并发
-      pageFilePattern,
-      '--font-path',
-      'fonts',
-    ], {
-      input: src,
-    });
+    const { stderr, stdout, error, status } = spawnSync(
+      typst_executable,
+      [
+        'compile',
+        '-', // 用 stdin 输入，这样文档多了后容易改成并发
+        pageFilePattern,
+        '--font-path',
+        'fonts',
+      ],
+      { input: src },
+    );
 
     assert(error === undefined, `Failed to call ${typst_executable}: ${error}`);
 
@@ -150,15 +161,18 @@ function compileTypst(
   }
 
   // 读取日志
-  const log = readToString(logFile)?.replaceAll(
-    // 删除日志中的无用路径（编译时的工作目录）
-    /(  ┌─ ).+(<stdin>:)/g,
-    '$1$2',
-  )?.replaceAll(
-    // 删除下载包的记录
-    /(^|\n)downloading @preview\/.+\n.+ ETA: 0 s($|\n)/g,
-    '',
-  )?.trim();
+  const log = readToString(logFile)
+    ?.replaceAll(
+      // 删除日志中的无用路径（编译时的工作目录）
+      /(  ┌─ ).+(<stdin>:)/g,
+      '$1$2',
+    )
+    ?.replaceAll(
+      // 删除下载包的记录
+      /(^|\n)downloading @preview\/.+\n.+ ETA: 0 s($|\n)/g,
+      '',
+    )
+    ?.trim();
   const exitedWithNonzero = existsSync(statusFile);
 
   // 适当报错
@@ -173,15 +187,17 @@ function compileTypst(
     if (info.line_begin) {
       location += `:${info.line_begin}`;
     }
-    console.error([
-      `Error compiling Typst document:`,
-      `  Source (starting at ${location}):`,
-      prettify(src, { indent: '    ', max_lines: 4 }),
-      `  Log (${logFile}):`,
-      prettify(log ?? '', { indent: '    ', max_lines: 8 }),
-      `  Result: ${result}`,
-      `  Compiler: ${typst_executable}`,
-    ].join('\n'));
+    console.error(
+      [
+        `Error compiling Typst document:`,
+        `  Source (starting at ${location}):`,
+        prettify(src, { indent: '    ', max_lines: 4 }),
+        `  Log (${logFile}):`,
+        prettify(log ?? '', { indent: '    ', max_lines: 8 }),
+        `  Result: ${result}`,
+        `  Compiler: ${typst_executable}`,
+      ].join('\n'),
+    );
   }
   assert(
     !shouldPanic,
@@ -196,9 +212,10 @@ function compileTypst(
  * @param tags markdown 代码块中指定的语言标签（“typst”之后的部分）
  * @returns 选择结果和 markdown 格式提示信息
  */
-function determineExecutable(
-  tags: string[],
-): { executable: string; info: string | null } {
+function determineExecutable(tags: string[]): {
+  executable: string;
+  info: string | null;
+} {
   const candidates = tags.filter((t) => t.startsWith('v'));
   assert(candidates.length <= 1, `Failed to parse language tags: ${tags}`);
 
@@ -230,7 +247,8 @@ function determineExecutable(
 }
 
 function TypstRender(md: MarkdownIt) {
-  const defaultRender = md.renderer.rules.fence ||
+  const defaultRender =
+    md.renderer.rules.fence ||
     function (tokens, idx, options, env, self) {
       return self.renderToken(tokens, idx, options);
     };
@@ -256,9 +274,10 @@ function TypstRender(md: MarkdownIt) {
       const policy = tags.includes('expect-warning')
         ? 'expect-warning'
         : DEFAULT_POLICY;
-      const policyHtml = policy === 'expect-warning'
-        ? md.render('::: tip\n上例出现警告是正常现象。\n:::')
-        : '';
+      const policyHtml =
+        policy === 'expect-warning'
+          ? md.render('::: tip\n上例出现警告是正常现象。\n:::')
+          : '';
 
       const result = compileTypst(
         compiling,
@@ -273,13 +292,13 @@ function TypstRender(md: MarkdownIt) {
 
       const codeHtml = defaultRender(tokens, idx, options, env, self);
 
-      const imagesHtml = result.pages.map((path) =>
-        `<img src="${path}" alt="Typst compiled image"/>`
-      ).join('');
+      const imagesHtml = result.pages
+        .map((path) => `<img src="${path}" alt="Typst compiled image"/>`)
+        .join('');
 
       const logHtml = result.log
-        // 日志本身可能已经含“```”，故用四个“`”。
-        ? md.render(['````log', result.log, '````'].join('\n'))
+        ? // 日志本身可能已经含“```”，故用四个“`”。
+          md.render(['````log', result.log, '````'].join('\n'))
         : '';
 
       return `${codeHtml}${imagesHtml}${versionHtml}${logHtml}${policyHtml}`;

@@ -71,14 +71,18 @@ main .vp-doc h1 {
   text-underline-offset: 4px;
 
   /* Dim underline color and append to transition */
-  transition: color 0.25s, opacity 0.25s, text-decoration-color 0.25s;
+  transition:
+    color 0.25s,
+    opacity 0.25s,
+    text-decoration-color 0.25s;
   text-decoration-color: color-mix(
     in srgb,
     var(--vp-c-brand-1) 50%,
     transparent 50%
   );
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     text-decoration-color: unset;
   }
 }

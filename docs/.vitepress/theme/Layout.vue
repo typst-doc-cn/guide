@@ -4,7 +4,7 @@ import DefaultTheme from 'vitepress/theme';
 import { computed } from 'vue';
 import { Waline } from '@waline/client/component';
 import { makeTags } from './utils';
-import { getTypstVersion } from './typst_version'
+import { getTypstVersion } from './typst_version';
 import '@waline/client/style';
 
 const { Layout } = DefaultTheme;
@@ -62,8 +62,11 @@ const typstVersion = computed(() => {
       <p
         v-if="typstVersion !== null"
         class="text-align-right"
-        style="font-size: 14px; font-weight: 500; color: var(--vp-c-text-2);"
-      >更新时针对 typst {{ typstVersion.version }}<span v-if="typstVersion.latest">（最新版）</span></p>
+        style="font-size: 14px; font-weight: 500; color: var(--vp-c-text-2)"
+      >
+        更新时针对 typst {{ typstVersion.version
+        }}<span v-if="typstVersion.latest">（最新版）</span>
+      </p>
     </template>
     <template #doc-after>
       <Waline :serverURL="serverURL" :path="path" />

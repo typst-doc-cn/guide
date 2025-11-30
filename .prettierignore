@@ -1,0 +1,6 @@
+/pnpm-lock.yaml
+
+# 忽略这些 markdown 文件的原因：
+# - git 历史会用于计算“更新时针对的 typst 版本”，故不宜随意更改文件
+# - TypstRender 报告行号时会假定 front matter 后没有换行，而 Prettier 强制换行，并且无法禁用
+/docs/FAQ/*.md
