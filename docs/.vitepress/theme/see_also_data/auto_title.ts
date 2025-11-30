@@ -3,6 +3,7 @@ import assert from 'node:assert';
 import { duration_fmt, removePrefix } from '../../util';
 import { execFile } from '../../util_node';
 import type { Link, RelativePath } from '../see_also.data';
+import { FileCacheWithInit } from './caching.ts';
 
 export const AUTO_TITLE = '⟨AUTO_TITLE⟩';
 
@@ -220,7 +221,14 @@ function generateQuery(meta_list: (IssueMeta | PullMeta)[]): {
 type SerializedMeta = string;
 
 /** A map from serialized metadata to their states. */
-const _GITHUB_STATES_CACHE = new Map<SerializedMeta, IssueState | PullState>();
+const _GITHUB_STATES_CACHE = new FileCacheWithInit<
+  Map<SerializedMeta, IssueState | PullState>
+>(
+  'github_states.json',
+  (value) => JSON.stringify(Array.from(value.entries())),
+  (raw) => new Map(JSON.parse(raw)),
+  new Map(),
+);
 
 function serialize(item: IssueMeta | PullMeta): SerializedMeta {
   return JSON.stringify([item.repo, item.num, item.type]);
@@ -251,9 +259,11 @@ async function fetchStates(meta_list: (IssueMeta | PullMeta)[]): Promise<void> {
   // This will be `<` if `meta_list` has duplicates.
   assert(metaFlat.length <= meta_list.length);
 
+  const cache = _GITHUB_STATES_CACHE.get();
   for (const [meta, state] of zip(metaFlat, stateFlat)) {
-    _GITHUB_STATES_CACHE.set(meta, state);
+    cache.set(meta, state);
   }
+  _GITHUB_STATES_CACHE.save();
 }
 
 /**
@@ -276,27 +286,29 @@ async function tryResolveViaGitHub(targets: Link[]): Promise<void> {
 
   // 1. Update cache
 
+  const cache = _GITHUB_STATES_CACHE.get();
   const fetchPlan = relevant.flatMap(([_link, meta]) =>
-    _GITHUB_STATES_CACHE.has(serialize(meta)) ? [] : meta,
+    cache.has(serialize(meta)) ? [] : meta,
   );
-
-  try {
-    await fetchStates(fetchPlan);
-  } catch (e) {
-    // @ts-ignore
-    if (e.code === 'ENOENT') {
-      console.warn(
-        '[Warning] GitHub CLI is not available. Skip resolving titles via GitHub for `<SeeAlso>`.',
-      );
-      return;
+  if (fetchPlan.length > 0) {
+    try {
+      await fetchStates(fetchPlan);
+    } catch (e) {
+      // @ts-ignore
+      if (e.code === 'ENOENT') {
+        console.warn(
+          '[Warning] GitHub CLI is not available. Skip resolving titles via GitHub for `<SeeAlso>`.',
+        );
+        return;
+      }
+      throw e;
     }
-    throw e;
   }
 
   // 2. Use the cache to populate titles
 
   for (const [link, meta] of relevant) {
-    const state = _GITHUB_STATES_CACHE.get(serialize(meta));
+    const state = cache.get(serialize(meta));
     assert(state !== undefined);
 
     const repoNum = `${removePrefix(meta.repo, 'typst/')}#${meta.num}`;
