@@ -1,6 +1,7 @@
 import { removePrefix } from '../../util';
 import type { Link, RelativePath } from '../see_also.data';
 import { AUTO_TITLE } from './auto_title';
+import { FileCache } from './caching.ts';
 
 const GAP_BASE: `https://${string}/` = 'https://typst-doc-cn.github.io/clreq/';
 
@@ -60,17 +61,20 @@ function formatWorkaround({ dest, note }: WorkaroundMeta): string {
   return note ? `${note} (${humanDest})` : humanDest;
 }
 
-let _GAP_INDEX_CACHE: GapIndex | null = null;
+let _GAP_INDEX_CACHE = new FileCache<GapIndex>(
+  'gap_index.json',
+  JSON.stringify,
+  JSON.parse,
+);
 
 /** Fetch the index for clreq-gap for typst. */
 export async function fetchGapIndex(): Promise<GapIndex> {
-  if (_GAP_INDEX_CACHE !== null) {
-    return _GAP_INDEX_CACHE;
+  if (_GAP_INDEX_CACHE.get() === null) {
+    const gapIndex = await (await fetch(`${GAP_BASE}index.json`)).json();
+    _GAP_INDEX_CACHE.set(gapIndex);
+    _GAP_INDEX_CACHE.save();
   }
-
-  const gapIndex = await (await fetch(`${GAP_BASE}index.json`)).json();
-  _GAP_INDEX_CACHE = gapIndex;
-  return gapIndex;
+  return _GAP_INDEX_CACHE.get()!;
 }
 
 /** Parse the index for clreq-gap for typst. */
