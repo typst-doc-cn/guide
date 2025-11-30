@@ -284,7 +284,7 @@ function TypstRender(md: MarkdownIt) {
         compiling,
         {
           path: `docs/${env.relativePath}`,
-          // 加四是因为 front matter
+          // TODO: 目前加四是因为 front matter，最好改成 front matter 实际行数
           line_begin: token.map ? token.map[0] + 4 : undefined,
         },
         executable,
