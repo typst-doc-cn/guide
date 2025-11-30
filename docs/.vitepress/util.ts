@@ -3,6 +3,10 @@
  * @module
  */
 
+import { format as _format } from '@std/fmt/duration';
+
+export const duration_fmt = (ms: number) => _format(ms, { ignoreZero: true });
+
 /**
  * 格式化`doc`
  * - 每行前加`indent`

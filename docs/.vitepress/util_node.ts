@@ -3,7 +3,9 @@
  * @module
  */
 
+import { execFile as _execFile } from 'node:child_process';
 import { readFileSync } from 'node:fs';
+import { promisify } from 'node:util';
 
 /**
  * Read a file to string, return `undefined` if not existed
@@ -20,3 +22,5 @@ export function readToString(file: string): string | undefined {
     }
   }
 }
+
+export const execFile = promisify(_execFile);
