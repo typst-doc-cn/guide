@@ -7,7 +7,8 @@ import { env } from 'node:process';
 import _which from 'which';
 
 import TEMPLATE from './typst_template';
-import { prettify, readToString, removePrefix } from './util';
+import { prettify, removePrefix } from './util';
+import { readToString } from './util_node';
 
 const which = (cmd: string): Promise<string | null> =>
   _which(cmd)
