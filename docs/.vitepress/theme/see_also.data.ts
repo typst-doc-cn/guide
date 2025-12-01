@@ -10,7 +10,7 @@
  *
  * When modifying the page frontmatter, the loader may be called repeatedly. Therefore, network requests are cached.
  *
- * For maximal compatibility, features requires network or GitHub CLI are disabled granularly if not available.
+ * For maximal compatibility, features requires network or GitHub API are disabled granularly if not available.
  *
  * @module
  */

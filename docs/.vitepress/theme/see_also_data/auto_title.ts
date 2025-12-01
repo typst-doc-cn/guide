@@ -1,7 +1,7 @@
 import { zip } from 'es-toolkit';
 import assert from 'node:assert';
+import { env } from 'node:process';
 import { duration_fmt, removePrefix } from '../../util';
-import { execFile } from '../../util_node';
 import type { Link, RelativePath } from '../see_also.data';
 import { FileCacheWithInit } from './caching.ts';
 
@@ -158,29 +158,47 @@ type PullState = { title: string } & (
 );
 
 /**
- * Query GitHub GraphQL API using GitHub CLI.
+ * Query GitHub GraphQL API.
  * https://docs.github.com/en/graphql/reference/queries
  */
-async function queryGitHub(
-  query: string,
-  vars: Record<string, string | number> = {},
-): Promise<any> {
+async function queryGitHub(query: string): Promise<any> {
   const timeStart = Date.now();
 
-  const { stdout } = await execFile('gh', [
-    'api',
-    'graphql',
-    '--raw-field',
-    `query=${query}`,
-    ...Object.entries(vars).flatMap(([k, v]) => ['--field', `${k}=${v}`]),
-  ]);
+  const token = env.GH_TOKEN ?? env.GITHUB_TOKEN;
+  if (token === undefined) {
+    throw new Error(
+      'GitHub GraphQL API requires authentication, but no token is available. Please set $GITHUB_TOKEN (no scope required) to authenticate.',
+    );
+  }
 
+  const response = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ query }),
+  });
+  const result = await response.text();
+
+  if (!response.ok) {
+    throw new Error(
+      `GitHub API request failed: ${response.status} ${response.statusText}\n${result}`,
+    );
+  }
   console.log(
-    `📩 Got ${stdout.length} characters from GitHub API successfully in`,
+    `📩 Got ${result.length} characters from GitHub API successfully in`,
     `${duration_fmt(Date.now() - timeStart)}.`,
   );
 
-  return JSON.parse(stdout).data;
+  const { data, errors } = JSON.parse(result);
+  if (errors) {
+    throw new Error(
+      `GitHub API responses with error: ${JSON.stringify(errors, null, 2)}`,
+    );
+  }
+
+  return data;
 }
 
 /**
@@ -252,7 +270,22 @@ async function fetchStates(meta_list: (IssueMeta | PullMeta)[]): Promise<void> {
 
   const stateFlat: (IssueState | PullState)[] = Object.values(data)
     .map((items_of_a_repo) => Object.values(items_of_a_repo))
-    .flat();
+    .flat()
+    .map(({ __typename: typename, ...state }, i) => {
+      // Check the types match
+      const actualType =
+        typename === 'Issue'
+          ? 'issue'
+          : typename === 'PullRequest'
+            ? 'pull'
+            : typename;
+      const mismatched = grouped[i].filter((meta) => meta.type !== actualType);
+      assert(
+        mismatched.length === 0,
+        `the link type is wrong. Actual: ${actualType}; Found: ${JSON.stringify(mismatched)}`,
+      );
+      return state;
+    });
 
   assert.strictEqual(metaFlat.length, stateFlat.length);
 
@@ -265,6 +298,9 @@ async function fetchStates(meta_list: (IssueMeta | PullMeta)[]): Promise<void> {
   }
   _GITHUB_STATES_CACHE.save();
 }
+
+/** Warned metadata, saved to avoid repetitive warnings. */
+const _WARNED = new Set<SerializedMeta>();
 
 /**
  * Try to populate titles via GitHub in place.
@@ -294,14 +330,17 @@ async function tryResolveViaGitHub(targets: Link[]): Promise<void> {
     try {
       await fetchStates(fetchPlan);
     } catch (e) {
-      // @ts-ignore
-      if (e.code === 'ENOENT') {
+      if (!fetchPlan.every((meta) => _WARNED.has(serialize(meta)))) {
         console.warn(
-          '[Warning] GitHub CLI is not available. Skip resolving titles via GitHub for `<SeeAlso>`.',
+          '[Warning] GitHub API is not accessible. Skip resolving titles for the following links in <SeeAlso> via GitHub. (You can ignore this warning if you do not care those titles.)\n  ',
+          fetchPlan.map((meta) => `${meta.repo}#${meta.num} (${meta.type})`),
+          `\n  Cause: ${e}`,
         );
-        return;
+
+        for (const meta of fetchPlan) {
+          _WARNED.add(serialize(meta));
+        }
       }
-      throw e;
     }
   }
 
@@ -309,7 +348,10 @@ async function tryResolveViaGitHub(targets: Link[]): Promise<void> {
 
   for (const [link, meta] of relevant) {
     const state = cache.get(serialize(meta));
-    assert(state !== undefined);
+    if (state === undefined) {
+      // Skip this one if its cache is not ready, but allow others to reuse their caches.
+      continue;
+    }
 
     const repoNum = `${removePrefix(meta.repo, 'typst/')}#${meta.num}`;
 
