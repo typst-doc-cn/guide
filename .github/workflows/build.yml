@@ -46,6 +46,9 @@ jobs:
       - run: pnpm install
 
       - run: pnpm build
+        env:
+          GH_TOKEN: ${{ github.token }} # `<SeeAlso>` requires GitHub API
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

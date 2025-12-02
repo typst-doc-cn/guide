@@ -15,6 +15,9 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
     devDependencies:
+      '@std/fmt':
+        specifier: jsr:^1.0.8
+        version: '@jsr/std__fmt@1.0.8'
       '@types/markdown-it':
         specifier: ^14.1.2
         version: 14.1.2
@@ -30,12 +33,18 @@ importers:
       '@waline/client':
         specifier: ^3.5.1
         version: 3.5.1
+      es-toolkit:
+        specifier: ^1.42.0
+        version: 1.42.0
       prettier:
         specifier: ^3.7.1
         version: 3.7.1
       unocss:
         specifier: ^0.63.6
         version: 0.63.6(postcss@8.5.1)(rollup@4.32.0)(vite@5.4.14(@types/node@22.13.1))
+      vite:
+        specifier: ^5.4.14
+        version: 5.4.14(@types/node@22.13.1)
       vitepress:
         specifier: ^1.6.3
         version: 1.6.3(@algolia/client-search@5.20.0)(@types/node@22.13.1)(postcss@8.5.1)(search-insights@2.16.3)
@@ -478,6 +487,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@jsr/std__fmt@1.0.8':
+    resolution: {integrity: sha512-miZHzj9OgjuajrcMKzpqNVwFb9O71UHZzV/FHVq0E0Uwmv/1JqXgmXAoBNPrn+MP0fHT3mMgaZ6XvQO7dam67Q==, tarball: https://npm.jsr.io/~/11/@jsr/std__fmt/1.0.8.tgz}
 
   '@polka/url@1.0.0-next.28':
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
@@ -947,6 +959,9 @@ packages:
   entities@4.5.0:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
     engines: {node: '>=0.12'}
+
+  es-toolkit@1.42.0:
+    resolution: {integrity: sha512-SLHIyY7VfDJBM8clz4+T2oquwTQxEzu263AyhVK4jREOAwJ+8eebaa4wM3nlvnAqhDrMm2EsA6hWHaQsMPQ1nA==}
 
   esbuild@0.21.5:
     resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==}
@@ -1704,6 +1719,8 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@jsr/std__fmt@1.0.8': {}
+
   '@polka/url@1.0.0-next.28': {}
 
   '@rollup/pluginutils@5.1.4(rollup@4.32.0)':
@@ -2213,6 +2230,8 @@ snapshots:
   emoji-regex-xs@1.0.0: {}
 
   entities@4.5.0: {}
+
+  es-toolkit@1.42.0: {}
 
   esbuild@0.21.5:
     optionalDependencies:

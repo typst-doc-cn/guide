@@ -1,20 +1,11 @@
-import { readFileSync } from 'node:fs';
-
 /**
- * Read a file to string, return `undefined` if not existed
+ * Utilities that do not depend on node, safe to be imported by client-side modules.
+ * @module
  */
-export function readToString(file: string): string | undefined {
-  try {
-    return readFileSync(file, { encoding: 'utf-8' });
-  } catch (err) {
-    // If not existed
-    if (err.code === 'ENOENT') {
-      return;
-    } else {
-      throw err;
-    }
-  }
-}
+
+import { format as _format } from '@std/fmt/duration';
+
+export const duration_fmt = (ms: number) => _format(ms, { ignoreZero: true });
 
 /**
  * 格式化`doc`

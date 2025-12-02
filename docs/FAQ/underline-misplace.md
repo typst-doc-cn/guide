@@ -1,9 +1,8 @@
 ---
 tags: [text, chinese]
 ---
-# 中英文下划线错位了怎么办？
 
-相关 issue：https://github.com/typst/typst/issues/1210
+# 中英文下划线错位了怎么办？
 
 ![](https://github.com/user-attachments/assets/9dcb568e-2888-4b27-ae4e-cbe19507bf78)
 
