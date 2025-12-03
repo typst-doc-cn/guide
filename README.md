@@ -3,8 +3,8 @@
 这里收集了一些官方文档和小蓝书中未提到的一些问题和小技巧，尤其是面向中文用户的。
 
 - 主站：[GitHub Pages](https://typst-doc-cn.github.io/guide)
-- 镜像站：[Vercel (guide.typst.dev)](https://guide.typst.dev)
-- 镜像站：[Cloudflare (typst.dev/guide)](https://typst.dev/guide/)
+- 镜像站：[Cloudflare (guide.typst.dev)](https://guide.typst.dev)
+- 镜像站：[Vercel (typst.dev/guide)](https://typst.dev/guide/)
 - 测试站：[Netlify](https://luxury-mochi-9269a9.netlify.app/)
 
 其中镜像站不定期手动更新，有时略滞后。

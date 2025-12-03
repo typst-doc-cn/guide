@@ -92,8 +92,8 @@ hero:
 如果您本次访问缓慢，可尝试切换站点。
 
 - 主站：[GitHub Pages](https://typst-doc-cn.github.io/guide)
-- 镜像站：[Vercel (guide.typst.dev)](https://guide.typst.dev)
-- 镜像站：[Cloudflare (typst.dev/guide)](https://typst.dev/guide/)
+- 镜像站：[Cloudflare (guide.typst.dev)](https://guide.typst.dev)
+- 镜像站：[Vercel (typst.dev/guide)](https://typst.dev/guide/)
 - 测试站：[Netlify](https://luxury-mochi-9269a9.netlify.app/)
 
 其中镜像站不定期手动更新，有时略滞后。
