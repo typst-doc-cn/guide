@@ -35,17 +35,23 @@ tags: [numbering, heading]
 
 ```typst
 #set heading(
-  numbering: n => numbering("第一章", calc.max(n - 1, 0)),
+  numbering: n => numbering("第一章", n - 1),
 )
 = 这对吗
 = 你说得对
 = 但是原神
 ```
 
-::: details 为何需要`calc.max(…, 0)`？
+::: details Typst v0.14.0 需要特别更改
 
-在排版收敛之前，`n`可能为零。此时`n - 1`是负值，会让`numbering`报错。为避免报错，让排版继续迭代，套上`calc.max(…, 0)`以令之非负。
+以上用 v0.14.0 编译时，`n - 1`会报告以下错误。
 
-参考 [Why the heading number can be zero in v0.14.0-rc.2? - Questions - Typst Forum](https://forum.typst.app/t/why-the-heading-number-can-be-zero-in-v0-14-0-rc-2/6585?u=y.d.x)。
+> Number must be at least zero
+
+这是因为`n`在排版收敛之前可能为零，导致`n - 1`是负值，让`numbering`报错。为避免报错，让排版继续迭代，需要把`n - 1`改为`calc.max(n - 1, 0)`或`calc.abs(n - 1)`，以保证非负。
+
+参考 [Why the heading number can be zero in v0.14.0-rc.2? - Questions - Typst Forum](https://forum.typst.app/t/why-the-heading-number-can-be-zero-in-v0-14-0-rc-2/6585?u=y.d.x) 以及 [v0.14.1 更新说明](https://typst.app/docs/changelog/0.14.1/#model) 提到的 [#7459](https://github.com/typst/typst/issues/7459)。
+
+v0.14.1 已经修复了这处回退，不再需要特别更改。
 
 :::

@@ -4,7 +4,7 @@ curl -OL https://www.7-zip.org/a/7z2409-linux-x64.tar.xz && \
 tar -xvf 7z2409-linux-x64.tar.xz 7zz && \
 mv 7zz 7z && \
 \
-curl -OL https://github.com/typst/typst/releases/download/v0.14.0/typst-x86_64-unknown-linux-musl.tar.xz && \
+curl -OL https://github.com/typst/typst/releases/download/v0.14.1/typst-x86_64-unknown-linux-musl.tar.xz && \
 tar -xvf typst-x86_64-unknown-linux-musl.tar.xz && \
 mv typst-x86_64-unknown-linux-musl/typst typst && \
 rm -r typst-x86_64-unknown-linux-musl && \
