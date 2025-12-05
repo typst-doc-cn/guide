@@ -9,6 +9,7 @@ const typst_history: {
 }[] = [
   // 更新方法：
   // gh release --repo typst/typst list --json 'tagName,publishedAt' --exclude-pre-releases --limit 5
+  { publishedAt: '2025-12-03T17:10:21Z', tagName: 'v0.14.1' },
   { publishedAt: '2025-10-24T12:27:35Z', tagName: 'v0.14.0' },
   { publishedAt: '2025-03-07T12:50:41Z', tagName: 'v0.13.1' },
   { publishedAt: '2025-02-19T16:25:41Z', tagName: 'v0.13.0' },
