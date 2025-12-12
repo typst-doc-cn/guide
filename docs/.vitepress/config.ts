@@ -77,18 +77,41 @@ gtag('config', 'G-NL1RYQ4PW7');`,
         },
       },
     },
-    sidebar: [
-      {
-        items: [
-          { text: '快速开始', link: '/quick-start' },
-          { text: '常见问题', link: '/FAQ' },
-          { text: '面向 Word 用户的快速入门向导', link: '/word' },
-          { text: '其他示例', link: '/showcase' },
-          { text: '发现', link: '/garden' },
-          { text: '关于本站', link: '/about' },
-        ],
-      },
-    ],
+
+    sidebar: {
+      '/': [
+        {
+          items: [
+            { text: '快速开始', link: '/quick-start' },
+            { text: '常见问题', link: '/FAQ' },
+            { text: '面向 Word 用户的快速入门向导', link: '/word' },
+            { text: '其它示例', link: '/showcase' },
+            { text: '发现', link: '/garden' },
+          ],
+        },
+        {
+          items: [
+            { text: '参与指南', link: '/dev' },
+            { text: '关于本站', link: '/about' },
+          ],
+        },
+      ],
+      '/dev/': [
+        {
+          items: [
+            { text: '参与指南', link: '/dev' },
+            { text: '渲染 Typst 代码块', link: '/dev/typst-render' },
+            { text: 'FAQ 列表及标签', link: '/dev/faq-list' },
+            { text: '“另请参见”链接', link: '/dev/see-also' },
+            { text: '更新时针对的 Typst 版本', link: '/dev/typst-version' },
+            { text: '如何升级 Typst 版本', link: '/dev/update' },
+          ],
+        },
+        {
+          items: [{ text: '关于本站', link: '/about' }],
+        },
+      ],
+    },
 
     footer: {
       message: '基于 MIT 许可发布',
