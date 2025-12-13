@@ -25,7 +25,7 @@ jobs:
           executable-name: typst-0.13.1
       - uses: typst-community/setup-typst@v4
         with:
-          typst-version: v0.14.1
+          typst-version: v0.14.2
 
       - name: Restore cached fonts
         # Downloading fonts is time consuming.
