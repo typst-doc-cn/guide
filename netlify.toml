@@ -19,6 +19,5 @@ export PATH=$PATH:$(pwd) && \
 bash scripts/download-fonts.sh && \
 \
 pnpm install && \
-sed -i "/base: '\\/guide\\/',/d" docs/.vitepress/config.ts && \
-pnpm build
+VP_PROFILE=netlify pnpm build
 """

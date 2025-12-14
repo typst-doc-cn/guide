@@ -1,9 +1,12 @@
+import { toMirror } from '../../plugins/mirror_link';
 import { removePrefix } from '../../util';
 import type { Link, RelativePath } from '../see_also.data';
 import { AUTO_TITLE } from './auto_title';
-import { FileCache } from './caching.ts';
+import { FileCache } from './caching';
 
-const GAP_BASE: `https://${string}/` = 'https://typst-doc-cn.github.io/clreq/';
+const GAP_BASE: `https://${string}/` = toMirror(
+  'https://typst-doc-cn.github.io/clreq/',
+);
 
 // Simplified types for the gap index
 
