@@ -1,13 +1,16 @@
-import { defineConfig } from 'vitepress';
 import footnote from 'markdown-it-footnote';
 import UnoCSS from 'unocss/vite';
+import { defineConfig } from 'vitepress';
+
+import { PROFILE } from './config_profile';
 import { MarkdownTransform } from './plugins/markdown_transform';
+import mirror_link from './plugins/mirror_link';
 import TypstRender from './typst_render';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Typst 中文社区导航',
-  base: '/guide/',
+  base: ['cloudflare', 'netlify'].includes(PROFILE) ? '/' : '/guide/',
   lang: 'zh-CN',
   description:
     '本文档收录了日经问题（QQ 群中经常有人问的问题），以及官方文档和小蓝书中未提到的一些零碎的使用技巧。',
@@ -20,6 +23,7 @@ export default defineConfig({
     config: (md) => {
       md.use(footnote);
       md.use(TypstRender);
+      md.use(mirror_link);
     },
   },
   head: [
@@ -104,6 +108,7 @@ gtag('config', 'G-NL1RYQ4PW7');`,
             { text: 'FAQ 列表及标签', link: '/dev/faq-list' },
             { text: '“另请参见”链接', link: '/dev/see-also' },
             { text: '更新时针对的 Typst 版本', link: '/dev/typst-version' },
+            { text: '镜像链接', link: '/dev/mirror-link' },
             { text: '如何升级 Typst 版本', link: '/dev/update' },
           ],
         },
