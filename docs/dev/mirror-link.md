@@ -35,3 +35,7 @@
 ```markdown
 [GitHub Pages](https://typst-doc-cn.github.io/guide/){data-no-mirror=true}
 ```
+
+### 其它扩展
+
+其它扩展可以调用这个扩展提供的`toMirror`函数。

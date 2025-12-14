@@ -57,6 +57,12 @@ function transform(url: string): string | null {
   return null;
 }
 
+/** Transform a given URL to the mirror selected via the profile. */
+export function toMirror(url: Prefix): Prefix;
+export function toMirror(url: string): string {
+  return transform(url) ?? url;
+}
+
 export default function mirror_link(md: MarkdownIt): void {
   const defaultRender =
     md.renderer.rules.link_open ||
