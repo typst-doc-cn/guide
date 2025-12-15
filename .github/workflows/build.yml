@@ -7,7 +7,7 @@ on:
     # TODO: Enable all deployments by default later.
     inputs:
       deploy-all:
-        description: Also deploy to vercel and cloudflare
+        description: Also deploy to cloudflare
         type: boolean
         default: false
         required: true
@@ -99,13 +99,11 @@ jobs:
   deploy-vercel:
     name: Deploy to Vercel
     needs: build
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy-all }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v7
         with:
           name: vercel-dist
-          path: docs/.vitepress/dist
       - env:
           VERCEL_JSON: ${{ secrets.VERCEL_JSON }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
