@@ -10,6 +10,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: VitePress build (${{ matrix.profile }})
+    strategy:
+      matrix:
+        profile:
+          - default
+          - vercel
+          - cloudflare
     steps:
       - uses: actions/checkout@v4
         with:
@@ -47,8 +54,9 @@ jobs:
       - run: pnpm build
         env:
           GH_TOKEN: ${{ github.token }} # `<SeeAlso>` requires GitHub API
+          VP_PROFILE: ${{ matrix.profile }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
-          name: dist
+          name: ${{ matrix.profile }}-dist
           path: docs/.vitepress/dist

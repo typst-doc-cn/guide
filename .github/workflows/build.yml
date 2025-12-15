@@ -1,16 +1,31 @@
-name: Build
+name: Build and deploy
 on:
   push:
     branches:
       - master
+  workflow_dispatch:
+    # TODO: Enable all deployments by default later.
+    inputs:
+      deploy-all:
+        description: Also deploy to vercel and cloudflare
+        type: boolean
+        default: false
+        required: true
 
-permissions:
-  contents: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: VitePress build
+    name: VitePress build (${{ matrix.profile }})
+    strategy:
+      matrix:
+        profile:
+          - default
+          - vercel
+          - cloudflare
     steps:
       - uses: actions/checkout@v4
         with:
@@ -48,15 +63,22 @@ jobs:
       - run: pnpm build
         env:
           GH_TOKEN: ${{ github.token }} # `<SeeAlso>` requires GitHub API
+          VP_PROFILE: ${{ matrix.profile }}
 
-      - name: Upload artifact
+      - name: Upload pages artifact
+        if: ${{ matrix.profile == 'default' }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/.vitepress/dist
+      - name: Upload artifact for ${{ matrix.profile }}
+        if: ${{ matrix.profile != 'default' }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ matrix.profile }}-dist
+          path: docs/.vitepress/dist
 
-  # Deploy job
   deploy:
-    # Add a dependency to the build job
+    name: Deploy to GitHub Pages
     needs: build
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
@@ -69,9 +91,43 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  deploy-vercel:
+    name: Deploy to Vercel
+    needs: build
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy-all }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: vercel-dist
+          path: docs/.vitepress/dist
+      - env:
+          VERCEL_JSON: ${{ secrets.VERCEL_JSON }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          mkdir -p .vercel
+          echo "$VERCEL_JSON" > .vercel/project.json
+          npx vercel --prod --yes --token $VERCEL_TOKEN
+
+  deploy-cloudflare:
+    name: Deploy to Cloudflare Pages
+    needs: build
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy-all }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: cloudflare-dist
+          path: docs/.vitepress/dist
+      - uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: 'typst-doc-cn-guide'
+          directory: './docs/.vitepress/dist'
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
