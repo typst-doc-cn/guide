@@ -1,6 +1,8 @@
 ---
 tags: [font, math, equation, text]
 outline: [2, 3]
+links:
+  - https://github.com/w3c/clreq/issues/534
 ---
 
 # 如何修改公式里的中文字体？
@@ -11,7 +13,7 @@ outline: [2, 3]
 -- #set page(height: auto, width: auto, margin: 1em)
 $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
 $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
-$ cases("Math" 1 I l, "正文 1Il") $
+$ (1,...,n) dot bold(v) + dots.c + f(dot.c) = cases("Math" 1 I l, "正文 1Il") $
 ```
 
 <!-- 为测试效果明显，以下都关闭 text.fallback；实用时不建议关闭 -->
@@ -25,7 +27,7 @@ $ cases("Math" 1 I l, "正文 1Il") $
 下文所谓“引号”并不专指单双引号，而泛指[中西共用标点](https://github.com/w3c/clreq/issues/534)，具体包括：
 
 - Latin-1 Supplement:
-  - U+00B7 `·` MIDDLE DOT
+  - U+00B7 `·` MIDDLE DOT, `$dot.c$` (≠ `$dot$` = `$dot.op$`)
 - General Punctuation:
   - U+2013 `–` EN DASH
   - U+2014 `—` EM DASH
@@ -34,7 +36,7 @@ $ cases("Math" 1 I l, "正文 1Il") $
   - U+201C `“` LEFT DOUBLE QUOTATION MARK
   - U+201D `”` RIGHT DOUBLE QUOTATION MARK
   - U+2025 `‥` TWO DOT LEADER
-  - U+2026 `…` HORIZONTAL ELLIPSIS
+  - U+2026 `…` HORIZONTAL ELLIPSIS, `$...$` (= `$dots.h$` ≠ `$dots.c$` = `$dots.h.c$`)
   - U+2027 `‧` HYPHENATION POINT
 - Supplemental Punctuation:
   - U+2E3A `⸺` TWO-EM DASH
@@ -43,7 +45,42 @@ $ cases("Math" 1 I l, "正文 1Il") $
 
 :::
 
+### 若引号想用数学字体（数学、西文字体统一）
+
+此法最简洁，且对数学部分干扰最小，推荐使用。
+
+```typst
+-- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false)
+#show math.equation: set text(font: (
+  "New Computer Modern Math", // 数学
+  "Source Han Serif SC", // 中文
+))
+
+-- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
+-- $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
+-- $ (1,...,n) dot bold(v) + dots.c + f(dot.c) = cases("Math" 1 I l, "正文 1Il") $
+```
+
 ### 若引号想用中文字体（数学、西文字体统一）
+
+有两种思路。第一种在数学字体前单独选择要使用的标点。这里没有选择间隔号`·`与省略号`……`，因为它们也可能用作数学符号。
+
+```typst
+-- #set page(height: auto, width: auto, margin: 1em)
+-- #set text(fallback: false)
+#show math.equation: set text(font: (
+  (name: "Source Han Serif SC", covers: regex("[–—‘’“”‥‧⸺]")), // 中文
+  "New Computer Modern Math", // 数学
+  "Source Han Serif SC", // 中文
+))
+
+-- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
+-- $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
+-- $ (1,...,n) dot bold(v) + dots.c + f(dot.c) = cases("Math" 1 I l, "正文 1Il") $
+```
+
+第二种从数学字体排除所有中西共用标点。
 
 ```typst
 -- #set page(height: auto, width: auto, margin: 1em)
@@ -56,27 +93,12 @@ $ cases("Math" 1 I l, "正文 1Il") $
 
 -- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
 -- $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
--- $ cases("Math" 1 I l, "正文 1Il") $
+-- $ (1,...,n) dot bold(v) + dots.c + f(dot.c) = cases("Math" 1 I l, "正文 1Il") $
 ```
 
 ::: tip
 Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中提取间距等数学排版信息。因此，中文字体若在数学字体之前，必须设置`covers: regex(".")`，不然中文字体会被误当做数学基准字体，导致数学间距异常，并让你满篇文章都有警告。
 :::
-
-### 若引号想用数学字体（数学、西文字体统一）
-
-```typst
--- #set page(height: auto, width: auto, margin: 1em)
--- #set text(fallback: false)
-#show math.equation: set text(font: (
-  "New Computer Modern Math", // 数学
-  "Source Han Serif SC", // 中文
-))
-
--- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
--- $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
--- $ cases("Math" 1 I l, "正文 1Il") $
-```
 
 ### 其它方法（数学、西文字体分开）
 
@@ -106,7 +128,7 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 -- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
 -- $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
--- $ cases("Math" 1 I l, "正文 1Il") $
+-- $ (1,...,n) dot bold(v) + dots.c + f(dot.c) = cases("Math" 1 I l, "正文 1Il") $
 ```
 
 :::
@@ -124,7 +146,7 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 -- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
 -- $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
--- $ cases("Math" 1 I l, "正文 1Il") $
+-- $ (1,...,n) dot bold(v) + dots.c + f(dot.c) = cases("Math" 1 I l, "正文 1Il") $
 ```
 
 :::
@@ -142,7 +164,7 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 -- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
 -- $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
--- $ cases("Math" 1 I l, "正文 1Il") $
+-- $ (1,...,n) dot bold(v) + dots.c + f(dot.c) = cases("Math" 1 I l, "正文 1Il") $
 ```
 
 :::
@@ -164,7 +186,7 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 -- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
 -- $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
--- $ cases("Math" 1 I l, "正文 1Il") $
+-- $ (1,...,n) dot bold(v) + dots.c + f(dot.c) = cases("Math" 1 I l, "正文 1Il") $
 ```
 
 1. **西文**字体，负责 `123`、`abc`、`,"!、{}()` 等
@@ -195,7 +217,7 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 
 -- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
 -- $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
--- $ cases("Math" 1 I l, "正文 1Il") $
+-- $ (1,...,n) dot bold(v) + dots.c + f(dot.c) = cases("Math" 1 I l, "正文 1Il") $
 ```
 
 注意这里第一处`_α–map_`没有倾斜，因为 Source Han Serif SC 缺少相应字形。
@@ -218,7 +240,7 @@ Typst 0.14 会将首个没有`covers`的字体用作数学基准字体，从中�
 }
 -- $ hat(alpha)(f) = f(alpha) "（同上，α–map的“定义”）"$
 -- $ f(alpha) #[或者*任意*内容 _α–map_ $alpha$–map] $
--- $ cases("Math" 1 I l, "正文 1Il") $
+-- $ (1,...,n) dot bold(v) + dots.c + f(dot.c) = cases("Math" 1 I l, "正文 1Il") $
 ```
 
 这种方法不会设置`（）`等中文独占标点的字体（它们仍然随机回落），而且在使用后难以覆盖，请谨慎使用。
