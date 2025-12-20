@@ -104,16 +104,6 @@ jobs:
       - uses: actions/download-artifact@v7
         with:
           name: vercel-dist
-      - name: Enable clean URLs
-        # https://vitepress.dev/guide/routing#generating-clean-url
-        shell: bash
-        run: |
-          cat >vercel.json <<'EOF'
-          {
-            "$schema": "https://openapi.vercel.sh/vercel.json",
-            "cleanUrls": true
-          }
-          EOF
       - env:
           VERCEL_JSON: ${{ secrets.VERCEL_JSON }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
