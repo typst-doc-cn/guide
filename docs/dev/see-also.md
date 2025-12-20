@@ -24,7 +24,7 @@ links:
 
 ## 前提条件
 
-必需：初次运行时需要有网，能访问到 https://typst-doc-cn.github.io/clreq/index.json。
+必需：初次运行时需要有网，能访问到[`index.json`](https://typst-doc-cn.github.io/clreq/index.json)。
 
 可选：设置环境变量`$GITHUB_TOKEN`。（用于访问 GitHub GraphQL API，无需任何特殊权限）
 

@@ -58,7 +58,8 @@ hero:
 - [**📘 小蓝书 The Raindrop-Blue Book**](https://typst-doc-cn.github.io/tutorial/)——入门教程
 - [**📜 中文文档**](https://typst-doc-cn.github.io/docs/)——官方文档的非官方翻译
 - [clreq-gap for typst](https://typst-doc-cn.github.io/clreq/)——分析 Typst 与中文排版的差距
-- [可用于 hayagriva 的 CSL 样式](https://typst-doc-cn.github.io/csl-sanitizer/)——让 Zotero 中文社区的参考文献样式能被 Typst 接受
+- [可用于 Hayagriva 的 CSL 样式](https://typst-doc-cn.github.io/csl-sanitizer/)——让 Zotero 中文社区的参考文献样式能被 Typst 接受
+- [CSL Validator](https://typst-doc-cn.github.io/csl-validator/)——克隆 CSL 官方检查器，适配中文 CSL 样式和大陆网络环境
 - [泰普斯屯](https://typst-doc-cn.github.io/news/)——新闻信息汇总
 
 其它资料：
@@ -96,4 +97,7 @@ hero:
 - 镜像站：[Vercel (typst.dev/guide)](https://typst.dev/guide/)
 - 测试站：[Netlify](https://luxury-mochi-9269a9.netlify.app/)
 
-其中镜像站不定期手动更新，有时略滞后。
+<!--
+  另外，www.typst.dev 也是 Cloudflare，而 typst.dev 重定向到 Vercel。
+  这俩太易混淆，就不写了。
+-->

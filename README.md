@@ -7,7 +7,10 @@
 - 镜像站：[Vercel (typst.dev/guide)](https://typst.dev/guide/)
 - 测试站：[Netlify](https://luxury-mochi-9269a9.netlify.app/)
 
-其中镜像站不定期手动更新，有时略滞后。
+<!--
+  另外，www.typst.dev 也是 Cloudflare，而 typst.dev 重定向到 Vercel。
+  这俩太易混淆，就不写了。
+-->
 
 ## 参与指南
 
