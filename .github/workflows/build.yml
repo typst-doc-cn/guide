@@ -104,6 +104,17 @@ jobs:
       - uses: actions/download-artifact@v7
         with:
           name: vercel-dist
+      - name: Disable clean URLs
+        # https://vitepress.dev/guide/routing#generating-clean-url does not work
+        # If enabled, /guide/foo is okay, but /guide/foo.html redirects to /foo, not /guide/foo.
+        shell: bash
+        run: |
+          cat >vercel.json <<'EOF'
+          {
+            "$schema": "https://openapi.vercel.sh/vercel.json",
+            "cleanUrls": false
+          }
+          EOF
       - env:
           VERCEL_JSON: ${{ secrets.VERCEL_JSON }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
