@@ -148,6 +148,38 @@ gtag('config', 'G-NL1RYQ4PW7');`,
     darkModeSwitchTitle: '切换到深色模式',
   },
 
+  transformHead({ pageData: { isNotFound } }) {
+    if (PROFILE === 'vercel' && isNotFound) {
+      // 部署到 Vercel 时，将不带`.html`的 URL 在前端转到正确的 URL
+      //
+      // VitePress 文档建议给 Vercel 设置 cleanUrls。https://vitepress.dev/guide/routing#generating-clean-url
+      // 然而不加这段代码时，无论如何设置 Vercel 的 cleanUrls，都不完全正常：
+      // - 若关闭（默认），则
+      //   - 不带`.html`的 URL 会返回 404 Not Found，内容是 404.html，然后 VitePress 会显示页面标题和“另请参见”，但不显示页面内容
+      //   - 带`.html`的 URL 正常
+      // - 若启用，则
+      //   - 不带`.html`的 URL 正常
+      //   - 带`.html`的 URL 会重定向到不带`.html`的 URL，但错误删除了 base（例：`/guide/foo.html` → `/foo`，而非`/guide/foo`）
+      //
+      // Vercel 以外的平台遇到缺少`.html`的 URL，均能正确返回相应文件，而非一律返回 404.html，故无此问题。
+      return [
+        [
+          'script',
+          // 需要等待 VitePress 的 assets/app.*.js 加载完再运行，故启用 ESM
+          { type: 'module' },
+          `
+if (
+  !window.location.pathname.endsWith("/") &&
+  !window.location.pathname.endsWith(".html")
+) {
+  window.location.pathname += ".html";
+}
+`,
+        ],
+      ];
+    }
+  },
+
   vite: {
     plugins: [UnoCSS(), MarkdownTransform()],
   },
