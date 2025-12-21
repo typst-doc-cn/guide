@@ -1,13 +1,13 @@
 version: 2
 updates:
   - package-ecosystem: github-actions
-    directory: "/"
+    directory: '/'
     schedule:
       interval: quarterly
     cooldown:
       default-days: 10
   - package-ecosystem: npm
-    directory: "/"
+    directory: '/'
     schedule:
       interval: quarterly
     cooldown:
