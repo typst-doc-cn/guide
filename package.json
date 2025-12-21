@@ -14,7 +14,7 @@
     "@types/markdown-it-footnote": "^3.0.4",
     "@types/node": "^22.13.1",
     "@types/which": "^3.0.4",
-    "@waline/client": "^3.5.1",
+    "@waline/client": "^3.8.0",
     "es-toolkit": "^1.42.0",
     "prettier": "^3.7.1",
     "unocss": "^0.63.6",
