@@ -11,7 +11,7 @@ Typst [已经内置](https://typst.app/docs/reference/model/bibliography/#parame
 
 [^present]: 指 v0.14.0-rc.1 及之后的版本。
 
-其实大部分非标准特性只影响特殊情况。可以先**删除非标准特性**，让 Typst 能读取样式生成参考文献；等真的遇到特殊情况了，再[专门解决](https://typst-doc-cn.github.io/clreq/#x7-bibliography)或[手动编辑](https://forum.typst.app/t/how-to-manually-correct-the-format-of-bibliography-for-60-styles/5303/2)。
+其实大部分非标准特性只影响特殊情况。可以先**删除非标准特性**，让 Typst 能读取样式生成参考文献；等真的遇到特殊情况了，再[专门解决](https://typst-doc-cn.github.io/clreq/#x7-bibliography)或[手动编辑](https://forum.typst.app/t/how-to-manually-correct-the-format-of-bibliography-for-60-styles/5303/2)。此外，也可以尝试使用 [Citext](https://github.com/Shuenhoy/citext) 替代 Typst 原生的参考文献功能来获取 CSL-M 支持，请参考[如何修复英文参考文献中的“等”](./bib-etal-lang.md)。
 
 ::: tip
 对于 [Zotero 中文社区的 CSL 样式](https://zotero-chinese.com/styles/)，可直接前往[可用于 hayagriva 的 CSL 样式](https://typst-doc-cn.github.io/csl-sanitizer/)下载批量修改好的版本。
