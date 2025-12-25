@@ -5,7 +5,7 @@ tags: bib
 
 当中英文参考文献同时出现时，英文参考文献中的“等”应该是“et al.”，而不是“等”。
 
-可以使用上面的手动参考文献方案，或者
+可以使用[手动参考文献方案](./bibitem.md)，或者
 
 1. 使用来自 [modern-nju-thesis](https://github.com/nju-lug/modern-nju-thesis) 的 `bilingual-bibliography` 函数修复。
 
@@ -29,7 +29,7 @@ tags: bib
 
 // 将原本的 #bibliography("refs.bib") 替换为
 #show bibliography: none
-#bibliography("refs.bib", style: "gb-7714-2015-numeric")
+#bibliography("refs.bib")
 
 = 参考文献
 #extbib(bib)
