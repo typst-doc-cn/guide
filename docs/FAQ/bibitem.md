@@ -34,3 +34,20 @@ tags: bib
 因为目前（0.12 版本）没有自定义元素，`figure` 有个 `kind` 属性可以直接 `query`，而且 `supplement` 和 `caption` 可以用来提供额外信息，所以用它非常合适。
 
 更新：0.12 版本 `figure` 默认 `align(center)`，所以增加了一行 `set align(left)`。
+
+---
+
+`bibliography` 也接受原始 `byte` 作为源，例如：
+
+```typst
+Cite them as usual: @key
+
+#let bib = ```bib
+@misc{key,
+  title = {Title},
+}
+```.text
+#bibliography(bytes(bib), style: "…")
+```
+
+- Reference: [How to insert bibliography entries as code to avoid importing .bib file](https://forum.typst.app/t/how-to-insert-bibliography-entries-as-code-to-avoid-importing-bib-file/6529)
