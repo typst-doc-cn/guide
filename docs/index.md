@@ -93,5 +93,10 @@ hero:
 
 - 主站：[Vercel (typst.dev/guide)](https://typst.dev/guide/)
 - 备份站：[GitHub Pages](https://typst-doc-cn.github.io/guide/){data-no-mirror=true}
-- 镜像站：[Cloudflare (guide.typst.dev)](https://guide.typst.dev)（手动更新，有时略滞后）
+- 镜像站：[Cloudflare (guide.typst.dev)](https://guide.typst.dev)
 - 测试站：[Netlify](https://luxury-mochi-9269a9.netlify.app/)
+
+<!--
+  另外，www.typst.dev 也是 Cloudflare，而 typst.dev 重定向到 Vercel。
+  这俩太易混淆，就不写了。
+-->
