@@ -4,13 +4,6 @@ on:
     branches:
       - master
   workflow_dispatch:
-    # TODO: Enable all deployments by default later.
-    inputs:
-      deploy-all:
-        description: Also deploy to cloudflare
-        type: boolean
-        default: false
-        required: true
 
 concurrency:
   group: pages
@@ -126,8 +119,10 @@ jobs:
   deploy-cloudflare:
     name: Deploy to Cloudflare Pages
     needs: build
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy-all }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
     steps:
       - uses: actions/download-artifact@v7
         with:
