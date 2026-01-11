@@ -1,5 +1,6 @@
 ---
 tags: [bib]
+outline: [2, 3]
 ---
 # 为什么指定参考文献 CSL 后，报错“failed to load CSL style”？
 
@@ -11,15 +12,53 @@ Typst [已经内置](https://typst.app/docs/reference/model/bibliography/#parame
 
 [^present]: 指 v0.14.0-rc.1 及之后的版本。
 
-其实大部分非标准特性只影响特殊情况。可以先**删除非标准特性**，让 Typst 能读取样式生成参考文献；等真的遇到特殊情况了，再[专门解决](https://typst-doc-cn.github.io/clreq/#x7-bibliography)或[手动编辑](https://forum.typst.app/t/how-to-manually-correct-the-format-of-bibliography-for-60-styles/5303/2)。此外，也可以尝试使用 [Citext](https://github.com/Shuenhoy/citext) 替代 Typst 原生的参考文献功能来获取 CSL-M 支持，请参考[如何修复英文参考文献中的“等”](./bib-etal-lang.md)。
+对此有两种解决思路：
+
+- 其实大部分非标准特性只影响特殊情况。可以先**删除非标准特性**，让 Typst 能读取样式生成参考文献；等真的遇到特殊情况了，再[专门解决](https://typst-doc-cn.github.io/clreq/#x7-bibliography)或[手动编辑](https://forum.typst.app/t/how-to-manually-correct-the-format-of-bibliography-for-60-styles/5303/2)。
+
+- 使用 [Citext](https://github.com/Shuenhoy/citext) **替代 Typst 原生**的参考文献引擎，支持非标准特性。
+
+  这种方法可以根除问题，但会拖慢编译，而且有时需要调用特殊函数而不能单纯`@key`。详见[另一页面的专门小节](./bib-etal-lang.md#citext)。
+
+下面具体介绍第一种方法。
+
+## 如何删除非标准特性
 
 ::: tip
-对于 [Zotero 中文社区的 CSL 样式](https://zotero-chinese.com/styles/)，可直接前往[可用于 hayagriva 的 CSL 样式](https://typst-doc-cn.github.io/csl-sanitizer/)下载批量修改好的版本。
+对于 [Zotero 中文社区的 CSL 样式](https://zotero-chinese.com/styles/)，不必阅读后文，可直接前往[可用于 Hayagriva 的 CSL 样式](https://typst-doc-cn.github.io/csl-sanitizer/)下载批量修改好的版本。
 :::
 
-以下列出了常见报错以及解决方法，大致按常见程度降序排列。如果您遇到的错误不在其中，可尝试**二分法**依次删除各个`<macro>`来定位问题。
+首先需**定位问题**。请将文件上传到 [CSL 官方网站的 Validator](https://validator.citationstyles.org)，正常应出现下面这种结果。
 
-## duplicate field `layout`
+> Oops, I found 8 errors.
+>
+> **Errors**
+>
+> 1. Line 42: Bad value `citation-range-delimiter` for attribute `name` on element `term` from namespace `http://purl.org/net/xbiblio/csl`.
+>
+>    ```xml
+>    ms>
+>      <term name="citation-range-delimiter">-</ter
+>    ```
+>
+> 2. …
+
+::: details CSL Validator 提示 No errors found，但 Typst 仍然无法加载 CSL？
+
+> CSL Validator: Good job! No errors found.
+
+CSL Validator 与 Typst/Hayagriva 毕竟原理不同，“CSL Validator 认为合法”与“Typst 认为合法”其实并无严格蕴含关系。
+
+遇到这种情况，可尝试用 Typst 持续编译文档，然后**二分法**依次删除各个`<macro>`来定位问题。
+:::
+
+接着结合 Typst 的报错，**逐一修改**各项错误。
+
+例如上例可能伴随 Typst 报错 data did not match any variant of untagged enum Term，与 CSL Validator 第一个错误写的 term 相关，那就找到 CSL 文件的第 42 行，删除或注释`citation-range-delimiter`这行。修改后，如果 Typst 仍然无法加载 CSL，就继续处理下一个错误，直到解决。
+
+以下列出了**常见报错以及解决方法**，大致按常见程度降序排列，可供参考。
+
+### duplicate field `layout`
 
 Typst 暂不支持 CSL-M 标准，可以注释掉多余的 `<layout>` 临时解决。
 
@@ -44,7 +83,7 @@ Typst 暂不支持 CSL-M 标准，可以注释掉多余的 `<layout>` 临时解�
 
 这样修改之后，CSL 根据文献语言自动使用“等”或“et al.”的功能会失效，请见[如何修复英文参考文献中的“等”](./bib-etal-lang.md)。
 
-## unknown variant `institution`, expected one of `name`, `et-al`, `label`, `substitute`
+### unknown variant `institution`, expected one of `name`, `et-al`, `label`, `substitute`
 
 请在 CSL 文件里注释掉`<institution/>`。
 
@@ -58,7 +97,7 @@ Typst 暂不支持 CSL-M 标准，可以注释掉多余的 `<layout>` 临时解�
   </macro>
 ```
 
-## data did not match any variant of untagged enum Term
+### data did not match any variant of untagged enum Term
 
 该错误有多种可能原因。
 
@@ -88,7 +127,7 @@ Typst 暂不支持 CSL-M 标准，可以注释掉多余的 `<layout>` 临时解�
 
 此外，个别 CSL 文件错误地把`<term>`当成`<macro>`用。这种情况需要理解文件原本意图才能改正，建议直接向 CSL 维护者提出。
 
-## data did not match any variant of untagged enum TextTarget/Variable
+### data did not match any variant of untagged enum TextTarget/Variable
 
 请替换非标准的变量（variable），例如：
 
@@ -117,9 +156,11 @@ Typst 暂不支持 CSL-M 标准，可以注释掉多余的 `<layout>` 临时解�
   - `original-issue`
   - `original-jurisdiction`
 
+- `<if variable="CSTR">`涉及[2025年新版国标](https://std.samr.gov.cn/gb/search/gbDetailed?id=4507EFE13D37CB6AE06397BE0A0A601F)引入的[科技资源标识 (CSTR)](https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D81092D3A7E05397BE0A0AB82A)，目前无法输入。可先在 CSL 删除整段`<if>`，然后在著录各篇文献时把`CSTR: …`作为文本夹带进相邻位置的字段。
+
 此外，个别 CSL 文件错误地把变量当成`<macro>`用。这种情况需要理解文件原本意图才能改正，建议直接向 CSL 维护者提出。
 
-## missing field `$value`
+### missing field `$value`
 
 CSL 标准规定`<else>`、`<group>`、`<layout>`等元素必须有内容。如果为空（或者只有注释），就会报告此错误。
 
@@ -147,7 +188,7 @@ CSL 标准规定`<else>`、`<group>`、`<layout>`等元素必须有内容。如�
   </citation>
 ```
 
-## unknown variant ``, expected one of `lowercase`, `uppercase`, `capitalize-first`, `capitalize-all`, `sentence`, `title`
+### unknown variant ``, expected one of `lowercase`, `uppercase`, `capitalize-first`, `capitalize-all`, `sentence`, `title`
 
 请删掉空的`text-case`属性。
 
@@ -156,7 +197,7 @@ CSL 标准规定`<else>`、`<group>`、`<layout>`等元素必须有内容。如�
 + <text variable="title"/>
 ```
 
-## invalid locator
+### invalid locator
 
 把`locator`属性改为标准规定的小写。
 
