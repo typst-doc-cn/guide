@@ -109,3 +109,17 @@ main .vp-doc h1 {
   color: #ffffff;
   background-color: var(--vp-c-brand-1);
 }
+
+pre.shiki {
+  .highlighted-word {
+    background-color: var(--vp-c-bg-soft);
+    border: 1px solid var(--vp-c-brand-dark);
+    padding: 2px;
+    margin: -2px;
+    border-radius: 4px;
+
+    .dark & {
+      border-color: var(--vp-c-brand-light);
+    }
+  }
+}
