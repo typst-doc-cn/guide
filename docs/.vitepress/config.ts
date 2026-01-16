@@ -1,3 +1,7 @@
+import {
+  transformerNotationMap,
+  transformerNotationWordHighlight,
+} from '@shikijs/transformers';
 import footnote from 'markdown-it-footnote';
 import UnoCSS from 'unocss/vite';
 import { defineConfig } from 'vitepress';
@@ -25,6 +29,20 @@ export default defineConfig({
       md.use(TypstRender);
       md.use(mirror_link);
     },
+    codeTransformers: [
+      // https://shiki.style/packages/transformers#transformernotationwordhighlight
+      transformerNotationWordHighlight(),
+      // For XML, use `[!code del]` instead of `[!code --]`, as the latter is not valid in XML comments.
+      // https://vitepress.dev/guide/markdown#colored-diffs-in-code-blocks
+      // https://shiki.style/packages/transformers#transformernotationdiff
+      // https://github.com/vuejs/vitepress/issues/4555#issuecomment-2649726618
+      // https://github.com/shikijs/shiki/issues/928
+      transformerNotationMap({
+        classMap: { ins: 'diff add', del: 'diff remove' },
+        classActivePre: 'has-diff',
+        matchAlgorithm: 'v3',
+      }),
+    ],
   },
   head: [
     [
