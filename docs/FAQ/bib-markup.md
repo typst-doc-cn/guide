@@ -45,6 +45,7 @@ links:
 -- #set page(width: auto, height: auto, margin: 1em)
 -- #set text(lang: "zh")
 #show bibliography: body => {
+  // [!code word:covers]
   show math.equation: set text(font: (name: "SimSun", covers: regex(".")))
   body
 }

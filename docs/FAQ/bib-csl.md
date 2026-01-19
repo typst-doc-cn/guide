@@ -64,7 +64,7 @@ Typst 暂不支持 CSL-M 标准，可以注释掉多余的 `<layout>` 临时解�
 
 在 CSL 文件里搜索 `bibliography` 和 `citation`，这里通常有多个 `<layout>` ，一般建议注释掉 `<layout locale="en">` 这一段 `<layout>` 。例子如下
 
-```xml
+```xml {2,7}
 <bibliography entry-spacing="0" et-al-min="4" et-al-use-first="3" second-field-align="flush">
   <!--
   <layout locale="en">
@@ -87,14 +87,15 @@ Typst 暂不支持 CSL-M 标准，可以注释掉多余的 `<layout>` 临时解�
 
 请在 CSL 文件里注释掉`<institution/>`。
 
-```xml {4}
-  <macro name="secondary-contributors-en">
-    <names variable="translator">
-      <name/>
-      <!-- <institution/> -->
-      <label form="short" prefix=" "/>
-    </names>
-  </macro>
+```xml
+<macro name="secondary-contributors-en">
+  <names variable="translator">
+    <name/>
+    <institution/><!-- [!code del] -->
+    <!-- <institution/> --> <!-- [!code ins] -->
+    <label form="short" prefix=" "/>
+  </names>
+</macro>
 ```
 
 ### data did not match any variant of untagged enum Term
@@ -103,13 +104,13 @@ Typst 暂不支持 CSL-M 标准，可以注释掉多余的 `<layout>` 临时解�
 
 若 CSL 文件中包含`citation-range-delimiter`等非标准`<term>`，请删除它们，例如：
 
-```diff
-  <locale>
-    <terms>
--     <term name="citation-range-delimiter">-</term>
-      <term name="page-range-delimiter">-</term>
-    </terms>
-  </locale>
+```xml
+<locale>
+  <terms>
+    <term name="citation-range-delimiter">-</term><!-- [!code del] -->
+    <term name="page-range-delimiter">-</term>
+  </terms>
+</locale>
 ```
 
 ::: details 原因
@@ -131,15 +132,15 @@ Typst 暂不支持 CSL-M 标准，可以注释掉多余的 `<layout>` 临时解�
 
 请替换非标准的变量（variable），例如：
 
-```diff
-- <if variable="original-container-title">
-+ <if variable="container-title">
-    <group delimiter=": ">
--     <text variable="original-container-title"/>
-+     <text variable="container-title"/>
-      <text macro="volume"/>
-    </group>
-  </if>
+```xml
+<if variable="original-container-title"><!-- [!code del] -->
+<if variable="container-title"><!-- [!code ins] -->
+  <group delimiter=": ">
+    <text variable="original-container-title"/><!-- [!code del] -->
+    <text variable="container-title"/><!-- [!code ins] -->
+    <text macro="volume"/>
+  </group>
+</if>
 ```
 
 常见的非标准变量及解决办法如下。
@@ -166,42 +167,42 @@ CSL 标准规定`<else>`、`<group>`、`<layout>`等元素必须有内容。如�
 
 对于`<else>`和`<group>`，通常是 CSL 维护者调试时忘记清理，直接把整段元素删掉即可。例如：
 
-```diff
-  <choose>
-    <if variable="URL">
-      <text variable="URL"/>
-    </if>
--   <else>
--     <!-- <text variable="DOI" prefix="https://doi.org/"/> -->
--   </else>
-  </choose>
+```xml
+<choose>
+  <if variable="URL">
+  <text variable="URL"/>
+  </if>
+  <else><!-- [!code del] -->
+    <!-- <text variable="DOI" prefix="https://doi.org/"/> --> <!-- [!code del] -->
+  </else><!-- [!code del] -->
+</choose>
 ```
 
 对于`<layout>`，应该是工具性 CSL 刻意为之，可填充空字符串解决。
 
-```diff
-  <citation>
--   <layout/>
-+   <layout>
-+     <text value=""/>
-+   </layout>
-  </citation>
+```xml
+<citation>
+  <layout/><!-- [!code del] -->
+  <layout><!-- [!code ins] -->
+    <text value=""/><!-- [!code ins] -->
+  </layout><!-- [!code ins] -->
+</citation>
 ```
 
 ### unknown variant ``, expected one of `lowercase`, `uppercase`, `capitalize-first`, `capitalize-all`, `sentence`, `title`
 
 请删掉空的`text-case`属性。
 
-```diff
-- <text variable="title" text-case=""/>
-+ <text variable="title"/>
+```xml
+<text variable="title" text-case=""/><!-- [!code del] -->
+<text variable="title"/><!-- [!code ins] -->
 ```
 
 ### invalid locator
 
 把`locator`属性改为标准规定的小写。
 
-```diff
-- <if locator="Chapter">
-+ <if locator="chapter">
+```xml
+<if locator="Chapter"><!-- [!code del] -->
+<if locator="chapter"><!-- [!code ins] -->
 ```
