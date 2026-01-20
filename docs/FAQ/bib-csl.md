@@ -28,7 +28,7 @@ Typst [已经内置](https://typst.app/docs/reference/model/bibliography/#parame
 对于 [Zotero 中文社区的 CSL 样式](https://zotero-chinese.com/styles/)，不必阅读后文，可直接前往[可用于 Hayagriva 的 CSL 样式](https://typst-doc-cn.github.io/csl-sanitizer/)下载批量修改好的版本。
 :::
 
-首先需**定位问题**。请将文件上传到 [CSL 官方网站的 Validator](https://validator.citationstyles.org)，正常应出现下面这种结果。
+首先需**定位问题**。请将文件上传到 [CSL Validator](https://typst-doc-cn.github.io/csl-validator/)，选择 CSL 1.0.2 (current)，正常应出现下面这种结果。
 
 > Oops, I found 8 errors.
 >
