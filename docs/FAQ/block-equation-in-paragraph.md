@@ -27,36 +27,25 @@ shows that the integral of $x + y$ is $z$.
 #set par(first-line-indent: (all: true, amount: 2em))
 
 // 以下规则必须放在最后
-#show: it => {
-  let processing = 0 // 特殊处理的状态
+#show: rest => {
+  let immediately-after = false
 
-  for (i, child) in it.children.enumerate() {
-    // 如果需要特殊处理，相应修改
-    if (processing >= 2) {
-      processing -= 1
-      continue
-    } else if (processing == 1) {
-      processing -= 1
+  for it in rest.children {
+    if immediately-after and it.func() == text {
       context h(-par.first-line-indent.amount)
-      child
-      continue
+    }
+    it
+
+    if it != [ ] {
+      immediately-after = false
     }
 
-    // 不特殊处理，正常显示
-    child
-
-    // 判断是否要触发特殊处理
     if (
-      i < it.children.len() - 2
-        and (
-          (child.func() == math.equation and child.block)
-            or child.func() == list.item
-            or child.func() == enum.item
-        )
-        and it.children.at(i + 1).func() != parbreak
-        and it.children.at(i + 2).func() == text
+      (it.func() == math.equation and it.block)
+        or it.func() == list.item
+        or it.func() == enum.item
     ) {
-      processing = 2
+      immediately-after = true
     }
   }
 }
@@ -76,15 +65,14 @@ $ y $
 
 （为简单，这里仅以公式和换行为例；以上代码也适用于列表、空格等情况。）
 
-**现象：**如果源代码在公式后连换两行（即空一行），则在 Typst 中公式后的元素为`parbreak`；若只换一行（即不空行），则为`space`。
+**现象：**如果源代码在公式后连换两行（即空一行），则在 Typst 中公式后的元素为`parbreak`；若只换一行（即不空行），则为`space`；若只换一行且加了标签（例：`前一行 $ x $ <eq> 后一行`），则出现连续两个`space`。
 
-**思路：**设计 show 规则，匹配“公式，`space`，文本”序列，抵消序列中文本的首行缩进。
+**思路：**设计 show 规则，匹配“公式，零个或任意多个`space`，文本”序列，抵消序列中文本的首行缩进。
 
 **具体操作：**
 
-- 匹配到序列后，保留公式，删除`space`（其实不删亦可），在文本前加`h(-par.first-line-indent.amount)`。
+- 匹配到序列后，保留公式，在文本前加`h(-par.first-line-indent.amount)`。
 - 不匹配时，原样显示。
-- 用`processing`变量记录匹配状态，0 = 尚未匹配，2 = 正在处理匹配序列中的`space`，1 = 正在处理匹配序列中的文本。
 
 **效果：** show 规则会让文章发生以下变化。
 
@@ -94,7 +82,7 @@ $ y $
   [应用以上规则后，公式后若不空行，例如],
   [ ],
   equation(block: true, body: [x]),
-  [ ], // [!code --]
+  [ ],
   context h(-2em), // [!code ++]
   [则后文首行不缩进。],
   parbreak(),
