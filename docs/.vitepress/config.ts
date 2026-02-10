@@ -138,7 +138,7 @@ gtag('config', 'G-NL1RYQ4PW7');`,
 
     footer: {
       message: '基于 MIT 许可发布',
-      copyright: `版权所有 © 2024-2025 typst guide team`,
+      copyright: `版权所有 © 2024-2026 typst guide team`,
     },
 
     docFooter: {
