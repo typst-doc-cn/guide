@@ -22,6 +22,8 @@ shows that the integral of $x + y$ is $z$.
 
 ## 实用解决办法——遍历全文，抵消缩进
 
+在所有show/set规则后加一段show规则，抵消全文各处多余的缩进。
+
 ```typst
 -- #set page(height: auto, width: 12em, margin: 1em)
 #set par(first-line-indent: (all: true, amount: 2em))
