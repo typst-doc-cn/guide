@@ -6,6 +6,9 @@ curl -OL https://www.7-zip.org/a/7z2409-linux-x64.tar.xz
 tar -xvf 7z2409-linux-x64.tar.xz 7zz
 mv 7zz 7z
 
+# Install jq
+curl -o jq -L https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-linux-amd64
+
 # Install typst v0.14
 curl -OL https://github.com/typst/typst/releases/download/v0.14.2/typst-x86_64-unknown-linux-musl.tar.xz
 tar -xvf typst-x86_64-unknown-linux-musl.tar.xz
@@ -23,6 +26,7 @@ export PATH=$PATH:$(pwd)
 
 # Prepare
 bash scripts/download-fonts.sh
+bash scripts/install-typst-local-packages.sh
 
 # Build
 pnpm install
