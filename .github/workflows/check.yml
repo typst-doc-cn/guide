@@ -32,6 +32,7 @@ jobs:
       - uses: typst-community/setup-typst@v4
         with:
           typst-version: v0.14.2
+      - run: bash scripts/install-typst-local-packages.sh
 
       - name: Restore cached fonts
         # Downloading fonts is time consuming.
