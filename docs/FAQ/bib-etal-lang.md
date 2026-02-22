@@ -88,8 +88,10 @@ BibTeX/BibLaTeX 有 language 和 langid 两个字段，以及 zh/en 和 chinese/
   - 真正按文献语言自动切换渲染方式
 - 共同**缺点**
   - 同一处引用多篇文献时，（因`show cite`规则限制）不能单纯`@key-a @key-b`，必须调用专门的`mulcite`或`multicite`函数
-  - 对文字之外的格式支持不好（例：长URL折行时，链接异常）
+  - 对文字之外的格式支持不好（例：长URL折行时，链接可能异常[^url-link]）
   - 不支持导出为 HTML（因为使用了`grid`、`hide`等语义弱的函数）
+
+[^url-link]: gb7714-bilingual 已经[基本修复了这一问题](https://github.com/pku-typst/gb7714-bilingual/pull/10)，不过不如 [CSL](https://docs.citationstyles.org/en/v1.0.2/specification.html#appendix-vi-links) 和 [Hayagriva](https://github.com/typst/hayagriva/blob/a137441413a5907c15ced44d1502dfb9fa1a3014/src/csl/rendering/mod.rs#L89-L106) 全面。
 
 ### 法二：换用 citext {#citext}
 
