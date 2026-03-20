@@ -42,7 +42,7 @@ BibTeX/BibLaTeX 有 language 和 langid 两个字段，以及 zh/en 和 chinese/
 
 ```typst no-render
 // 在文档开头引入
-#import "@preview/modern-nju-thesis:0.4.0": bilingual-bibliography
+#import "@preview/modern-nju-thesis:0.4.1": bilingual-bibliography
 
 // 将原本的 #bibliography("refs.bib") 替换为
 #bilingual-bibliography(bibliography: bibliography.with("refs.bib"))
@@ -59,7 +59,7 @@ BibTeX/BibLaTeX 有 language 和 langid 两个字段，以及 zh/en 和 chinese/
 
 ````typst
 -- #set page(height: auto, width: 24em, margin: 1em)
-#import "@preview/modern-nju-thesis:0.4.0": bilingual-bibliography
+#import "@preview/modern-nju-thesis:0.4.1": bilingual-bibliography
 
 - 中文@吴伟仁2017
 - 英文@su2025
@@ -111,7 +111,7 @@ BibTeX/BibLaTeX 有 language 和 langid 两个字段，以及 zh/en 和 chinese/
    ```typst no-render
    #import "./local-package/citext/lib.typ": *
    // 若安装为 local package，请将上一行替换为：
-   // #import "@local/citext:0.4.0": *
+   // #import "@local/citext:0.5.0": *
 
    #let bib = init-citation(read("refs.bib"))
    #show: show-extcite.with(bib: bib, gen-id: true)
@@ -157,7 +157,7 @@ citext 使用 [citation.js](https://citation.js.org/) + [QuickJS](https://crates
 
 ````typst
 -- #set page(height: auto, width: 24em, margin: 1em)
-#import "@local/citext:0.4.0": extbib, init-citation, show-extcite
+#import "@local/citext:0.5.0": extbib, init-citation, show-extcite
 
 #let bib-content = ```bib
 @article{吴伟仁2017,
