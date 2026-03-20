@@ -1,23 +1,2 @@
 [build]
-command = """
-curl -OL https://www.7-zip.org/a/7z2409-linux-x64.tar.xz && \
-tar -xvf 7z2409-linux-x64.tar.xz 7zz && \
-mv 7zz 7z && \
-\
-curl -OL https://github.com/typst/typst/releases/download/v0.14.1/typst-x86_64-unknown-linux-musl.tar.xz && \
-tar -xvf typst-x86_64-unknown-linux-musl.tar.xz && \
-mv typst-x86_64-unknown-linux-musl/typst typst && \
-rm -r typst-x86_64-unknown-linux-musl && \
-\
-curl -OL https://github.com/typst/typst/releases/download/v0.13.1/typst-x86_64-unknown-linux-musl.tar.xz && \
-tar -xvf typst-x86_64-unknown-linux-musl.tar.xz && \
-mv typst-x86_64-unknown-linux-musl/typst typst-0.13.1 && \
-rm -r typst-x86_64-unknown-linux-musl && \
-\
-export PATH=$PATH:$(pwd) && \
-\
-bash scripts/download-fonts.sh && \
-\
-pnpm install && \
-VP_PROFILE=netlify pnpm build
-"""
+command = "bash scripts/netlify-build.sh"
