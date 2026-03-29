@@ -28,7 +28,7 @@ tags: [layout, text]
 
 ```typst
 -- #set page(width: auto, height: auto, margin: 1em)
-#import "@preview/cjk-unbreak:0.2.1": remove-cjk-break-space // [!code ++]
+#import "@preview/cjk-unbreak:0.2.3": remove-cjk-break-space // [!code ++]
 #show: remove-cjk-break-space // [!code ++]
 
 测试一下，
@@ -59,7 +59,7 @@ tags: [layout, text]
 
 ```typst
 -- #set page(width: auto, height: auto, margin: 1em)
-#import "@preview/cjk-unbreak:0.2.1": remove-cjk-break-space
+#import "@preview/cjk-unbreak:0.2.3": remove-cjk-break-space
 #show: remove-cjk-break-space
 
 “七斤嫂，你‘恨棒打人’。
