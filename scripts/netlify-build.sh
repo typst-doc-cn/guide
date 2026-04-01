@@ -2,8 +2,8 @@
 set -euxo pipefail
 
 # Install 7z
-curl -OL https://www.7-zip.org/a/7z2409-linux-x64.tar.xz
-tar -xvf 7z2409-linux-x64.tar.xz 7zz
+curl -OL https://github.com/ip7z/7zip/releases/download/26.00/7z2600-linux-x64.tar.xz
+tar -xvf 7z2600-linux-x64.tar.xz 7zz
 mv 7zz 7z
 
 # Install jq
