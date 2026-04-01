@@ -16,7 +16,7 @@
     "@types/node": "^25.0.0",
     "@types/which": "^3.0.4",
     "@waline/client": "^3.5.1",
-    "es-toolkit": "^1.42.0",
+    "es-toolkit": "^1.45.1",
     "prettier": "^3.7.1",
     "unocss": "^66.5.10",
     "vite": "^7.3.1",
