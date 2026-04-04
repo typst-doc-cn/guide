@@ -59,7 +59,7 @@ jobs:
           path: docs/.vitepress/dist
       - name: Upload artifact for ${{ matrix.profile }}
         if: ${{ matrix.profile != 'default' }}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.profile }}-dist
           path: docs/.vitepress/dist
@@ -88,7 +88,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         with:
           name: vercel-dist
       - name: Disable clean URLs
@@ -118,7 +118,7 @@ jobs:
       contents: read
       deployments: write
     steps:
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         with:
           name: cloudflare-dist
           path: docs/.vitepress/dist
