@@ -9,7 +9,7 @@
     "fmt": "prettier . --write"
   },
   "devDependencies": {
-    "@shikijs/transformers": "^3.21.0",
+    "@shikijs/transformers": "^4.0.2",
     "@std/fmt": "jsr:^1.0.8",
     "@types/markdown-it": "^14.1.2",
     "@types/markdown-it-footnote": "^3.0.4",
