@@ -1,5 +1,22 @@
+diff --git a/dist/client/components/Changelog.vue b/dist/client/components/Changelog.vue
+index c1716c10b04816ef22179ed738a7e4809aeaba76..28a094837ff5b7e198139daadbb1393bc406ef1e 100644
+--- a/dist/client/components/Changelog.vue
++++ b/dist/client/components/Changelog.vue
+@@ -25,7 +25,11 @@ const { commits, useHmr } = useChangelog()
+ // The order of commits, defaults to true (descending order)
+ const isDescending = ref(true)
+ const toggleViewMore = ref(false)
+-const lastChangeDate = ref<Date>(commits.value[0]?.date_timestamp ? toDate(commits.value[0]?.date_timestamp) : new Date())
++const lastChangeDate = computed<Date>(() => {
++  // Find the latest regular commit (excluding typst fake commits)
++  const last = commits.value.find(c => !c.tag)
++  return last?.date_timestamp ? toDate(last?.date_timestamp) : new Date()
++})
+ 
+ const locale = computed<Locale>(() => {
+   if (!options.locales || typeof options.locales === 'undefined')
 diff --git a/dist/client/composables/changelog.mjs b/dist/client/composables/changelog.mjs
-index f63b201c453809ad5a5797360ce3f55a70ee6581..cadb0547b88485f5a71bafbc79e1da480a5d9da5 100644
+index f63b201c453809ad5a5797360ce3f55a70ee6581..0d710d3bb31e2a157358dc503b32d3f7cf8ddf24 100644
 --- a/dist/client/composables/changelog.mjs
 +++ b/dist/client/composables/changelog.mjs
 @@ -2,6 +2,20 @@ import changelog from "virtual:nolebase-git-changelog";
