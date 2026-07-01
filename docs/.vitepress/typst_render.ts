@@ -92,9 +92,7 @@ function compileTypst(
   info: { path: string; line_begin?: number },
   typst_executable: string = 'typst',
   policy:
-    | 'allow-any'
-    | 'expect-warning'
-    | 'deny-warning-and-error' = 'allow-any',
+    'allow-any' | 'expect-warning' | 'deny-warning-and-error' = 'allow-any',
 ): CompileResult {
   // 输出设置
 
