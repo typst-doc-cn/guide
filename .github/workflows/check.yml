@@ -29,7 +29,7 @@ jobs:
       - run: bash scripts/install-typst-local-packages.sh
       - name: Restore cached fonts
         # Downloading fonts is time consuming.
-        uses: actions/cache@v5
+        uses: actions/cache@v5.0.5
         id: fonts-cache
         with:
           path: |
