@@ -54,7 +54,7 @@ jobs:
 
       - name: Upload pages artifact
         if: ${{ matrix.profile == 'default' }}
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: docs/.vitepress/dist
       - name: Upload artifact for ${{ matrix.profile }}
