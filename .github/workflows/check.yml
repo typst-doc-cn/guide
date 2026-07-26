@@ -54,3 +54,25 @@ jobs:
         with:
           name: ${{ matrix.profile }}-dist
           path: docs/.vitepress/dist
+
+  build-minimal:
+    runs-on: ubuntu-latest
+    name: VitePress build (default-minimal)
+    # 保证未配置字体、GitHub token 等时也能本地预览，方便临时贡献者
+    steps:
+      - uses: actions/checkout@v7
+      - uses: typst-community/setup-typst@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
+        with:
+          cache: pnpm
+      - run: pnpm install
+
+      - run: pnpm build
+        env:
+          CI: 'false'
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: default-minimal-dist
+          path: docs/.vitepress/dist

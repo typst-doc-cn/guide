@@ -27,12 +27,7 @@ console.log(
   `Found available typst executables: ${AVAILABLE_EXECUTABLES.join(', ')}`,
 );
 
-const DEFAULT_POLICY = env.CI ? 'deny-warning-and-error' : 'allow-any';
-if (DEFAULT_POLICY !== 'allow-any') {
-  console.log(
-    `The default compile policy is changed to ${DEFAULT_POLICY}, because $CI is set to ${env.CI}.`,
-  );
-}
+const IS_CI = env.CI && env.CI !== 'false';
 
 type PreprocessResult = {
   /** 用于显示的版本 */
@@ -76,6 +71,11 @@ type CompileResult = {
   log?: string;
 };
 
+type CompilePolicy = {
+  tag: 'default' | 'expect-warning';
+  isCI: boolean;
+};
+
 /**
  * 用 typst 编译
  *
@@ -91,8 +91,7 @@ function compileTypst(
   src: string,
   info: { path: string; line_begin?: number },
   typst_executable: string = 'typst',
-  policy:
-    'allow-any' | 'expect-warning' | 'deny-warning-and-error' = 'allow-any',
+  policy: CompilePolicy,
 ): CompileResult {
   // 输出设置
 
@@ -183,12 +182,13 @@ function compileTypst(
 
   // 适当报错
   const result = exitedWithNonzero ? 'error' : log ? 'warning' : 'ok';
-  const canHideLog = policy === 'expect-warning' && result === 'warning';
+  const canHideLog = policy.tag === 'expect-warning' && result === 'warning';
   const shouldPanic =
-    (policy === 'deny-warning-and-error' && result !== 'ok') ||
-    (policy === 'expect-warning' && result !== 'warning');
+    policy.isCI &&
+    ((policy.tag === 'default' && result !== 'ok') ||
+      (policy.tag === 'expect-warning' && result !== 'warning'));
 
-  if ((log && !canHideLog) || shouldPanic) {
+  if ((log && !canHideLog) || exitedWithNonzero || shouldPanic) {
     let location = info.path;
     if (info.line_begin) {
       location += `:${info.line_begin}`;
@@ -207,7 +207,7 @@ function compileTypst(
   }
   assert(
     !shouldPanic,
-    `Panicked because the policy is set to ${policy}, but the result is ${result}.`,
+    `Panicked because the policy is set to ${policy.tag} (CI: ${policy.isCI}), but the result is ${result}.`,
   );
 
   return { pages, log };
@@ -277,11 +277,12 @@ function TypstRender(md: MarkdownIt) {
       const { executable, info: versionInfo } = determineExecutable(tags);
       const versionHtml = versionInfo !== null ? md.render(versionInfo) : '';
 
-      const policy = tags.includes('expect-warning')
-        ? 'expect-warning'
-        : DEFAULT_POLICY;
+      const policy = {
+        tag: tags.includes('expect-warning') ? 'expect-warning' : 'default',
+        isCI: IS_CI,
+      } satisfies CompilePolicy;
       const policyHtml =
-        policy === 'expect-warning'
+        policy.tag === 'expect-warning'
           ? md.render('::: tip\n上例出现警告是正常现象。\n:::')
           : '';
 
