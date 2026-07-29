@@ -52,12 +52,13 @@ hero:
 
 <style>
 .tab-group {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  margin: 0 0;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  overflow: hidden;}
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);}
 /* Hide radio inputs */
 .tab-group input[type="radio"] {
   display: none;}
@@ -72,7 +73,7 @@ hero:
   padding: 10px;
   text-align: center;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 800;
   color: #666;
   transition: all 0.2s;
   user-select: none;
@@ -82,6 +83,21 @@ hero:
 .tab-labels label:hover {
   background: #e8e8e8;
   color: #333;}
+/* Fixed height container - KEY to preventing shaking */
+.tab-panels {
+  position: relative;
+  width: 100%;}
+/* All panels occupy same space */
+.tab-panel {
+  display: none;
+  padding: 0px 24px;}
+/* Show active panel */
+#tab1:checked ~ .tab-panels #panel1,
+#tab2:checked ~ .tab-panels #panel2,
+#tab3:checked ~ .tab-panels #panel3,
+#tab4:checked ~ .tab-panels #panel4 {
+  display: block;
+  animation: fadeIn 0.3s ease;}
 /* Active tab label */
 #tab1:checked ~ .tab-labels label[for="tab1"],
 #tab2:checked ~ .tab-labels label[for="tab2"],
@@ -91,31 +107,19 @@ hero:
   color: #007bff;
   border-bottom: 2px solid #007bff;
   margin-bottom: -2px;}
-/* Fixed height container - KEY to preventing shaking */
-.tab-panels {
-  position: relative;
-  height: 345px;
-  overflow-y: scroll;
-  scrollbar-gutter: stable;}
-/* All panels occupy same space */
-.tab-panel {
-  position: absolute;
-  top: 0px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  padding: 0px 24px;
-  line-height: 1.6;}
-/* Show active panel */
-#tab1:checked ~ .tab-panels #panel1,
-#tab2:checked ~ .tab-panels #panel2,
-#tab3:checked ~ .tab-panels #panel3,
-#tab4:checked ~ .tab-panels #panel4 {
-  visibility: visible;
-  opacity: 1;}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }}
+.latex-logo {
+  font-size: 1.2em;}
+.latex-logo .sup {
+  font-size: 0.7em;
+  vertical-align: super;
+  margin-left: -0.2em;}
+.latex-logo .sub {
+  font-size: 0.7em;
+  vertical-align: sub;
+  margin-left: -0.1em;}
 </style>
 
 <div class="tab-group">
@@ -131,55 +135,56 @@ hero:
 </div>
 <div class="tab-panels">
   <div class="tab-panel" id="panel1">
-    <h4>Typst是什么？</h4>
+    <h4><b style="color:#239DAD">Typst</b>是什么？</h4>
     <ul>
-      <li>多人在线合作编辑的免费<b>网页办公应用</b>，大陆地区可用</li>
-      <li>排版文档的<b>标记编程语言</b>，比60秒就看懂的Markdown，只难一点儿</li>
-      <li>从简单文本生成PDF/SVG/PNG/HTML的<b>增量式编译器</b>，对标LaTeX的质量、类似Office的所见即所得</li>
+      <li><b style="color:#003153;">网页办公应用</b>，大陆可用</li>
+      <li><b style="color:#DD0000;">标记编程语言</b>，新质排版</li>
+      <li><b style="color:#FFCE00;">增量式编译器</b>，所见所得</li>
     </ul>
-    <p><b>应用场景和边界：</b>(&#x2191;&#x2193;滚动)</p>
+    <p style="border:1px solid black; padding:0px 2px; margin:8px -8px; width:fit-content; height:35px;"><small class="latex-logo"; style="font-size:0.8em">Typst = Markdown·<i>L<span class="sup">A</span>T<span class="sub">E</span>X</i>·Office</small></p>
+    <p><b style="color:hotpink">应用场景和边界：</b>(&#x2191;&#x2193;滚动)</p>
     <ul>
       <li>图书、报刊、发票等，追求速度的商业出版</li>
       <li>教材、论文、试卷等，大量数学公式的科技或教学</li>
-      <li>笔记、简历、PPT等，可打印个人向、可套用模板向的文档</li>
+      <li>笔记、简历、PPT等，可打印个人向、可套用模板向</li>
       <li>表格，装填数据、简单计算、绘图，是文档排版，而非Excel式的计算软件</li>
     </ul>
   </div>
   <div class="tab-panel" id="panel2">
+    <ul>
+      <li>以拉丁写作系统为先，覆盖了全球70%的范围，对于中东的右到左、东亚的表意文字和竖向，或需额外配置</li>
+      <li>不支持动态内容，如音视频和3D模型</li>
+      <li>HTML处于起步阶段，不随PDF一同编译，需专门编辑HTML部分</li>
+    </ul>
+    <hr />
     <ul>
       <li>开源可商用，Apache-2.0</li>
       <li>编译十倍速，比同行平均快十几倍</li>
       <li>即改即预览，修改后仅重新编译修改部分</li>
       <li>轻量便携式，小于0.1GB的单独免安装程序</li>
     </ul>
-    <hr />
-    <ul>
-      <li>以拉丁写作系统为先，覆盖了全球70%的范围，对于中东的右到左、东亚的表意文字和竖向，或需额外配置</li>
-      <li>不支持动态内容，如音视频和3D模型。虽PDF标准早已包含，但出于安全和实用目的，大部分PDF相关的软件皆如是</li>
-      <li>HTML处于起步阶段，功能少，也并非同一篇Typst可生成PDF/HTML两种格式，需专门编辑HTML部分</li>
-    </ul>
   </div>
   <div class="tab-panel" id="panel3">
     <ol>
       <li><a href="https://gitee.com/mirrors/typst">一图认识</a>：见识Typst的编排能力，及代码、标记、数学三种模式的进出</li>
-      <li><a href="https://typst.app/docs/tutorial/writing-in-typst/">四页入门</a>：<b>不-看-英-文-旁-白</b>，只看代码和结果图就行。掌握用Typst作学术会议简报、可复用模板等</li>
-      <li><a href="https://typst.app/docs/reference/syntax/">语言手册</a>：别背，用到再查</li>
+      <li><a href="https://typst.app/docs/tutorial/writing-in-typst/">四页入门</a>：<b style="color:teal">不看英文旁白</b>，只看代码和结果。会写学术会议文、可复用模板</li>
+      <li><a href="https://typst.app/docs/reference/syntax/">语言手册</a>：用哪个查哪个</li>
     </ol>
     <ul>
       <li><a href="https://typst.app/universe/">三方生态</a>：社区人士制作的、被Typst官方收录的，包或模板（商用请注意第三方的许可协议）</li>
       <li>程序<a href="https://typst.app/open-source/#download">下载页面</a>是在官网，但下载源都在<a href="https://github.com/typst/typst">Github Typst 代码仓库</a>，网络问题可用G站命令行工具<b>gh</b>，更快。为减少上传下载的文件体积，默认都是压缩后的，请根据文件后缀名，先解压再启动</li>
-      <li>文档(含教程、手册、LaTeX用户指南)有PDF版本，可离线查看，也在代码仓库，随新版本发布。没错，100%由Typst编译</li>
     </ul>
   </div>
   <div class="tab-panel" id="panel4">
     <ul>
-      <li>电脑操作：没用过命令行，无法启动？下载解压后的目录里右单击打开终端，输入 ./typst compile 之前.typ 之后.pdf 添加到全局PATH后省略./</li>
+      <li>电脑操作：没用过命令行，无法启动？下载解压后的目录里右单击打开终端，输入
+      <small style="border:1px solid black; padding:2px; margin:0px; width:fit-content;">./typst compile 之前.typ 之后.pdf</small>添加到全局PATH后省略./</li>
       <li>基础知识：不了解em、pt、for、else这样的排版或编程概念？带关键词LaTeX或Python上网搜索</li>
-      <li>函数、宏：除了上述问题，都推荐多读文档</li>
+      <li>函数、宏：查手册</li>
       <li>通用问题：问大语言模型，如DeepSeek、百度文心、需翻墙的ChatGPT</li>
-      <li>中文排版：通常来自与Word的比较，见<a href="word.html">我是Word用户</a></li>
-      <li>类似已解：见<a href="FAQ.html">常见问题</a>、搜<a href="https://forum.typst.app/">英文论坛</a>和代码仓库，看有无相关的</li>
-      <li>报错源码：开发者可Git下载源码，翻翻测试集，看报错信息对应例子，甚至直接浏览Rust源码</li>
+      <li>中文排版：<a href="word.html">我是Word用户</a></li>
+      <li>类似已解：见<a href="FAQ.html">常见问题</a>、搜<a href="https://forum.typst.app/">英文论坛</a>和代码仓库</li>
+      <li>报错信息：翻翻源码测试集</li>
     </ul>
   </div>
 </div>
