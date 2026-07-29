@@ -73,7 +73,6 @@ hero:
   padding: 10px;
   text-align: center;
   cursor: pointer;
-  font-weight: 800;
   color: #666;
   transition: all 0.2s;
   user-select: none;
@@ -135,14 +134,14 @@ hero:
 </div>
 <div class="tab-panels">
   <div class="tab-panel" id="panel1">
-    <h4><b style="color:#239DAD">Typst</b>是什么？</h4>
+    <h4><b style="color:#239DAD">Typst</b>是什么？<a href="https://typst.app">&#x2197;</a></h4>
     <ul>
       <li><b style="color:#003153;">网页办公应用</b>，大陆可用</li>
       <li><b style="color:#DD0000;">标记编程语言</b>，新质排版</li>
       <li><b style="color:#FFCE00;">增量式编译器</b>，所见所得</li>
     </ul>
     <p style="border:1px solid black; padding:0px 2px; margin:8px -8px; width:fit-content; height:35px;"><small class="latex-logo"; style="font-size:0.8em">Typst = Markdown·<i>L<span class="sup">A</span>T<span class="sub">E</span>X</i>·Office</small></p>
-    <p><b style="color:hotpink">应用场景和边界：</b>(&#x2191;&#x2193;滚动)</p>
+    <p>应用场景和边界：</p>
     <ul>
       <li>图书、报刊、发票等，追求速度的商业出版</li>
       <li>教材、论文、试卷等，大量数学公式的科技或教学</li>
@@ -172,7 +171,12 @@ hero:
     </ol>
     <ul>
       <li><a href="https://typst.app/universe/">三方生态</a>：社区人士制作的、被Typst官方收录的，包或模板（商用请注意第三方的许可协议）</li>
-      <li>程序<a href="https://typst.app/open-source/#download">下载页面</a>是在官网，但下载源都在<a href="https://github.com/typst/typst">Github Typst 代码仓库</a>，网络问题可用G站命令行工具<b>gh</b>，更快。为减少上传下载的文件体积，默认都是压缩后的，请根据文件后缀名，先解压再启动</li>
+      <li>官网有<a href="https://typst.app/open-source/#download">程序下载</a>页面，但下载源都在<a href="https://github.com/typst/typst">Github Typst 代码仓库</a>，好在有<a href="https://mirrors.cernet.edu.cn/app/Typst">开源镜像站</a>，更快</li>
+      <ul>
+        <li>微软选Windows，苹果选macOS，其他Linux</li>
+        <li>电脑选x86_64，手机平板选aarch64</li>
+        <li>为减少上传下载的文件体积，默认都是压缩后的，请根据文件后缀名，先解压再启动</li>
+      </ul>
     </ul>
   </div>
   <div class="tab-panel" id="panel4">
