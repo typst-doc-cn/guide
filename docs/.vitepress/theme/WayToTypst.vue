@@ -176,23 +176,33 @@ import { withBase } from 'vitepress';
       <div id="panel4">
         <ul>
           <li>
-            电脑操作：没用过命令行，无法启动？下载解压后的目录里右单击打开终端，输入
-            <code>./typst compile main.typ out.pdf</code>
-            添加到PATH后省略<code>./</code>
+            电脑操作：没用过命令行，无法启动？不妨先尝试在线使用或本地Tinymist，详见上方「快速开始」
           </li>
           <li>
-            基础知识：不了解em、pt、for、else这样的排版或编程概念？带关键词LaTeX或Python上网搜索
+            基础知识：不了解em、pt等字体排印概念或for、else等编程概念？带关键词LaTeX或Python上网搜索，触类旁通
           </li>
-          <li>函数、宏：查手册</li>
-          <li>通用问题：问大语言模型，如DeepSeek、百度文心、需翻墙的ChatGPT</li>
-          <li>中文排版：<a href="word.html">我是Word用户</a></li>
+          <li>通用问题：询问DeepSeek等大语言模型</li>
+          <li>基础排版：见上方「我是Word用户」</li>
           <li>
-            类似已解：见<a href="FAQ.html">常见问题</a>、搜<a
-              href="https://forum.typst.app/"
-              >英文论坛</a
-            >和代码仓库
+            函数用法：查询官方文档、Typst Examples Book 或小蓝书，见下方「<a
+              href="#推荐资料"
+              >推荐资料</a
+            >」
           </li>
-          <li>报错信息：翻翻源码测试集</li>
+          <li>
+            类似已解：搜索上方「常见问题」或下方「<a href="#用户社区"
+              >用户社区</a
+            >」
+          </li>
+          <li>
+            调试报错：询问连接了源代码仓库的
+            <a
+              href="https://deepwiki.com/typst/typst"
+              target="_blank"
+              rel="noopener"
+              >DeepWiki</a
+            >
+          </li>
         </ul>
       </div>
     </div>

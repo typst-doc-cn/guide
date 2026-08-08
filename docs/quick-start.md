@@ -14,7 +14,7 @@ outline: [2, 3]
 [官方文档 Typst Documentation](https://typst.app/docs/) 有完善介绍；不过深入之前，您可先通过下图这个例子了解Typst的能力。
 
 ```typst
-#set page(width: 20em, height: auto, margin: 2em)
+#set page(width: 20em, height: auto, margin: 1.5em)
 #set heading(numbering: "1.")
 #set par(leading: 1em)
 #set text(lang: "zh", font: "Source Han Serif SC")
@@ -92,4 +92,4 @@ Typst的命令行工具可以通过多种方式获取，详见 [Typst 官网 →
 
 如果你选择下载可执行文件，那么建议参考官网所附链接配置`PATH`环境变量，方便调用。另外Typst可执行文件有数十MB，而官网链接至GitHub，国内可考虑换用 [CERNET 校园网联合镜像站](https://mirrors.cernet.edu.cn/app/Typst)（镜像站网页需自行选择平台，如不清楚，可先尝试 Windows, x86_64）。
 
-安装后可参考[官方仓库的 README](https://github.com/typst/typst?tab=readme-ov-file#usage) 在命令行编译`*.typ`文档。
+安装后可参考[官方 README 的 Usage 一节](https://typst-community.github.io/extra-docs/typst/#usage)或[小蓝书首页的「使用typst-cli与PDF阅读器」](https://typst-doc-cn.github.io/tutorial/introduction.html)在命令行编译`*.typ`文档。
