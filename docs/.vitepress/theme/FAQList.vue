@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen-lg w-full px-2 py-2 my-0 mx-auto">
+  <div class="mx-auto my-0 w-full max-w-screen-lg px-2 py-2">
     <div class="flex flex-wrap gap-1">
       <a
         :href="withBase(`FAQ#outline`)"
