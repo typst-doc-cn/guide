@@ -47,6 +47,7 @@
 html,
 body {
   background-color: var(--vp-c-bg) !important;
+  text-autospace: normal;
 }
 
 button.copy::after {
