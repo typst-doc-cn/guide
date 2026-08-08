@@ -101,14 +101,21 @@
     <div class="tab-panels">
       <div class="tab-panel" id="panel1">
         <h4>
-          <b style="color: #239dad">Typst</b>是什么？<a href="https://typst.app"
+          <strong style="color: #239dad">Typst</strong>是什么？<a
+            href="https://typst.app"
             >&#x2197;</a
           >
         </h4>
         <ul>
-          <li><b style="color: #003153">网页办公应用</b>，大陆可用</li>
-          <li><b style="color: #dd0000">标记编程语言</b>，新质排版</li>
-          <li><b style="color: #ffce00">增量式编译器</b>，所见所得</li>
+          <li>
+            <strong style="color: #003153">网页办公应用</strong>，大陆可用
+          </li>
+          <li>
+            <strong style="color: #dd0000">标记编程语言</strong>，新质排版
+          </li>
+          <li>
+            <strong style="color: #ffce00">增量式编译器</strong>，所见所得
+          </li>
         </ul>
         <p
           style="
@@ -160,7 +167,7 @@
           <li>
             <a href="https://typst.app/docs/tutorial/writing-in-typst/"
               >四页入门</a
-            >：<b style="color: teal">不看英文旁白</b
+            >：<strong style="color: teal">不看英文旁白</strong
             >，只看代码和结果。会写学术会议文、可复用模板
           </li>
           <li>
