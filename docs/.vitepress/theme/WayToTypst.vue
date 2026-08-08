@@ -4,9 +4,13 @@
   height: auto;
   overflow: hidden;
   margin: 0 0;
-  background: white;
+  background: var(--vp-c-bg);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .dark & {
+    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.4);
+  }
 }
 /* Hide radio inputs */
 .tab-group input[type='radio'] {
@@ -16,24 +20,24 @@
 .tab-labels {
   height: 50px;
   display: flex;
-  background: #f0f0f0;
-  border-bottom: 2px solid #ddd;
+  background: var(--vp-button-alt-bg);
+  border-bottom: 2px solid var(--vp-c-border);
 }
 .tab-labels label {
   flex: 1;
   padding: 10px;
   text-align: center;
   cursor: pointer;
-  color: #666;
+  color: var(--vp-c-text-2);
   transition: all 0.2s;
   user-select: none;
   align-items: center;
   justify-content: center;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid var(--vp-c-border);
 }
 .tab-labels label:hover {
-  background: #e8e8e8;
-  color: #333;
+  background: var(--vp-button-alt-hover-bg);
+  color: var(--vp-c-text-1);
 }
 /* Fixed height container - KEY to preventing shaking */
 .tab-panels {
@@ -58,9 +62,10 @@
 #tab2:checked ~ .tab-labels label[for='tab2'],
 #tab3:checked ~ .tab-labels label[for='tab3'],
 #tab4:checked ~ .tab-labels label[for='tab4'] {
-  background: white;
-  color: #007bff;
-  border-bottom: 2px solid #007bff;
+  background: var(--vp-c-bg-alt);
+  font-weight: bold;
+  color: var(--vp-c-brand);
+  border-bottom: 2px solid var(--vp-c-brand);
   margin-bottom: -2px;
 }
 @keyframes fadeIn {
@@ -88,31 +93,15 @@
     <div class="tab-panels">
       <div class="tab-panel" id="panel1">
         <h4>
-          <strong style="color: #239dad">Typst</strong>是什么？<a
-            href="https://typst.app"
-            >&#x2197;</a
-          >
+          <strong style="color: var(--vp-home-hero-name-color)">Typst</strong
+          >是什么？<a href="https://typst.app">&#x2197;</a>
         </h4>
         <ul>
-          <li>
-            <strong style="color: #003153">网页办公应用</strong>，大陆可用
-          </li>
-          <li>
-            <strong style="color: #dd0000">标记编程语言</strong>，新质排版
-          </li>
-          <li>
-            <strong style="color: #ffce00">增量式编译器</strong>，所见所得
-          </li>
+          <li><strong>网页办公应用</strong>，大陆可用</li>
+          <li><strong>标记编程语言</strong>，新质排版</li>
+          <li><strong>增量式编译器</strong>，所见所得</li>
         </ul>
-        <p
-          style="
-            border: 1px solid black;
-            padding: 0px 2px;
-            margin: 8px -8px;
-            width: fit-content;
-            height: 35px;
-          "
-        >
+        <p>
           <small style="font-size: 0.8em"
             >Typst = Markdown · LaTeX · Office</small
           >
@@ -152,8 +141,7 @@
           <li>
             <a href="https://typst.app/docs/tutorial/writing-in-typst/"
               >四页入门</a
-            >：<strong style="color: teal">不看英文旁白</strong
-            >，只看代码和结果。会写学术会议文、可复用模板
+            >：可先跳读，只看代码和结果，忽略英文解释。会写学术会议文、可复用模板
           </li>
           <li>
             <a href="https://typst.app/docs/reference/syntax/">语言手册</a
@@ -186,15 +174,8 @@
         <ul>
           <li>
             电脑操作：没用过命令行，无法启动？下载解压后的目录里右单击打开终端，输入
-            <small
-              style="
-                border: 1px solid black;
-                padding: 2px;
-                margin: 0px;
-                width: fit-content;
-              "
-              >./typst compile 之前.typ 之后.pdf</small
-            >添加到全局PATH后省略./
+            <code>./typst compile main.typ out.pdf</code>
+            添加到PATH后省略<code>./</code>
           </li>
           <li>
             基础知识：不了解em、pt、for、else这样的排版或编程概念？带关键词LaTeX或Python上网搜索
