@@ -144,40 +144,34 @@ import { withBase } from 'vitepress';
       <div id="panel3">
         <ol>
           <li>
-            <a href="https://gitee.com/mirrors/typst">一图认识</a
-            >：见识Typst的编排能力，及代码、标记、数学三种模式的进出
+            <a :href="withBase('/quick-start.html')">快速开始</a
+            >：一图认识Typst的编排能力，熟悉标记、数学、脚本三种模式，然后选择在线或本地使用。
           </li>
           <li>
-            <a href="https://typst.app/docs/tutorial/writing-in-typst/"
+            <a
+              href="https://typst.app/docs/tutorial/writing-in-typst/"
+              target="_blank"
+              rel="noopener"
               >四页入门</a
-            >：可先跳读，只看代码和结果，忽略英文解释。会写学术会议文、可复用模板
+            >：可只看代码和结果，暂时忽略英文解释。理想情况下，读完就能撰写典型文章、开发简单模板了。
           </li>
           <li>
-            <a href="https://typst.app/docs/reference/syntax/">语言手册</a
-            >：用哪个查哪个
+            <a
+              href="https://typst.app/docs/reference/syntax/"
+              target="_blank"
+              rel="noopener"
+              >语法参考</a
+            >：标记模式语法总览，需要什么查什么。
           </li>
         </ol>
-        <ul>
-          <li>
-            <a href="https://typst.app/universe/">三方生态</a
-            >：社区人士制作的、被Typst官方收录的，包或模板（商用请注意第三方的许可协议）
-          </li>
-          <li>
-            官网有<a href="https://typst.app/open-source/#download">程序下载</a
-            >页面，但下载源都在<a href="https://github.com/typst/typst"
-              >Github Typst 代码仓库</a
-            >，好在有<a href="https://mirrors.cernet.edu.cn/app/Typst"
-              >开源镜像站</a
-            >，更快
-          </li>
-          <ul>
-            <li>微软选Windows，苹果选macOS，其他Linux</li>
-            <li>电脑选x86_64，手机平板选aarch64</li>
-            <li>
-              为减少上传下载的文件体积，默认都是压缩后的，请根据文件后缀名，先解压再启动
-            </li>
-          </ul>
-        </ul>
+        <p>
+          如兴趣还可探索<a
+            href="https://typst.app/universe/"
+            target="_blank"
+            rel="noopener"
+            >官方宇宙 Typst Universe</a
+          >。它列出了由社区人士制作且被Typst官方收录的包和模板，商用请注意第三方的许可协议。
+        </p>
       </div>
       <div id="panel4">
         <ul>
