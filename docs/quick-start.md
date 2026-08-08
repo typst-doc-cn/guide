@@ -22,17 +22,17 @@
 
 2. 单击左侧扩展图标，搜索 [Tinymist Typst 插件](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist)并安装。
 
-![](images/20240715222928.png)
+   ![](images/20240715222928.png)
 
-Tinymist 还集成了 [Typstyle](https://typstyle-rs.github.io/typstyle/) 代码格式化功能，可按 Shift+Alt+F 使用。
+3. 创建后缀为`.typ`的文件，开始写作。
 
-安装后 Typst 应该能扫描到系统中安装的字体。如果遇到问题，可参考[如何设置（中文）字体](./FAQ/install-fonts.md)。
+补充：
 
-::: warning
-不要安装 Typst LSP 插件或 Typst Preview 插件，这两个插件已废弃，功能已经整合到 Tinymist 插件中。
+- 写作时可按 Shift+Alt+F 格式化文档，让代码更方便浏览。（该功能利用 Tinymist 集成的 [Typstyle](https://typstyle-rs.github.io/typstyle/) 实现）
 
-如果之前安装了这两个插件请卸载，否则会导致冲突。
-:::
+- 安装后 Typst 应该能扫描到系统中安装的字体。如果遇到问题，可参考[如何设置（中文）字体](./FAQ/install-fonts.md)。
+
+- 不要安装 Typst LSP 或 Typst Preview 插件，这些插件已经废弃，功能已经整合到 Tinymist 插件中。如果之前安装了这两个插件，请卸载，否则会与 Tinymist 插件冲突。
 
 ### Vim/Helix/Zed/…
 

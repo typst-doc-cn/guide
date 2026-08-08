@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { withBase } from 'vitepress';
+</script>
+
 <style>
 /* Tab labels bar */
 .tab-labels {
@@ -81,27 +85,37 @@
     </div>
     <div class="tab-panels w-full [&>*]:px-6 [&>*]:pb-4">
       <div id="panel1">
-        <h4>
-          <strong style="color: var(--vp-home-hero-name-color)">Typst</strong
-          >是什么？<a href="https://typst.app">&#x2197;</a>
-        </h4>
-        <ul>
-          <li><strong>网页办公应用</strong>，大陆可用</li>
-          <li><strong>标记编程语言</strong>，新质排版</li>
-          <li><strong>增量式编译器</strong>，所见所得</li>
-        </ul>
         <p>
-          <small style="font-size: 0.8em"
-            >Typst = Markdown · LaTeX · Office</small
-          >
+          <a href="https://typst.app/home" target="_blank" rel="noopener"
+            >Typst</a
+          >是什么？
         </p>
-        <p>应用场景和边界：</p>
         <ul>
-          <li>图书、报刊、发票等，追求速度的商业出版</li>
-          <li>教材、论文、试卷等，大量数学公式的科技或教学</li>
-          <li>笔记、简历、PPT等，可打印个人向、可套用模板向</li>
           <li>
-            表格，装填数据、简单计算、绘图，是文档排版，而非Excel式的计算软件
+            <strong>网页办公应用</strong>，可前往
+            <a href="https://typst.app/play" target="_blank" rel="noopener"
+              >typst.app/play</a
+            >
+            直接尝试；当然<a :href="withBase('/quick-start.html#本地使用')"
+              >本地亦可使用</a
+            >
+          </li>
+          <li>
+            <strong>标记编程语言</strong
+            >，轻松写作与精细排版两不误，综合Markdown、LaTeX所长
+          </li>
+          <li>
+            <strong>增量式编译器</strong
+            >，修改文档即刻预览，响应时间为毫秒级至秒级
+          </li>
+        </ul>
+        <p>Typst能用在哪里？边界如何？</p>
+        <ul>
+          <li>图书、发票、小告示，追求高效自动与成本低廉的商业出版</li>
+          <li>讲义、论文、试卷等，数学公式或交叉引用繁多的教育需求</li>
+          <li>笔记、简历、幻灯片，能套用模板并个人定制的可打印文档</li>
+          <li>
+            读取数据、简单计算、绘图制表能融入文档排版，但并非Excel式计算软件
           </li>
         </ul>
       </div>
