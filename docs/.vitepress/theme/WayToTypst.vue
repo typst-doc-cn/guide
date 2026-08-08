@@ -1,72 +1,59 @@
 <style>
-.tab-group {
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-  margin: 0 0;
-  background: var(--vp-c-bg);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-  .dark & {
-    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.4);
-  }
-}
-/* Hide radio inputs */
-.tab-group input[type='radio'] {
-  display: none;
-}
 /* Tab labels bar */
 .tab-labels {
-  height: 50px;
-  display: flex;
+  @apply border-0 border-b-2 border-solid border-b-[var(--vp-c-border)];
   background: var(--vp-button-alt-bg);
-  border-bottom: 2px solid var(--vp-c-border);
+
+  label {
+    @apply cursor-pointer select-none;
+    color: var(--vp-c-text-2);
+    transition: all 0.2s;
+
+    &:hover {
+      background: var(--vp-button-alt-hover-bg);
+      color: var(--vp-c-text-1);
+    }
+  }
+
+  /* Emphasize the active tab label */
+  #tab1:checked ~ & label[for='tab1'],
+  #tab2:checked ~ & label[for='tab2'],
+  #tab3:checked ~ & label[for='tab3'],
+  #tab4:checked ~ & label[for='tab4'] {
+    @apply font-bold text-[var(--vp-c-brand)] shadow-inner;
+    background: var(--vp-c-bg-alt);
+  }
+
+  /* The sliding bottom border */
+  &::after {
+    @apply content-empty relative bottom-0 left-0 -my-0.5 h-1 bg-[var(--vp-c-brand)] transition-all duration-200;
+  }
+  #tab2:checked ~ &::after {
+    @apply left-1/1;
+  }
+  #tab3:checked ~ &::after {
+    @apply left-2/1;
+  }
+  #tab4:checked ~ &::after {
+    @apply left-3/1;
+  }
 }
-.tab-labels label {
-  flex: 1;
-  padding: 10px;
-  text-align: center;
-  cursor: pointer;
-  color: var(--vp-c-text-2);
-  transition: all 0.2s;
-  user-select: none;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 2px solid var(--vp-c-border);
-}
-.tab-labels label:hover {
-  background: var(--vp-button-alt-hover-bg);
-  color: var(--vp-c-text-1);
-}
-/* Fixed height container - KEY to preventing shaking */
+
+/* Tab content panels */
 .tab-panels {
-  position: relative;
-  width: 100%;
-}
-/* All panels occupy same space */
-.tab-panel {
-  display: none;
-  padding: 0px 24px;
-}
-/* Show active panel */
-#tab1:checked ~ .tab-panels #panel1,
-#tab2:checked ~ .tab-panels #panel2,
-#tab3:checked ~ .tab-panels #panel3,
-#tab4:checked ~ .tab-panels #panel4 {
-  display: block;
-  animation: fadeIn 0.3s ease;
-}
-/* Active tab label */
-#tab1:checked ~ .tab-labels label[for='tab1'],
-#tab2:checked ~ .tab-labels label[for='tab2'],
-#tab3:checked ~ .tab-labels label[for='tab3'],
-#tab4:checked ~ .tab-labels label[for='tab4'] {
-  background: var(--vp-c-bg-alt);
-  font-weight: bold;
-  color: var(--vp-c-brand);
-  border-bottom: 2px solid var(--vp-c-brand);
-  margin-bottom: -2px;
+  /* Hide inactive panels */
+  & > div {
+    display: none;
+  }
+
+  /* Show the active panel */
+  #tab1:checked ~ & > #panel1,
+  #tab2:checked ~ & > #panel2,
+  #tab3:checked ~ & > #panel3,
+  #tab4:checked ~ & > #panel4 {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
 }
 @keyframes fadeIn {
   from {
@@ -79,19 +66,21 @@
 </style>
 
 <template>
-  <div class="tab-group">
-    <input type="radio" name="tabs" id="tab1" checked />
-    <input type="radio" name="tabs" id="tab2" />
-    <input type="radio" name="tabs" id="tab3" />
-    <input type="radio" name="tabs" id="tab4" />
-    <div class="tab-labels">
+  <div class="overflow-clip rounded-md shadow-md">
+    <input type="radio" name="tabs" id="tab1" class="hidden" checked />
+    <input type="radio" name="tabs" id="tab2" class="hidden" />
+    <input type="radio" name="tabs" id="tab3" class="hidden" />
+    <input type="radio" name="tabs" id="tab4" class="hidden" />
+    <div
+      class="tab-labels grid w-full grid-cols-4 [&>*]:grid [&>*]:size-full [&>*]:place-items-center [&>*]:py-3"
+    >
       <label for="tab1">介绍</label>
       <label for="tab2">瑕瑜</label>
       <label for="tab3">学用</label>
       <label for="tab4">解惑</label>
     </div>
-    <div class="tab-panels">
-      <div class="tab-panel" id="panel1">
+    <div class="tab-panels w-full [&>*]:px-6 [&>*]:pb-4">
+      <div id="panel1">
         <h4>
           <strong style="color: var(--vp-home-hero-name-color)">Typst</strong
           >是什么？<a href="https://typst.app">&#x2197;</a>
@@ -116,7 +105,7 @@
           </li>
         </ul>
       </div>
-      <div class="tab-panel" id="panel2">
+      <div id="panel2">
         <ul>
           <li>
             以拉丁写作系统为先，覆盖了全球70%的范围，对于中东的右到左、东亚的表意文字和竖向，或需额外配置
@@ -132,7 +121,7 @@
           <li>轻量便携式，小于0.1GB的单独免安装程序</li>
         </ul>
       </div>
-      <div class="tab-panel" id="panel3">
+      <div id="panel3">
         <ol>
           <li>
             <a href="https://gitee.com/mirrors/typst">一图认识</a
@@ -170,7 +159,7 @@
           </ul>
         </ul>
       </div>
-      <div class="tab-panel" id="panel4">
+      <div id="panel4">
         <ul>
           <li>
             电脑操作：没用过命令行，无法启动？下载解压后的目录里右单击打开终端，输入

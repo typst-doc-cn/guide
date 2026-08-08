@@ -42,6 +42,8 @@
     var(--vp-c-brand-dark) 30%,
     transparent 100%
   );
+
+  --un-shadow-color: rgba(255, 255, 255, 0.4);
 }
 
 html,
