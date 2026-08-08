@@ -71,19 +71,6 @@
     opacity: 1;
   }
 }
-.latex-logo {
-  font-size: 1.2em;
-}
-.latex-logo .sup {
-  font-size: 0.7em;
-  vertical-align: super;
-  margin-left: -0.2em;
-}
-.latex-logo .sub {
-  font-size: 0.7em;
-  vertical-align: sub;
-  margin-left: -0.1em;
-}
 </style>
 
 <template>
@@ -126,10 +113,8 @@
             height: 35px;
           "
         >
-          <small class="latex-logo" ; style="font-size: 0.8em"
-            >Typst = Markdown·<i
-              >L<span class="sup">A</span>T<span class="sub">E</span>X</i
-            >·Office</small
+          <small style="font-size: 0.8em"
+            >Typst = Markdown · LaTeX · Office</small
           >
         </p>
         <p>应用场景和边界：</p>
