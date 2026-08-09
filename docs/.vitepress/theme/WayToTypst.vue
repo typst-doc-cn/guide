@@ -9,7 +9,7 @@ import { withBase } from 'vitepress';
   background: var(--vp-button-alt-bg);
 
   label {
-    @apply cursor-pointer select-none;
+    @apply cursor-pointer;
     color: var(--vp-c-text-2);
     transition: all 0.2s;
 
@@ -41,6 +41,12 @@ import { withBase } from 'vitepress';
   #tab4:checked ~ &::after {
     @apply left-3/1;
   }
+  #tab1:focus-visible ~ &::after,
+  #tab2:focus-visible ~ &::after,
+  #tab3:focus-visible ~ &::after,
+  #tab4:focus-visible ~ &::after {
+    @apply -my-1 h-1.5 bg-[var(--vp-button-brand-bg)];
+  }
 }
 
 /* Tab content panels */
@@ -70,11 +76,13 @@ import { withBase } from 'vitepress';
 </style>
 
 <template>
-  <div class="overflow-clip rounded-md shadow-md">
-    <input type="radio" name="tabs" id="tab1" class="hidden" checked />
-    <input type="radio" name="tabs" id="tab2" class="hidden" />
-    <input type="radio" name="tabs" id="tab3" class="hidden" />
-    <input type="radio" name="tabs" id="tab4" class="hidden" />
+  <div
+    class="overflow-clip rounded-md shadow-md [&>input]:pointer-events-none [&>input]:absolute [&>input]:opacity-0"
+  >
+    <input type="radio" name="tabs" id="tab1" checked />
+    <input type="radio" name="tabs" id="tab2" />
+    <input type="radio" name="tabs" id="tab3" />
+    <input type="radio" name="tabs" id="tab4" />
     <div
       class="tab-labels grid w-full grid-cols-4 [&>*]:grid [&>*]:size-full [&>*]:place-items-center [&>*]:py-3"
     >
