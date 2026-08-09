@@ -516,22 +516,22 @@ $
 #zebraw(
   highlight-lines: (
     (3, [to avoid negative numbers]),
-    (6, [0 is not a right argument to fibonacci_reccursive()!]),
+    (6, [0 is not a right argument to fibonacci_recursive()!]),
   ),
-  header: "fibonacci_reccursive()",
+  header: "fibonacci_recursive()",
   ```rust
-  pub fn fibonacci_reccursive(n: i32) -> u64 {
+  pub fn fibonacci_recursive(n: i32) -> u64 {
       if n < 0 {
           panic!("{} is negative!", n);
       }
       match n {
-          0 => panic!("zero is not a right argument to fibonacci_reccursive()!"),
+          0 => panic!("zero is not a right argument to fibonacci_recursive()!"),
           1 | 2 => 1,
           3 => 2,
           /*
           50    => 12586269025,
           */
-          _ => fibonacci_reccursive(n - 1) + fibonacci_reccursive(n - 2),
+          _ => fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2),
       }
   }
   ```,
