@@ -164,12 +164,34 @@ import { withBase } from 'vitepress';
             >：可只看代码和结果，暂时忽略英文解释。理想情况下，读完就能撰写典型文章、开发简单模板了。
           </li>
           <li>
-            <a
+            其余文档：按需搜索查阅<a
+              href="https://typst.app/docs/reference/"
+              target="_blank"
+              rel="noopener"
+              >参考手册</a
+            >和<a
+              href="https://typst.app/docs/guides/"
+              target="_blank"
+              rel="noopener"
+              >指南</a
+            >，包含<a
               href="https://typst.app/docs/reference/syntax/"
               target="_blank"
               rel="noopener"
-              >语法参考</a
-            >：标记模式语法总览，需要什么查什么。
+              >语法总览</a
+            >、各种库函数的介绍、<a :href="withBase('/FAQ/input-symbol.html')"
+              >符号列表</a
+            >、<a
+              href="https://typst.app/docs/guides/for-latex-users/"
+              target="_blank"
+              rel="noopener"
+              >LaTeX用户指南</a
+            >、<a
+              href="https://typst.app/docs/guides/tables/"
+              target="_blank"
+              rel="noopener"
+              >表格指南</a
+            >等。
           </li>
         </ol>
         <p>

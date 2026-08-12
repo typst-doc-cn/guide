@@ -82,6 +82,8 @@ Fibonacci数列的前 #count 项如下表。
 
 - 不要安装 Typst LSP 或 Typst Preview 插件，这些插件已经废弃，功能已经整合到 Tinymist 插件中。如果之前安装了这两个插件，请卸载，否则会与 Tinymist 插件冲突。
 
+- Tinymist以Rust包的形式内置了Typst，因此无需安装Typst命令行就能使用。不过若您习惯使用命令行，也可一同[安装Typst命令行](#命令行)。
+
 ### Vim/Helix/Zed/…
 
 请参考 [Editor Frontends – Tinymist Docs](https://myriad-dreamin.github.io/tinymist/frontend/main.html)。
