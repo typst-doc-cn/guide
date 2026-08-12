@@ -175,18 +175,23 @@ import { withBase } from 'vitepress';
               rel="noopener"
               >指南</a
             >，包含<a
+              class="[.vp-doc_&]:not-hover:text-inherit"
               href="https://typst.app/docs/reference/syntax/"
               target="_blank"
               rel="noopener"
               >语法总览</a
-            >、各种库函数的介绍、<a :href="withBase('/FAQ/input-symbol.html')"
+            >、各种库函数的介绍、<a
+              class="[.vp-doc_&]:not-hover:text-inherit"
+              :href="withBase('/FAQ/input-symbol.html')"
               >符号列表</a
             >、<a
+              class="[.vp-doc_&]:not-hover:text-inherit"
               href="https://typst.app/docs/guides/for-latex-users/"
               target="_blank"
               rel="noopener"
               >LaTeX用户指南</a
             >、<a
+              class="[.vp-doc_&]:not-hover:text-inherit"
               href="https://typst.app/docs/guides/tables/"
               target="_blank"
               rel="noopener"
