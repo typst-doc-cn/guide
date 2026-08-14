@@ -5,7 +5,7 @@ outline: [2, 3]
 # 面向 Word 用户的快速入门向导
 
 ::: tip
-在阅读本文前，请确保你已经了解了 [Typst](https://typst.app/) 是什么并且已经[安装了 Typst 的运行环境](https://typst-doc-cn.github.io/tutorial/introduction.html)。
+在阅读本文前，请确保你已经[了解 Typst，并注册在线应用或安装本地环境](./quick-start.md)。
 :::
 
 大家能看到这篇文章，或多或少都是因为对于排版或者样式定制有一定的需求。这篇文章将会帮助你快速上手 Typst 并且开始使用 Typst 的排版功能。
@@ -516,22 +516,22 @@ $
 #zebraw(
   highlight-lines: (
     (3, [to avoid negative numbers]),
-    (6, [0 is not a right argument to fibonacci_reccursive()!]),
+    (6, [0 is not a right argument to fibonacci_recursive()!]),
   ),
-  header: "fibonacci_reccursive()",
+  header: "fibonacci_recursive()",
   ```rust
-  pub fn fibonacci_reccursive(n: i32) -> u64 {
+  pub fn fibonacci_recursive(n: i32) -> u64 {
       if n < 0 {
           panic!("{} is negative!", n);
       }
       match n {
-          0 => panic!("zero is not a right argument to fibonacci_reccursive()!"),
+          0 => panic!("zero is not a right argument to fibonacci_recursive()!"),
           1 | 2 => 1,
           3 => 2,
           /*
           50    => 12586269025,
           */
-          _ => fibonacci_reccursive(n - 1) + fibonacci_reccursive(n - 2),
+          _ => fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2),
       }
   }
   ```,
