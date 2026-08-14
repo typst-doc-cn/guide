@@ -1,4 +1,4 @@
-import MarkdownIt from 'markdown-it';
+import type { MarkdownIt } from 'markdown-it';
 import assert from 'node:assert';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -27,7 +27,7 @@ console.log(
   `Found available typst executables: ${AVAILABLE_EXECUTABLES.join(', ')}`,
 );
 
-const IS_CI = env.CI && env.CI !== 'false';
+const IS_CI = Boolean(env.CI) && env.CI !== 'false';
 
 type PreprocessResult = {
   /** 用于显示的版本 */
