@@ -100,12 +100,13 @@ import { withBase } from 'vitepress';
         </p>
         <ul>
           <li>
-            <strong>网页办公应用</strong>，可前往
+            <strong>文档办公应用</strong>，网页
             <a href="https://typst.app/play" target="_blank" rel="noopener"
               >typst.app/play</a
             >
-            直接尝试；当然<a :href="withBase('/quick-start.html#本地使用')"
-              >本地亦可使用</a
+            可在线使用，下载编译器亦可<a
+              :href="withBase('/quick-start.html#本地使用')"
+              >本地使用</a
             >
           </li>
           <li>
