@@ -72,7 +72,7 @@ Fibonacci数列的前 #count 项如下表。
 
    ![](images/20240715222928.png)
 
-3. 创建后缀为`.typ`的文件，开始写作。
+3. 创建后缀为`.typ`的文件，单击右上角 ![open-preview](./images/codicon-open-preview.svg){class="badge"} 按钮（鼠标悬停会提示「Typst预览：预览已打开的文件」，快捷键 Ctrl+K, V），开始写作。
 
 补充：
 
