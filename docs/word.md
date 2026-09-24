@@ -20,7 +20,7 @@ Word 是一个开箱即用、所见即所得的软件，而其弊端就在于其
 
 在本文中，你会多次见到形如 `#set A()` 的语句。这里的 `#` 是 Typst 由默认的内容模式进入脚本模式的标志，而 `set` 允许你设置在这之后 `A` 元素默认的参数值，它的作用范围从 `#set` 开始到文档结束。相对应的，直接使用 `#A()` 并传入一些参数可以构造一个使用这些参数的 `A` 元素对象，这样就不会影响其他元素的参数值，作用范围是局部的。
 
-与之对应还有 show 语法，在本文中没有怎么出现但实际使用中同样很重要，详见[小蓝书的「show」语法部分](https://typst-doc-cn.github.io/tutorial/basic/scripting-scope-and-style.html#label-grammar-show) 和 [「set」语法部分](https://typst-doc-cn.github.io/tutorial/basic/writing-scripting.html#)。
+与之对应还有 show 语法，在本文中没有怎么出现但实际使用中同样很重要，详见[小蓝书的「show」语法部分](https://typst-doc-cn.github.io/tutorial/tutorial/scripting-style.html#label-grammar-show) 和 [「set」语法部分](https://typst-doc-cn.github.io/tutorial/tutorial/scripting-style.html#label-grammar-set)。
 
 ### package
 
@@ -69,7 +69,7 @@ package 就是「包」，在小蓝书中翻译为「库」，是一些由 [Typs
 | 文本高亮    | /        | `#highlight[高亮]`           |
 | 文本颜色    | /        | `#text(fill: red)[红色文本]` |
 
-其中，`#text(fill: red)[红色文本]` 可以设置文本的颜色，`red` 可以替换为其他颜色，如 `blue`、`green` 等。`fill` 参数接收的是一个颜色，可以参考[小蓝书](https://typst-doc-cn.github.io/tutorial/basic/scripting-color-and-shape.html)中有关颜色的介绍。`#highlight(fill: yellow)[高亮]` 可以设置文本的背景色，`yellow` 可以替换为其他颜色，这个是同理的。
+其中，`#text(fill: red)[红色文本]` 可以设置文本的颜色，`red` 可以替换为其他颜色，如 `blue`、`green` 等。`fill` 参数接收的是一个颜色，可以参考[小蓝书](https://typst-doc-cn.github.io/tutorial/tutorial/scripting-shape.html)中有关颜色的介绍。`#highlight(fill: yellow)[高亮]` 可以设置文本的背景色，`yellow` 可以替换为其他颜色，这个是同理的。
 
 Word 原生提供了伪粗体和伪斜体的功能，但 Typst 原生并不默认支持，而是直接使用字体文件中已有的不同样式和字重。中文字体并不一定提供了粗体和斜体的变体，因此在使用粗体和斜体时可能会出现问题。详情请参考：
 
@@ -126,7 +126,7 @@ A     B
 ```
 
 ::: tip
-有关段落可进一步参考[小蓝书相关章节](https://typst-doc-cn.github.io/tutorial/basic/writing-markup.html#label-grammar-paragraph)。
+有关段落可进一步参考[小蓝书相关章节](https://typst-doc-cn.github.io/tutorial/tutorial/writing-markup.html#label-grammar-paragraph)。
 :::
 
 ### 对齐方式
@@ -298,7 +298,7 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 :::
 
 ::: tip
-有关长度单位的介绍请参考[小蓝书的度量与布局](https://typst-doc-cn.github.io/tutorial/basic/scripting-length-and-layout.html)。你可以简单理解成 em 就是当前上下文中一个字的长度，历史上曾定义 `M` 的宽度为 1em，但实际情况下并不一定完全相等。当然以下例子中的行距和段距也可以使用绝对单位，如 `12pt`、`1cm` 等。
+有关长度单位的介绍请参考[小蓝书的度量与布局](https://typst-doc-cn.github.io/tutorial/tutorial/scripting-layout.html)。你可以简单理解成 em 就是当前上下文中一个字的长度，历史上曾定义 `M` 的宽度为 1em，但实际情况下并不一定完全相等。当然以下例子中的行距和段距也可以使用绝对单位，如 `12pt`、`1cm` 等。
 :::
 
 ### 字间距和词间距
@@ -330,7 +330,7 @@ This is a 中英文混排段落，如果 not 使用 `justify` 参数，将会默
 左 #h(1fr) 中 #h(1fr) 右
 ```
 
-这里的 `fr` 表示比例，它也是一个相对单位，在同一个部分的 `fr` 会按照不同的比例平分剩余的空间，因此同样的系数平分的空间是相等的。有关相对长度可见[小蓝书的解释](https://typst-doc-cn.github.io/tutorial/basic/scripting-length-and-layout.html#)。
+这里的 `fr` 表示比例，它也是一个相对单位，在同一个部分的 `fr` 会按照不同的比例平分剩余的空间，因此同样的系数平分的空间是相等的。有关相对长度可见[小蓝书的解释](https://typst-doc-cn.github.io/tutorial/tutorial/scripting-layout.html#loc-1x20.00x1466.49)。
 
 ### 竖排
 
@@ -480,7 +480,7 @@ $
 
 1. 将 LaTeX 公式中的 `\frac` 改为 `/`，如 `\frac12` 改为 `1/2`。在 Typst 中，`/` 通常会显示成水平的分数线，如果需要写成斜杠，可以使用 `\/` 进行转义或者使用群友科技 [slashion](https://typst.app/universe/package/slashion/) 包。
 2. 将 LaTeX 公式中的不同元素用空格分隔，如 `2ab` 在 Typst 中应该写为 `2 a b`。
-3. 许多在 LaTeX 中需要反斜杠才能引出的符号在 Typst 中可以直接输入，参见[小蓝书的常用数学符号](https://typst-doc-cn.github.io/tutorial/basic/reference-math-symbols.html)。
+3. 许多在 LaTeX 中需要反斜杠才能引出的符号在 Typst 中可以直接输入，参见[小蓝书的常用数学符号](https://typst-doc-cn.github.io/tutorial/tutorial/reference-math-symbols.html)。
 
 这一部分建议还是多看看官方文档的 [math](https://typst.app/docs/reference/math/) 部分，三言两语不太容易说清。
 
