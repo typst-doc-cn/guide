@@ -20,7 +20,7 @@ importers:
     devDependencies:
       '@nolebase/vitepress-plugin-git-changelog':
         specifier: ^2.18.2
-        version: 2.18.2(patch_hash=616dace0668592bf5dc98c80c63ffa931449a071d3cc02bc116f844b9d4920cb)(vitepress@2.0.0-alpha.17(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26))(vue@3.5.41)
+        version: 2.18.2(patch_hash=616dace0668592bf5dc98c80c63ffa931449a071d3cc02bc116f844b9d4920cb)(vitepress@2.0.0-alpha.17(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26))(vue@3.5.41)
       '@shikijs/transformers':
         specifier: ^4.4.3
         version: 4.4.3
@@ -31,8 +31,8 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4
       '@types/node':
-        specifier: ^26.2.0
-        version: 26.2.0
+        specifier: ^26.6.2
+        version: 26.6.2
       '@types/which':
         specifier: ^3.0.4
         version: 3.0.4
@@ -50,13 +50,13 @@ importers:
         version: 0.8.1(prettier@3.9.6)
       unocss:
         specifier: ^66.10.5
-        version: 66.10.5(cac@7.0.0)(rolldown@1.2.4)(rollup@4.62.4)(srvx@1.0.5)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1))
+        version: 66.10.5(cac@7.0.0)(rolldown@1.2.4)(rollup@4.62.4)(srvx@1.0.5)(vite@8.2.1(@types/node@26.6.2)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1))
       vite:
         specifier: ^8.2.1
-        version: 8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1)
+        version: 8.2.1(@types/node@26.6.2)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1)
       vitepress:
         specifier: 2.0.0-alpha.17
-        version: 2.0.0-alpha.17(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26)
+        version: 2.0.0-alpha.17(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26)
       vue:
         specifier: ^3.5.41
         version: 3.5.41
@@ -749,8 +749,8 @@ packages:
   '@types/mdurl@2.0.0':
     resolution: {integrity: sha512-RGdgjQUZba5p6QEFAVx2OGb8rQDL/cPRG7GiedRzMcJ1tYnUANBncjbSB1NRGwbvjcPeikRABz2nshyPk1bhWg==}
 
-  '@types/node@26.2.0':
-    resolution: {integrity: sha512-5IviulTZeRNp2vAJ514cc/HUlY5nZ9fCbq9DMyC52BrhFZACo3nI0R7qBxhQmo/d27NFe96ur/b7Wwxklda+kg==}
+  '@types/node@26.6.2':
+    resolution: {integrity: sha512-X1P21scMv4zGKLYqjdGjaKa7COa0RKVYYZZN/NfvLQ1JegxFhdhpZG/Lyn8AXx6CDUavKAd11v6BvfpkDByK8g==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -1737,8 +1737,8 @@ packages:
   uncrypto@0.1.3:
     resolution: {integrity: sha512-Ql87qFHB3s/De2ClA9e0gsnS6zXG27SkTiSJwjCc9MebbfapQfuPzumMIUMi38ezPZVNFcHI9sUIepeQfw8J8Q==}
 
-  undici-types@8.3.0:
-    resolution: {integrity: sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==}
+  undici-types@8.9.0:
+    resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
 
   unicorn-magic@0.3.0:
     resolution: {integrity: sha512-+QBBXBCvifc56fsbuxZQ6Sic3wqqc3WWaqxs58gvJrcOuN83HGTCwz3oS5phzU9LthRNE9VrJCFCLUgHeeFnfA==}
@@ -2071,19 +2071,19 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
 
-  '@nolebase/ui@2.18.2(vitepress@2.0.0-alpha.17(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26))(vue@3.5.41)':
+  '@nolebase/ui@2.18.2(vitepress@2.0.0-alpha.17(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26))(vue@3.5.41)':
     dependencies:
       '@iconify-json/octicon': 1.2.32
       less: 4.8.1
-      vitepress: 2.0.0-alpha.17(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26)
+      vitepress: 2.0.0-alpha.17(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26)
       vue: 3.5.41
     transitivePeerDependencies:
       - supports-color
 
-  '@nolebase/vitepress-plugin-git-changelog@2.18.2(patch_hash=616dace0668592bf5dc98c80c63ffa931449a071d3cc02bc116f844b9d4920cb)(vitepress@2.0.0-alpha.17(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26))(vue@3.5.41)':
+  '@nolebase/vitepress-plugin-git-changelog@2.18.2(patch_hash=616dace0668592bf5dc98c80c63ffa931449a071d3cc02bc116f844b9d4920cb)(vitepress@2.0.0-alpha.17(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26))(vue@3.5.41)':
     dependencies:
       '@iconify-json/octicon': 1.2.32
-      '@nolebase/ui': 2.18.2(vitepress@2.0.0-alpha.17(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26))(vue@3.5.41)
+      '@nolebase/ui': 2.18.2(vitepress@2.0.0-alpha.17(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26))(vue@3.5.41)
       colorette: 2.0.20
       date-fns: 4.4.0
       defu: 6.1.7
@@ -2093,7 +2093,7 @@ snapshots:
       gray-matter: 4.0.3
       less: 4.8.1
       uncrypto: 0.1.3
-      vitepress: 2.0.0-alpha.17(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26)
+      vitepress: 2.0.0-alpha.17(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - supports-color
       - vue
@@ -2373,9 +2373,9 @@ snapshots:
 
   '@types/mdurl@2.0.0': {}
 
-  '@types/node@26.2.0':
+  '@types/node@26.6.2':
     dependencies:
-      undici-types: 8.3.0
+      undici-types: 8.9.0
 
   '@types/unist@3.0.3': {}
 
@@ -2521,7 +2521,7 @@ snapshots:
     dependencies:
       '@unocss/core': 66.10.5
 
-  '@unocss/vite@66.10.5(cac@7.0.0)(srvx@1.0.5)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1))':
+  '@unocss/vite@66.10.5(cac@7.0.0)(srvx@1.0.5)(vite@8.2.1(@types/node@26.6.2)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1))':
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@unocss/config': 66.10.5
@@ -2532,17 +2532,17 @@ snapshots:
       pathe: 2.0.3
       tinyglobby: 0.2.17
       unplugin-utils: 0.3.2
-      vite: 8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1)
+      vite: 8.2.1(@types/node@26.6.2)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1)
     transitivePeerDependencies:
       - '@devframes/agentic'
       - cac
       - ocache
       - srvx
 
-  '@vitejs/plugin-vue@6.0.8(vite@7.3.6(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0))(vue@3.5.41)':
+  '@vitejs/plugin-vue@6.0.8(vite@7.3.6(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0))(vue@3.5.41)':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 7.3.6(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)
+      vite: 7.3.6(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)
       vue: 3.5.41
 
   '@vue/compiler-core@3.5.41':
@@ -3415,7 +3415,7 @@ snapshots:
 
   uncrypto@0.1.3: {}
 
-  undici-types@8.3.0: {}
+  undici-types@8.9.0: {}
 
   unicorn-magic@0.3.0: {}
 
@@ -3442,7 +3442,7 @@ snapshots:
       unist-util-is: 6.0.1
       unist-util-visit-parents: 6.0.2
 
-  unocss@66.10.5(cac@7.0.0)(rolldown@1.2.4)(rollup@4.62.4)(srvx@1.0.5)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1)):
+  unocss@66.10.5(cac@7.0.0)(rolldown@1.2.4)(rollup@4.62.4)(srvx@1.0.5)(vite@8.2.1(@types/node@26.6.2)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1)):
     dependencies:
       '@unocss/cli': 66.10.5
       '@unocss/core': 66.10.5
@@ -3461,7 +3461,7 @@ snapshots:
       '@unocss/transformer-compile-class': 66.10.5
       '@unocss/transformer-directives': 66.10.5
       '@unocss/transformer-variant-group': 66.10.5
-      '@unocss/vite': 66.10.5(cac@7.0.0)(srvx@1.0.5)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1))
+      '@unocss/vite': 66.10.5(cac@7.0.0)(srvx@1.0.5)(vite@8.2.1(@types/node@26.6.2)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1))
     transitivePeerDependencies:
       - '@devframes/agentic'
       - cac
@@ -3493,7 +3493,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@7.3.6(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0):
+  vite@7.3.6(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0):
     dependencies:
       esbuild: 0.28.2
       fdir: 6.5.0(picomatch@4.0.5)
@@ -3502,13 +3502,13 @@ snapshots:
       rollup: 4.62.4
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 26.2.0
+      '@types/node': 26.6.2
       fsevents: 2.3.3
       jiti: 2.7.0
       less: 4.8.1
       lightningcss: 1.33.0
 
-  vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1):
+  vite@8.2.1(@types/node@26.6.2)(esbuild@0.28.2)(jiti@2.7.0)(less@4.8.1):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.5
@@ -3516,13 +3516,13 @@ snapshots:
       rolldown: 1.2.4
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 26.2.0
+      '@types/node': 26.6.2
       esbuild: 0.28.2
       fsevents: 2.3.3
       jiti: 2.7.0
       less: 4.8.1
 
-  vitepress@2.0.0-alpha.17(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26):
+  vitepress@2.0.0-alpha.17(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)(postcss@8.5.26):
     dependencies:
       '@docsearch/css': 4.7.0
       '@docsearch/js': 4.7.0
@@ -3532,7 +3532,7 @@ snapshots:
       '@shikijs/transformers': 3.23.0
       '@shikijs/types': 3.23.0
       '@types/markdown-it': 14.1.2
-      '@vitejs/plugin-vue': 6.0.8(vite@7.3.6(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0))(vue@3.5.41)
+      '@vitejs/plugin-vue': 6.0.8(vite@7.3.6(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0))(vue@3.5.41)
       '@vue/devtools-api': 8.2.1
       '@vue/shared': 3.5.41
       '@vueuse/core': 14.4.0(vue@3.5.41)
@@ -3541,7 +3541,7 @@ snapshots:
       mark.js: 8.11.1
       minisearch: 7.2.0
       shiki: 3.23.0
-      vite: 7.3.6(@types/node@26.2.0)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)
+      vite: 7.3.6(@types/node@26.6.2)(jiti@2.7.0)(less@4.8.1)(lightningcss@1.33.0)
       vue: 3.5.41
     optionalDependencies:
       postcss: 8.5.26
