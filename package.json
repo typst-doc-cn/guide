@@ -21,7 +21,7 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "unocss": "^66.10.5",
     "vite": "^8.3.0",
-    "vitepress": "2.0.0-alpha.17",
+    "vitepress": "2.0.0-alpha.20",
     "vue": "^3.5.41",
     "which": "^7.0.0"
   },
