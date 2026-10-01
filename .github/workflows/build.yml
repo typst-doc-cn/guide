@@ -122,10 +122,12 @@ jobs:
         with:
           name: cloudflare-dist
           path: docs/.vitepress/dist
-      - uses: cloudflare/pages-action@v1
+      - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 'typst-doc-cn-guide'
-          directory: './docs/.vitepress/dist'
+          command: >-
+            pages deploy
+            ./docs/.vitepress/dist
+            --project-name=typst-doc-cn-guide
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
