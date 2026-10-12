@@ -11,7 +11,7 @@ tags: [chinese, text]
 ```typst
 -- #set page(height: auto, margin: 1em)
 -- #let 西文字体 = (name: "Libertinus Serif", covers: "latin-in-cjk")
-#show emph: text.with(font: (西文字体, "Kaiti"))
+#show emph: set text(font: (西文字体, "Kaiti"))
 孔乙己_上大人_
 ```
 
