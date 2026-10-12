@@ -30,10 +30,11 @@ const MIRROR_REGISTRY: (Partial<Record<Profile, Prefix>> & {
     default: 'https://typst-doc-cn.github.io/news/',
     cloudflare: 'https://news.typst.dev/',
     vercel: 'https://typst.dev/news/',
+    netlify: 'https://news.zhtyp.top/',
   },
   {
     default: 'https://typst-doc-cn.github.io/clreq/',
-    netlify: 'https://gap.zhtyp.art/',
+    netlify: 'https://gap.zhtyp.top/',
   },
 ];
 
